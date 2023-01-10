@@ -1,0 +1,112 @@
+PODS:
+  - Alamofire (5.4.3)
+  - AlipaySDK-iOS (15.8.11)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - IQKeyboardManagerSwift (6.5.6)
+  - JXPagingView/Paging (2.1.2)
+  - JXSegmentedView (1.3.0)
+  - KakaJSON (1.1.2)
+  - Kingfisher (6.3.1)
+  - KingfisherWebP (1.3.0):
+    - Kingfisher (~> 6.2)
+    - libwebp (>= 1.1.0)
+  - libwebp (1.2.4):
+    - libwebp/demux (= 1.2.4)
+    - libwebp/mux (= 1.2.4)
+    - libwebp/webp (= 1.2.4)
+  - libwebp/demux (1.2.4):
+    - libwebp/webp
+  - libwebp/mux (1.2.4):
+    - libwebp/demux
+  - libwebp/webp (1.2.4)
+  - MBProgressHUD (1.2.0)
+  - MJRefresh (3.7.2)
+  - Popover (1.3.0)
+  - PromiseKit (6.18.1):
+    - PromiseKit/CorePromise (= 6.18.1)
+    - PromiseKit/Foundation (= 6.18.1)
+    - PromiseKit/UIKit (= 6.18.1)
+  - PromiseKit/CorePromise (6.18.1)
+  - PromiseKit/Foundation (6.18.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.18.1):
+    - PromiseKit/CorePromise
+  - SnapKit (5.0.1)
+  - SwiftDate (6.3.1)
+  - swiftScan (1.2.1)
+  - WechatOpenSDK (1.9.9)
+  - ZLPhotoBrowser (4.3.7):
+    - ZLPhotoBrowser/Core (= 4.3.7)
+  - ZLPhotoBrowser/Core (4.3.7)
+
+DEPENDENCIES:
+  - Alamofire
+  - AlipaySDK-iOS
+  - FMDB
+  - IQKeyboardManagerSwift
+  - JXPagingView/Paging
+  - JXSegmentedView
+  - KakaJSON
+  - Kingfisher (~> 6.3.1)
+  - KingfisherWebP
+  - MBProgressHUD
+  - MJRefresh
+  - Popover
+  - PromiseKit (from `./PromiseKit`)
+  - SnapKit
+  - SwiftDate
+  - swiftScan
+  - WechatOpenSDK
+  - ZLPhotoBrowser
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlipaySDK-iOS
+    - FMDB
+    - IQKeyboardManagerSwift
+    - JXPagingView
+    - JXSegmentedView
+    - KakaJSON
+    - Kingfisher
+    - KingfisherWebP
+    - libwebp
+    - MBProgressHUD
+    - MJRefresh
+    - Popover
+    - SnapKit
+    - SwiftDate
+    - swiftScan
+    - WechatOpenSDK
+    - ZLPhotoBrowser
+
+EXTERNAL SOURCES:
+  PromiseKit:
+    :path: "./PromiseKit"
+
+SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  AlipaySDK-iOS: a07b6eafa847a5b29acb6c150ea16d9792d5d167
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
+  JXSegmentedView: fec0d335355b6e019c494fe2e030bde8a36d2df6
+  KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
+  KingfisherWebP: dec17a5eb1af2658791bde1f93ae9a853678f826
+  libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
+  PromiseKit: 3402dd72417fcd35b334f730df3629970921bd5c
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  swiftScan: 0849e7d7c1c641384767a573ee8cb90b88d1ddd9
+  WechatOpenSDK: 9bf85605d50000b35e5ea679a76582426a30c595
+  ZLPhotoBrowser: f571bdaec6d0b64ae94a29787e4c7cbd8900d10f
+
+PODFILE CHECKSUM: b76080cb777aa8300d5b996f2d532f4643f3933d
+
+COCOAPODS: 1.11.3
