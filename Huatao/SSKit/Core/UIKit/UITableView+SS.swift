@@ -47,4 +47,21 @@ public extension UITableView {
     func endRefreshing() {
         self.refreshControl?.endRefreshing()
     }
+    
+    /// 快速注册xib cell
+    func register(nibCell cellClass: AnyClass) {
+        let nib = UINib(nibName: String(describing: cellClass), bundle: nil)
+        self.register(nib, forCellReuseIdentifier: String(describing: cellClass))
+    }
+    
+    /// 快速注册cell
+    func register(cell cellClass: AnyClass) {
+        self.register(cellClass, forCellReuseIdentifier: String(describing: cellClass))
+    }
+    
+    /// cell复用
+    func dequeueReusableCell<T: UITableViewCell>(with cellClass: T.Type) -> T {
+        return dequeueReusableCell(withIdentifier: String(describing: cellClass)) as! T
+    }
+    
 }

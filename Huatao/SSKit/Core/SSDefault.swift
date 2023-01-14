@@ -27,7 +27,6 @@ public struct SSDefault<T> {
     }
 }
 
-
 //MARK: 使用示例
 
 /// 封装一个SSUserDefault配置文件

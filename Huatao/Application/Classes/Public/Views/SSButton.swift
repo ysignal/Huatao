@@ -8,6 +8,12 @@
 import UIKit
 
 open class SSButton: UIButton {
+    
+    open override var isSelected: Bool {
+        didSet {
+            
+        }
+    }
 
     open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         // 需要拓展的大小

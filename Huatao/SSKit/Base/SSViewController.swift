@@ -7,6 +7,10 @@
 
 import UIKit
 
+struct ListConfig {
+    
+}
+
 open class SSViewController: UIViewController {
     
     open var fakeNav: SSNavigationBar = SSNavigationBar()
@@ -37,6 +41,11 @@ open class SSViewController: UIViewController {
         }else{
             automaticallyAdjustsScrollViewInsets = false
         }
+        buildUI()
+    }
+    
+    func buildUI() {
+        
     }
     
     // MARK: - 导航条上左右按钮的点击事件

@@ -31,8 +31,19 @@ class MainTabbarController: SSTabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 去除系统tabBar的顶部细线
+        tabBar.backgroundColor = .white
+        tabBar.barStyle = .black
+        tabBar.backgroundImage = UIImage()
+        tabBar.shadowImage = UIImage()
+        tabBar.tintColor = .black
+        
+        selectedIndex = 1
 
         addChilds()
+        
+        APP.updateUserInfo()
     }
     
     func addChilds() {

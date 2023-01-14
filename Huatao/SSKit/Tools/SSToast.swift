@@ -10,7 +10,7 @@ import UIKit
 public struct SSToastConfigure {
     static let shared = SSToastConfigure()
     
-    public var backgroundColor: UIColor = .black
+    public var backgroundColor: UIColor = .black.withAlphaComponent(0.8)
     public var textColor: UIColor = .white
     
     public var style: ToastStyle {
@@ -22,6 +22,8 @@ public struct SSToastConfigure {
         style.messageFont = .ss_semibold(size: 16)
         style.titleAlignment = .center
         style.messageAlignment = .center
+        style.horizontalPadding = 12
+        style.verticalPadding = 15
         return style
     }
 }

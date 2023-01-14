@@ -66,28 +66,42 @@ public struct APP {
     }
     
     static var name: String = "华涛生活"
+
+    /// 一键登录倒计时计数
+    static var authCount: Int = 0
     
-    /// 服务器列表数据每页数量
-    static var pageLimit: Int = 15
-    
-    /// 通用的倒计时计数
-    static var generateCount: Int = 60
+    /// 手机号码倒计时计数
+    static var phoneCount: Int = 0
     
     /// 当前聊天会话ID
     static var currentEaseId: String = ""
     
-    /// 登录返回的用户数据
-    static var loginData = ""
+    /// 登录返回的用户数据字符串
+    @SSDefault(SettingKey.loginData, defaultValue: "")
+    static var loginDataString: String
+    
+    /// 登录返回的用户数据模型
+    static var loginData: LoginData {
+        return loginDataString.kj.model(LoginData.self) ?? LoginData()
+    }
+
+    /// 最后一个登录的手机号
+    @SSDefault(SettingKey.lastLogin, defaultValue: "")
+    static var lastLogin: String
+    
+    /// 是否退出登录返回的登录页面
+    @SSDefault(SettingKey.isLogout, defaultValue: false)
+    static var isLogout: Bool
     
     /// 用户的详细数据
-    static var userInfo = ""
+    static var userInfo = UserInfo()
     
     /// 用户的钱包数据
     static var walletInfo = ""
 
     /// 请求用的token
     static var token: String {
-        return ""
+        return loginData.tokenType + loginData.accessToken
     }
     
     static weak var delegate: AppDelegate?
@@ -139,7 +153,6 @@ public struct APP {
         APP.switchLoginViewController()
     }
     
-    
     @discardableResult
     static func saveImage(image: UIImage, name: String) -> String {
         let path = SS.tmpPath + "/image/" + name
@@ -158,7 +171,25 @@ public struct APP {
         }
         return false
     }
+    
+    // 更新用户信息
+    static func updateUserInfo() {
+        HttpApi.Login.getUserInfo().done { data in
+            userInfo = data.kj.model(UserInfo.self)
+            asyncIMUserInfo()
+        }
+    }
+    
+    static func asyncIMUserInfo() {
+        
+    }
+    
+    static func setupAPP() {
 
+        
+        
+    }
+    
 }
 
 typealias StringBlock = ((String) -> ())

@@ -350,4 +350,12 @@ extension String {
                                   "\n</body>\n</html>"]
         return htmlList.joined()
     }
+    
+    func htmlToAttr(fontSize: Int = 15) -> NSAttributedString {
+        if let h5Data = self.encodeHtmlString(fontSize: fontSize).data(using: .unicode),
+           let h5Str = try? NSMutableAttributedString(data: h5Data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
+            return h5Str
+        }
+        return NSAttributedString(string: self)
+    }
 }

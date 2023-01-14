@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftDate
+import Kingfisher
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         APP.delegate = self
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = MainTabbarController()
+        window?.rootViewController = SSNavigationController(rootViewController: LoginViewController.from(sb: .login))
         window?.makeKeyAndVisible()
         APP.window = window
         PayManager.register(with: window)
+        APP.setupAPP()
         return true
     }
 

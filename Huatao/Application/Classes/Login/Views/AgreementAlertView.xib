@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="8kw-tr-BKb" customClass="AgreementAlertView" customModule="Huatao" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDQ-N0-ap1">
+                    <rect key="frame" x="180.66666666666666" y="69" width="31.666666666666657" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="pBG-fN-BwD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jF-Zo-fhx">
+                    <rect key="frame" x="12" y="121" width="369" height="637"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D72-MN-JOL">
+                    <rect key="frame" x="196.66666666666663" y="768" width="196.33333333333337" height="50"/>
+                    <color key="backgroundColor" red="0.1450980392" green="0.82745098039999998" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="HfH-yf-U4T"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="同意">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="toAgree:" destination="8kw-tr-BKb" eventType="touchUpInside" id="Vh6-I1-32y"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sph-fr-pU3">
+                    <rect key="frame" x="0.0" y="768" width="196.66666666666666" height="50"/>
+                    <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="6tY-xx-9aI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="关闭">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="toClose:" destination="8kw-tr-BKb" eventType="touchUpInside" id="KiB-eG-YXH"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="zPu-Gs-vUV"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="D72-MN-JOL" firstAttribute="leading" secondItem="Sph-fr-pU3" secondAttribute="trailing" id="4CH-El-AnO"/>
+                <constraint firstItem="zPu-Gs-vUV" firstAttribute="bottom" secondItem="3jF-Zo-fhx" secondAttribute="bottom" constant="60" id="7WJ-99-7Eo"/>
+                <constraint firstItem="Sph-fr-pU3" firstAttribute="leading" secondItem="zPu-Gs-vUV" secondAttribute="leading" id="8nF-UC-Hcl"/>
+                <constraint firstItem="3jF-Zo-fhx" firstAttribute="leading" secondItem="zPu-Gs-vUV" secondAttribute="leading" constant="12" id="Fh5-aH-qmo"/>
+                <constraint firstItem="Sph-fr-pU3" firstAttribute="width" secondItem="D72-MN-JOL" secondAttribute="width" id="HyN-jU-62f"/>
+                <constraint firstItem="zPu-Gs-vUV" firstAttribute="trailing" secondItem="3jF-Zo-fhx" secondAttribute="trailing" constant="12" id="LA5-od-Dze"/>
+                <constraint firstItem="3jF-Zo-fhx" firstAttribute="top" secondItem="EDQ-N0-ap1" secondAttribute="bottom" constant="12" id="Pau-Cm-WCE"/>
+                <constraint firstItem="EDQ-N0-ap1" firstAttribute="centerX" secondItem="8kw-tr-BKb" secondAttribute="centerX" id="cXE-5a-asa"/>
+                <constraint firstItem="EDQ-N0-ap1" firstAttribute="top" secondItem="zPu-Gs-vUV" secondAttribute="top" constant="10" id="pOB-DF-1Ke"/>
+                <constraint firstItem="zPu-Gs-vUV" firstAttribute="bottom" secondItem="D72-MN-JOL" secondAttribute="bottom" id="sur-dk-fnl"/>
+                <constraint firstItem="zPu-Gs-vUV" firstAttribute="trailing" secondItem="D72-MN-JOL" secondAttribute="trailing" id="xBQ-M1-wBi"/>
+                <constraint firstItem="Sph-fr-pU3" firstAttribute="bottom" secondItem="zPu-Gs-vUV" secondAttribute="bottom" id="xsW-sR-uez"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="8"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="agreeBtn" destination="D72-MN-JOL" id="SU7-jK-EZ1"/>
+                <outlet property="closeBtn" destination="Sph-fr-pU3" id="Yza-tN-g7j"/>
+                <outlet property="titleLabel" destination="EDQ-N0-ap1" id="uDa-xU-PAc"/>
+                <outlet property="wkWeb" destination="3jF-Zo-fhx" id="8Xd-r3-eNO"/>
+            </connections>
+            <point key="canvasLocation" x="29" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

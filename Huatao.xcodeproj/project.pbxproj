@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B650E36297156370093FEEB /* TaskListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E35297156370093FEEB /* TaskListItemCell.swift */; };
+		6B650E3929715A400093FEEB /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E3829715A400093FEEB /* TaskModel.swift */; };
+		6B650E3C297166940093FEEB /* SSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E3B297166940093FEEB /* SSImageView.swift */; };
+		6B650E402971674D0093FEEB /* BaseImageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E3E2971674D0093FEEB /* BaseImageItemCell.swift */; };
+		6B650E412971674D0093FEEB /* BaseImageItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B650E3F2971674D0093FEEB /* BaseImageItemCell.xib */; };
 		6BCB5F61296D397A00E3E7EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB5F60296D397A00E3E7EC /* AppDelegate.swift */; };
 		6BCB5F63296D397A00E3E7EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB5F62296D397A00E3E7EC /* SceneDelegate.swift */; };
-		6BCB5F65296D397A00E3E7EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB5F64296D397A00E3E7EC /* ViewController.swift */; };
+		6BCB5F65296D397A00E3E7EC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB5F64296D397A00E3E7EC /* BaseViewController.swift */; };
 		6BCB5F68296D397A00E3E7EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BCB5F66296D397A00E3E7EC /* Main.storyboard */; };
 		6BCB5F6A296D397C00E3E7EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BCB5F69296D397C00E3E7EC /* Assets.xcassets */; };
 		6BCB5F6D296D397C00E3E7EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BCB5F6B296D397C00E3E7EC /* LaunchScreen.storyboard */; };
@@ -90,6 +95,33 @@
 		6BCB603B296D6A2400E3E7EC /* SSConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB603A296D6A2400E3E7EC /* SSConvertible.swift */; };
 		6BCB603D296D6A3100E3E7EC /* SSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB603C296D6A3100E3E7EC /* SSModel.swift */; };
 		6BCB6040296D6AFE00E3E7EC /* SSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB603F296D6AFE00E3E7EC /* SSButton.swift */; };
+		6BCB604B296FA41100E3E7EC /* ShopVipSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB604A296FA41100E3E7EC /* ShopVipSetCell.swift */; };
+		6BCB60512970155500E3E7EC /* SSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60502970155500E3E7EC /* SSImage.swift */; };
+		6BCB60542970191400E3E7EC /* AuthLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60532970191400E3E7EC /* AuthLoginViewController.swift */; };
+		6BCB605629701B0B00E3E7EC /* OtherLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB605529701B0B00E3E7EC /* OtherLoginViewController.swift */; };
+		6BCB605829701E0F00E3E7EC /* UITextField+SS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB605729701E0F00E3E7EC /* UITextField+SS.swift */; };
+		6BCB605A2970209E00E3E7EC /* DisabledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60592970209E00E3E7EC /* DisabledButton.swift */; };
+		6BCB605C2970EFA100E3E7EC /* SSProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB605B2970EFA100E3E7EC /* SSProgressHUD.swift */; };
+		6BCB605E2970EFE700E3E7EC /* SSLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB605D2970EFE700E3E7EC /* SSLanguage.swift */; };
+		6BCB60612970F77E00E3E7EC /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60602970F77E00E3E7EC /* LoginModel.swift */; };
+		6BCB60642970FF6300E3E7EC /* AgreementAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60632970FF6300E3E7EC /* AgreementAlertView.swift */; };
+		6BCB60662970FF8500E3E7EC /* AgreementAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCB60652970FF8500E3E7EC /* AgreementAlertView.xib */; };
+		6BCB60702971002100E3E7EC /* SSOverlayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60682971002100E3E7EC /* SSOverlayController.swift */; };
+		6BCB60712971002100E3E7EC /* SSOverlayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60692971002100E3E7EC /* SSOverlayConfig.swift */; };
+		6BCB60722971002100E3E7EC /* ZoomOutAniamtion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB606B2971002100E3E7EC /* ZoomOutAniamtion.swift */; };
+		6BCB60732971002100E3E7EC /* FadeInAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB606C2971002100E3E7EC /* FadeInAnimation.swift */; };
+		6BCB60742971002200E3E7EC /* OverlayAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB606D2971002100E3E7EC /* OverlayAnimation.swift */; };
+		6BCB60752971002200E3E7EC /* TranslationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB606E2971002100E3E7EC /* TranslationAnimation.swift */; };
+		6BCB60762971002200E3E7EC /* ExpandedAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB606F2971002100E3E7EC /* ExpandedAnimation.swift */; };
+		6BCB60782971042200E3E7EC /* ShopVipSetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BCB60772971042200E3E7EC /* ShopVipSetCell.xib */; };
+		6BCB607B2971049F00E3E7EC /* SectionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB607A2971049F00E3E7EC /* SectionCollectionView.swift */; };
+		6BCB607E297104DF00E3E7EC /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB607D297104DF00E3E7EC /* CollectionSection.swift */; };
+		6BCB60802971065900E3E7EC /* UICollectionView+SS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB607F2971065900E3E7EC /* UICollectionView+SS.swift */; };
+		6BCB60822971075F00E3E7EC /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB60812971075F00E3E7EC /* UIScrollView+Refresh.swift */; };
+		6BCB608429710B1A00E3E7EC /* SSRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB608329710B1A00E3E7EC /* SSRefreshHeader.swift */; };
+		6BCB6088297114F300E3E7EC /* SSGenericCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB6087297114F300E3E7EC /* SSGenericCollectionViewController.swift */; };
+		6BCB608B2971176400E3E7EC /* ShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB608A2971176400E3E7EC /* ShopModel.swift */; };
+		6BCB6092297140C600E3E7EC /* SSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCB6091297140C600E3E7EC /* SSString.swift */; };
 		AA4FA65D340C227220952292 /* Pods_HuataoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2DBAF0969761D32612F12C /* Pods_HuataoTests.framework */; };
 		BE0D2C92EA479F3C060F98B1 /* Pods_Huatao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271CF15653F35951F675CE50 /* Pods_Huatao.framework */; };
 /* End PBXBuildFile section */
@@ -115,10 +147,15 @@
 		271CF15653F35951F675CE50 /* Pods_Huatao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Huatao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BD2CDA634ACFA601DD860A /* Pods-Huatao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Huatao.release.xcconfig"; path = "Target Support Files/Pods-Huatao/Pods-Huatao.release.xcconfig"; sourceTree = "<group>"; };
 		65521FBBAD142536254E48F8 /* Pods-Huatao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Huatao.debug.xcconfig"; path = "Target Support Files/Pods-Huatao/Pods-Huatao.debug.xcconfig"; sourceTree = "<group>"; };
+		6B650E35297156370093FEEB /* TaskListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListItemCell.swift; sourceTree = "<group>"; };
+		6B650E3829715A400093FEEB /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		6B650E3B297166940093FEEB /* SSImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSImageView.swift; sourceTree = "<group>"; };
+		6B650E3E2971674D0093FEEB /* BaseImageItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseImageItemCell.swift; sourceTree = "<group>"; };
+		6B650E3F2971674D0093FEEB /* BaseImageItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseImageItemCell.xib; sourceTree = "<group>"; };
 		6BCB5F5D296D397A00E3E7EC /* Huatao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Huatao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BCB5F60296D397A00E3E7EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BCB5F62296D397A00E3E7EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6BCB5F64296D397A00E3E7EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6BCB5F64296D397A00E3E7EC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6BCB5F67296D397A00E3E7EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6BCB5F69296D397C00E3E7EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BCB5F6C296D397C00E3E7EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -203,6 +240,33 @@
 		6BCB603A296D6A2400E3E7EC /* SSConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSConvertible.swift; sourceTree = "<group>"; };
 		6BCB603C296D6A3100E3E7EC /* SSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModel.swift; sourceTree = "<group>"; };
 		6BCB603F296D6AFE00E3E7EC /* SSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSButton.swift; sourceTree = "<group>"; };
+		6BCB604A296FA41100E3E7EC /* ShopVipSetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopVipSetCell.swift; sourceTree = "<group>"; };
+		6BCB60502970155500E3E7EC /* SSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSImage.swift; sourceTree = "<group>"; };
+		6BCB60532970191400E3E7EC /* AuthLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLoginViewController.swift; sourceTree = "<group>"; };
+		6BCB605529701B0B00E3E7EC /* OtherLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherLoginViewController.swift; sourceTree = "<group>"; };
+		6BCB605729701E0F00E3E7EC /* UITextField+SS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+SS.swift"; sourceTree = "<group>"; };
+		6BCB60592970209E00E3E7EC /* DisabledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledButton.swift; sourceTree = "<group>"; };
+		6BCB605B2970EFA100E3E7EC /* SSProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSProgressHUD.swift; sourceTree = "<group>"; };
+		6BCB605D2970EFE700E3E7EC /* SSLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLanguage.swift; sourceTree = "<group>"; };
+		6BCB60602970F77E00E3E7EC /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		6BCB60632970FF6300E3E7EC /* AgreementAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementAlertView.swift; sourceTree = "<group>"; };
+		6BCB60652970FF8500E3E7EC /* AgreementAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgreementAlertView.xib; sourceTree = "<group>"; };
+		6BCB60682971002100E3E7EC /* SSOverlayController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSOverlayController.swift; sourceTree = "<group>"; };
+		6BCB60692971002100E3E7EC /* SSOverlayConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSOverlayConfig.swift; sourceTree = "<group>"; };
+		6BCB606B2971002100E3E7EC /* ZoomOutAniamtion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomOutAniamtion.swift; sourceTree = "<group>"; };
+		6BCB606C2971002100E3E7EC /* FadeInAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeInAnimation.swift; sourceTree = "<group>"; };
+		6BCB606D2971002100E3E7EC /* OverlayAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayAnimation.swift; sourceTree = "<group>"; };
+		6BCB606E2971002100E3E7EC /* TranslationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationAnimation.swift; sourceTree = "<group>"; };
+		6BCB606F2971002100E3E7EC /* ExpandedAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandedAnimation.swift; sourceTree = "<group>"; };
+		6BCB60772971042200E3E7EC /* ShopVipSetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopVipSetCell.xib; sourceTree = "<group>"; };
+		6BCB607A2971049F00E3E7EC /* SectionCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionView.swift; sourceTree = "<group>"; };
+		6BCB607D297104DF00E3E7EC /* CollectionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
+		6BCB607F2971065900E3E7EC /* UICollectionView+SS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+SS.swift"; sourceTree = "<group>"; };
+		6BCB60812971075F00E3E7EC /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
+		6BCB608329710B1A00E3E7EC /* SSRefreshHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSRefreshHeader.swift; sourceTree = "<group>"; };
+		6BCB6087297114F300E3E7EC /* SSGenericCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSGenericCollectionViewController.swift; sourceTree = "<group>"; };
+		6BCB608A2971176400E3E7EC /* ShopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopModel.swift; sourceTree = "<group>"; };
+		6BCB6091297140C600E3E7EC /* SSString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSString.swift; sourceTree = "<group>"; };
 		8E2DBAF0969761D32612F12C /* Pods_HuataoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuataoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9361C9281F0D44CEE4D1E999 /* Pods-HuataoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuataoTests.release.xcconfig"; path = "Target Support Files/Pods-HuataoTests/Pods-HuataoTests.release.xcconfig"; sourceTree = "<group>"; };
 		9A9216A86DA78EE0388D8F96 /* Pods-HuataoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuataoTests.debug.xcconfig"; path = "Target Support Files/Pods-HuataoTests/Pods-HuataoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -235,6 +299,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B650E34297155F50093FEEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6B650E35297156370093FEEB /* TaskListItemCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6B650E3729715A2E0093FEEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6B650E3829715A400093FEEB /* TaskModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6B650E3A297166530093FEEB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB6038296D656700E3E7EC /* SSColor.swift */,
+				6BCB60502970155500E3E7EC /* SSImage.swift */,
+				6BCB6091297140C600E3E7EC /* SSString.swift */,
+				6B650E3B297166940093FEEB /* SSImageView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6B650E3D2971673A0093FEEB /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				6B650E3E2971674D0093FEEB /* BaseImageItemCell.swift */,
+				6B650E3F2971674D0093FEEB /* BaseImageItemCell.xib */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
 		6BCB5F54296D397A00E3E7EC = {
 			isa = PBXGroup;
 			children = (
@@ -294,7 +394,7 @@
 				6BCB5F60296D397A00E3E7EC /* AppDelegate.swift */,
 				6BCB5F62296D397A00E3E7EC /* SceneDelegate.swift */,
 				6BCB6012296D40C500E3E7EC /* MainTabbarController.swift */,
-				6BCB5F64296D397A00E3E7EC /* ViewController.swift */,
+				6BCB5F64296D397A00E3E7EC /* BaseViewController.swift */,
 				6BCB5F66296D397A00E3E7EC /* Main.storyboard */,
 				6BCB5F6B296D397C00E3E7EC /* LaunchScreen.storyboard */,
 				6BCB6014296D416C00E3E7EC /* Classes */,
@@ -421,6 +521,9 @@
 				6BCB5FB8296D406A00E3E7EC /* UIFont+SS.swift */,
 				6BCB5FB9296D406A00E3E7EC /* UIViewController+SS.swift */,
 				6BCB5FBA296D406A00E3E7EC /* UITableView+SS.swift */,
+				6BCB607F2971065900E3E7EC /* UICollectionView+SS.swift */,
+				6BCB60812971075F00E3E7EC /* UIScrollView+Refresh.swift */,
+				6BCB605729701E0F00E3E7EC /* UITextField+SS.swift */,
 				6BCB5FBB296D406A00E3E7EC /* UIColor+SS.swift */,
 			);
 			path = UIKit;
@@ -453,7 +556,10 @@
 		6BCB5FCC296D406B00E3E7EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6BCB607C297104BD00E3E7EC /* SSCollectionSection */,
+				6BCB60672971002100E3E7EC /* SSOverlayController */,
 				6BCB5FCD296D406B00E3E7EC /* Toast.swift */,
+				6BCB608329710B1A00E3E7EC /* SSRefreshHeader.swift */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -468,6 +574,7 @@
 				6BCB5FD3296D406B00E3E7EC /* SSBubbleTabBarController.swift */,
 				6BCB5FD4296D406B00E3E7EC /* SSNavigationBar.swift */,
 				6BCB5FD5296D406B00E3E7EC /* SSFullViewController.swift */,
+				6BCB6087297114F300E3E7EC /* SSGenericCollectionViewController.swift */,
 				6BCB5FD6296D406B00E3E7EC /* SSWebViewController.swift */,
 				6BCB5FD7296D406B00E3E7EC /* SSCollectionViewLayout.swift */,
 				6BCB5FD8296D406B00E3E7EC /* SSTabBarController.swift */,
@@ -492,7 +599,9 @@
 		6BCB6015296D419400E3E7EC /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				6BCB6025296D44FA00E3E7EC /* LoginViewController.swift */,
+				6BCB60622970FF5500E3E7EC /* Views */,
+				6BCB605F2970F76A00E3E7EC /* Models */,
+				6BCB6052297018F700E3E7EC /* ViewControllers */,
 				6BCB602B296D641B00E3E7EC /* Login.storyboard */,
 			);
 			path = Login;
@@ -501,6 +610,8 @@
 		6BCB6016296D41A600E3E7EC /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				6BCB60892971175600E3E7EC /* Models */,
+				6BCB6049296FA3C100E3E7EC /* Views */,
 				6BCB6023296D44F200E3E7EC /* ShopViewController.swift */,
 				6BCB602D296D643200E3E7EC /* Shop.storyboard */,
 			);
@@ -510,6 +621,8 @@
 		6BCB6017296D41B300E3E7EC /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				6B650E3729715A2E0093FEEB /* Models */,
+				6B650E34297155F50093FEEB /* Views */,
 				6BCB6021296D44EA00E3E7EC /* TaskViewController.swift */,
 				6BCB602F296D644200E3E7EC /* Task.storyboard */,
 			);
@@ -555,10 +668,11 @@
 		6BCB6037296D655400E3E7EC /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				6B650E3A297166530093FEEB /* Extension */,
 				6BCB603E296D6AEE00E3E7EC /* Views */,
-				6BCB6038296D656700E3E7EC /* SSColor.swift */,
 				6BCB603A296D6A2400E3E7EC /* SSConvertible.swift */,
 				6BCB603C296D6A3100E3E7EC /* SSModel.swift */,
+				6BCB605D2970EFE700E3E7EC /* SSLanguage.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -566,9 +680,87 @@
 		6BCB603E296D6AEE00E3E7EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6B650E3D2971673A0093FEEB /* Nibs */,
 				6BCB603F296D6AFE00E3E7EC /* SSButton.swift */,
+				6BCB60592970209E00E3E7EC /* DisabledButton.swift */,
+				6BCB605B2970EFA100E3E7EC /* SSProgressHUD.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6BCB6049296FA3C100E3E7EC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB604A296FA41100E3E7EC /* ShopVipSetCell.swift */,
+				6BCB60772971042200E3E7EC /* ShopVipSetCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6BCB6052297018F700E3E7EC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB6025296D44FA00E3E7EC /* LoginViewController.swift */,
+				6BCB60532970191400E3E7EC /* AuthLoginViewController.swift */,
+				6BCB605529701B0B00E3E7EC /* OtherLoginViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6BCB605F2970F76A00E3E7EC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB60602970F77E00E3E7EC /* LoginModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6BCB60622970FF5500E3E7EC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB60632970FF6300E3E7EC /* AgreementAlertView.swift */,
+				6BCB60652970FF8500E3E7EC /* AgreementAlertView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6BCB60672971002100E3E7EC /* SSOverlayController */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB60682971002100E3E7EC /* SSOverlayController.swift */,
+				6BCB60692971002100E3E7EC /* SSOverlayConfig.swift */,
+				6BCB606A2971002100E3E7EC /* Animations */,
+			);
+			path = SSOverlayController;
+			sourceTree = "<group>";
+		};
+		6BCB606A2971002100E3E7EC /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB606B2971002100E3E7EC /* ZoomOutAniamtion.swift */,
+				6BCB606C2971002100E3E7EC /* FadeInAnimation.swift */,
+				6BCB606D2971002100E3E7EC /* OverlayAnimation.swift */,
+				6BCB606E2971002100E3E7EC /* TranslationAnimation.swift */,
+				6BCB606F2971002100E3E7EC /* ExpandedAnimation.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		6BCB607C297104BD00E3E7EC /* SSCollectionSection */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB607A2971049F00E3E7EC /* SectionCollectionView.swift */,
+				6BCB607D297104DF00E3E7EC /* CollectionSection.swift */,
+			);
+			path = SSCollectionSection;
+			sourceTree = "<group>";
+		};
+		6BCB60892971175600E3E7EC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6BCB608A2971176400E3E7EC /* ShopModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A0728FCC9104C0D6CCD2BF01 /* Pods */ = {
@@ -702,10 +894,13 @@
 			files = (
 				6BCB6032296D645200E3E7EC /* Find.storyboard in Resources */,
 				6BCB602C296D641B00E3E7EC /* Login.storyboard in Resources */,
+				6BCB60662970FF8500E3E7EC /* AgreementAlertView.xib in Resources */,
 				6BCB6030296D644200E3E7EC /* Task.storyboard in Resources */,
 				6BCB6036296D64D100E3E7EC /* Mine.storyboard in Resources */,
 				6BCB602E296D643200E3E7EC /* Shop.storyboard in Resources */,
 				6BCB5F6D296D397C00E3E7EC /* LaunchScreen.storyboard in Resources */,
+				6B650E412971674D0093FEEB /* BaseImageItemCell.xib in Resources */,
+				6BCB60782971042200E3E7EC /* ShopVipSetCell.xib in Resources */,
 				6BCB5F6A296D397C00E3E7EC /* Assets.xcassets in Resources */,
 				6BCB6034296D64C000E3E7EC /* Chat.storyboard in Resources */,
 				6BCB5F68296D397A00E3E7EC /* Main.storyboard in Resources */,
@@ -814,40 +1009,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BCB5F65296D397A00E3E7EC /* ViewController.swift in Sources */,
+				6BCB605C2970EFA100E3E7EC /* SSProgressHUD.swift in Sources */,
+				6BCB5F65296D397A00E3E7EC /* BaseViewController.swift in Sources */,
+				6BCB607B2971049F00E3E7EC /* SectionCollectionView.swift in Sources */,
 				6BCB5FDD296D406B00E3E7EC /* DataManager.swift in Sources */,
 				6BCB6024296D44F200E3E7EC /* ShopViewController.swift in Sources */,
+				6BCB605629701B0B00E3E7EC /* OtherLoginViewController.swift in Sources */,
+				6B650E3929715A400093FEEB /* TaskModel.swift in Sources */,
+				6BCB6092297140C600E3E7EC /* SSString.swift in Sources */,
+				6BCB60642970FF6300E3E7EC /* AgreementAlertView.swift in Sources */,
+				6BCB60612970F77E00E3E7EC /* LoginModel.swift in Sources */,
 				6BCB5FF0296D406B00E3E7EC /* SSRandom.swift in Sources */,
 				6BCB600D296D406B00E3E7EC /* SSNavigationBar.swift in Sources */,
+				6BCB60712971002100E3E7EC /* SSOverlayConfig.swift in Sources */,
 				6BCB600E296D406B00E3E7EC /* SSFullViewController.swift in Sources */,
 				6BCB5FE2296D406B00E3E7EC /* APP.swift in Sources */,
+				6BCB608B2971176400E3E7EC /* ShopModel.swift in Sources */,
 				6BCB5F61296D397A00E3E7EC /* AppDelegate.swift in Sources */,
 				6BCB5FE9296D406B00E3E7EC /* LoggerPlugin.swift in Sources */,
 				6BCB5FE8296D406B00E3E7EC /* PluginType.swift in Sources */,
+				6BCB605A2970209E00E3E7EC /* DisabledButton.swift in Sources */,
 				6BCB5FDB296D406B00E3E7EC /* HttpApi.swift in Sources */,
 				6BCB5FDF296D406B00E3E7EC /* UIView+.swift in Sources */,
 				6BCB5FDE296D406B00E3E7EC /* PayManager.swift in Sources */,
+				6BCB6088297114F300E3E7EC /* SSGenericCollectionViewController.swift in Sources */,
+				6B650E3C297166940093FEEB /* SSImageView.swift in Sources */,
 				6BCB5FE1296D406B00E3E7EC /* UIView+Gesture.swift in Sources */,
 				6BCB5FF9296D406B00E3E7EC /* Int+SS.swift in Sources */,
+				6BCB60742971002200E3E7EC /* OverlayAnimation.swift in Sources */,
 				6BCB6026296D44FA00E3E7EC /* LoginViewController.swift in Sources */,
 				6BCB5FF7296D406B00E3E7EC /* UITableView+SS.swift in Sources */,
 				6BCB600F296D406B00E3E7EC /* SSWebViewController.swift in Sources */,
+				6B650E402971674D0093FEEB /* BaseImageItemCell.swift in Sources */,
 				6BCB5F63296D397A00E3E7EC /* SceneDelegate.swift in Sources */,
 				6BCB6010296D406B00E3E7EC /* SSCollectionViewLayout.swift in Sources */,
+				6BCB60752971002200E3E7EC /* TranslationAnimation.swift in Sources */,
 				6BCB5FFF296D406B00E3E7EC /* Double+SS.swift in Sources */,
 				6BCB5FE3296D406B00E3E7EC /* HttpClient+PromiseKit.swift in Sources */,
+				6B650E36297156370093FEEB /* TaskListItemCell.swift in Sources */,
 				6BCB6006296D406B00E3E7EC /* SSSandbox.swift in Sources */,
 				6BCB5FF4296D406B00E3E7EC /* UIView+SS.swift in Sources */,
 				6BCB5FE7296D406B00E3E7EC /* HttpError.swift in Sources */,
 				6BCB6001296D406B00E3E7EC /* Scale.swift in Sources */,
+				6BCB607E297104DF00E3E7EC /* CollectionSection.swift in Sources */,
 				6BCB6000296D406B00E3E7EC /* String+SS.swift in Sources */,
 				6BCB5FFE296D406B00E3E7EC /* Data+SS.swift in Sources */,
 				6BCB6003296D406B00E3E7EC /* SSLog.swift in Sources */,
 				6BCB5FF5296D406B00E3E7EC /* UIFont+SS.swift in Sources */,
+				6BCB605829701E0F00E3E7EC /* UITextField+SS.swift in Sources */,
 				6BCB6009296D406B00E3E7EC /* SSBubbleTabBar.swift in Sources */,
 				6BCB5FFC296D406B00E3E7EC /* NSObject+SS.swift in Sources */,
 				6BCB5FEB296D406B00E3E7EC /* TapBuzz.swift in Sources */,
 				6BCB5FE4296D406B00E3E7EC /* HttpRequest.swift in Sources */,
+				6BCB60762971002200E3E7EC /* ExpandedAnimation.swift in Sources */,
 				6BCB5FF8296D406B00E3E7EC /* UIColor+SS.swift in Sources */,
 				6BCB5FF3296D406B00E3E7EC /* UIButton+SS.swift in Sources */,
 				6BCB5FF2296D406B00E3E7EC /* UILabel+SS.swift in Sources */,
@@ -861,6 +1075,7 @@
 				6BCB600B296D406B00E3E7EC /* SSController.swift in Sources */,
 				6BCB5FEE296D406B00E3E7EC /* SSJump.swift in Sources */,
 				6BCB5FEA296D406B00E3E7EC /* HttpDecoder.swift in Sources */,
+				6BCB60722971002100E3E7EC /* ZoomOutAniamtion.swift in Sources */,
 				6BCB6013296D40C500E3E7EC /* MainTabbarController.swift in Sources */,
 				6BCB6005296D406B00E3E7EC /* SSDefault.swift in Sources */,
 				6BCB6011296D406B00E3E7EC /* SSTabBarController.swift in Sources */,
@@ -868,21 +1083,30 @@
 				6BCB6040296D6AFE00E3E7EC /* SSButton.swift in Sources */,
 				6BCB6008296D406B00E3E7EC /* SSViewController.swift in Sources */,
 				6BCB600C296D406B00E3E7EC /* SSBubbleTabBarController.swift in Sources */,
+				6BCB60822971075F00E3E7EC /* UIScrollView+Refresh.swift in Sources */,
 				6BCB6004296D406B00E3E7EC /* SS.swift in Sources */,
+				6BCB608429710B1A00E3E7EC /* SSRefreshHeader.swift in Sources */,
 				6BCB6020296D44E100E3E7EC /* FindViewController.swift in Sources */,
 				6BCB5FDA296D406B00E3E7EC /* ParamsPlugin.swift in Sources */,
+				6BCB60732971002100E3E7EC /* FadeInAnimation.swift in Sources */,
 				6BCB603B296D6A2400E3E7EC /* SSConvertible.swift in Sources */,
 				6BCB5FDC296D406B00E3E7EC /* PlayManager.swift in Sources */,
+				6BCB60802971065900E3E7EC /* UICollectionView+SS.swift in Sources */,
 				6BCB5FF1296D406B00E3E7EC /* UIImage+SS.swift in Sources */,
 				6BCB600A296D406B00E3E7EC /* SSNavigationController.swift in Sources */,
 				6BCB601E296D44C300E3E7EC /* ChatViewController.swift in Sources */,
+				6BCB60542970191400E3E7EC /* AuthLoginViewController.swift in Sources */,
 				6BCB603D296D6A3100E3E7EC /* SSModel.swift in Sources */,
+				6BCB605E2970EFE700E3E7EC /* SSLanguage.swift in Sources */,
 				6BCB601C296D44B900E3E7EC /* MineViewController.swift in Sources */,
 				6BCB6002296D406B00E3E7EC /* SSKit.swift in Sources */,
 				6BCB5FE6296D406B00E3E7EC /* HttpClient.swift in Sources */,
 				6BCB5FFB296D406B00E3E7EC /* Dictionary+SS.swift in Sources */,
 				6BCB602A296D5FD100E3E7EC /* headerTest.m in Sources */,
+				6BCB60702971002100E3E7EC /* SSOverlayController.swift in Sources */,
+				6BCB604B296FA41100E3E7EC /* ShopVipSetCell.swift in Sources */,
 				6BCB6007296D406B00E3E7EC /* Toast.swift in Sources */,
+				6BCB60512970155500E3E7EC /* SSImage.swift in Sources */,
 				6BCB5FD9296D406B00E3E7EC /* FileTool.swift in Sources */,
 				6BCB5FF6296D406B00E3E7EC /* UIViewController+SS.swift in Sources */,
 			);
