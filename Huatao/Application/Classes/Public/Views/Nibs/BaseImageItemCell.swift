@@ -13,11 +13,11 @@ class BaseImageItemCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        baseImage.contentMode = .scaleAspectFill
         baseImage.layer.masksToBounds = true
     }
     
-    func confit(url: String, placeholder: UIImage?, cornerRadius: CGFloat = 0) {
+    func config(url: String, placeholder: UIImage?, cornerRadius: CGFloat = 0) {
         baseImage.layer.cornerRadius = cornerRadius
         baseImage.ss_setImage(url, placeholder: placeholder)
     }

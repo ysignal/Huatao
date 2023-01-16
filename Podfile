@@ -26,7 +26,9 @@ target 'Huatao' do
   # 分段控制器框架
   pod 'JXSegmentedView'
   pod 'JXPagingView/Paging'
-  
+  # 通知中心
+  pod 'SwiftNotificationCenter'
+  # 数据库
   pod 'FMDB'
   
   # 图片缓存
@@ -39,7 +41,21 @@ target 'Huatao' do
   pod 'WechatOpenSDK'
   # 支付宝SDK
   pod 'AlipaySDK-iOS'
-
+  
+#  pod 'RongCloud/IMLib'
+  # 融云IM
+  pod 'RongCloudOpenSource/IMKit', '5.3.4'
+  # 小视频
+#  pod 'RongCloudOpenSource/Sight', '5.3.4'
+  # 表情
+#  pod 'RongCloudOpenSource/RongSticker', '5.3.4'
+  # 语言输入
+#  pod 'RongCloudOpenSource/IFly', '5.3.4'
+  # 名片
+#  pod 'RongCloudOpenSource/ContactCard', '5.3.4'
+  # 位置
+#  pod 'RongCloudOpenSource/LocationKit', '5.3.4'
+  
   # 二维码生成 扫描
   pod 'swiftScan'
   

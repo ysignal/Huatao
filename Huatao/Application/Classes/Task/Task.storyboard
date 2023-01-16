@@ -17,27 +17,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bv7-MY-zhp">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="262"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="262" id="JJu-2Y-bzz"/>
-                                </constraints>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mFr-4R-9Ap">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mFr-4R-9Ap">
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="9e9-jz-3Og">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="206"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8mQ-rw-PwZ">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8mQ-rw-PwZ">
                                             <rect key="frame" x="12" y="12" width="369" height="147.33333333333334"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="8mQ-rw-PwZ" secondAttribute="height" multiplier="351:140" id="p7C-vT-iaW"/>
                                             </constraints>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lMm-Ba-niH">
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="rAh-4F-xUu">
                                                 <size key="itemSize" width="128" height="128"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -77,7 +70,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskListItemCell" rowHeight="64" id="Seo-dF-ViP" customClass="TaskListItemCell" customModule="Huatao" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="300" width="393" height="64"/>
+                                        <rect key="frame" x="0.0" y="256" width="393" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Seo-dF-ViP" id="b6B-IA-Y0d">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="64"/>
@@ -95,7 +88,7 @@
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJX-6y-CMs">
                                                             <rect key="frame" x="52" y="26" width="0.0" height="0.0"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -189,16 +182,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mFr-4R-9Ap" secondAttribute="trailing" id="38h-Rj-Eba"/>
-                            <constraint firstItem="bv7-MY-zhp" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="BaL-Gz-d2z"/>
-                            <constraint firstAttribute="trailing" secondItem="bv7-MY-zhp" secondAttribute="trailing" id="IAs-8b-Zvs"/>
                             <constraint firstItem="mFr-4R-9Ap" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cM3-TS-o6N"/>
                             <constraint firstAttribute="bottom" secondItem="mFr-4R-9Ap" secondAttribute="bottom" id="lQm-Wc-1va"/>
                             <constraint firstItem="mFr-4R-9Ap" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="44" id="m8Q-pE-9sa"/>
-                            <constraint firstItem="bv7-MY-zhp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="mbD-m9-tQN"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="background" destination="bv7-MY-zhp" id="kuy-Rn-nyV"/>
                         <outlet property="bannerCV" destination="8mQ-rw-PwZ" id="DMz-VP-C8k"/>
                         <outlet property="headerView" destination="9e9-jz-3Og" id="auk-Qr-hug"/>
                         <outlet property="pageControl" destination="Aca-Gf-TwJ" id="KTL-yb-2i0"/>

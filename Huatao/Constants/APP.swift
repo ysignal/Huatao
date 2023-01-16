@@ -6,20 +6,18 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 enum APPState {
     case debug
-    case debugOnline
     case release
     
     var baseUrl: String {
         switch self {
         case .debug:
             return "http://192.168.1.17:8765"
-        case .debugOnline:
-            return ""
         case .release:
-            return ""
+            return "http://huatao.gou39.cn/"
         }
     }
     
@@ -30,7 +28,7 @@ enum APPState {
 
 public struct APP {
     
-    static let state: APPState = .debug
+    static let state: APPState = .release
     
     struct SDKKey {
         static let WXAppID = "wx66831e7dc3edf060"
@@ -41,16 +39,10 @@ public struct APP {
         static let BMKKey = "QA3aN2b86WKGNp2GbynA5bewEWjY0zud"
         
         static let AlipayScheme = "alipay2021003143628782"
-        // 环信IM AppKey
-        static let EMAPPKey = "1125220812103311#rujiaolove"
+        // 融云IM AppKey
+        static let RCIMAPPKey = "25wehl3u2v5tw"
         // 极光推送 AppKey
         static let JPushAppKey = "434c716684887b293e1b73a6"
-        // 友盟统计 AppKey
-        static let UMAppKey = ""
-        // Zego音视频 AppID
-        static let ZegoAppID: UInt32 = 1390936217
-        // Zego音视频 AppSign
-        static let ZegoAppSign: String = "fa54d4647ca6a997338dd916e21d6a11f7071bd143fa10a71fd6aac71a87beb9"
     }
     
     struct SettingKey {
@@ -123,7 +115,7 @@ public struct APP {
     static let dateActivity: String = "yyyy年MM月dd日hh时"
 
     static func isDebug() -> Bool {
-        return state == .debug || state == .debug
+        return state == .debug || state == .release
     }
     
     /// 切换到APP主页
@@ -146,10 +138,10 @@ public struct APP {
     
     /// 退出登录，注销用户
     static func logout() {
-        UserDefaults.standard.setValue(true, forKey: APP.SettingKey.isLogout)
-        UserDefaults.standard.set("", forKey: APP.SettingKey.loginData)
-        UserDefaults.standard.synchronize()
-        // 退出环信
+        APP.isLogout = true
+        APP.loginDataString = ""
+        // 退出IM
+        RCIM.shared().logout()
         APP.switchLoginViewController()
     }
     
@@ -173,11 +165,24 @@ public struct APP {
     }
     
     // 更新用户信息
-    static func updateUserInfo() {
+    static func updateUserInfo(completion: NoneBlock? = nil) {
         HttpApi.Login.getUserInfo().done { data in
             userInfo = data.kj.model(UserInfo.self)
             asyncIMUserInfo()
+            SSMainAsync {
+                completion?()
+            }
         }
+    }
+    
+    static func imageHeight(total: Int, lineMax: Int, lineHeight: CGFloat, lineSpace: CGFloat) -> CGFloat {
+        var line = total / lineMax
+        let rem = total % lineMax
+        if rem > 0 {
+            line += 1
+        }
+        let imageHeight = CGFloat(line) * (lineHeight + lineSpace) - lineSpace
+        return imageHeight
     }
     
     static func asyncIMUserInfo() {
@@ -185,9 +190,14 @@ public struct APP {
     }
     
     static func setupAPP() {
-
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
         
-        
+        RCIM.shared().initWithAppKey(APP.SDKKey.RCIMAPPKey)
+        RCIM.shared().addConnectionStatusDelegate(IMManager.shared)
+        RCIM.shared().addReceiveMessageDelegate(IMManager.shared)
     }
     
 }

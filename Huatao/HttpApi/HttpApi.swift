@@ -219,108 +219,153 @@ extension HttpApi {
         /// 获取任务列表
         /// - Returns: 返回结果
         static func getTaskList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/send_material_detail", method: .get)
+            let req = HttpRequest(path: "/api/task_list", method: .get)
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
+        /// 轮播图列表
+        /// - Parameter sign: 类型 home-首页、task-任务大厅
+        /// - Returns: 返回结果
+        static func getBannerList(sign: String) -> Promise<[[String: Any]]> {
+            var req = HttpRequest(path: "/api/banner/list", method: .get)
+            req.params = ["sign": sign]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [[String: Any]] ?? [])})
+        }
     }
 }
 
 // MARK: - 星球页面请求接口
 extension HttpApi {
     
-    struct Star {
+    struct Find {
         
-        /// 获取星球推荐用户
-        /// - Parameter type: 视角类型 1-男视角，2-女视角
-        /// - Returns: 返回结果
-        static func getHomeList(type: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/home_list", method: .get)
-            req.params = ["type": type]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 星球推荐用户滑动切换 右滑-喜欢|讨厌
+        /// 发布图片动态
         /// - Parameters:
-        ///   - userId: 用户ID
-        ///   - type: 投票类型，0-喜欢，1-讨厌
+        ///   - content: 动态内容
+        ///   - images: 图片链接数组
         /// - Returns: 无返回值
-        static func postUserVote(userId: Int, type: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/user/vote_post", method: .post)
+        static func postImageDynamic(content: String, images: [String]) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/add_dynamic", method: .post)
             req.paramsType = .json
-            req.params = ["user_id": userId, "type": type]
+            var params: [String: Any] = ["content": content, "type": 0, "video": ""]
+            images.enumerated().forEach { (i, image) in
+                params["images[\(i)]"] = images
+            }
+            req.params = params
             
             return APP.httpClient.request(req).asVoid()
         }
         
-        /// 获取当前用户的上一个用户
-        /// - Parameter userId: 当前用户的ID
-        /// - Returns: 返回结果
-        static func getBackPre(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/home/back_pre", method: .get)
-            req.params = ["user_id": userId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 提交喜欢用户
-        /// - Parameter userId: 用户ID
-        /// - Returns: 无返回结果
-        static func getPointLike(userId: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/home/point_like", method: .get)
-            req.params = ["user_id": userId]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取排行榜列表
+        /// 发布视频动态
         /// - Parameters:
-        ///   - type: 视角类型 1-男视角，2--女视角
-        ///   - page: 数据页数  `page_size` 每页数据个数
-        /// - Returns: 返回结果
-        static func getRankList(type: Int, page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/home/rank_list", method: .get)
-            req.params = ["type": type, "page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取排行榜列表
-        /// - Parameters:
-        ///   - type: 视角类型 1-男视角，2--女视角
-        ///   - page: 数据页数  `page_size` 每页数据个数
-        /// - Returns: 返回结果
-        static func getActiveRankList(type: Int, page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/home/active_rank_list", method: .get)
-            req.params = ["type": type, "page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取礼物列表
-        /// - Parameter page: 数据页数
-        /// - Returns: 返回结果
-        static func getGiftList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/my/gift_list", method: .get)
-            req.params = ["page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 赠送礼物
-        /// - Parameters:
-        ///   - giftId: 礼物ID
-        ///   - toUserId: 赠送用户ID
-        ///   - number: 礼物数量
+        ///   - content: 动态内容
+        ///   - video: 视频链接
         /// - Returns: 无返回值
-        static func postGiftSend(giftId: Int, toUserId: Int, number: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/gift_send", method: .post)
+        static func postVideoDynamic(content: String, video: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/add_dynamic", method: .post)
             req.paramsType = .json
-            req.params = ["gift_id": giftId, "to_user_id": toUserId, "number": number]
+            req.params = ["content": content, "type": 1, "video": video]
             
             return APP.httpClient.request(req).asVoid()
+        }
+        
+        ///
+        /// - Parameter
+        ///   - isMy:
+        /// - Returns: 返回结果
+        
+        /// 获取动态列表
+        /// - Parameters:
+        ///   - isMy: 动态类型，0-所有，1-我的
+        ///   - page: 数据页数
+        /// - Returns: 返回结果
+        static func getDynamicList(isMy: Int, page: Int = 0) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/dynamic_list", method: .get)
+            req.params = ["is_my": isMy]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 点赞动态
+        /// - Parameter dynamicId: 动态ID
+        /// - Returns: 无返回值
+        static func putDynamicLike(dynamicId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/dynamic_like", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["dynamic_id": dynamicId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 评论动态
+        /// - Parameters:
+        ///   - dynamicId: 动态ID
+        ///   - content: 评论内容
+        ///   - toUserId: 回复的用户ID
+        ///   - topPid: 顶级评论的ID，为0就是评论贴主
+        /// - Returns: 无返回值
+        static func postDynamicComment(dynamicId: Int, content: String, toUserId: Int, topPid: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/dynamic_comment", method: .post)
+            req.paramsType = .json
+            req.params = ["dynamic_id": dynamicId, "content": content, "to_user_id": toUserId, "top_pid": topPid]
+        
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取动态详情
+        /// - Parameter dynamicId: 动态ID
+        /// - Returns: 返回数据
+        static func getDynamicDetail(dynamicId: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/dynamic_detail", method: .get)
+            req.params = ["dynamic_id": dynamicId]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 点赞评论
+        /// - Parameter commentId: 评论ID
+        /// - Returns: 无返回值
+        static func putCommentLike(commentId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/dynamic_like", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["comment_id": commentId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 删除动态
+        /// - Parameter dynamicId: 动态ID
+        /// - Returns: 无返回值
+        static func deleteDynamic(dynamicId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/dynamic_delete", method: .delete)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["dynamic_id": dynamicId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取互动消息列表
+        /// - Returns: 返回结果
+        static func getInteractMessageList() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/Interact_message_list", method: .get)
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 获取发现页面右上角小红点
+        /// - Returns: 返回结果
+        static func getDynamicRedNotice() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/dynamic_red_notice", method: .get)
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
     }

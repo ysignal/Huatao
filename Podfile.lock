@@ -33,8 +33,26 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.18.1):
     - PromiseKit/CorePromise
+  - RongCloudIM/ChatRoom (5.3.4):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/CustomerService (5.3.4):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/Discussion (5.3.4):
+    - RongCloudIM/IMLibCore
+  - RongCloudIM/IMLib (5.3.4):
+    - RongCloudIM/ChatRoom
+    - RongCloudIM/CustomerService
+    - RongCloudIM/Discussion
+    - RongCloudIM/IMLibCore
+    - RongCloudIM/PublicService
+  - RongCloudIM/IMLibCore (5.3.4)
+  - RongCloudIM/PublicService (5.3.4):
+    - RongCloudIM/IMLibCore
+  - RongCloudOpenSource/IMKit (5.3.4):
+    - RongCloudIM/IMLib (= 5.3.4)
   - SnapKit (5.0.1)
   - SwiftDate (6.3.1)
+  - SwiftNotificationCenter (1.0.4)
   - swiftScan (1.2.1)
   - WechatOpenSDK (1.9.9)
   - ZLPhotoBrowser (4.3.7):
@@ -55,8 +73,10 @@ DEPENDENCIES:
   - MJRefresh
   - Popover
   - PromiseKit (from `./PromiseKit`)
+  - RongCloudOpenSource/IMKit (= 5.3.4)
   - SnapKit
   - SwiftDate
+  - SwiftNotificationCenter
   - swiftScan
   - WechatOpenSDK
   - ZLPhotoBrowser
@@ -76,8 +96,11 @@ SPEC REPOS:
     - MBProgressHUD
     - MJRefresh
     - Popover
+    - RongCloudIM
+    - RongCloudOpenSource
     - SnapKit
     - SwiftDate
+    - SwiftNotificationCenter
     - swiftScan
     - WechatOpenSDK
     - ZLPhotoBrowser
@@ -101,12 +124,15 @@ SPEC CHECKSUMS:
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
   PromiseKit: 3402dd72417fcd35b334f730df3629970921bd5c
+  RongCloudIM: b6014f6348ba782f484115c9bfb2176a6075cae8
+  RongCloudOpenSource: 3bd0bcc7c99d5c35a56af0701df1068df60ed093
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
+  SwiftNotificationCenter: 760386da2ce03d3594cb5e96d1e22ec80b44b46f
   swiftScan: 0849e7d7c1c641384767a573ee8cb90b88d1ddd9
   WechatOpenSDK: 9bf85605d50000b35e5ea679a76582426a30c595
   ZLPhotoBrowser: f571bdaec6d0b64ae94a29787e4c7cbd8900d10f
 
-PODFILE CHECKSUM: b76080cb777aa8300d5b996f2d532f4643f3933d
+PODFILE CHECKSUM: ed910ff84a9fa15462c9a9d757437dca4e12dbb4
 
 COCOAPODS: 1.11.3

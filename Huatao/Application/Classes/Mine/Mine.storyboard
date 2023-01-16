@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,9 +17,73 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eAr-Wv-1R4">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="23F-Mv-00r">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MineMenuItemCell" id="9uN-AL-RSl" customClass="MineMenuItemCell" customModule="Huatao" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rh2-OJ-xCp">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lyy-6O-DHE">
+                                                    <rect key="frame" x="-26" y="-41" width="180" height="180"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="180" id="1jv-gN-yOy"/>
+                                                        <constraint firstAttribute="width" constant="180" id="Wyp-ix-Pgv"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cV2-jb-1zG">
+                                                    <rect key="frame" x="64" y="68" width="0.0" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="0bP-Dw-Fm6"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cV2-jb-1zG" firstAttribute="top" secondItem="rh2-OJ-xCp" secondAttribute="top" constant="68" id="Ofv-IZ-DZd"/>
+                                                <constraint firstItem="lyy-6O-DHE" firstAttribute="centerX" secondItem="rh2-OJ-xCp" secondAttribute="centerX" id="eXq-MQ-9vb"/>
+                                                <constraint firstItem="cV2-jb-1zG" firstAttribute="centerX" secondItem="rh2-OJ-xCp" secondAttribute="centerX" id="m4e-YK-EVi"/>
+                                                <constraint firstItem="lyy-6O-DHE" firstAttribute="centerY" secondItem="rh2-OJ-xCp" secondAttribute="centerY" constant="-15" id="p6p-lu-m2O"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="menuIcon" destination="lyy-6O-DHE" id="JTO-fc-AaK"/>
+                                            <outlet property="menuTitle" destination="cV2-jb-1zG" id="YOs-7F-1tb"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="Yzy-Bp-YTM"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="JsG-XE-znU"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eAr-Wv-1R4" secondAttribute="trailing" id="0Ey-L9-DM4"/>
+                            <constraint firstAttribute="bottom" secondItem="eAr-Wv-1R4" secondAttribute="bottom" id="0QQ-JD-Ylk"/>
+                            <constraint firstItem="eAr-Wv-1R4" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="44" id="3mB-r7-kI5"/>
+                            <constraint firstItem="eAr-Wv-1R4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="FhR-Wu-X9d"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mineCV" destination="eAr-Wv-1R4" id="HgR-hP-iR8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

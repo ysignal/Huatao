@@ -11,3 +11,5 @@
 #import <WXApi.h>
 // 支付宝
 #import <AlipaySDK/AlipaySDK.h>
+// 融云
+#import <RongCloudOpenSource/RongIMKit.h>

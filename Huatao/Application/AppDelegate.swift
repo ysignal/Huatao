@@ -25,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         APP.setupAPP()
         return true
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        // 应用销毁
+        RCIM.shared().logout()
+        
+        sleep(2)
+    }
 
     // MARK: UISceneSession Lifecycle
 

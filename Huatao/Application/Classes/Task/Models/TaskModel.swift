@@ -56,6 +56,7 @@ struct TaskListItem: SSConvertible {
     /// 是否完成
     var isComplete: Int = 0
     
+    /// 任务详情对象
     var task = TaskDetail()
     
 }
@@ -94,3 +95,8 @@ struct TaskDetail: SSConvertible {
     
 }
 
+struct BannerImageItem: SSConvertible {
+    
+    var image: String = ""
+    
+}

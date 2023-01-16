@@ -39,11 +39,30 @@ class MainTabbarController: SSTabBarController {
         tabBar.shadowImage = UIImage()
         tabBar.tintColor = .black
         
-        selectedIndex = 1
-
         addChilds()
         
+        selectedIndex = 4
+        
         APP.updateUserInfo()
+        
+        // 连接IM
+        RCIM.shared().connect(withToken: APP.loginData.imToken, timeLimit: 5) { code in
+            // 消息数据库打开，可以进入到主页面
+            SS.log("融云消息数据库打开成功")
+        } success: { userId in
+            // 连接成功
+            SS.log("融云用户\(userId ?? "")连接成功")
+        } error: { status in
+            switch status {
+            case .RC_CONN_TOKEN_INCORRECT:
+                // token非法，刷新token进行重连
+                SS.log("融云token非法，刷新token进行重连")
+            case .RC_CONNECT_TIMEOUT:
+                SS.log("融云连接超时")
+            default:
+                SS.log("融云连接失败：错误码-\(status.rawValue)")
+            }
+        }
     }
     
     func addChilds() {

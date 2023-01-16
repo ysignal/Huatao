@@ -9,5 +9,6 @@ import Foundation
 
 struct DataManager {
     
+    static var cacheVideoImage: [String: UIImage] = [:]
 
 }

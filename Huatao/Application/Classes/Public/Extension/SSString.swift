@@ -66,17 +66,23 @@ extension String {
         return self
     }
     
-    func width(from font: UIFont, height: CGFloat) -> CGFloat {
-        return (self as NSString).boundingRect(with: CGSize(width: .greatestFiniteMagnitude, height: height), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : font], context: nil).size.width
+    func width(from font: UIFont, height: CGFloat, lineHeight: CGFloat = 0, headIndent: CGFloat = 0) -> CGFloat {
+        return size(from: font, size: CGSize(width: .greatestFiniteMagnitude, height: height), lineHeight: lineHeight, headIndent: headIndent).width
     }
     
-    func height(from font: UIFont, width: CGFloat) -> CGFloat {
-        return (self as NSString).boundingRect(with: CGSize(width: width, height: .greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : font], context: nil).size.height
+    func height(from font: UIFont, width: CGFloat, lineHeight: CGFloat = 0, headIndent: CGFloat = 0) -> CGFloat {
+        return size(from: font, size: CGSize(width: width, height: .greatestFiniteMagnitude), lineHeight: lineHeight, headIndent: headIndent).height
     }
     
-    func size(from font: UIFont, size: CGSize) -> CGSize {
-        return (self as NSString).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : font], context: nil).size
-
+    func size(from font: UIFont, size: CGSize, lineHeight: CGFloat = 0, headIndent: CGFloat = 0, alignment: NSTextAlignment = .left) -> CGSize {
+        let style = NSMutableParagraphStyle()
+        if lineHeight > 0 {
+            style.lineSpacing = lineHeight - font.lineHeight
+        }
+        style.firstLineHeadIndent = headIndent
+        style.alignment = alignment
+        let attrStr = NSAttributedString(string: self, attributes: [.paragraphStyle: style])
+        return attrStr.boundingRect(with: size, options: .usesLineFragmentOrigin, context: nil).size
     }
     
     func upper(than old: String?) -> Bool {

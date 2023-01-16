@@ -23,9 +23,10 @@ struct SSImage {
     
     // 导航栏返回按钮
     static var back: UIImage? { return UIImage(named: "ic_back_24")?.original }
-    static var userDefault: UIImage? { return UIImage(named: "pic_avatar_default") }
+    static var userDefault: UIImage? { return UIImage(named: "ic_user_default") }
     static var photoDefault: UIImage? { return UIImage(named: "pic_default") }
-    
+    static var photoDefaultWhite: UIImage? { return UIImage(named: "pic_default_white") }
+
     static var radioOn: UIImage? { return UIImage(named: "ic_radio_on") }
     static var radioOff: UIImage? { return UIImage(named: "ic_radio_off") }
     
@@ -37,7 +38,7 @@ struct SSImage {
     static var taskFriend: UIImage? { return UIImage(named: "ic_task_circle") }
     static var taskLike: UIImage? { return UIImage(named: "ic_task_like") }
     static var taskComplete: UIImage? { return UIImage(named: "ic_task_complete") }
-    static var taskTotal: UIImage? { return UIImage(named: "ic_task_total") }
+    static var taskTotal: UIImage? { return UIImage(named: "ic_task_invite") }
     static var taskLook: UIImage? { return UIImage(named: "ic_task_look") }
     static var taskPay: UIImage? { return UIImage(named: "ic_task_pay") }
 

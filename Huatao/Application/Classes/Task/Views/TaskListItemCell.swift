@@ -19,7 +19,7 @@ class TaskListItemCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        selectionStyle = .none
     }
 
     func config(item: TaskListItem) {

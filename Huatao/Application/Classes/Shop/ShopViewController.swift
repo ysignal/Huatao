@@ -9,7 +9,12 @@ import UIKit
 
 class ShopViewController: SSViewController {
     
-    @IBOutlet weak var background: UIView!
+    lazy var background: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 358))
+        view.drawGradient(start: .hex("fff1e2"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
+        return view
+    }()
+    
     @IBOutlet weak var shopTV: UITableView!
     
     var list: [ShopGiftItem] = []
@@ -23,15 +28,14 @@ class ShopViewController: SSViewController {
     
     override func buildUI() {
         view.backgroundColor = .hex("f6f6f6")
+        view.insertSubview(background, belowSubview: shopTV)
         
         showFakeNavBar()
         fakeNav.backgroundColor = .clear
-        fakeNav.titleLabel.font = UIFont.ss_semibold(size: 18)
+        fakeNav.titleLabel.font = .ss_semibold(size: 18)
         fakeNav.title = "商城"
         fakeNav.titleColor = .hex("333333")
-        
-        background.drawGradient(start: .hex("fff1e2"), end: .hex("f6f6f6"), size: CGSize(width: SS.w, height: 358), direction: .t2b)
-                
+                        
         shopTV.register(nibCell: ShopVipSetCell.self)
         shopTV.tableFooterView = UIView()
     }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,30 +14,28 @@
             <objects>
                 <viewController storyboardIdentifier="ShopViewController" id="Y6W-OH-hqX" customClass="ShopViewController" customModule="Huatao" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mq-vI-rL2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="358"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="358" id="B5j-7a-lhm"/>
-                                </constraints>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sta-cR-XBl">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Sta-cR-XBl">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Qcm-b2-iDb">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="6"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="6"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="NkF-kd-gea">
+                                    <rect key="frame" x="0.0" y="128" width="393" height="6"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uXo-Kp-cB8">
-                                        <rect key="frame" x="0.0" y="56" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="56" width="393" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uXo-Kp-cB8" id="MNF-rJ-x5R">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -50,16 +50,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Sta-cR-XBl" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="44" id="9NL-A1-zuU"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6mq-vI-rL2" secondAttribute="trailing" id="EBK-E1-yL7"/>
-                            <constraint firstItem="6mq-vI-rL2" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="I9e-Xe-JpX"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Sta-cR-XBl" secondAttribute="trailing" id="QhL-4M-C9r"/>
-                            <constraint firstItem="6mq-vI-rL2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="R8J-0b-R8x"/>
                             <constraint firstItem="Sta-cR-XBl" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="RLx-gl-MsI"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Sta-cR-XBl" secondAttribute="bottom" id="oYh-2M-ZGB"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="background" destination="6mq-vI-rL2" id="P9T-Cp-Jzc"/>
                         <outlet property="shopTV" destination="Sta-cR-XBl" id="qRL-3b-EOh"/>
                     </connections>
                 </viewController>
