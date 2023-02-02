@@ -45,8 +45,8 @@ class AuthLoginViewController: SSViewController, WXApiDelegate {
             phoneLabel.text = pre + "****" + suf
         }
         
-        loginView.drawGradient(start: .hex("f5a41b"), end: .hex("f08720"), size: CGSize(width: SS.w - 50, height: 42), direction: .t2b)
-        
+        loginView.drawThemeGradient(CGSize(width: SS.w - 50, height: 42))
+
         loginView.isHidden = true
         loginBtn.backgroundColor = .hex("dddddd")
         loginBtn.isUserInteractionEnabled = false

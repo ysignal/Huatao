@@ -34,7 +34,8 @@ class LoginViewController: SSViewController {
             wechatLabel.isHidden = true
         }
 
-        phoneView.drawGradient(start: .hex("f5a41b"), end: .hex("f08720"), size: CGSize(width: SS.w - 50, height: 42), direction: .t2b)
+        phoneView.drawThemeGradient(CGSize(width: SS.w - 50, height: 42))
+
         faceBtn.title = "其他手机号登录"
         
         radioBtn.image = SSImage.radioOff

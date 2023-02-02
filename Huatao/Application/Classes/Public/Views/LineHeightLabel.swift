@@ -50,5 +50,9 @@ class LineHeightLabel: UILabel {
             }
         }
     }
+    
+    func textHeight(with size: CGSize) -> CGFloat {
+        return attributedText?.boundingRect(with: size, options: .usesLineFragmentOrigin, context: nil).height ?? 0
+    }
 
 }

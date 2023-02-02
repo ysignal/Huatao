@@ -81,7 +81,7 @@ extension String {
         }
         style.firstLineHeadIndent = headIndent
         style.alignment = alignment
-        let attrStr = NSAttributedString(string: self, attributes: [.paragraphStyle: style])
+        let attrStr = NSAttributedString(string: self, attributes: [.paragraphStyle: style, .font: font])
         return attrStr.boundingRect(with: size, options: .usesLineFragmentOrigin, context: nil).size
     }
     

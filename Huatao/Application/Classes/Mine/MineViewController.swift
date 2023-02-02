@@ -18,16 +18,18 @@ class MineViewController: SSViewController {
     @IBOutlet weak var mineCV: UICollectionView!
     
     private let list = MineModel.menuList
+    
+    private var model = MineUserInfo()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         buildUI()
+        requestUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestUserInfo()
     }
     
     override func buildUI() {
@@ -45,8 +47,40 @@ class MineViewController: SSViewController {
     }
     
     func requestUserInfo() {
-        APP.updateUserInfo {
-            self.mineCV.reloadData()
+        HttpApi.Mine.getMyUserInfo().done { [weak self] data in
+            self?.model = data.kj.model(MineUserInfo.self)
+            SSMainAsync {
+                self?.mineCV.reloadData()
+            }
+        }
+    }
+    
+    func itemClicked(_ item: MineMenuItem) {
+        switch item.action {
+        case "team":
+            let vc = MyTeamViewController.from(sb: .mine)
+            go(vc)
+        case "trade":
+            let vc = TradeCenterViewController.from(sb: .mine)
+            go(vc)
+        case "wallet":
+            let vc = MyWalletViewController.from(sb: .mine)
+            go(vc)
+        case "promotion":
+            let vc = ForwardPosterViewController.from(sb: .mine)
+            go(vc)
+        case "password":
+            let vc = TradePasswordViewController.from(sb: .mine)
+            go(vc)
+        case "circle":
+            let vc = MyCircleViewController.from(sb: .mine)
+            go(vc)
+            
+        case "setting":
+            let vc = SettingViewController.from(sb: .mine)
+            go(vc)
+        default:
+            break
         }
     }
 }
@@ -63,7 +97,7 @@ extension MineViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = list[indexPath.row]
-        SS.log(item.title)
+        itemClicked(item)
     }
 }
 
@@ -82,9 +116,23 @@ extension MineViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, view: MineHeaderView.self, for: indexPath)
-            header.config()
+            header.config(model: model)
+            header.delegate = self
             return header
         }
         return UICollectionReusableView()
     }
+}
+
+extension MineViewController: MineHeaderViewDelegate {
+    
+    func headerViewDidClickedEdit() {
+        toast(message: "点击了编辑资料")
+    }
+    
+    func headerViewDidClickedVip() {
+        let vc = VipRuleViewController.from(sb: .mine)
+        go(vc)
+    }
+    
 }

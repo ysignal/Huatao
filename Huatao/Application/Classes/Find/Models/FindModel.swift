@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DynamicListItem: SSConvertible {
+class DynamicListItem: NSObject, SSConvertible {
     
     /// 动态ID
     var dynamicId: Int = 0
@@ -50,6 +50,10 @@ struct DynamicListItem: SSConvertible {
     
     /// 发布时间
     var createdAt: String = ""
+    
+    required override init() {
+        
+    }
     
 }
 
@@ -195,6 +199,10 @@ struct LikeListItem: SSConvertible {
     
     /// 点赞时间
     var createAt: String = ""
+    
+    static func myItem() -> LikeListItem {
+        return LikeListItem(userName: APP.userInfo.name, userAvatar: APP.userInfo.avatar, createAt: Date().toString(.custom(APP.dateFullFormat)))
+    }
     
 }
 

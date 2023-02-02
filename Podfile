@@ -55,6 +55,9 @@ target 'Huatao' do
 #  pod 'RongCloudOpenSource/ContactCard', '5.3.4'
   # 位置
 #  pod 'RongCloudOpenSource/LocationKit', '5.3.4'
+
+  #图表
+  pod 'AAInfographics', :git => 'https://github.com/AAChartModel/AAChartKit-Swift.git'
   
   # 二维码生成 扫描
   pod 'swiftScan'

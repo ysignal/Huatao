@@ -16,7 +16,7 @@ public extension SS {
                     method: String = #function)
     {
         guard APP.isDebug() else { return }
-        print("\(URL(fileURLWithPath: file).lastPathComponent)[\(line)], \(method)", terminator: separator)
+        print("-----------🖨🖨🖨 \(URL(fileURLWithPath: file).lastPathComponent)[\(line)], \(method) 🖨🖨🖨-----------:")
         var i = 0
         let j = items.count
         for a in items {

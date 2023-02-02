@@ -22,7 +22,7 @@ extension UIImage {
 struct SSImage {
     
     // 导航栏返回按钮
-    static var back: UIImage? { return UIImage(named: "ic_back_24")?.original }
+    static var back: UIImage? { return UIImage(named: "ic_back")?.original }
     static var userDefault: UIImage? { return UIImage(named: "ic_user_default") }
     static var photoDefault: UIImage? { return UIImage(named: "pic_default") }
     static var photoDefaultWhite: UIImage? { return UIImage(named: "pic_default_white") }
@@ -41,7 +41,5 @@ struct SSImage {
     static var taskTotal: UIImage? { return UIImage(named: "ic_task_invite") }
     static var taskLook: UIImage? { return UIImage(named: "ic_task_look") }
     static var taskPay: UIImage? { return UIImage(named: "ic_task_pay") }
-
-    
     
 }

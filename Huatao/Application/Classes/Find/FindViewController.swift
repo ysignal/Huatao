@@ -11,11 +11,16 @@ class FindViewController: SSViewController {
     
     lazy var background: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 262))
-        view.drawGradient(start: .hex("fff1e2"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
+        view.drawGradient(start: .hex("fff1e2"), end: .white, size: view.frame.size, direction: .t2b)
         return view
     }()
     
     @IBOutlet weak var menuStack: UIStackView!
+    @IBOutlet weak var circleView: UIView!
+    @IBOutlet weak var travelView: UIView!
+    @IBOutlet weak var shopView: UIView!
+    @IBOutlet weak var clubView: UIView!
+    
     @IBOutlet weak var findTV: UITableView!
     
     var list: [DynamicListItem] = []
@@ -25,13 +30,11 @@ class FindViewController: SSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        buildUI()
         view.ss.showHUDLoading()
         requestData()
     }
     
     override func buildUI() {
-        view.backgroundColor = .hex("f6f6f6")
         view.insertSubview(background, belowSubview: menuStack)
         
         showFakeNavBar()
@@ -39,6 +42,13 @@ class FindViewController: SSViewController {
         fakeNav.titleLabel.font = .ss_semibold(size: 18)
         fakeNav.title = "发现"
         fakeNav.titleColor = .hex("333333")
+        
+        circleView.addGesture(.tap) { tap in
+            if tap.state == .ended {
+                let vc = FriendCircleViewController.from(sb: .find)
+                self.go(vc)
+            }
+        }
         
         findTV.addRefresh(type: .headerAndFooter, delegate: self)
         findTV.register(nibCell: DynamicListItemCell.self)
@@ -68,7 +78,7 @@ class FindViewController: SSViewController {
             guard let weakSelf = self else { return }
             SSMainAsync {
                 weakSelf.view.ss.hideHUD()
-                weakSelf.findTV.endRefreshing()
+                weakSelf.findTV.endRefresh()
                 weakSelf.toast(message: error.localizedDescription)
             }
         }
@@ -95,22 +105,7 @@ extension FindViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = list[indexPath.row]
-        
-        let baseHeight: CGFloat = 122
-        let contentHeight = item.content.height(from: .ss_regular(size: 14), width: SS.w - 24, lineHeight: 20)
-        let mediaHeight: CGFloat = {
-            if item.type == 0 {
-                return APP.imageHeight(total: item.images.count, lineMax: 3, lineHeight: 86, lineSpace: 2)
-            } else if item.type == 1 && !item.video.isEmpty {
-                return 150
-            }
-            return 0
-        }()
-        let likeText = item.likeArray.compactMap({ $0.userName }).joined(separator: "，")
-        let likeHeight = item.likeArray.isEmpty ? 0 : likeText.height(from: .ss_regular(size: 14), width: SS.w - 24, lineHeight: 22, headIndent: 15)
-        let commentHeight = CGFloat(item.commentArray.count) * 22
-        
-        return baseHeight + contentHeight + mediaHeight + likeHeight + commentHeight
+        return APP.dynamicHeight(for: item)
     }
     
 }
@@ -125,6 +120,26 @@ extension FindViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(with: DynamicListItemCell.self)
         let item = list[indexPath.row]
         cell.config(item: item)
+        cell.updateBlock = { index in
+            switch index {
+            case 0:
+                // 删除
+                self.list.remove(at: indexPath.row)
+                // iOS 11以后支持，动画删除cell之后调用回调
+                tableView.performBatchUpdates {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                } completion: { finished in
+                    tableView.reloadData()
+                }
+            case 1:
+                // 点赞
+                UIView.performWithoutAnimation {
+                    tableView.reloadRows(at: [indexPath], with: .none)
+                }
+            default:
+                break
+            }
+        }
         return cell
     }
     

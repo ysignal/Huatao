@@ -1,4 +1,5 @@
 PODS:
+  - AAInfographics (7.3.0)
   - Alamofire (5.4.3)
   - AlipaySDK-iOS (15.8.11)
   - FMDB (2.7.5):
@@ -60,6 +61,7 @@ PODS:
   - ZLPhotoBrowser/Core (4.3.7)
 
 DEPENDENCIES:
+  - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
   - Alamofire
   - AlipaySDK-iOS
   - FMDB
@@ -106,10 +108,18 @@ SPEC REPOS:
     - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
+  AAInfographics:
+    :git: https://github.com/AAChartModel/AAChartKit-Swift.git
   PromiseKit:
     :path: "./PromiseKit"
 
+CHECKOUT OPTIONS:
+  AAInfographics:
+    :commit: 94c2acb9575cd06a9030a066e586b0e42aa38560
+    :git: https://github.com/AAChartModel/AAChartKit-Swift.git
+
 SPEC CHECKSUMS:
+  AAInfographics: ee2a7959acdd0a00243b7f5a3f03a1fa2bdf0781
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   AlipaySDK-iOS: a07b6eafa847a5b29acb6c150ea16d9792d5d167
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -133,6 +143,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 9bf85605d50000b35e5ea679a76582426a30c595
   ZLPhotoBrowser: f571bdaec6d0b64ae94a29787e4c7cbd8900d10f
 
-PODFILE CHECKSUM: ed910ff84a9fa15462c9a9d757437dca4e12dbb4
+PODFILE CHECKSUM: c7759fe30359ef2d51be5b5e05e048d4bfd39a49
 
 COCOAPODS: 1.11.3

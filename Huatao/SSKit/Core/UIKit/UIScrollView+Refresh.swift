@@ -67,7 +67,7 @@ extension UIScrollView {
     }
     
     func createHeader(tintColor: UIColor = .gray) {
-        let header = MJRefreshHeader {
+        let header = MJRefreshNormalHeader {
             self.refreshDelegate?.scrollViewHeaderRefreshData(self)
         }.autoChangeTransparency(true)
         self.mj_header = header

@@ -49,4 +49,8 @@ struct UserInfo: SSConvertible {
     /// 类型
     var type: Int = 0
     
+    // MARK: 测试字段
+    
+    var vipLevel: Int = 2
+    
 }

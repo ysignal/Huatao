@@ -28,7 +28,7 @@ enum APPState {
 
 public struct APP {
     
-    static let state: APPState = .release
+    static let state: APPState = .debug
     
     struct SDKKey {
         static let WXAppID = "wx66831e7dc3edf060"
@@ -173,6 +173,45 @@ public struct APP {
                 completion?()
             }
         }
+    }
+    
+    static func dynamicHeight(for item: DynamicListItem) -> CGFloat {
+        let baseHeight: CGFloat = 122
+        let contentHeight = item.content.height(from: .ss_regular(size: 14), width: SS.w - 24, lineHeight: 20)
+        let mediaHeight: CGFloat = {
+            if item.type == 0 {
+                return APP.imageHeight(total: item.images.count, lineMax: 3, lineHeight: 86, lineSpace: 2)
+            } else if item.type == 1 && !item.video.isEmpty {
+                return 150
+            }
+            return 0
+        }()
+
+
+        let likeHeight = likeHeight(for: item)
+        
+        let commentHeight = CGFloat(item.commentArray.count) * 22
+        
+        return baseHeight + contentHeight + mediaHeight + likeHeight + commentHeight
+    }
+    
+    static func likeHeight(for item: DynamicListItem) -> CGFloat {
+        let likeWidthList = item.likeArray.compactMap({ $0.userName.width(from: .ss_regular(size: 12), height: 21) + 20 })
+        var line: Int = 0
+        let maxWidth = SS.w - 24
+        var lineWidth: CGFloat = 0
+        likeWidthList.forEach { width in
+            if lineWidth + width > maxWidth {
+                line += 1
+                lineWidth = width
+            } else {
+                if line == 0 {
+                    line += 1
+                }
+                lineWidth += width
+            }
+        }
+        return CGFloat(line) * 21
     }
     
     static func imageHeight(total: Int, lineMax: Int, lineHeight: CGFloat, lineSpace: CGFloat) -> CGFloat {

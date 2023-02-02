@@ -146,9 +146,10 @@ extension HttpApi {
         
         /// 获取转发推广海报列表
         /// - Returns: 返回结果
-        static func getSendMaterialList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/send_material_list", method: .get)
-            
+        static func getSendMaterialList(page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/send_material_list", method: .get)
+            req.params = ["page": page]
+
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
@@ -367,616 +368,196 @@ extension HttpApi {
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
+
         
     }
 }
 
 // MARK: - 消息页面请求接口
 extension HttpApi {
-    struct Message {
+    struct Chat {
         
-        /// 获取通知数量
-        /// - Returns: 返回结果
-        static func getNotice() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/notice", method: .get)
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
         
-        /// 获取消息列表总览
-        /// - Returns: 返回结果
-        static func getNoticeDetail() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/notice_detail", method: .get)
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取通知消息的历史记录
-        /// - Parameters:
-        ///   - type: 消息类型 0-系统通知，1-俱乐部通知，2-聚会活动通知
-        ///   - page: 数据页数
-        /// - Returns: 返回结果
-        static func getNoticeList(type: Int, page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/notice_list", method: .get)
-            req.params = ["type": type, "page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取同城动态列表
-        /// - Parameter page: 数据页数
-        /// - Returns: 返回结果
-        static func getCityDynamicList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/city_dynamic_list", method: .get)
-            req.params = ["page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取用户亲密度
-        /// - Parameter userId: 用户ID
-        /// - Returns: 返回结果
-        static func getUserIntimacy(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/user_intimacy", method: .get)
-            req.params = ["user_id": userId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取用户的语音通话价格
-        /// - Parameter userId: 用户ID
-        /// - Returns: 返回结果
-        static func getCallStart(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/call_start", method: .get)
-            req.params = ["user_id": userId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 告知服务器通话开始
-        /// - Parameters:
-        ///   - userId: 用户ID
-        ///   - callId: 通话ID，默认为0新增，有值是更新
-        ///   - type: 通话类型，0-语音聊天，1-视频通话
-        /// - Returns: 返回结果
-        static func putCallStart(userId: Int, callId: Int, type: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/call_start?user_id=\(userId)", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["call_id": callId, "type": type]
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 告知服务器语音通话结束
-        /// - Parameter callId: 语音通话ID
-        /// - Returns: 无返回值
-        static func putCallEnd(callId: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/call_end", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["call_id": callId]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取用户备注名称
-        /// - Returns: 返回数据
-        static func getEditFriendName(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/edit_friend_name", method: .get)
-            req.paramsType = .url
-            req.params = ["user_id": userId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 修改用户备注
-        /// - Parameters:
-        ///   - userId: 被备注用户的ID
-        ///   - name: 备注
-        /// - Returns: 无返回值
-        static func putEditFriendName(userId: Int, name: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/edit_friend_name", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["user_id": userId, "name": name]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 购买用户
-        /// - Parameters:
-        ///   - userId: 用户id
-        ///   - money: 金额
-        /// - Returns: 无返回值
-        static func postTradeUser(userId: Int, money: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/trade_user?user_id=\(userId)", method: .post)
-            req.paramsType = .json
-            req.params = ["money": money]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取主人游戏信息
-        /// - Parameter userId: 用户ID
-        /// - Returns: 返回结果
-        static func getTradeUser(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/trade_user", method: .get)
-            req.paramsType = .url
-            req.params = ["user_id": userId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 发送群聊红包
-        /// - Parameters:
-        ///   - chatId: 群聊ID，俱乐部、活动群组、群聊房间
-        ///   - number: 红包人数
-        ///   - type: 红包类型：0-群聊，1-俱乐部红包，2-聚会活动
-        ///   - gold: 金币数量
-        ///   - description: 红包描述
-        /// - Returns: 返回 `red_id`
-        static func postSendClubRed(chatId: String, number: Int, type: Int, gold: Int, description: String) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/club/send_club_red", method: .post)
-            req.paramsType = .json
-            req.params = ["chat_id": chatId, "number": number, "description": description, "type": type, "gold": gold]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 发送群聊礼物
-        /// - Parameters:
-        ///   - chatId: 群聊ID，俱乐部、活动群组
-        ///   - number: 红包人数
-        ///   - type: 红包类型：0-群聊，1-俱乐部红包，2-聚会活动
-        ///   - giftId: 礼物ID
-        ///   - gold: 金币数量
-        ///   - description: 礼物描述
-        /// - Returns: 返回 `red_id`
-        static func postSendClubGift(chatId: String, number: Int, type: Int, giftId: Int, gold: Int, description: String = "") -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/club/send_club_red", method: .post)
-            req.paramsType = .json
-            req.params = ["chat_id": chatId, "number": number, "description": description, "type": type, "gold": gold, "gift_id": giftId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 领取红包
-        /// - Parameters:
-        ///   - redId: 红包ID
-        ///   - chatId: 聊天ID
-        /// - Returns: 返回结果
-        static func putGetRed(redId: Int, chatId: String) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/world/get_red", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["red_id": redId, "chat_id": chatId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 领取礼物
-        /// - Parameters:
-        ///   - redId: 包裹ID
-        ///   - chatId: 聊天ID
-        /// - Returns: 返回结果
-        static func putGetGiftRed(redId: Int, chatId: String) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/world/get_gift_red", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["red_id": redId, "chat_id": chatId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 群聊广场红包
-        /// - Parameters:
-        ///   - chatId: 群聊房间
-        ///   - number: 人数，发送礼物为礼物数
-        ///   - type: 0-发送金币红包，1-发送礼物红包
-        ///   - gold: 金币总数
-        ///   - giftId: 礼物ID
-        ///   - description: 描述
-        /// - Returns: 返回 `red_id`
-        static func postSendWorldRed(chatId: String, number: Int, type: Int, gold: Int, giftId: Int, description: String = "") -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/world/send_red", method: .post)
-            req.paramsType = .json
-            req.params = ["chat_id": chatId, "number": number, "description": description, "type": type, "gold": gold, "gift_id": giftId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-
     }
 }
 
 // MARK: - 个人中心页面请求接口
 extension HttpApi {
+    
     struct Mine {
-        /// 获取用户信息
-        /// - Returns: 用户信息对象
-        static func getUserInfo() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/login/getUserInfo", method: .get)
+        
+        /// 获取个人中心数据
+        /// - Returns: 返回结果
+        static func getMyUserInfo() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/my/user_info", method: .get)
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        static func getUserDetail(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/user/user_detail", method: .get)
-            req.paramsType = .url
-            req.params = ["user_id": userId]
+        /// 获取我的团队数据
+        /// - Returns: 返回结果
+        static func getMyTeam() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/my_team", method: .get)
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        static func getUserInfo(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/my/my_info", method: .get)
-            req.paramsType = .url
-            req.params = ["to_user_id": userId]
+        /// 获取交易大厅数据
+        /// - Returns: 返回数据
+        static func getTradingHall() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/trading_hall", method: .get)
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
+        
+        /// 获取交易大厅-折线图数据
+        /// - Parameter type: 类型, 0-7天, 1-14天, 2-30天
+        /// - Returns: 返回结果
+        static func getTradingHallLine(type: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/trading_hall_line", method: .get)
+            req.params = ["type": type]
 
-        /// 获取编辑资料
-        /// - Returns: 用户编辑的信息对象
-        static func getEditUserInfo() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/my/edit_myinfo", method: .get)
-            
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        /// 提交更新的用户数据
-        /// - Parameter data: 更新数据的数据模型
+        /// 提交金豆卖出申请
+        /// - Parameters:
+        ///   - total: 卖出总额
+        ///   - tradeType: 收款类型
+        ///   - name: 姓名
+        ///   - card: 卡号
+        ///   - bankAddress: 开户行
+        ///   - tradeImage: 收款图片
+        ///   - tradePassword: 交易密码
         /// - Returns: 无返回值
-        static func putEditUserInfo(params: [String: Any]) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/edit_myinfo", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = params
-            
+        static func postGoldSale(total: CGFloat, tradeType: Int, name: String, card: String, bankAddress: String, tradeImage: String, tradePassword: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/gold_sale", method: .post)
+            req.paramsType = .json
+            req.params = ["total": total, "trade_type": tradeType, "name": name, "card": card, "bank_address": bankAddress, "trade_image": tradeImage, "trade_password": tradePassword]
+        
             return APP.httpClient.request(req).asVoid()
         }
         
-        /// 获取用户的微信号
-        /// - Parameter userId: 用户ID
-        /// - Returns: 返回结果
-        static func getUserWechat(userId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/user/look_wechat", method: .get)
-            req.params = ["user_id": userId]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        /// 提交金豆购买申请
+        /// - Parameters:
+        ///   - total: 购买金豆总额
+        ///   - price: 购买单价
+        /// - Returns: 无返回值
+        static func postGoldBuy(total: Int, price: CGFloat) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/gold_buy", method: .post)
+            req.paramsType = .json
+            req.params = ["total": total, "price": price]
+        
+            return APP.httpClient.request(req).asVoid()
         }
         
-        /// 获取我的关注列表
+        /// 获取金豆购入记录
         /// - Parameter page: 数据页数
         /// - Returns: 返回结果
-        static func getMyFollowList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/my_follow_list", method: .get)
+        static func getTradeBuyList(page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/trade_buy_list", method: .get)
             req.params = ["page": page]
-            
+
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        /// 获取我的粉丝列表
+        /// 获取金豆售出记录
         /// - Parameter page: 数据页数
         /// - Returns: 返回结果
-        static func getMyFansList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/my_fans_list", method: .get)
+        static func getTradeSaleList(page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/trade_sale_list", method: .get)
             req.params = ["page": page]
-            
+
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        /// 获取我的主人游戏列表
-        /// - Parameter page: 数据页数
-        /// - Returns: 返回结果
-        static func getMyGameList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/my_game_list", method: .get)
-            req.params = ["page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取我的解锁列表
-        /// - Parameter page: 数据页数
-        /// - Returns: 返回结果
-        static func getMyHistoryList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/history_list", method: .get)
-            req.params = ["page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取我的访客列表
-        /// - Parameter page: 数据页数
-        /// - Returns: 返回结果
-        static func getLookMyList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/look_my_list", method: .get)
-            req.params = ["page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取关注用户
-        /// - Parameter userId: 用户ID
-        /// - Returns: 返回列表
-        static func putMyFollow(userId: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my_follow", method: .put)
+        /// 金豆出售订单确认
+        /// - Parameters:
+        ///   - buyId: 购买订单id
+        ///   - status: 订单状态
+        /// - Returns: 无返回值
+        static func putTradeConfirm(buyId: Int, status: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/trade_comfirm", method: .put)
             req.headers["Content-Type"] = "application/x-www-form-urlencoded"
             req.paramsType = .url
             req.encoding = URLEncoding.httpBody
-            req.params = ["to_user_id": userId]
-            
+            req.params = ["buy_id": buyId, "status": status]
+
             return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取订单交易凭证
+        /// - Parameter buyId: 订单ID
+        /// - Returns: 返回结果
+        static func getTradeUpload(buyId: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/trade_upload", method: .get)
+            req.params = ["buy_id": buyId]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 上传交易凭证
+        /// - Parameters:
+        ///   - buyId: 交易ID
+        ///   - uploadImage: 交易凭证截图
+        /// - Returns: 无返回值
+        static func putTradeUpload(buyId: Int, uploadImage: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/trade_upload", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["buy_id": buyId, "upload_image": uploadImage]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 交易完成
+        /// - Parameter buyId: 交易ID
+        /// - Returns: 无返回值
+        static func putTradeComplete(buyId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/trade_complete", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["buy_id": buyId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取升级规则
+        /// - Returns: 返回结果
+        static func getUpgradeRule() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/upgrade_rule", method: .get)
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
         /// 获取我的钱包
-        /// - Returns: 我的钱包数据对象
-        static func getMyWallet() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/currency/my_bag", method: .get)
+        /// - Returns: 返回结果
+        static func getMyBag() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/my_bag", method: .get)
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        /// 获取邀请好友数据
-        /// - Returns: 邀请数据对象
-        static func getInviteDetail() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/invite_detail", method: .get)
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取曝光任务列表
-        /// - Returns: 曝光任务列表数据
-        static func getExposureList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/user/exposure_list", method: .get)
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取认证中心数据
-        /// - Returns: 认证中心数据字典
-        static func getMyAuth() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/my/my_auth", method: .get)
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取百度只能认证的token
-        /// - Returns: 获取到的token字典 ["access_token":""]
-        static func getAuthToken() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/get_baidu_token", method: .get)
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 上传真人认证数据
-        /// - Parameter url: 认证图片
-        /// - Returns: 无返回值
-        static func putRealAuth(url: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/real_auth", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["auth_pic": url]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 上传实名认证数据
-        /// - Parameter realName: 身份证姓名
-        /// - Parameter cardID: 身份证号码
-        /// - Returns: 无返回值
-        static func putCardAuth(realName: String, cardID: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/card_auth", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["real_name": realName, "card_id": cardID]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 提交女神认证数据
+        /// 获取记录列表
         /// - Parameters:
-        ///   - avatar: 认证图片
-        ///   - wechat: 认证微信
-        ///   - video: 认证视频
-        ///   - images: 认证相册，6张 图片链接用逗号隔开
-        /// - Returns: 提交结果
-        static func putGoddessAuth(avatar: String, wechat: String, video: String, images: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/card_auth", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["avatar": avatar, "wechat": wechat, "video": video, "images": images]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取提现记录数组
-        /// - Parameter page: 数据页数
-        /// - Returns: 数据数组
-        static func getWithdrawList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/currency/withdraw_list", method: .get)
-            req.params = ["page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取充值记录数组
-        /// - Parameter page: 数据页数
-        /// - Returns: 数据数组
-        static func getRechargeRecordList(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/currency/recharge_record_list", method: .get)
-            req.params = ["page": page]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取提现账户列表
-        /// - Returns: 返回数据
-        static func getBankList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/currency/bank_list", method: .get)
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 提交提现账户数据
-        /// - Parameters:
-        ///   - name: 持卡人姓名
-        ///   - bankNo: 银行卡号
-        ///   - bankName: 银行名称
-        ///   - subBranch: 开户支行
-        ///   - mobile: 银行预留手机号
-        /// - Returns: 无返回值
-        static func postUserBank(name: String, bankNo: String, bankName: String, subBranch: String, mobile: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/currency/user_bank", method: .post)
-            req.paramsType = .json
-            req.params = ["name": name,
-                          "card_no": bankNo,
-                          "bank_name": bankName,
-                          "sub_branch": subBranch,
-                          "mobile": mobile]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 删除绑定的提现账户
-        /// - Parameter cardNo: 提现账户
-        /// - Returns: 无返回值
-        static func deleteUserBank(cardNo: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/currency/user_bank_delete", method: .delete)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["card_no": cardNo]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取账户明细
-        /// - Parameters:
+        ///   - way: 方式，0-余额记录，1-银豆记录，2-金豆记录，3-贡献记录
+        ///   - type: 类型，0-支出，1-收入
         ///   - page: 数据页数
-        ///   - tradeType: 交易类型
-        ///   - time: 交易时间
-        /// - Returns: 返回数据
-        static func getMoneyDetail(page: Int, tradeType: Int, time: String) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/currency/my_money_detail", method: .get)
-            req.params = ["page": page,
-                          "trade_type": tradeType,
-                          "time": time]
-            
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取余额明细
-        /// - Parameter page: 数据页数
-        /// - Returns: 返回数据
-        static func getBalanceDetail(page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/currency/my_balance_detail", method: .get)
-            req.params = ["page": page]
+        /// - Returns: 返回结果
+        static func getRecordList(way: Int, type: Int, page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/record_list", method: .get)
+            req.params = ["way": way, "type": type, "page": page]
 
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        /// 上传相册json
-        /// - Parameter json: 相册JSON
+        /// 兑换金豆
+        /// - Parameter money: 兑换数量
         /// - Returns: 无返回值
-        static func putUserAlbum(json: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/upload_album", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["album": json]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取注销满足条件
-        /// - Returns: 返回结果
-        static func getCancelAccount() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/currency/cancel_acount", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取积分提现数据
-        /// - Returns: 返回结果
-        static func getCreditWithdraw() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/currency/credit_withdraw", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 提交提现申请
-        /// - Parameter cardNo: 提现账户
-        /// - Returns: 无返回值
-        static func postMoneyWithdraw(cardNo: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/currency/money_withdraw_post", method: .post)
-            req.paramsType = .json
-            req.params = ["card_no": cardNo]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取提现记录详情
-        /// - Parameter withdrawId: 提现记录ID
-        /// - Returns: 返回结果
-        static func getWithdrawDetail(withdrawId: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/currency/withdraw_detail", method: .get)
-            req.params = ["withdraw_id": withdrawId]
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取金币充值列表
-        /// - Returns: 返回结果
-        static func getRechargeGoldList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/my/recharge_gold_list", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取会员列表数据
-        /// - Returns: 返回结果
-        static func getVipList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/my/vip_list", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取免打扰设置
-        /// - Returns: 返回结果
-        static func getNoDisturbSet() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/my/no_disturb_set", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 提交免打扰设置
-        /// - Parameter param: 提交参数
-        /// - Returns: 无返回值
-        static func putNoDisturbSet(param: [String: Any]) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/no_disturb_set", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = param
-
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 提交积分转余额
-        /// - Parameter money: 余额数量
-        /// - Returns: 无返回值
-        static func putCreditToMoney(money: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/currency/credit_to_money", method: .put)
+        static func putConversionGold(money: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/conversion_gold", method: .put)
             req.headers["Content-Type"] = "application/x-www-form-urlencoded"
             req.paramsType = .url
             req.encoding = URLEncoding.httpBody
@@ -985,129 +566,20 @@ extension HttpApi {
             return APP.httpClient.request(req).asVoid()
         }
         
-        /// 提交积分转金币
-        /// - Parameter money: 金币数量
-        /// - Returns: 无返回值
-        static func putCreditToGold(money: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/currency/credit_to_gold", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            req.params = ["money": money]
-
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取魅力特质列表
+        /// 获取兑换金豆数量列表
         /// - Returns: 返回结果
-        static func getCharmList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/user/charm_list", method: .get)
+        static func getConversionGold() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/conversion_gold", method: .get)
 
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        /// 添加魅力特质
-        /// - Parameters:
-        ///   - charmId: 特质ID
-        ///   - images: 图片
-        ///   - video: 视频
-        ///   - type: 类型
-        /// - Returns: 无返回结果
-        static func postCharmAdd(charmId: Int, images: String, video: String, type: Int, des: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/user/charm_add", method: .post)
-            req.paramsType = .json
-            req.params = ["charm_id": charmId, "images": images, "video": video, "type": type, "des": des]
-            
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取我的写真集列表
+        /// 获取兑换记录列表
+        /// - Parameter page: 数据页数
         /// - Returns: 返回结果
-        static func getMyCharmList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/user/my_charm_list", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取特征详情
-        /// - Parameters:
-        ///   - charmId: 特征ID
-        ///   - page: 数据页数
-        /// - Returns: 返回结果
-        static func getMyCharmDetail(charmId: Int, page: Int) -> Promise<[String: Any]> {
-            var req = HttpRequest(path: "/api/user/my_charm_detail", method: .get)
-            req.params = ["charm_id": charmId, "page": page]
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 特征写真点赞
-        /// - Parameter recordId: 魅力特质记录ID
-        /// - Returns: 无返回值
-        static func getMyCharmLike(recordId: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/user/my_charm_like", method: .get)
-            req.params = ["record_id": recordId]
-
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 特征分类点赞
-        /// - Parameter charmId: 魅力特质分类ID
-        /// - Returns: 无返回值
-        static func getCharmCateLike(charmId: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/user/charm_cate_like", method: .get)
-            req.params = ["charm_id": charmId]
-
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取评价的印象列表，根据自身性别获取不同的评价列表
-        /// - Returns: 返回数据
-        static func getSendComment() -> Promise<[[String: Any]]> {
-            let req = HttpRequest(path: "/api/my/send_comment", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [[String: Any]] ?? [])})
-        }
-        
-        /// 获取别人对我的评价列表
-        /// - Returns: 返回数据
-        static func getMyComment() -> Promise<[[String: Any]]> {
-            let req = HttpRequest(path: "/api/my/my_get_label", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [[String: Any]] ?? [])})
-        }
-        
-        /// 提交评价印象
-        /// - Parameters:
-        ///   - userId: 用户Id
-        ///   - ids: 印象ID数组
-        /// - Returns: 无返回值
-        static func putComment(userId: Int, ids: [Int]) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/my/send_comment", method: .put)
-            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
-            req.paramsType = .url
-            req.encoding = URLEncoding.httpBody
-            var params = ["to_user_id": userId]
-            for (i, item) in ids.enumerated() {
-                params["label_ids[\(i)]"] = item
-            }
-            req.params = params
-
-            return APP.httpClient.request(req).asVoid()
-        }
-        
-        /// 获取财富值升级信息
-        /// - Returns: 返回结果
-        static func getWealthLevelNeed() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/wealthlevel_need", method: .get)
-
-            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
-        }
-        
-        /// 获取魅力值升级信息
-        /// - Returns: 返回结果
-        static func getCharmLevelNeed() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/charmlevel_need", method: .get)
+        static func getConversionList(page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/conversion_list", method: .get)
+            req.params = ["page": page]
 
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
@@ -1118,6 +590,7 @@ extension HttpApi {
 
 // MARK: - 支付请求接口
 extension HttpApi {
+    
     struct Pay {
 
         /// 购买VIP

@@ -41,7 +41,7 @@ class OtherLoginViewController: SSViewController {
             codeBtn.isUserInteractionEnabled = false
         }
         
-        loginView.drawGradient(start: .hex("f5a41b"), end: .hex("f08720"), size: CGSize(width: SS.w - 50, height: 42), direction: .t2b)
+        loginView.drawThemeGradient(CGSize(width: SS.w - 50, height: 42))
         
         loginView.isHidden = true
         loginBtn.backgroundColor = .hex("dddddd")
@@ -90,7 +90,7 @@ class OtherLoginViewController: SSViewController {
         if let tf = sender as? UITextField {
             if tf == phoneTF, phoneTF.markedTextRange == nil, let text = phoneTF.text {
                 mobile = text
-            } else if tf == codeTF, codeTF.markedTextRange == nil, let text = phoneTF.text {
+            } else if tf == codeTF, codeTF.markedTextRange == nil, let text = codeTF.text {
                 code = text
             }
         }
@@ -103,7 +103,7 @@ class OtherLoginViewController: SSViewController {
         codeTF.resignFirstResponder()
         view.ss.showHUDLoading()
         HttpApi.Login.sendSms(mobile: mobile, sign: 1).done { [weak self] () in
-            APP.phoneCount = 59
+            APP.phoneCount = 60
             SSMainAsync {
                 self?.view.ss.hideHUD()
                 self?.toast(message: "发送成功")
