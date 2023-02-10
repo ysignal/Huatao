@@ -1768,6 +1768,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S54L9X6U53;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 armv7s armv7 x86_64";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Huatao/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "华涛生活";
