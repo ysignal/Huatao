@@ -30,6 +30,12 @@ public struct HttpRequest {
             }
         }
     }
+    
+    public let privateKey = "!QWArfeedde#%^&aa"
+    
+    /// 是否签名
+    public var isSign: Bool = false
+    
     /// 文件
     public var files: [HttpRequestFormFile]?
     /// 传参方式
@@ -49,6 +55,22 @@ public struct HttpRequest {
         if !APP.token.isEmpty && isEncode {
             self.headers = ["Authorization": APP.token]
         }
+    }
+    
+    mutating func sign() {
+        var params = self.params ?? [:]
+        params["random_str"] = "\(Int.random(in: 100000...999999))"
+        params["time_stamp"] = Int(Date().timeIntervalSince1970)
+        // 签名
+        let sortKeys = params.keys.sorted()
+        var paramsList = [String]()
+        sortKeys.forEach { key in
+            paramsList.append("\(key)=\(params[key] ?? "")")
+        }
+        let signStr = "\(paramsList.joined(separator: "&"))\(privateKey)"
+        let makeSign = signStr.md5.lowercased().md5.lowercased()
+        params["make_sign"] = makeSign
+        self.params = params
     }
 }
 

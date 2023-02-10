@@ -106,6 +106,7 @@ public extension String {
             case .md5:
                 if #available(iOS 13.0, *) {
                     // iOS 13.0以后会弃用该api，不推荐使用md5
+                    CC_SHA256(bytes.baseAddress, CC_LONG(data.count), &h)
                 } else {
                     CC_MD5(bytes.baseAddress, CC_LONG(data.count), &h)
                 }

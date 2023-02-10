@@ -20,6 +20,9 @@ public struct HttpClient {
 
     public func request(_ req: HttpRequest, success: @escaping (_ response: HttpResponse) -> Void, failure: @escaping (_ error: Error) -> Void) {
         var newReq = req
+        if newReq.isSign {
+            newReq.sign()
+        }
         plugins.forEach { newReq = $0.prepare(newReq) }
         let url = generateURL(newReq)
         newReq.fullPath = url.absoluteString

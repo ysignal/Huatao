@@ -38,6 +38,7 @@ extension HttpApi {
             var req = HttpRequest(path: "/api/verify/sendSms", method: .post)
             req.paramsType = .json
             req.params = ["mobile": mobile, "sign": sign]
+            req.isSign = true
             
             return APP.httpClient.request(req).asVoid()
         }
