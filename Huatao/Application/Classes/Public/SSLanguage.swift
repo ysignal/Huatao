@@ -2,7 +2,7 @@
 //  SSLanguage.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/13.
+//  Created on 2023/1/13.
 //
 
 import Foundation

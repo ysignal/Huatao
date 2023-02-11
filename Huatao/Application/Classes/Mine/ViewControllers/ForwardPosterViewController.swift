@@ -2,7 +2,7 @@
 //  ForwardPosterViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/25.
+//  Created on 2023/1/25.
 //
 
 import UIKit

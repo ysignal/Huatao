@@ -2,7 +2,7 @@
 //  MineMenuItemCell.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/15.
+//  Created on 2023/1/15.
 //
 
 import UIKit

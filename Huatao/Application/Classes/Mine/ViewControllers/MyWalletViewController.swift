@@ -2,7 +2,7 @@
 //  MyWalletViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/24.
+//  Created on 2023/1/24.
 //
 
 import UIKit

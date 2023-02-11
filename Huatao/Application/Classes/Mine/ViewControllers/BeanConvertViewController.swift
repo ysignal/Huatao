@@ -2,7 +2,7 @@
 //  BeanConvertViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/26.
+//  Created on 2023/1/26.
 //
 
 import UIKit

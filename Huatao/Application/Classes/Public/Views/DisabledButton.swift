@@ -2,7 +2,7 @@
 //  DisabledButton.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/12.
+//  Created on 2023/1/12.
 //
 
 import Foundation

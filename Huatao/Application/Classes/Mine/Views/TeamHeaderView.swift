@@ -2,7 +2,7 @@
 //  TeamHeaderView.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/18.
+//  Created on 2023/1/18.
 //
 
 import UIKit
