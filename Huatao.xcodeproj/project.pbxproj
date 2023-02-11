@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		55CEAFFA2996105F00CF8313 /* DataEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEAFF92996105F00CF8313 /* DataEmptyView.swift */; };
+		55CEB002299730F800CF8313 /* SSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB001299730F800CF8313 /* SSDate.swift */; };
+		55CEB00429973AA700CF8313 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB00329973AA700CF8313 /* PreviewViewController.swift */; };
 		6B650E36297156370093FEEB /* TaskListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E35297156370093FEEB /* TaskListItemCell.swift */; };
 		6B650E3929715A400093FEEB /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E3829715A400093FEEB /* TaskModel.swift */; };
 		6B650E3C297166940093FEEB /* SSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E3B297166940093FEEB /* SSImageView.swift */; };
@@ -237,6 +239,8 @@
 /* Begin PBXFileReference section */
 		271CF15653F35951F675CE50 /* Pods_Huatao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Huatao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CEAFF92996105F00CF8313 /* DataEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEmptyView.swift; sourceTree = "<group>"; };
+		55CEB001299730F800CF8313 /* SSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDate.swift; sourceTree = "<group>"; };
+		55CEB00329973AA700CF8313 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		63BD2CDA634ACFA601DD860A /* Pods-Huatao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Huatao.release.xcconfig"; path = "Target Support Files/Pods-Huatao/Pods-Huatao.release.xcconfig"; sourceTree = "<group>"; };
 		65521FBBAD142536254E48F8 /* Pods-Huatao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Huatao.debug.xcconfig"; path = "Target Support Files/Pods-Huatao/Pods-Huatao.debug.xcconfig"; sourceTree = "<group>"; };
 		6B650E35297156370093FEEB /* TaskListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListItemCell.swift; sourceTree = "<group>"; };
@@ -506,6 +510,7 @@
 				6B650E3B297166940093FEEB /* SSImageView.swift */,
 				6B650EBC29750D940093FEEB /* SSFont.swift */,
 				6BD2A80C297E7A7E00EA7EDC /* SSView.swift */,
+				55CEB001299730F800CF8313 /* SSDate.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1040,6 +1045,7 @@
 				6BCB603C296D6A3100E3E7EC /* SSModel.swift */,
 				6BCB605D2970EFE700E3E7EC /* SSLanguage.swift */,
 				6B650EB42974FB070093FEEB /* SSAlignFlowLayout.swift */,
+				55CEB00329973AA700CF8313 /* PreviewViewController.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -1459,6 +1465,7 @@
 				6BCB6026296D44FA00E3E7EC /* LoginViewController.swift in Sources */,
 				6BCB5FF7296D406B00E3E7EC /* UITableView+SS.swift in Sources */,
 				6BB4DA6529861579004FFB11 /* ConvertResultViewController.swift in Sources */,
+				55CEB002299730F800CF8313 /* SSDate.swift in Sources */,
 				6BCB600F296D406B00E3E7EC /* SSWebViewController.swift in Sources */,
 				6B650E402971674D0093FEEB /* BaseImageItemCell.swift in Sources */,
 				6BB4DA612982DBE4004FFB11 /* AboutViewController.swift in Sources */,
@@ -1497,6 +1504,7 @@
 				6BCB6009296D406B00E3E7EC /* SSBubbleTabBar.swift in Sources */,
 				6BCB5FFC296D406B00E3E7EC /* NSObject+SS.swift in Sources */,
 				6BCB5FEB296D406B00E3E7EC /* TapBuzz.swift in Sources */,
+				55CEB00429973AA700CF8313 /* PreviewViewController.swift in Sources */,
 				6BCB5FE4296D406B00E3E7EC /* HttpRequest.swift in Sources */,
 				6B650E9A2974F3FF0093FEEB /* SSPhotoUIOptions.swift in Sources */,
 				6B650E982974F3FF0093FEEB /* SSProgressView.swift in Sources */,

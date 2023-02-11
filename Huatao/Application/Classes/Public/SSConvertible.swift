@@ -2,7 +2,7 @@
 //  SSConvertible.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/10.
+//  Created on 2023/1/10.
 //
 
 import KakaJSON
@@ -27,5 +27,4 @@ extension SSConvertible {
         // 将驼峰式属性名转换为下划线式属性名
         return property.name.kj.underlineCased()
     }
-    
 }

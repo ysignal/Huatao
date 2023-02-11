@@ -2,7 +2,7 @@
 //  FindViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/10.
+//  Created on 2023/1/10.
 //
 
 import UIKit
@@ -119,7 +119,7 @@ extension FindViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(with: DynamicListItemCell.self)
         let item = list[indexPath.row]
-        cell.config(item: item)
+        cell.config(item: item, target: self)
         cell.updateBlock = { index in
             switch index {
             case 0:

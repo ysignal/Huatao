@@ -10,9 +10,9 @@ import SnapKit
 
 open class SSNavigationBar: UIView {
     open var statusBackground = UIView()
-    open var leftButton = SSButton(type: .system)
+    open var leftButton = SSButton(type: .custom)
     open var titleLabel = UILabel(text: "", textColor: .hex("#222222"), textFont: .ss_medium(size: 16), textAlignment: .center)
-    open var rightButton = SSButton(type: .system)
+    open var rightButton = SSButton(type: .custom)
     
     open var leftButtonHandler : (() -> ())?
     open var rightButtonHandler : (() -> ())?

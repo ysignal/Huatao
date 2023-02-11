@@ -2,7 +2,7 @@
 //  FriendCircleViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/29.
+//  Created on 2023/1/29.
 //
 
 import UIKit
@@ -117,7 +117,7 @@ extension FriendCircleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(with: DynamicListItemCell.self)
         let item = list[indexPath.row]
-        cell.config(item: item)
+        cell.config(item: item, target: self)
         return cell
     }
     

@@ -2,7 +2,7 @@
 //  MineModel.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/15.
+//  Created on 2023/1/15.
 //
 
 import Foundation
@@ -22,7 +22,9 @@ struct MineModel {
                            MineMenuItem(action: "task", icon: "ic_mine_tab_11", title: "任务提醒"),
                            MineMenuItem(action: "card", icon: "ic_mine_tab_12", title: "卡包"),
                            MineMenuItem(action: "pay", icon: "ic_mine_tab_13", title: "公益基金"),
-                           MineMenuItem(action: "setting", icon: "ic_mine_tab_14", title: "设置")]
+                           MineMenuItem(action: "setting", icon: "ic_mine_tab_14", title: "设置"),
+                           MineMenuItem(action: "vipbag", icon: "ic_mine_tab_15", title: "会员礼包"),
+                           MineMenuItem(action: "tovip", icon: "ic_mine_tab_16", title: "成为会员")]
     
 }
 

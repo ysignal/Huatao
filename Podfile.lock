@@ -2,6 +2,9 @@ PODS:
   - AAInfographics (7.3.0)
   - Alamofire (5.4.3)
   - AlipaySDK-iOS (15.8.11)
+  - AliPlayerSDK_iOS (5.5.2.0):
+    - AliPlayerSDK_iOS/AliPlayerSDK (= 5.5.2.0)
+  - AliPlayerSDK_iOS/AliPlayerSDK (5.5.2.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -64,6 +67,7 @@ DEPENDENCIES:
   - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
   - Alamofire
   - AlipaySDK-iOS
+  - AliPlayerSDK_iOS
   - FMDB
   - IQKeyboardManagerSwift
   - JXPagingView/Paging
@@ -87,6 +91,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlipaySDK-iOS
+    - AliPlayerSDK_iOS
     - FMDB
     - IQKeyboardManagerSwift
     - JXPagingView
@@ -122,6 +127,7 @@ SPEC CHECKSUMS:
   AAInfographics: ee2a7959acdd0a00243b7f5a3f03a1fa2bdf0781
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   AlipaySDK-iOS: a07b6eafa847a5b29acb6c150ea16d9792d5d167
+  AliPlayerSDK_iOS: 3770f4bd2b02451aa595c814102f6da8ed5a3333
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
@@ -143,6 +149,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 9bf85605d50000b35e5ea679a76582426a30c595
   ZLPhotoBrowser: a36e618898b781c225672115938ed861a11b2121
 
-PODFILE CHECKSUM: c7759fe30359ef2d51be5b5e05e048d4bfd39a49
+PODFILE CHECKSUM: 173a1210ebb19c5bada1209f43420bdf2e04a343
 
 COCOAPODS: 1.11.3

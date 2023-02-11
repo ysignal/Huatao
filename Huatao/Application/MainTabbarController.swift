@@ -2,7 +2,7 @@
 //  MainTabbarController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/10.
+//  Created on 2023/1/10.
 //
 
 import UIKit
@@ -41,7 +41,7 @@ class MainTabbarController: SSTabBarController {
         
         addChilds()
         
-        selectedIndex = 4
+        selectedIndex = 2
         
         APP.updateUserInfo()
         

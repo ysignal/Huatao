@@ -2,7 +2,7 @@
 //  MyCircleViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/24.
+//  Created on 2023/1/24.
 //
 
 import UIKit
@@ -27,6 +27,7 @@ class MyCircleViewController: BaseViewController {
         
         circleTV.register(nibCell: DynamicListItemCell.self)
         circleTV.addRefresh(type: .headerAndFooter, delegate: self)
+        circleTV.tableFooterView = UIView()
     }
     
     func requestData() {
