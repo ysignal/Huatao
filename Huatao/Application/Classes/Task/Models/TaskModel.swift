@@ -47,8 +47,11 @@ struct TaskListItem: SSConvertible {
     /// 任务标题
     var title: String = ""
     
-    /// 完成数量
+    /// 需要完成数量
     var nubmer: Int = 0
+    
+    /// 已完成数量
+    var completeNumber: Int = 0
     
     /// 任务类型
     var taskType: Int = 0
@@ -56,8 +59,11 @@ struct TaskListItem: SSConvertible {
     /// 是否完成
     var isComplete: Int = 0
     
-    /// 任务详情对象
-    var task = TaskDetail()
+    /// 今日任务对象
+    var dayTask = TaskDetail()
+    
+    /// 本月任务对象
+    var monthTask = TaskDetail()
     
 }
 
@@ -71,6 +77,12 @@ struct TaskDetail: SSConvertible {
     
     /// 完成时间
     var completeTime: String = ""
+    
+    /// 已完成数量
+    var completeNumber: Int = 0
+    
+    /// 比例
+    var ratio: String = ""
     
     /// 任务类型
     var type: Int = 0
@@ -86,9 +98,6 @@ struct TaskDetail: SSConvertible {
     
     /// 任务状态
     var status: Int = 0
-    
-    /// 任务类型
-    var taskType: Int = 0
     
     /// 任务标识
     var name: String = ""

@@ -10,6 +10,21 @@
 		55CEAFFA2996105F00CF8313 /* DataEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEAFF92996105F00CF8313 /* DataEmptyView.swift */; };
 		55CEB002299730F800CF8313 /* SSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB001299730F800CF8313 /* SSDate.swift */; };
 		55CEB00429973AA700CF8313 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB00329973AA700CF8313 /* PreviewViewController.swift */; };
+		55CEB006299781C400CF8313 /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB005299781C400CF8313 /* VideoPlayViewController.swift */; };
+		55CEB0082997A74F00CF8313 /* VipBagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB0072997A74F00CF8313 /* VipBagViewController.swift */; };
+		55CEB00A2997A77600CF8313 /* VipJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB0092997A77600CF8313 /* VipJoinViewController.swift */; };
+		55CEB00C2999D84B00CF8313 /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB00B2999D84B00CF8313 /* DonateViewController.swift */; };
+		55CEB00E2999E28900CF8313 /* ConvertListItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55CEB00D2999E28900CF8313 /* ConvertListItemCell.xib */; };
+		55CEB0102999EAE000CF8313 /* BuyHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB00F2999EAE000CF8313 /* BuyHistoryViewController.swift */; };
+		55CEB0122999EB1500CF8313 /* MyCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB0112999EB1500CF8313 /* MyCartViewController.swift */; };
+		55CEB0142999EB2D00CF8313 /* AgentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB0132999EB2D00CF8313 /* AgentViewController.swift */; };
+		55CEB0162999EB4D00CF8313 /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB0152999EB4D00CF8313 /* ServiceViewController.swift */; };
+		55CEB0182999EB7800CF8313 /* TaskTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB0172999EB7800CF8313 /* TaskTipViewController.swift */; };
+		55CEB01A2999EBD900CF8313 /* CardBagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB0192999EBD900CF8313 /* CardBagViewController.swift */; };
+		55CEB01C299A0DB200CF8313 /* CardListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB01B299A0DB200CF8313 /* CardListItemCell.swift */; };
+		55CEB01E299A0DC100CF8313 /* CardRecordItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB01D299A0DC100CF8313 /* CardRecordItemCell.swift */; };
+		55CEB020299A299100CF8313 /* TaskTipItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB01F299A299100CF8313 /* TaskTipItemCell.swift */; };
+		55CEB029299A4AA900CF8313 /* AgentUserItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB028299A4AA900CF8313 /* AgentUserItemCell.swift */; };
 		6B650E36297156370093FEEB /* TaskListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E35297156370093FEEB /* TaskListItemCell.swift */; };
 		6B650E3929715A400093FEEB /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E3829715A400093FEEB /* TaskModel.swift */; };
 		6B650E3C297166940093FEEB /* SSImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B650E3B297166940093FEEB /* SSImageView.swift */; };
@@ -241,6 +256,21 @@
 		55CEAFF92996105F00CF8313 /* DataEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEmptyView.swift; sourceTree = "<group>"; };
 		55CEB001299730F800CF8313 /* SSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDate.swift; sourceTree = "<group>"; };
 		55CEB00329973AA700CF8313 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		55CEB005299781C400CF8313 /* VideoPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayViewController.swift; sourceTree = "<group>"; };
+		55CEB0072997A74F00CF8313 /* VipBagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VipBagViewController.swift; sourceTree = "<group>"; };
+		55CEB0092997A77600CF8313 /* VipJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VipJoinViewController.swift; sourceTree = "<group>"; };
+		55CEB00B2999D84B00CF8313 /* DonateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
+		55CEB00D2999E28900CF8313 /* ConvertListItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConvertListItemCell.xib; sourceTree = "<group>"; };
+		55CEB00F2999EAE000CF8313 /* BuyHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyHistoryViewController.swift; sourceTree = "<group>"; };
+		55CEB0112999EB1500CF8313 /* MyCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartViewController.swift; sourceTree = "<group>"; };
+		55CEB0132999EB2D00CF8313 /* AgentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentViewController.swift; sourceTree = "<group>"; };
+		55CEB0152999EB4D00CF8313 /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		55CEB0172999EB7800CF8313 /* TaskTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTipViewController.swift; sourceTree = "<group>"; };
+		55CEB0192999EBD900CF8313 /* CardBagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBagViewController.swift; sourceTree = "<group>"; };
+		55CEB01B299A0DB200CF8313 /* CardListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListItemCell.swift; sourceTree = "<group>"; };
+		55CEB01D299A0DC100CF8313 /* CardRecordItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRecordItemCell.swift; sourceTree = "<group>"; };
+		55CEB01F299A299100CF8313 /* TaskTipItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTipItemCell.swift; sourceTree = "<group>"; };
+		55CEB028299A4AA900CF8313 /* AgentUserItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentUserItemCell.swift; sourceTree = "<group>"; };
 		63BD2CDA634ACFA601DD860A /* Pods-Huatao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Huatao.release.xcconfig"; path = "Target Support Files/Pods-Huatao/Pods-Huatao.release.xcconfig"; sourceTree = "<group>"; };
 		65521FBBAD142536254E48F8 /* Pods-Huatao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Huatao.debug.xcconfig"; path = "Target Support Files/Pods-Huatao/Pods-Huatao.debug.xcconfig"; sourceTree = "<group>"; };
 		6B650E35297156370093FEEB /* TaskListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListItemCell.swift; sourceTree = "<group>"; };
@@ -546,10 +576,15 @@
 				6BB4DA562982B96D004FFB11 /* WalletListCell.swift */,
 				6BB4DA582982B97C004FFB11 /* WalletListItemCell.swift */,
 				6BB4DA6229860F47004FFB11 /* ConvertListItemCell.swift */,
+				55CEB00D2999E28900CF8313 /* ConvertListItemCell.xib */,
 				6BB4DA68298617E1004FFB11 /* ConvertHistoryItemCell.swift */,
 				6BB4DA6A29861FC0004FFB11 /* ConvertRateTipView.swift */,
 				6BB4DA6C29861FCA004FFB11 /* ConvertRateTipView.xib */,
 				6BB4DA5E2982CF06004FFB11 /* SettingMenuItemCell.swift */,
+				55CEB01B299A0DB200CF8313 /* CardListItemCell.swift */,
+				55CEB01D299A0DC100CF8313 /* CardRecordItemCell.swift */,
+				55CEB01F299A299100CF8313 /* TaskTipItemCell.swift */,
+				55CEB028299A4AA900CF8313 /* AgentUserItemCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1046,6 +1081,7 @@
 				6BCB605D2970EFE700E3E7EC /* SSLanguage.swift */,
 				6B650EB42974FB070093FEEB /* SSAlignFlowLayout.swift */,
 				55CEB00329973AA700CF8313 /* PreviewViewController.swift */,
+				55CEB005299781C400CF8313 /* VideoPlayViewController.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -1156,8 +1192,17 @@
 				6BD10CF329816593002CDCB7 /* ForwardPosterViewController.swift */,
 				6BD10CF529822CA4002CDCB7 /* PosterDetailViewController.swift */,
 				6BD10CED297FF499002CDCB7 /* MyCircleViewController.swift */,
+				55CEB00B2999D84B00CF8313 /* DonateViewController.swift */,
 				6BB4DA5C2982CBDC004FFB11 /* SettingViewController.swift */,
 				6BB4DA602982DBE4004FFB11 /* AboutViewController.swift */,
+				55CEB0072997A74F00CF8313 /* VipBagViewController.swift */,
+				55CEB0092997A77600CF8313 /* VipJoinViewController.swift */,
+				55CEB00F2999EAE000CF8313 /* BuyHistoryViewController.swift */,
+				55CEB0112999EB1500CF8313 /* MyCartViewController.swift */,
+				55CEB0132999EB2D00CF8313 /* AgentViewController.swift */,
+				55CEB0152999EB4D00CF8313 /* ServiceViewController.swift */,
+				55CEB0172999EB7800CF8313 /* TaskTipViewController.swift */,
+				55CEB0192999EBD900CF8313 /* CardBagViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1300,6 +1345,7 @@
 				6BFCC2F62979317F00758510 /* TeamHeaderView.xib in Resources */,
 				6BCB60662970FF8500E3E7EC /* AgreementAlertView.xib in Resources */,
 				6B650E602974DF520093FEEB /* DynamicListItemCell.xib in Resources */,
+				55CEB00E2999E28900CF8313 /* ConvertListItemCell.xib in Resources */,
 				6BCB6030296D644200E3E7EC /* Task.storyboard in Resources */,
 				6BCB6036296D64D100E3E7EC /* Mine.storyboard in Resources */,
 				6BB4DA552982B69D004FFB11 /* WalletTabCell.xib in Resources */,
@@ -1437,6 +1483,7 @@
 				6BCB60712971002100E3E7EC /* SSOverlayConfig.swift in Sources */,
 				6BCB600E296D406B00E3E7EC /* SSFullViewController.swift in Sources */,
 				6BCB5FE2296D406B00E3E7EC /* APP.swift in Sources */,
+				55CEB0122999EB1500CF8313 /* MyCartViewController.swift in Sources */,
 				6B650E912974F3FF0093FEEB /* SSNotification.swift in Sources */,
 				6B650EA92974F3FF0093FEEB /* SSTapDetectingImageView.swift in Sources */,
 				6BCB608B2971176400E3E7EC /* ShopModel.swift in Sources */,
@@ -1470,6 +1517,7 @@
 				6B650E402971674D0093FEEB /* BaseImageItemCell.swift in Sources */,
 				6BB4DA612982DBE4004FFB11 /* AboutViewController.swift in Sources */,
 				6BCB5F63296D397A00E3E7EC /* SceneDelegate.swift in Sources */,
+				55CEB00C2999D84B00CF8313 /* DonateViewController.swift in Sources */,
 				6BCB6010296D406B00E3E7EC /* SSCollectionViewLayout.swift in Sources */,
 				6B650E9B2974F3FF0093FEEB /* SSEditImageOptions.swift in Sources */,
 				6BCB60752971002200E3E7EC /* TranslationAnimation.swift in Sources */,
@@ -1487,6 +1535,7 @@
 				6BCB5FE7296D406B00E3E7EC /* HttpError.swift in Sources */,
 				6BCB6001296D406B00E3E7EC /* Scale.swift in Sources */,
 				6B650EBD29750D940093FEEB /* SSFont.swift in Sources */,
+				55CEB020299A299100CF8313 /* TaskTipItemCell.swift in Sources */,
 				6BCB607E297104DF00E3E7EC /* CollectionSection.swift in Sources */,
 				6BCB6000296D406B00E3E7EC /* String+SS.swift in Sources */,
 				6BFCC2ED29754D7B00758510 /* GroupImageView.swift in Sources */,
@@ -1500,6 +1549,7 @@
 				6BD10CF229800C66002CDCB7 /* MyWalletViewController.swift in Sources */,
 				6BCB605829701E0F00E3E7EC /* UITextField+SS.swift in Sources */,
 				6B650E9C2974F3FF0093FEEB /* PHAsset+SSPhotoManager.swift in Sources */,
+				55CEB029299A4AA900CF8313 /* AgentUserItemCell.swift in Sources */,
 				6BB4DA7229864AC1004FFB11 /* CirclePublishViewController.swift in Sources */,
 				6BCB6009296D406B00E3E7EC /* SSBubbleTabBar.swift in Sources */,
 				6BCB5FFC296D406B00E3E7EC /* NSObject+SS.swift in Sources */,
@@ -1507,15 +1557,19 @@
 				55CEB00429973AA700CF8313 /* PreviewViewController.swift in Sources */,
 				6BCB5FE4296D406B00E3E7EC /* HttpRequest.swift in Sources */,
 				6B650E9A2974F3FF0093FEEB /* SSPhotoUIOptions.swift in Sources */,
+				55CEB0102999EAE000CF8313 /* BuyHistoryViewController.swift in Sources */,
 				6B650E982974F3FF0093FEEB /* SSProgressView.swift in Sources */,
 				6BCB60762971002200E3E7EC /* ExpandedAnimation.swift in Sources */,
 				6BCB5FF8296D406B00E3E7EC /* UIColor+SS.swift in Sources */,
 				6BCB5FF3296D406B00E3E7EC /* UIButton+SS.swift in Sources */,
+				55CEB01C299A0DB200CF8313 /* CardListItemCell.swift in Sources */,
 				6BCB5FF2296D406B00E3E7EC /* UILabel+SS.swift in Sources */,
 				6BCB5FED296D406B00E3E7EC /* TapticEngine.swift in Sources */,
+				55CEB0142999EB2D00CF8313 /* AgentViewController.swift in Sources */,
 				6BD10CF429816593002CDCB7 /* ForwardPosterViewController.swift in Sources */,
 				6BB4DA7429865023004FFB11 /* CircleActionView.swift in Sources */,
 				6BCB6022296D44EA00E3E7EC /* TaskViewController.swift in Sources */,
+				55CEB0082997A74F00CF8313 /* VipBagViewController.swift in Sources */,
 				6BCB5FEF296D406B00E3E7EC /* SSToast.swift in Sources */,
 				6BCB5FFA296D406B00E3E7EC /* NSAttributedString+SS.swift in Sources */,
 				6B650EC0297533600093FEEB /* ChatBaseSectionCell.swift in Sources */,
@@ -1530,9 +1584,12 @@
 				6BB4DA5F2982CF06004FFB11 /* SettingMenuItemCell.swift in Sources */,
 				6BB4DA6729861691004FFB11 /* ConvertHistoryViewController.swift in Sources */,
 				6B650EC5297534E90093FEEB /* ChatModel.swift in Sources */,
+				55CEB0182999EB7800CF8313 /* TaskTipViewController.swift in Sources */,
 				6BCB600B296D406B00E3E7EC /* SSController.swift in Sources */,
+				55CEB01E299A0DC100CF8313 /* CardRecordItemCell.swift in Sources */,
 				6BCB5FEE296D406B00E3E7EC /* SSJump.swift in Sources */,
 				6BCB5FEA296D406B00E3E7EC /* HttpDecoder.swift in Sources */,
+				55CEB0162999EB4D00CF8313 /* ServiceViewController.swift in Sources */,
 				6BCB60722971002100E3E7EC /* ZoomOutAniamtion.swift in Sources */,
 				6BCB6013296D40C500E3E7EC /* MainTabbarController.swift in Sources */,
 				6BCB6005296D406B00E3E7EC /* SSDefault.swift in Sources */,
@@ -1542,6 +1599,7 @@
 				6B650E922974F3FF0093FEEB /* SSPickerView.swift in Sources */,
 				6BB4DA7729866470004FFB11 /* LikeListItemCell.swift in Sources */,
 				6BCB5FE5296D406B00E3E7EC /* HttpResponse.swift in Sources */,
+				55CEB006299781C400CF8313 /* VideoPlayViewController.swift in Sources */,
 				6B650E592974271F0093FEEB /* FindModel.swift in Sources */,
 				6BCB6040296D6AFE00E3E7EC /* SSButton.swift in Sources */,
 				6B650EA72974F3FF0093FEEB /* SSCacheModel.swift in Sources */,
@@ -1562,6 +1620,7 @@
 				6BCB6020296D44E100E3E7EC /* FindViewController.swift in Sources */,
 				6B650E5F2974DF520093FEEB /* DynamicListItemCell.swift in Sources */,
 				6BCB5FDA296D406B00E3E7EC /* ParamsPlugin.swift in Sources */,
+				55CEB00A2997A77600CF8313 /* VipJoinViewController.swift in Sources */,
 				6BFCC302297C381600758510 /* TradeHistoryViewController.swift in Sources */,
 				6BB4DA5D2982CBDC004FFB11 /* SettingViewController.swift in Sources */,
 				6BCB60732971002100E3E7EC /* FadeInAnimation.swift in Sources */,
@@ -1582,6 +1641,7 @@
 				6BCB6002296D406B00E3E7EC /* SSKit.swift in Sources */,
 				6B650E992974F3FF0093FEEB /* SSAlbumListModel.swift in Sources */,
 				6B650EAD2974F3FF0093FEEB /* SSCaptionView.swift in Sources */,
+				55CEB01A2999EBD900CF8313 /* CardBagViewController.swift in Sources */,
 				6BD10CF0297FF4BE002CDCB7 /* ForgetPasswordViewController.swift in Sources */,
 				6BCB5FE6296D406B00E3E7EC /* HttpClient.swift in Sources */,
 				6B650EB12974F3FF0093FEEB /* SSImageBrowser.swift in Sources */,

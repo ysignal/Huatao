@@ -56,32 +56,8 @@ class MineViewController: SSViewController {
     }
     
     func itemClicked(_ item: MineMenuItem) {
-        switch item.action {
-        case "team":
-            let vc = MyTeamViewController.from(sb: .mine)
-            go(vc)
-        case "trade":
-            let vc = TradeCenterViewController.from(sb: .mine)
-            go(vc)
-        case "wallet":
-            let vc = MyWalletViewController.from(sb: .mine)
-            go(vc)
-        case "promotion":
-            let vc = ForwardPosterViewController.from(sb: .mine)
-            go(vc)
-        case "password":
-            let vc = TradePasswordViewController.from(sb: .mine)
-            go(vc)
-        case "circle":
-            let vc = MyCircleViewController.from(sb: .mine)
-            go(vc)
-            
-        case "setting":
-            let vc = SettingViewController.from(sb: .mine)
-            go(vc)
-        default:
-            break
-        }
+        let vc = item.vcType.from(sb: .mine)
+        go(vc)
     }
 }
 

@@ -124,9 +124,8 @@ extension CirclePublishViewController: UICollectionViewDelegate {
         if indexPath.row >= list.count {
             toPickerImage()
         } else {
-            let index = indexPath.row - 1
             let vc = PreviewViewController()
-            vc.configUpload(list, index: index) { [weak self] data in
+            vc.configUpload(list, index: indexPath.row) { [weak self] data in
                 self?.list = data
                 collectionView.reloadData()
             }

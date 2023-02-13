@@ -41,7 +41,7 @@ class MainTabbarController: SSTabBarController {
         
         addChilds()
         
-        selectedIndex = 2
+        selectedIndex = 4
         
         APP.updateUserInfo()
         

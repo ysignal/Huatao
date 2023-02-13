@@ -42,5 +42,6 @@ struct SSImage {
     static var taskTotal: UIImage? { return UIImage(named: "ic_task_invite") }
     static var taskLook: UIImage? { return UIImage(named: "ic_task_look") }
     static var taskPay: UIImage? { return UIImage(named: "ic_task_pay") }
-    
+    static var taskMoney: UIImage? { return UIImage(named: "ic_task_money") }
+
 }

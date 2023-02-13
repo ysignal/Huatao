@@ -26,6 +26,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    // MARK: App Lifecycle
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let host: String? = {
+            if #available(iOS 16.0, *) {
+                return url.host()
+            } else {
+                return url.host
+            }
+        }()
+        if host == "safepay" {
+            // 支付跳转支付宝钱包进行支付，处理支付结果, 回调传空，才能在调起支付的地方收到回调
+            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: nil)
+        }
+
+        return WXApi.handleOpen(url, delegate: self)
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // 进入APP清除小红点
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // 应用销毁
         RCIM.shared().logout()
@@ -52,3 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: WXApiDelegate {
+    
+    
+    
+}

@@ -1,42 +1,31 @@
 //
-//  ShopViewController.swift
+//  VipBagViewController.swift
 //  Huatao
 //
-//  Created on 2023/1/10.
-//
+//  Created on 2023/2/11.
+//  
+	
 
 import UIKit
 
-class ShopViewController: SSViewController {
+class VipBagViewController: BaseViewController {
     
-    lazy var background: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 358))
-        view.drawGradient(start: .hex("fff1e2"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
-        return view
-    }()
-    
-    @IBOutlet weak var shopTV: UITableView!
+    @IBOutlet weak var bagTV: UITableView!
     
     var list: [ShopGiftItem] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         requestData()
+
     }
     
     override func buildUI() {
-        view.backgroundColor = .hex("f6f6f6")
-        view.insertSubview(background, belowSubview: shopTV)
+        fakeNav.title = "会员礼包"
         
-        showFakeNavBar()
-        fakeNav.backgroundColor = .clear
-        fakeNav.titleLabel.font = .ss_semibold(size: 18)
-        fakeNav.title = "商城"
-        fakeNav.titleColor = .hex("333333")
-                        
-        shopTV.register(nibCell: ShopVipSetCell.self)
-        shopTV.tableFooterView = UIView()
+        bagTV.register(nibCell: ShopVipSetCell.self)
+        bagTV.tableFooterView = UIView()
     }
     
     func requestData() {
@@ -46,7 +35,7 @@ class ShopViewController: SSViewController {
             self?.list = listModel.list
             SSMainAsync {
                 self?.view.ss.hideHUD()
-                self?.shopTV.reloadData()
+                self?.bagTV.reloadData()
             }
         }.catch { [weak self] error in
             SSMainAsync {
@@ -58,7 +47,7 @@ class ShopViewController: SSViewController {
 
 }
 
-extension ShopViewController: UITableViewDelegate {
+extension VipBagViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120.scale + 12
@@ -66,7 +55,7 @@ extension ShopViewController: UITableViewDelegate {
     
 }
 
-extension ShopViewController: UITableViewDataSource {
+extension VipBagViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count

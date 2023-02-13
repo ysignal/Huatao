@@ -46,6 +46,8 @@ class TaskListItemCell: UITableViewCell {
             taskIcon.image = SSImage.taskTotal
         case "month_pay":
             taskIcon.image = SSImage.taskPay
+        case "new_send_money":
+            taskIcon.image = SSImage.taskMoney
         default:
             taskIcon.image = nil
         }

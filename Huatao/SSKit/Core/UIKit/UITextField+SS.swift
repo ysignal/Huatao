@@ -27,6 +27,15 @@ extension UITextField {
         }
     }
     
+    @IBInspectable var placeholderColor: UIColor? {
+        get {
+            return self.value(forKeyPath: "placeholderlaber.textcolor") as? UIColor
+        }
+        set {
+            self.setValue(newValue, forKeyPath: "placeholderlaber.textcolor")
+        }
+    }
+    
     @objc func checkMaxLength(textField: UITextField) {
         guard let prospectiveText = self.text,
               prospectiveText.count > maxLength else { return }

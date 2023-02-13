@@ -251,11 +251,7 @@ extension HttpApi {
         static func postImageDynamic(content: String, images: [String]) -> Promise<Void> {
             var req = HttpRequest(path: "/api/add_dynamic", method: .post)
             req.paramsType = .json
-            var params: [String: Any] = ["content": content, "type": 0, "video": ""]
-            images.enumerated().forEach { (i, image) in
-                params["images[\(i)]"] = images
-            }
-            req.params = params
+            req.params = ["content": content, "type": 0, "images": images]
             
             return APP.httpClient.request(req).asVoid()
         }
@@ -585,6 +581,112 @@ extension HttpApi {
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
+        /// 获取卡包列表
+        /// - Parameter page: 页数
+        /// - Returns: 返回结果
+        static func getCardList(page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/my_card_list", method: .get)
+            req.params = ["page": page]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 获取卡包返回数据
+        /// - Returns: 返回结果
+        static func getCardReturn() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/my_card_return", method: .get)
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 获取已完成卡包列表
+        /// - Parameter page: 页数
+        /// - Returns: 返回结果
+        static func getCompleteCardList(page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/complete_card_list", method: .get)
+            req.params = ["page": page]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 兑换卡包
+        /// - Parameter cardId: 卡包ID
+        /// - Returns: 无返回值
+        static func putConversionCard(cardId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/conversion_card", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["card_id": cardId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+
+        /// 获取任务提醒直推和间推列表
+        /// - Parameters:
+        ///   - page: 数据页数
+        ///   - type: 数据类型  0-直推，1-间推
+        /// - Returns: 返回结果
+        static func getTaskNotice(page: Int, type: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/task_notice", method: .get)
+            req.params = ["page": page, "type": type]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 提醒做任务
+        /// - Parameter userIds: 用户ID数组
+        /// - Returns: 返回结果
+        static func putTaskSendNotice(userIds: [Int]) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/task_send_notice", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .json
+            req.encoding = URLEncoding.httpBody
+            req.params = ["user_ids": userIds]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取任务弹窗
+        /// - Returns: 返回结果
+        static func getTaskAlert() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/task_alert", method: .get)
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 更新任务弹窗
+        /// - Returns: 无返回值
+        static func getUpdateAlert() -> Promise<Void> {
+            let req = HttpRequest(path: "/api/update_alert", method: .get)
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取代理列表
+        /// - Returns: 返回结果
+        static func getAgentList() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/become_agent", method: .get)
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 提交代理申请
+        /// - Parameters:
+        ///   - mobile: 手机号
+        ///   - name: 姓名
+        ///   - provinceCode: 省份号码
+        ///   - cityCode: 城市号码
+        /// - Returns: 无返回值
+        static func putBecomeAgent(mobile: String, name: String, provinceCode: String, cityCode: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/task_send_notice", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["mobile": mobile, "name": name, "province_code": provinceCode, "city_code": cityCode]
+
+            return APP.httpClient.request(req).asVoid()
+        }
     }
 
 }
@@ -619,6 +721,7 @@ extension HttpApi {
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
+        
         
         
         

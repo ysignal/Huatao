@@ -118,6 +118,26 @@ extension FriendCircleViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(with: DynamicListItemCell.self)
         let item = list[indexPath.row]
         cell.config(item: item, target: self)
+        cell.updateBlock = { index in
+            switch index {
+            case 0:
+                // 删除
+                self.list.remove(at: indexPath.row)
+                // iOS 11以后支持，动画删除cell之后调用回调
+                tableView.performBatchUpdates {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                } completion: { finished in
+                    tableView.reloadData()
+                }
+            case 1:
+                // 点赞
+                UIView.performWithoutAnimation {
+                    tableView.reloadRows(at: [indexPath], with: .none)
+                }
+            default:
+                break
+            }
+        }
         return cell
     }
     

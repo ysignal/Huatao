@@ -41,6 +41,15 @@ class DynamicListItemCell: UITableViewCell {
         likeCV.register(nibCell: LikeListItemCell.self)
         imageCV.register(nibCell: BaseImageItemCell.self)
         contentLabel.font = .ss_regular(size: 14)
+        
+        videoView.addGesture(.tap) { tap in
+            if tap.state == .ended {
+                let vc = VideoPlayViewController()
+                vc.urlString = self.model.video
+                vc.videoImage = self.videoImage.image
+                self.target?.present(vc, animated: true)
+            }
+        }
     }
     
     func config(item: DynamicListItem, target: UIViewController? = nil) {
