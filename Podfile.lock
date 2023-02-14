@@ -56,6 +56,7 @@ PODS:
   - SwiftNotificationCenter (1.0.4)
   - swiftScan (1.2.1)
   - WechatOpenSDK (1.9.9)
+  - ZHXIndexView (0.0.3)
   - ZLPhotoBrowser (4.3.8):
     - ZLPhotoBrowser/Core (= 4.3.8)
   - ZLPhotoBrowser/Core (4.3.8)
@@ -81,6 +82,7 @@ DEPENDENCIES:
   - SwiftNotificationCenter
   - swiftScan
   - WechatOpenSDK
+  - ZHXIndexView (~> 0.0.3)
   - ZLPhotoBrowser
 
 SPEC REPOS:
@@ -105,6 +107,7 @@ SPEC REPOS:
     - SwiftNotificationCenter
     - swiftScan
     - WechatOpenSDK
+    - ZHXIndexView
     - ZLPhotoBrowser
 
 EXTERNAL SOURCES:
@@ -133,7 +136,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
-  PromiseKit: 42caf791f87f006c0f3275dbedeba40f8d93e69b
+  PromiseKit: 3402dd72417fcd35b334f730df3629970921bd5c
   RongCloudIM: b6014f6348ba782f484115c9bfb2176a6075cae8
   RongCloudOpenSource: 3bd0bcc7c99d5c35a56af0701df1068df60ed093
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
@@ -141,8 +144,9 @@ SPEC CHECKSUMS:
   SwiftNotificationCenter: 760386da2ce03d3594cb5e96d1e22ec80b44b46f
   swiftScan: 0849e7d7c1c641384767a573ee8cb90b88d1ddd9
   WechatOpenSDK: 9bf85605d50000b35e5ea679a76582426a30c595
+  ZHXIndexView: e7bd78b850969061f33b2c3c2f878a5bc1702ad1
   ZLPhotoBrowser: a36e618898b781c225672115938ed861a11b2121
 
-PODFILE CHECKSUM: c7759fe30359ef2d51be5b5e05e048d4bfd39a49
+PODFILE CHECKSUM: dc21b9e81110ef303935b6e8a8ecd3bb6cefc625
 
 COCOAPODS: 1.11.3

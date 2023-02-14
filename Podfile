@@ -63,6 +63,9 @@ target 'Huatao' do
   pod 'swiftScan'
   
   pod 'PromiseKit', :path => './PromiseKit'
+  
+  #列表索引
+  pod 'ZHXIndexView', '~> 0.0.3'
 
   target 'HuataoTests' do
     inherit! :search_paths

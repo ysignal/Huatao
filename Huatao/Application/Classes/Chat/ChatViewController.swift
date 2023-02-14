@@ -41,6 +41,19 @@ class ChatViewController: SSViewController {
         fakeNav.title = "聊天"
         fakeNav.titleColor = .hex("333333")
         
+        
+        fakeNav.rightButton.image = UIImage(named: "ic_chat_notice")
+        fakeNav.rightButton.isHidden = false
+        fakeNav.rightButton.snp.updateConstraints { make in
+            make.width.height.equalTo(24)
+        }
+        
+        fakeNav.rightButtonHandler = { [weak self] in
+
+            self?.go(ChatNoticeViewController())
+            
+        }
+        
         searchTF.leftView = UIImageView(image: UIImage(named: "ic_chat_search"))
         
         chatTV.tableFooterView = UIView()
@@ -73,6 +86,30 @@ extension ChatViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        if indexPath.row > sections.count - 1 {
+        
+            let conversation = conversations[indexPath.row - 1 - sections.count]
+            
+            print(conversation.channelId ?? "channelId为空")
+            
+            go(RCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: conversation.targetId), animated: true)
+        }else{
+            
+            if indexPath.row == 0 {
+                
+                go(AddressBookViewController())
+                
+            }else{
+                
+                let vc = ChatGroupListViewController()
+                
+                vc.chatGroupType = ((indexPath.row == 1) ? .normal : .leader)
+                
+                go(vc)
+            }
+            
+            
+        }
     }
     
 }

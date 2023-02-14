@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -213,6 +213,12 @@
 		6BFCC2FE297BF1DC00758510 /* TradeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFCC2FD297BF1DC00758510 /* TradeHeaderView.swift */; };
 		6BFCC300297BF1E700758510 /* TradeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BFCC2FF297BF1E700758510 /* TradeHeaderView.xib */; };
 		6BFCC302297C381600758510 /* TradeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFCC301297C381600758510 /* TradeHistoryViewController.swift */; };
+		9B42FF6729976858002129A5 /* AddressBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42FF6629976858002129A5 /* AddressBookViewController.swift */; };
+		9B42FF6929978661002129A5 /* AddresssBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42FF6829978661002129A5 /* AddresssBookCell.swift */; };
+		9B42FF6B2997A039002129A5 /* ChatGroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42FF6A2997A039002129A5 /* ChatGroupListViewController.swift */; };
+		9B42FF6F299B5699002129A5 /* ChatNoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42FF6E299B5699002129A5 /* ChatNoticeViewController.swift */; };
+		9B42FF71299B5E66002129A5 /* ChatNoticeUnreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42FF70299B5E66002129A5 /* ChatNoticeUnreadCell.swift */; };
+		9B42FF73299B5E7B002129A5 /* ChatNoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42FF72299B5E7B002129A5 /* ChatNoticeCell.swift */; };
 		AA4FA65D340C227220952292 /* Pods_HuataoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E2DBAF0969761D32612F12C /* Pods_HuataoTests.framework */; };
 		BE0D2C92EA479F3C060F98B1 /* Pods_Huatao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 271CF15653F35951F675CE50 /* Pods_Huatao.framework */; };
 /* End PBXBuildFile section */
@@ -452,6 +458,12 @@
 		8E2DBAF0969761D32612F12C /* Pods_HuataoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuataoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9361C9281F0D44CEE4D1E999 /* Pods-HuataoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuataoTests.release.xcconfig"; path = "Target Support Files/Pods-HuataoTests/Pods-HuataoTests.release.xcconfig"; sourceTree = "<group>"; };
 		9A9216A86DA78EE0388D8F96 /* Pods-HuataoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuataoTests.debug.xcconfig"; path = "Target Support Files/Pods-HuataoTests/Pods-HuataoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B42FF6629976858002129A5 /* AddressBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBookViewController.swift; sourceTree = "<group>"; };
+		9B42FF6829978661002129A5 /* AddresssBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddresssBookCell.swift; sourceTree = "<group>"; };
+		9B42FF6A2997A039002129A5 /* ChatGroupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupListViewController.swift; sourceTree = "<group>"; };
+		9B42FF6E299B5699002129A5 /* ChatNoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNoticeViewController.swift; sourceTree = "<group>"; };
+		9B42FF70299B5E66002129A5 /* ChatNoticeUnreadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNoticeUnreadCell.swift; sourceTree = "<group>"; };
+		9B42FF72299B5E7B002129A5 /* ChatNoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNoticeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -668,6 +680,9 @@
 			children = (
 				6B650EBF297533600093FEEB /* ChatBaseSectionCell.swift */,
 				6B650EC1297533980093FEEB /* ChatConversationCell.swift */,
+				9B42FF6829978661002129A5 /* AddresssBookCell.swift */,
+				9B42FF70299B5E66002129A5 /* ChatNoticeUnreadCell.swift */,
+				9B42FF72299B5E7B002129A5 /* ChatNoticeCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1002,6 +1017,7 @@
 		6BCB6019296D41CF00E3E7EC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				9B42FF63299767DB002129A5 /* ViewControllers */,
 				6B650EC3297534D70093FEEB /* Models */,
 				6B650EBE297533020093FEEB /* Views */,
 				6BCB601D296D44C300E3E7EC /* ChatViewController.swift */,
@@ -1156,6 +1172,16 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		9B42FF63299767DB002129A5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9B42FF6629976858002129A5 /* AddressBookViewController.swift */,
+				9B42FF6A2997A039002129A5 /* ChatGroupListViewController.swift */,
+				9B42FF6E299B5699002129A5 /* ChatNoticeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		A0728FCC9104C0D6CCD2BF01 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1261,7 +1287,7 @@
 				};
 			};
 			buildConfigurationList = 6BCB5F58296D397A00E3E7EC /* Build configuration list for PBXProject "Huatao" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1412,6 +1438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B42FF73299B5E7B002129A5 /* ChatNoticeCell.swift in Sources */,
 				6BCB605C2970EFA100E3E7EC /* SSProgressHUD.swift in Sources */,
 				6BCB5F65296D397A00E3E7EC /* BaseViewController.swift in Sources */,
 				6BCB607B2971049F00E3E7EC /* SectionCollectionView.swift in Sources */,
@@ -1440,6 +1467,7 @@
 				6BCB605A2970209E00E3E7EC /* DisabledButton.swift in Sources */,
 				6BB4DA572982B96D004FFB11 /* WalletListCell.swift in Sources */,
 				6BCB5FDB296D406B00E3E7EC /* HttpApi.swift in Sources */,
+				9B42FF6F299B5699002129A5 /* ChatNoticeViewController.swift in Sources */,
 				6BCB5FDF296D406B00E3E7EC /* UIView+.swift in Sources */,
 				6BCB5FDE296D406B00E3E7EC /* PayManager.swift in Sources */,
 				6BCB6088297114F300E3E7EC /* SSGenericCollectionViewController.swift in Sources */,
@@ -1464,6 +1492,7 @@
 				6BB4DA612982DBE4004FFB11 /* AboutViewController.swift in Sources */,
 				6BCB5F63296D397A00E3E7EC /* SceneDelegate.swift in Sources */,
 				6BCB6010296D406B00E3E7EC /* SSCollectionViewLayout.swift in Sources */,
+				9B42FF6729976858002129A5 /* AddressBookViewController.swift in Sources */,
 				6B650E9B2974F3FF0093FEEB /* SSEditImageOptions.swift in Sources */,
 				6BCB60752971002200E3E7EC /* TranslationAnimation.swift in Sources */,
 				6BCB5FFF296D406B00E3E7EC /* Double+SS.swift in Sources */,
@@ -1519,6 +1548,7 @@
 				6B650EB02974F3FF0093FEEB /* SSTapDetectingView.swift in Sources */,
 				6B650EAA2974F3FF0093FEEB /* SSGridCell.swift in Sources */,
 				6BD2A808297D0A2500EA7EDC /* TradeSaleBuyCell.swift in Sources */,
+				9B42FF6B2997A039002129A5 /* ChatGroupListViewController.swift in Sources */,
 				6BB4DA5F2982CF06004FFB11 /* SettingMenuItemCell.swift in Sources */,
 				6BB4DA6729861691004FFB11 /* ConvertHistoryViewController.swift in Sources */,
 				6B650EC5297534E90093FEEB /* ChatModel.swift in Sources */,
@@ -1534,6 +1564,7 @@
 				6B650E922974F3FF0093FEEB /* SSPickerView.swift in Sources */,
 				6BB4DA7729866470004FFB11 /* LikeListItemCell.swift in Sources */,
 				6BCB5FE5296D406B00E3E7EC /* HttpResponse.swift in Sources */,
+				9B42FF6929978661002129A5 /* AddresssBookCell.swift in Sources */,
 				6B650E592974271F0093FEEB /* FindModel.swift in Sources */,
 				6BCB6040296D6AFE00E3E7EC /* SSButton.swift in Sources */,
 				6B650EA72974F3FF0093FEEB /* SSCacheModel.swift in Sources */,
@@ -1576,6 +1607,7 @@
 				6B650EAD2974F3FF0093FEEB /* SSCaptionView.swift in Sources */,
 				6BD10CF0297FF4BE002CDCB7 /* ForgetPasswordViewController.swift in Sources */,
 				6BCB5FE6296D406B00E3E7EC /* HttpClient.swift in Sources */,
+				9B42FF71299B5E66002129A5 /* ChatNoticeUnreadCell.swift in Sources */,
 				6B650EB12974F3FF0093FEEB /* SSImageBrowser.swift in Sources */,
 				6BB4DA6B29861FC0004FFB11 /* ConvertRateTipView.swift in Sources */,
 				6BCB5FFB296D406B00E3E7EC /* Dictionary+SS.swift in Sources */,
