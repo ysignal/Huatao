@@ -2,7 +2,7 @@
 //  SSPubSubName.swift
 //  Charming
 //
-//  Created by minse on 2022/11/18.
+//  Created on 2022/11/18.
 //
 
 import Foundation

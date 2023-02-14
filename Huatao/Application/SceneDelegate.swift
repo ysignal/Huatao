@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/10.
+//  Created on 2023/1/10.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  OverlayAnimation.swift
 //  Charming
 //
-//  Created by minse on 2022/10/12.
+//  Created on 2022/10/12.
 //
 
 import UIKit

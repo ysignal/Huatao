@@ -2,7 +2,7 @@
 //  DynamicListItemCell.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/16.
+//  Created on 2023/1/16.
 //
 
 import UIKit
@@ -32,6 +32,8 @@ class DynamicListItemCell: UITableViewCell {
     // 更新类型，0-删除、1-点赞、2-评论
     var updateBlock: IntBlock?
     
+    weak var target: UIViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
@@ -39,9 +41,19 @@ class DynamicListItemCell: UITableViewCell {
         likeCV.register(nibCell: LikeListItemCell.self)
         imageCV.register(nibCell: BaseImageItemCell.self)
         contentLabel.font = .ss_regular(size: 14)
+        
+        videoView.addGesture(.tap) { tap in
+            if tap.state == .ended {
+                let vc = VideoPlayViewController()
+                vc.urlString = self.model.video
+                vc.videoImage = self.videoImage.image
+                self.target?.present(vc, animated: true)
+            }
+        }
     }
     
-    func config(item: DynamicListItem) {
+    func config(item: DynamicListItem, target: UIViewController? = nil) {
+        self.target = target
         model = item
         userIcon.ss_setImage(item.avatar, placeholder: SSImage.userDefault)
         userName.text = item.name
@@ -189,6 +201,12 @@ extension DynamicListItemCell: UICollectionViewDelegateFlowLayout {
             return CGSize(width: textWidth + 20, height: 21)
         }
         return CGSize(width: 86, height: 86)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = PreviewViewController()
+        vc.configPreview(model.images, index: indexPath.row)
+        target?.go(vc)
     }
 
 }

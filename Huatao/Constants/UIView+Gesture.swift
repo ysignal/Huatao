@@ -2,7 +2,7 @@
 //  UIView+Gesture.swift
 //  Charming
 //
-//  Created by minse on 2022/10/14.
+//  Created on 2022/10/14.
 //
 
 import UIKit

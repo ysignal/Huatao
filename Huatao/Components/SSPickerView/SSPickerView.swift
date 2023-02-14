@@ -2,7 +2,7 @@
 //  SSPickerView.swift
 //  Charming
 //
-//  Created by minse on 2022/10/15.
+//  Created on 2022/10/15.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  PlayManager.swift
 //  Charming
 //
-//  Created by minse on 2023/1/9.
+//  Created on 2023/1/9.
 //
 
 import Foundation

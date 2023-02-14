@@ -2,7 +2,7 @@
 //  WalletTabCell.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/26.
+//  Created on 2023/1/26.
 //
 
 import UIKit
@@ -14,7 +14,6 @@ class WalletTabCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            SS.log(frame)
             if isSelected {
                 titleLabel.font = .ss_semibold(size: 16)
                 titleLabel.textColor = .white

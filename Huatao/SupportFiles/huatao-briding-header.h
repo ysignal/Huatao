@@ -2,7 +2,7 @@
 //  huatao-briding-header.h
 //  Huatao
 //
-//  Created by minse on 2023/1/10.
+//  Created on 2023/1/10.
 //
 
 // swift要使用的oc头文件，在此处引用

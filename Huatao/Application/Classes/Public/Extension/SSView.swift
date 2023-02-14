@@ -2,7 +2,7 @@
 //  SSView.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/23.
+//  Created on 2023/1/23.
 //
 
 import Foundation

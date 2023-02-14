@@ -2,7 +2,7 @@
 //  DataEmptyView.swift
 //  Huatao
 //
-//  Created by 杨茗智 on 2023/2/10.
+//  Created on 2023/2/10.
 //
 
 import UIKit

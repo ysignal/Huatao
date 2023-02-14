@@ -2,7 +2,7 @@
 //  TaskListItemCell.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/13.
+//  Created on 2023/1/13.
 //
 
 import UIKit
@@ -46,6 +46,8 @@ class TaskListItemCell: UITableViewCell {
             taskIcon.image = SSImage.taskTotal
         case "month_pay":
             taskIcon.image = SSImage.taskPay
+        case "new_send_money":
+            taskIcon.image = SSImage.taskMoney
         default:
             taskIcon.image = nil
         }

@@ -2,7 +2,7 @@
 //  AboutViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/27.
+//  Created on 2023/1/27.
 //
 
 import UIKit

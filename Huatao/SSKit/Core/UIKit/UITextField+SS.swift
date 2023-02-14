@@ -2,7 +2,7 @@
 //  UITextField+SS.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/12.
+//  Created on 2023/1/12.
 //
 
 import Foundation
@@ -24,6 +24,15 @@ extension UITextField {
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.maxLength, newValue, .OBJC_ASSOCIATION_RETAIN)
             addTarget(self, action: #selector(checkMaxLength), for: .editingChanged)
+        }
+    }
+    
+    @IBInspectable var placeholderColor: UIColor? {
+        get {
+            return self.value(forKeyPath: "placeholderlaber.textcolor") as? UIColor
+        }
+        set {
+            self.setValue(newValue, forKeyPath: "placeholderlaber.textcolor")
         }
     }
     

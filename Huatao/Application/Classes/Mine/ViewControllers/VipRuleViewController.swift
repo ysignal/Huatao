@@ -2,7 +2,7 @@
 //  VipRuleViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/21.
+//  Created on 2023/1/21.
 //
 
 import UIKit

@@ -246,13 +246,16 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="此时此刻，你想和大家分享什么"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="JJz-Ru-6xu" id="aSo-KD-txe"/>
+                                </connections>
                             </textView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fa3-kq-a8H">
-                                <rect key="frame" x="12" y="228" width="270" height="270"/>
+                                <rect key="frame" x="12" y="228" width="262" height="270"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="270" id="3Rj-Hm-vwZ"/>
-                                    <constraint firstAttribute="width" constant="270" id="TjE-P3-y9D"/>
+                                    <constraint firstAttribute="width" constant="262" id="TjE-P3-y9D"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="Rcg-bw-Vhf">
                                     <size key="itemSize" width="86" height="86"/>
@@ -280,6 +283,9 @@
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="toPublish:" destination="JJz-Ru-6xu" eventType="touchUpInside" id="hwi-qo-4Hq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ky5-Se-joc"/>
@@ -300,6 +306,7 @@
                     </view>
                     <connections>
                         <outlet property="imageCV" destination="fa3-kq-a8H" id="PH7-43-qRS"/>
+                        <outlet property="publishBtn" destination="drr-rR-02c" id="mnh-ZB-1mi"/>
                         <outlet property="textView" destination="bPW-xP-C7R" id="Bh1-cw-Liy"/>
                     </connections>
                 </viewController>

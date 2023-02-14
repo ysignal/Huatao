@@ -35,14 +35,10 @@ public struct APP {
         static let WXSecret = "007b2188fb8752dfa323069bf141ce79"
         static let WXUniversalLink = "https://1pnh9f.xinstall.com.cn/tolink/"
         static let QQUniversalLink = "https://1pnh9f.xinstall.com.cn/qq_conn/102024811"
-        // 百度定位 AppKey
-        static let BMKKey = "QA3aN2b86WKGNp2GbynA5bewEWjY0zud"
         
-        static let AlipayScheme = "alipay2021003143628782"
+        static let AlipayScheme = "alipay2021003174648764"
         // 融云IM AppKey
         static let RCIMAPPKey = "25wehl3u2v5tw"
-        // 极光推送 AppKey
-        static let JPushAppKey = "434c716684887b293e1b73a6"
     }
     
     struct SettingKey {
@@ -105,7 +101,7 @@ public struct APP {
     static var httpClient: HttpClient {
         // 发布环境不打印接口数据
         if state == .release {
-            return HttpClient(baseURL: host, plugins: [ParamsPlugin(), LoggerPlugin()])
+            return HttpClient(baseURL: host, plugins: [ParamsPlugin()])
         }
         return HttpClient(baseURL: host, plugins: [ParamsPlugin(), LoggerPlugin()])
     }

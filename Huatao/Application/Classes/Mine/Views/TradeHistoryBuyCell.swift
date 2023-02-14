@@ -2,7 +2,7 @@
 //  TradeHistoryBuyCell.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/22.
+//  Created on 2023/1/22.
 //
 
 import UIKit

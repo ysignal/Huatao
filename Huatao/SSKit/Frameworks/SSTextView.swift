@@ -2,7 +2,7 @@
 //  SSTextView.swift
 //  SimpleSwift
 //
-//  Created by minse on 2023/1/29.
+//  Created on 2023/1/29.
 //
 
 import UIKit

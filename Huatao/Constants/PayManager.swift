@@ -2,7 +2,7 @@
 //  PayManager.swift
 //  Charming
 //
-//  Created by minse on 2023/1/7.
+//  Created on 2023/1/7.
 //
 
 import Foundation

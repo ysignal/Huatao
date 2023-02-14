@@ -2,7 +2,7 @@
 //  BeanConvertViewController.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/26.
+//  Created on 2023/1/26.
 //
 
 import UIKit
@@ -40,6 +40,7 @@ class BeanConvertViewController: BaseViewController {
         fakeNav.rightButtonHandler = { [weak self] in
             self?.toHistory()
         }
+        convertCV.register(nibCell: ConvertListItemCell.self)
         // 关闭多选
         convertCV.allowsMultipleSelection = false
         // 约束可滚动区域宽度

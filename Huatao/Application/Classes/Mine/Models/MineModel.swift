@@ -2,40 +2,42 @@
 //  MineModel.swift
 //  Huatao
 //
-//  Created by minse on 2023/1/15.
+//  Created on 2023/1/15.
 //
 
 import Foundation
 
 struct MineModel {
     
-    static var menuList = [MineMenuItem(action: "team", icon: "ic_mine_tab_01", title: "我的团队"),
-                           MineMenuItem(action: "trade", icon: "ic_mine_tab_02", title: "交易大厅"),
-                           MineMenuItem(action: "wallet", icon: "ic_mine_tab_03", title: "我的钱包"),
-                           MineMenuItem(action: "promotion", icon: "ic_mine_tab_04", title: "我要推广"),
-                           MineMenuItem(action: "circle", icon: "ic_mine_tab_05", title: "我的朋友圈"),
-                           MineMenuItem(action: "password", icon: "ic_mine_tab_06", title: "支付密码"),
-                           MineMenuItem(action: "history", icon: "ic_mine_tab_07", title: "购买记录"),
-                           MineMenuItem(action: "car", icon: "ic_mine_tab_08", title: "购物车"),
-                           MineMenuItem(action: "delegate", icon: "ic_mine_tab_09", title: "成为代理商"),
-                           MineMenuItem(action: "service", icon: "ic_mine_tab_10", title: "联系客服"),
-                           MineMenuItem(action: "task", icon: "ic_mine_tab_11", title: "任务提醒"),
-                           MineMenuItem(action: "card", icon: "ic_mine_tab_12", title: "卡包"),
-                           MineMenuItem(action: "pay", icon: "ic_mine_tab_13", title: "公益基金"),
-                           MineMenuItem(action: "setting", icon: "ic_mine_tab_14", title: "设置")]
+    static var menuList = [MineMenuItem(icon: "ic_mine_tab_01", title: "我的团队", vcType: MyTeamViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_02", title: "交易大厅", vcType: TradeCenterViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_03", title: "我的钱包", vcType: MyWalletViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_04", title: "我要推广", vcType: ForwardPosterViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_05", title: "我的朋友圈", vcType: MyCircleViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_06", title: "支付密码", vcType: ForgetPasswordViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_07", title: "购买记录", vcType: BuyHistoryViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_08", title: "购物车", vcType: MyCartViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_09", title: "成为代理商", vcType: AgentViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_10", title: "联系客服", vcType: ServiceViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_11", title: "任务提醒", vcType: TaskTipViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_12", title: "卡包", vcType: CardBagViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_13", title: "公益基金", vcType: DonateViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_14", title: "设置", vcType: SettingViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_15", title: "会员礼包", vcType: VipBagViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_16", title: "成为会员", vcType: VipJoinViewController.self)]
     
 }
 
 struct MineMenuItem {
-    
-    /// 菜单事件
-    var action: String = ""
-    
+
     /// 菜单图标
     var icon: String = ""
     
     /// 菜单标题
     var title: String = ""
+    
+    /// 视图类型
+    var vcType: UIViewController.Type
     
 }
 
@@ -297,5 +299,110 @@ struct ConversionGoldModel: SSConvertible {
     
     /// 会员名称
     var name: String = ""
+    
+}
+
+struct CardListItem: SSConvertible {
+    
+    /// 卡包ID
+    var cardId: Int = 0
+    
+    /// 卡包名称
+    var name: String = ""
+    
+    /// 最大持有数
+    var holdNum: Int = 0
+    
+    /// 已经获得数
+    var haveNum: Int = 0
+    
+    /// 总产量
+    var total: String = ""
+    
+    /// 银豆数
+    var silverNum: String = ""
+    
+    /// PV
+    var pv: String = ""
+    
+    /// 周期
+    var cycleDays: Int = 0
+    
+    /// 贡献值
+    var contributeValue: String = ""
+    
+    /// 卡包兑换时间
+    var createdAt: String = ""
+    
+}
+
+struct CardReturnModel: SSConvertible {
+    
+    /// 累计返还
+    var getMoney: Int = 0
+    
+    /// 剩余待返还
+    var waitMoney: Int = 0
+    
+    /// 今日返还
+    var todayMoney: Int = 0
+    
+}
+
+struct TaskNoticeItem: SSConvertible {
+    
+    /// 用户ID
+    var userId: Int = 0
+    
+    /// 名称
+    var name: String = ""
+    
+    /// 手机号
+    var mobile: String = ""
+    
+    /// 头像
+    var avatar: String = ""
+    
+    /// 是否完成  0-未完成，1-已完成
+    var todayTask: Int = 0
+    
+}
+
+struct TaskAlertModel: SSConvertible {
+    
+    /// 是否弹窗提示，0-不提示，1-提示
+    var isAlert: Int = 0
+    
+    /// 提示内容
+    var message: String = ""
+    
+}
+
+struct AgentListItem: SSConvertible {
+    
+    /// 省份编码
+    var code: String = ""
+    
+    /// 省名称
+    var name: String = ""
+    
+    /// 市代理
+    var children: [AgentChildrenItem] = []
+    
+    /// 列表收缩和折叠功能使用
+    var isOpen: Bool = false
+    
+}
+
+struct AgentChildrenItem: SSConvertible {
+    
+    /// 城市
+    var city: String = ""
+    
+    /// 姓名
+    var name: String = ""
+    
+    /// 手机号
+    var mobile: String = ""
     
 }
