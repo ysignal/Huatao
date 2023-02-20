@@ -45,7 +45,7 @@ open class SSTabBarController: UITabBarController {
                                        selected: UIColor) {
         childController.title = title
         childController.closePopGestureRecognizer = true
-        if imageName.count > 0{
+        if imageName.count > 0 {
             childController.tabBarItem.image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
             childController.tabBarItem.selectedImage = UIImage(named: selectedImageName)?.withRenderingMode(.alwaysOriginal)
             childController.tabBarItem.title = title

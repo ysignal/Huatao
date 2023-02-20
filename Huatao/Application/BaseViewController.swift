@@ -19,9 +19,8 @@ class BaseViewController: SSViewController {
         }
         fakeNav.leftImage = SSImage.back
         
-        view.bringSubviewToFront(fakeNav)
-        
         buildUI()
+        view.bringSubviewToFront(fakeNav)
     }
 
 }

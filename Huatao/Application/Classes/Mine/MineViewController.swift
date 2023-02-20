@@ -8,33 +8,46 @@
 import UIKit
 
 class MineViewController: SSViewController {
+
+    @IBOutlet weak var tableView: UITableView!
     
     lazy var background: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 262))
-        view.drawGradient(start: .hex("fff1e2"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
+        view.drawGradient(start: .hex("ffeedb"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
         return view
     }()
     
-    @IBOutlet weak var mineCV: UICollectionView!
+    lazy var headerView: MineHeaderView = {
+        let view = MineHeaderView.fromNib()
+        view.delegate = self
+        return view
+    }()
     
-    private let list = MineModel.menuList
+    lazy var settingBtn: SSButton = {
+        let btn = SSButton(type: .custom)
+        btn.image = UIImage(named: "ic_mine_setting")
+        return btn
+    }()
     
-    private var model = MineUserInfo()
+    lazy var messageBtn: SSButton = {
+        let btn = SSButton(type: .custom)
+        btn.image = UIImage(named: "ic_mine_message")
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        buildUI()
-        requestUserInfo()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        requestUserInfo()
     }
     
     override func buildUI() {
         view.backgroundColor = .hex("f6f6f6")
-        view.insertSubview(background, belowSubview: mineCV)
+        view.insertSubview(background, belowSubview: tableView)
         
         showFakeNavBar()
         fakeNav.backgroundColor = .clear
@@ -42,73 +55,112 @@ class MineViewController: SSViewController {
         fakeNav.title = "个人中心"
         fakeNav.titleColor = .hex("333333")
         
-        mineCV.register(nibView: MineHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
-        mineCV.reloadData()
+        fakeNav.addSubview(settingBtn)
+        settingBtn.snp.makeConstraints { make in
+            make.width.height.equalTo(24)
+            make.right.equalToSuperview().offset(-12)
+            make.bottom.equalToSuperview().offset(-10)
+        }
+        settingBtn.addTarget(self, action: #selector(toSetting), for: .touchUpInside)
+        
+        fakeNav.addSubview(messageBtn)
+        messageBtn.snp.makeConstraints { make in
+            make.width.height.equalTo(24)
+            make.right.equalTo(settingBtn.snp.left).offset(-16)
+            make.bottom.equalToSuperview().offset(-10)
+        }
+        messageBtn.addTarget(self, action: #selector(toMessage), for: .touchUpInside)
+
+        
+        tableView.tableHeaderView = headerView
+        tableView.tableFooterView = UIView()
+        
+        tableView.reloadData()
+        
     }
     
     func requestUserInfo() {
-        HttpApi.Mine.getMyUserInfo().done { [weak self] data in
-            self?.model = data.kj.model(MineUserInfo.self)
-            SSMainAsync {
-                self?.mineCV.reloadData()
-            }
+        APP.updateUserInfo {
+            self.updateViews()
         }
+    }
+    
+    func updateViews() {
+        headerView.config()
     }
     
     func itemClicked(_ item: MineMenuItem) {
         let vc = item.vcType.from(sb: .mine)
         go(vc)
     }
-}
-
-extension MineViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: SS.w, height: 175)
+    
+    @objc func toMessage() {
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = SS.w/4
-        return CGSize(width: width, height: 100)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = list[indexPath.row]
-        itemClicked(item)
+    @objc func toSetting() {
+        let vc = SettingViewController.from(sb: .mine)
+        go(vc)
     }
 }
 
-extension MineViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+extension MineViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var line = MineModel.menuList.count / 4
+        if MineModel.menuList.count % 4 > 0 {
+            line += 1
+        }
+        return CGFloat(line) * 100 + 46
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(with: MineMenuItemCell.self, for: indexPath)
-        let item = list[indexPath.row]
-        cell.config(item: item)
+}
+
+extension MineViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(with: MineMemuListCell.self)
+        cell.config(delegate: self)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, view: MineHeaderView.self, for: indexPath)
-            header.config(model: model)
-            header.delegate = self
-            return header
-        }
-        return UICollectionReusableView()
+}
+
+extension MineViewController: MineMemuListCellDelegate {
+    
+    func cellClickedItem(_ item: MineMenuItem) {
+        itemClicked(item)
     }
+    
 }
 
 extension MineViewController: MineHeaderViewDelegate {
-    
-    func headerViewDidClickedEdit() {
-        toast(message: "点击了编辑资料")
+
+    func headerViewWillStartAction(_ action: MineHeaderView.HeaderAction) {
+        switch action {
+        case .edit:
+            let vc = MineEditViewController.from(sb: .mine)
+            go(vc)
+        case .vip:
+            let vc = VipRuleViewController.from(sb: .mine)
+            go(vc)
+        case .card:
+            let vc = CardBagViewController.from(sb: .mine)
+            go(vc)
+        case .bean:
+            let vc = MyWalletViewController.from(sb: .mine)
+            go(vc)
+        case .ticket:
+            let vc = MyTicketViewController.from(sb: .mine)
+            go(vc)
+        case .money:
+            let vc = MyMoneyViewController.from(sb: .mine)
+            go(vc)
+        }
     }
-    
-    func headerViewDidClickedVip() {
-        let vc = VipRuleViewController.from(sb: .mine)
-        go(vc)
-    }
-    
+
 }

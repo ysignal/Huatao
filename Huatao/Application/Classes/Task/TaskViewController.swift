@@ -12,7 +12,7 @@ class TaskViewController: SSViewController {
 
     lazy var background: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 262))
-        view.drawGradient(start: .hex("fff1e2"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
+        view.drawGradient(start: .hex("ffeedb"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
         return view
     }()
     
@@ -79,7 +79,7 @@ class TaskViewController: SSViewController {
         fakeNav.title = "任务大厅"
         fakeNav.titleColor = .hex("333333")
         
-        headerView.ex_height = 66 + 140.scale
+        headerView.ex_height = 24 + 140.scale
         pageControl.isHidden = true
         pageControl.isUserInteractionEnabled = false
         
@@ -216,14 +216,34 @@ extension TaskViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 {
+        switch section {
+        case 0:
+            if taskModel.list.isEmpty {
+                return 0.01
+            }
+            return 40
+        case 1:
             return 50
+        default:
+            return 0
         }
-        return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
+        switch section {
+        case 0:
+            if taskModel.list.isEmpty {
+                return nil
+            }
+            let view = UIView().loadOption([.backgroundColor(.clear)])
+            let lb = UILabel(text: "新人任务", textColor: .hex("333333"), textFont: .ss_semibold(size: 18))
+            view.addSubview(lb)
+            lb.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(12)
+                make.centerY.equalToSuperview()
+            }
+            return view
+        case 1:
             let view = UIView().loadOption([.backgroundColor(.clear)])
             view.addSubview(segmentedView)
             segmentedView.snp.makeConstraints { make in
@@ -232,8 +252,9 @@ extension TaskViewController: UITableViewDelegate {
                 make.height.equalTo(40)
             }
             return view
+        default:
+            return nil
         }
-        return nil
     }
     
 }

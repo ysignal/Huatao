@@ -11,7 +11,6 @@ import UIKit
 
 class ChatNoticeViewController: BaseViewController{
     
-    
     lazy var tableView: UITableView = {
         
         

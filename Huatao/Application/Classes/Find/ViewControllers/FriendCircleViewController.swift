@@ -106,6 +106,17 @@ extension FriendCircleViewController: UITableViewDelegate {
         return APP.dynamicHeight(for: item)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = list[indexPath.row]
+        let vc = CircleDetailViewController.from(sb: .find)
+        vc.dynamicId = item.dynamicId
+        vc.dynamicItem = item
+        vc.updateBlock = {
+            self.page = 1
+            self.requestData()
+        }
+        go(vc)
+    }
 }
 
 extension FriendCircleViewController: UITableViewDataSource {

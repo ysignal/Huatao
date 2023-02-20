@@ -13,6 +13,8 @@ extension UIColor {
     static var ss_33: UIColor { return .hex("333333") }
     static var ss_66: UIColor { return .hex("666666") }
     static var ss_99: UIColor { return .hex("999999") }
+    static var ss_f6: UIColor { return .hex("f6f6f6") }
+    static var ss_ee: UIColor { return .hex("eeeeee") }
 
     
 }

@@ -45,11 +45,19 @@ public struct APP {
         
         static let loginData = "kLoginData"
         
-        static let isLogout = "kIsLogout"
+        static let isAgree = "kIsAgree"
         
         static let isUpdate = "kIsUpdate"
         
         static let lastLogin = "kLastLogin"
+        
+        static var isUpdateAddressBook: String {
+            return "\(APP.loginData.userId)_isUpdateAddressBook"
+        }
+        
+        static var lastApplyContent: String {
+            return "\(APP.loginData.userId)_lastApplyContent"
+        }
         
     }
     
@@ -78,11 +86,19 @@ public struct APP {
     static var lastLogin: String
     
     /// 是否退出登录返回的登录页面
-    @SSDefault(SettingKey.isLogout, defaultValue: false)
-    static var isLogout: Bool
+    @SSDefault(SettingKey.isAgree, defaultValue: false)
+    static var isAgree: Bool
+    
+    /// 是否刷新通讯录
+    @SSDefault(SettingKey.isUpdateAddressBook, defaultValue: false)
+    static var isUpdateAddressBook: Bool
+    
+    /// 最后一次好友申请内容
+    @SSDefault(SettingKey.lastApplyContent, defaultValue: "")
+    static var lastApplyContent: String
     
     /// 用户的详细数据
-    static var userInfo = UserInfo()
+    static var userInfo = MineUserInfo()
     
     /// 用户的钱包数据
     static var walletInfo = ""
@@ -134,7 +150,6 @@ public struct APP {
     
     /// 退出登录，注销用户
     static func logout() {
-        APP.isLogout = true
         APP.loginDataString = ""
         // 退出IM
         RCIM.shared().logout()
@@ -162,8 +177,8 @@ public struct APP {
     
     // 更新用户信息
     static func updateUserInfo(completion: NoneBlock? = nil) {
-        HttpApi.Login.getUserInfo().done { data in
-            userInfo = data.kj.model(UserInfo.self)
+        HttpApi.Mine.getMyUserInfo().done { data in
+            userInfo = data.kj.model(MineUserInfo.self)
             asyncIMUserInfo()
             SSMainAsync {
                 completion?()
@@ -172,7 +187,7 @@ public struct APP {
     }
     
     static func dynamicHeight(for item: DynamicListItem) -> CGFloat {
-        let baseHeight: CGFloat = 122
+        let baseHeight: CGFloat = 136
         let contentHeight = item.content.height(from: .ss_regular(size: 14), width: SS.w - 24, lineHeight: 20)
         let mediaHeight: CGFloat = {
             if item.type == 0 {
@@ -183,12 +198,7 @@ public struct APP {
             return 0
         }()
 
-
-        let likeHeight = likeHeight(for: item)
-        
-        let commentHeight = CGFloat(item.commentArray.count) * 22
-        
-        return baseHeight + contentHeight + mediaHeight + likeHeight + commentHeight
+        return baseHeight + contentHeight + mediaHeight
     }
     
     static func likeHeight(for item: DynamicListItem) -> CGFloat {
@@ -225,6 +235,9 @@ public struct APP {
     }
     
     static func setupAPP() {
+        UITextView.appearance().tintColor = .ss_theme
+        UITextField.appearance().tintColor = .ss_theme
+        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -233,6 +246,16 @@ public struct APP {
         RCIM.shared().initWithAppKey(APP.SDKKey.RCIMAPPKey)
         RCIM.shared().addConnectionStatusDelegate(IMManager.shared)
         RCIM.shared().addReceiveMessageDelegate(IMManager.shared)
+        RCIM.shared().userInfoDataSource = IMManager.shared
+        
+        // 异步加载本地数据
+        DispatchQueue.global().async {
+            if let url = Bundle.main.url(forResource: "china_address", withExtension: "json"),
+               let data = try? Data(contentsOf: url),
+               let list = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [[String: Any]] {
+                DataManager.provinceList = list.compactMap({ $0.kj.model(ProvinceModel.self) })
+            }
+        }
     }
     
 }

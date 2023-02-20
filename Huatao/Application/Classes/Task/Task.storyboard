@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mFr-4R-9Ap">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mFr-4R-9Ap">
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="9e9-jz-3Og">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="206"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="160"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8mQ-rw-PwZ">
@@ -47,21 +47,10 @@
                                             <color key="pageIndicatorTintColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </pageControl>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新人任务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEM-HY-Hvc">
-                                            <rect key="frame" x="12" y="179.33333333333334" width="65.333333333333329" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="22" id="Z2o-Z9-334"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="IEM-HY-Hvc" firstAttribute="leading" secondItem="9e9-jz-3Og" secondAttribute="leading" constant="12" id="04U-y7-GAF"/>
                                         <constraint firstItem="Aca-Gf-TwJ" firstAttribute="bottom" secondItem="8mQ-rw-PwZ" secondAttribute="bottom" id="AIx-Ih-DtE"/>
-                                        <constraint firstItem="IEM-HY-Hvc" firstAttribute="top" secondItem="8mQ-rw-PwZ" secondAttribute="bottom" constant="20" id="abY-cq-CHJ"/>
                                         <constraint firstItem="8mQ-rw-PwZ" firstAttribute="top" secondItem="9e9-jz-3Og" secondAttribute="top" constant="12" id="abo-bK-DfA"/>
                                         <constraint firstAttribute="trailing" secondItem="8mQ-rw-PwZ" secondAttribute="trailing" constant="12" id="buD-YX-SSL"/>
                                         <constraint firstItem="8mQ-rw-PwZ" firstAttribute="leading" secondItem="9e9-jz-3Og" secondAttribute="leading" constant="12" id="gA4-Uh-Ha7"/>
@@ -70,7 +59,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskListItemCell" rowHeight="64" id="Seo-dF-ViP" customClass="TaskListItemCell" customModule="Huatao" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="256" width="393" height="64"/>
+                                        <rect key="frame" x="0.0" y="215.33333206176758" width="393" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Seo-dF-ViP" id="b6B-IA-Y0d">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="64"/>

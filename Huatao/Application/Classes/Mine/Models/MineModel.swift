@@ -9,22 +9,23 @@ import Foundation
 
 struct MineModel {
     
-    static var menuList = [MineMenuItem(icon: "ic_mine_tab_01", title: "我的团队", vcType: MyTeamViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_02", title: "交易大厅", vcType: TradeCenterViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_03", title: "我的钱包", vcType: MyWalletViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_04", title: "我要推广", vcType: ForwardPosterViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_05", title: "我的朋友圈", vcType: MyCircleViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_06", title: "支付密码", vcType: ForgetPasswordViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_07", title: "购买记录", vcType: BuyHistoryViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_08", title: "购物车", vcType: MyCartViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_09", title: "成为代理商", vcType: AgentViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_10", title: "联系客服", vcType: ServiceViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_11", title: "任务提醒", vcType: TaskTipViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_12", title: "卡包", vcType: CardBagViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_13", title: "公益基金", vcType: DonateViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_14", title: "设置", vcType: SettingViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_15", title: "会员礼包", vcType: VipBagViewController.self),
-                           MineMenuItem(icon: "ic_mine_tab_16", title: "成为会员", vcType: VipJoinViewController.self)]
+    static var menuList = [MineMenuItem(icon: "ic_mine_tab_02", title: "交易大厅", vcType: TradeCenterViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_01", title: "我的团队", vcType: MyTeamViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_03", title: "我的钱包", vcType: MyWalletViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_04", title: "我要推广", vcType: ForwardPosterViewController.self),
+                           MineMenuItem(icon: "ic_mine_tab_05", title: "我的朋友圈", vcType: MyCircleViewController.self)
+//                           MineMenuItem(icon: "ic_mine_tab_06", title: "支付密码", vcType: TradePasswordViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_07", title: "购买记录", vcType: BuyHistoryViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_08", title: "购物车", vcType: MyCartViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_09", title: "成为代理商", vcType: AgentViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_10", title: "联系客服", vcType: ServiceViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_11", title: "任务提醒", vcType: TaskTipViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_12", title: "卡包", vcType: CardBagViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_13", title: "公益基金", vcType: DonateViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_14", title: "设置", vcType: SettingViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_15", title: "会员礼包", vcType: VipBagViewController.self),
+//                           MineMenuItem(icon: "ic_mine_tab_16", title: "成为会员", vcType: VipJoinViewController.self)
+    ]
     
 }
 
@@ -70,6 +71,33 @@ struct MineUserInfo: SSConvertible {
     
     /// 会员级别
     var levelName: String = ""
+    
+    /// 直推数
+    var promoteNum: Int = 0
+    
+    /// 间推数
+    var nextNum: Int = 0
+    
+    /// 营业额
+    var tradeMoney: Int = 0
+    
+    /// 认证状态，1-已认证
+    var cardStatus: Int = 0
+    
+    /// 邀请码
+    var inviteCode: String = ""
+    
+    /// 可提现余额
+    var money: Int = 0
+    
+    /// 兑换费率
+    var rate: String = ""
+    
+    /// 职业名称
+    var jobName: String = ""
+    
+    /// 个性签名
+    var personSign: String = ""
     
 }
 

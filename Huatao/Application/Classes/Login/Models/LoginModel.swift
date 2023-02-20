@@ -49,6 +49,12 @@ struct UserInfo: SSConvertible {
     /// 类型
     var type: Int = 0
     
+    /// 职业
+    var job: String = ""
+    
+    /// 个人签名
+    var sign: String = ""
+    
     // MARK: 测试字段
     
     var vipLevel: Int = 2

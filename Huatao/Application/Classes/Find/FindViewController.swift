@@ -9,12 +9,6 @@ import UIKit
 
 class FindViewController: SSViewController {
     
-    lazy var background: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 262))
-        view.drawGradient(start: .hex("fff1e2"), end: .white, size: view.frame.size, direction: .t2b)
-        return view
-    }()
-    
     @IBOutlet weak var menuStack: UIStackView!
     @IBOutlet weak var circleView: UIView!
     @IBOutlet weak var travelView: UIView!
@@ -22,6 +16,35 @@ class FindViewController: SSViewController {
     @IBOutlet weak var clubView: UIView!
     
     @IBOutlet weak var findTV: UITableView!
+    
+    lazy var background: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 262))
+        view.drawGradient(start: .hex("ffeedb"), end: .white, size: view.frame.size, direction: .t2b)
+        return view
+    }()
+    
+    lazy var tipBtn: SSButton = {
+        let btn = SSButton(type: .custom)
+        btn.image = UIImage(named: "ic_notice_fill")
+        
+        btn.addSubview(countLabel)
+        countLabel.snp.makeConstraints { make in
+            make.width.height.equalTo(16)
+            make.right.equalToSuperview().offset(6)
+            make.top.equalToSuperview().offset(-6)
+        }
+        
+        return btn
+    }()
+    
+    lazy var countLabel: UILabel = {
+        let lb = UILabel(text: "1", textColor: .white, textFont: .ss_regular(size: 10))
+        lb.backgroundColor = .hex("eb2020")
+        lb.textAlignment = .center
+        lb.loadOption([.cornerRadius(8)])
+        lb.isHidden = true
+        return lb
+    }()
     
     var list: [DynamicListItem] = []
     
@@ -34,6 +57,11 @@ class FindViewController: SSViewController {
         requestData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        requestNotice()
+    }
+    
     override func buildUI() {
         view.insertSubview(background, belowSubview: menuStack)
         
@@ -42,6 +70,20 @@ class FindViewController: SSViewController {
         fakeNav.titleLabel.font = .ss_semibold(size: 18)
         fakeNav.title = "发现"
         fakeNav.titleColor = .hex("333333")
+        
+        fakeNav.addSubview(tipBtn)
+        tipBtn.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-10)
+            make.right.equalToSuperview().offset(-12)
+            make.width.height.equalTo(24)
+        }
+        
+        tipBtn.addGesture(.tap) { tap in
+            if tap.state == .ended {
+                let vc = CircleNoticeViewController.from(sb: .find)
+                self.go(vc)
+            }
+        }
         
         circleView.addGesture(.tap) { tap in
             if tap.state == .ended {
@@ -84,7 +126,28 @@ class FindViewController: SSViewController {
         }
     }
     
+    func requestNotice() {
+        HttpApi.Find.getDynamicRedNotice().done { [weak self] data in
+            let model = data.kj.model(DynamicRedNoticeModel.self)
+            SSMainAsync {
+                self?.updateNotice(model.total)
+            }
+        }
+    }
     
+    func updateNotice(_ count: Int) {
+        countLabel.isHidden = count <= 0
+        countLabel.text = "\(min(count, 99))"
+    }
+    
+    @objc func toSend() {
+        let vc = CirclePublishViewController.from(sb: .find)
+        vc.completeBlock = { [weak self] in
+            self?.page = 1
+            self?.requestData()
+        }
+        go(vc)
+    }
 }
 
 extension FindViewController: UIScrollViewRefreshDelegate {
@@ -106,6 +169,18 @@ extension FindViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let item = list[indexPath.row]
         return APP.dynamicHeight(for: item)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = list[indexPath.row]
+        let vc = CircleDetailViewController.from(sb: .find)
+        vc.dynamicId = item.dynamicId
+        vc.dynamicItem = item
+        vc.updateBlock = {
+            self.page = 1
+            self.requestData()
+        }
+        go(vc)
     }
     
 }

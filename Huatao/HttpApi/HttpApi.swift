@@ -328,7 +328,7 @@ extension HttpApi {
         /// - Parameter commentId: 评论ID
         /// - Returns: 无返回值
         static func putCommentLike(commentId: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/dynamic_like", method: .put)
+            var req = HttpRequest(path: "/api/dynamic_comment_like", method: .put)
             req.headers["Content-Type"] = "application/x-www-form-urlencoded"
             req.paramsType = .url
             req.encoding = URLEncoding.httpBody
@@ -374,7 +374,208 @@ extension HttpApi {
 extension HttpApi {
     struct Chat {
         
+        /// 根据手机号码搜索用户
+        /// - Returns: 返回结果
+        static func getSearchFriend(mobile: String) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/search_friend", method: .get)
+            req.params = ["mobile": mobile]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
         
+        /// 提交添加好友申请
+        /// - Parameters:
+        ///   - userId: 用户ID
+        ///   - desc: 申请描述
+        ///   - name: 备注名
+        /// - Returns: 无返回值
+        static func postAddFriend(userId: Int, desc: String, name: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/add_friend", method: .post)
+            req.paramsType = .json
+            req.params = ["user_id": userId, "desc": desc, "name": name]
+        
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取好友申请通知
+        /// - Returns: 返回结果
+        static func getNoticeFriend(page: Int, pageSize: Int = 100) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/notice_friend", method: .get)
+            req.params = ["page": page, "page_size": pageSize]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 添加好友审批
+        /// - Parameters:
+        ///   - noticeId: 通知ID
+        ///   - status: 出来状态，1-同意，2-拒绝
+        /// - Returns: 返回结果
+        static func putCheckFriend(noticeId: Int, status: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/check_friend", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["notice_id": noticeId, "status": status]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取通讯录列表
+        /// - Returns: 返回结果
+        static func getFriendList(page: Int = 1, pageSize: Int = 100) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/friend_list", method: .get)
+            req.params = ["page": page, "page_size": pageSize]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 获取群聊设置
+        /// - Parameter teamId: 群组ID
+        /// - Returns: 返回结果
+        static func getTeamMaster(teamId: Int) -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/team_master", method: .get)
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 获取群主列表
+        /// - Returns: 返回结果
+        static func getTeamList() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/team_list", method: .get)
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 修改群名称
+        /// - Parameters:
+        ///   - title: 群名称
+        ///   - teamId: 群组ID
+        /// - Returns: 无返回值
+        static func putTeamEdit(title: String, teamId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_edit", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["title": title, "team_id": teamId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取群组管理员设置
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - keyword: 关键词
+        /// - Returns: 返回结果
+        static func getTeamSet(teamId: Int, keyword: String) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/team_set", method: .get)
+            req.params = ["keyword": keyword, "team_id": teamId]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 设置群组管理员
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - keyword: 关键词
+        /// - Returns: 返回结果
+        static func putTeamSet(teamId: Int, userId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_set", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["user_id": userId, "team_id": teamId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 删除群员
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - userIds: 群员ID数组
+        /// - Returns: 无返回值
+        static func deleteTeamUser(teamId: Int, userIds: [Int]) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_delete_user", method: .delete)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["user_ids": userIds, "team_id": teamId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 发个人红包
+        /// - Parameters:
+        ///   - userId: 对象ID
+        ///   - type: 类型 0-银豆，1-现金红包
+        ///   - payType: 支付类型，0-余额支付，1-微信支付，2-支付宝支付
+        ///   - money: 数额
+        ///   - orderSn: 支付订单号
+        /// - Returns: 无返回值
+        static func putUserSendRed(userId: Int, type: Int, payType: Int, money: Int, orderSn: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_set", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["user_id": userId, "type": type, "pay_type": payType, "money": money, "order_sn": orderSn]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 发放群组红包
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - type: 类型 0-银豆，1-现金红包
+        ///   - payType: 支付类型，0-余额支付，1-微信支付，2-支付宝支付
+        ///   - money: 数额
+        ///   - number: 份数
+        ///   - orderSn: 支付订单号
+        ///   - redType: 红包类型，0-普通红包，1-拼手气红包
+        ///   - totalMoney: 总金额
+        /// - Returns: 无返回值
+        static func putTeamSendRed(teamId: Int, type: Int, payType: Int, money: Int, number: Int, orderSn: String, redType: Int, totalMoney: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_set", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["team_id": teamId, "type": type, "pay_type": payType, "money": money, "number": number, "order_sn": orderSn, "red_type": redType, "total_money": totalMoney]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 提交红包支付
+        /// - Parameters:
+        ///   - money: 金额
+        ///   - payType: 支付方式，wechat-微信，alipay-支付宝
+        ///   - payWay: 支付方法，miniapp-小程序，app-APP支付，scan-扫码支付
+        /// - Returns: 无返回值
+        static func postRedPay(money: String, payType: String, payWay: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/add_friend", method: .post)
+            req.paramsType = .json
+            req.params = ["money": money, "pay_type": payType, "pay_way": payWay]
+        
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取好友详情
+        /// - Parameter userId: 用户ID
+        /// - Returns: 返回结果
+        static func getFriendDetail(userId: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/friend_detail", method: .get)
+            req.params = ["user_id": userId]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 获取下级关系
+        /// - Parameter userId: 用户ID
+        /// - Returns: 返回结果
+        static func getChildrenList(userId: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/children_list", method: .get)
+            req.params = ["user_id": userId]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
     }
 }
 
@@ -679,11 +880,63 @@ extension HttpApi {
         ///   - cityCode: 城市号码
         /// - Returns: 无返回值
         static func putBecomeAgent(mobile: String, name: String, provinceCode: String, cityCode: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/task_send_notice", method: .put)
+            var req = HttpRequest(path: "/api/become_agent", method: .put)
             req.headers["Content-Type"] = "application/x-www-form-urlencoded"
             req.paramsType = .url
             req.encoding = URLEncoding.httpBody
             req.params = ["mobile": mobile, "name": name, "province_code": provinceCode, "city_code": cityCode]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+
+        /// 修改头像
+        /// - Parameter avatar: 头像
+        /// - Returns: 无返回值
+        static func putMyAvatar(avatar: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/my/editMyJobhunter", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["avatar": avatar]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 修改昵称
+        /// - Parameter name: 昵称
+        /// - Returns: 无返回值
+        static func putMyName(name: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/my/editMyJobhunter", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["name": name]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 修改个性签名
+        /// - Parameter personSign: 个性签名
+        /// - Returns: 无返回值
+        static func putMyPersonSign(personSign: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/my/editMyJobhunter", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["person_sign": personSign]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 修改职业
+        /// - Parameter jobName: 职业
+        /// - Returns: 无返回值
+        static func putMyJobName(jobName: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/my/editMyJobhunter", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["job_name": jobName]
 
             return APP.httpClient.request(req).asVoid()
         }

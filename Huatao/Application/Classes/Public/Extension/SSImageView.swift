@@ -6,6 +6,7 @@
 //
 
 import KingfisherWebP
+import Kingfisher
 
 extension UIImageView {
     
@@ -26,4 +27,42 @@ extension UIImageView {
         }
     }
     
+    func ss_setVideo(_ path: String, placeholder: UIImage? = nil, animated: Bool = true) {
+        let loadImage = {
+            self.image = nil
+            if animated {
+                self.ss.showHUDLoading()
+            }
+            DispatchQueue.global().async {
+                if let image = SSPhotoManager.getVideoFirstImage(forUrl: path) {
+                    if let data = image.pngData() {
+                        KingfisherManager.shared.cache.storeToDisk(data, forKey: path)
+                    }
+                    DispatchQueue.main.async {
+                        self.image = image
+                        self.ss.hideHUD()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.image = placeholder
+                        self.ss.hideHUD()
+                    }
+                }
+            }
+        }
+        KingfisherManager.shared.cache.retrieveImageInDiskCache(forKey: path) { result in
+            SSMainAsync {
+                switch result {
+                case .success(let data):
+                    if let image = data {
+                        self.image = image
+                    } else {
+                        loadImage()
+                    }
+                case .failure(_):
+                    loadImage()
+                }
+            }
+        }
+    }
 }

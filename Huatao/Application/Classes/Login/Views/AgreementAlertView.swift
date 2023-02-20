@@ -17,6 +17,7 @@ class AgreementAlertView: UIView {
     private var completionBlock: BoolBlock?
 
     override func awakeFromNib() {
+        super.awakeFromNib()
         buildUI()
     }
     

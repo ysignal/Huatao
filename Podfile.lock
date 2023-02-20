@@ -2,6 +2,9 @@ PODS:
   - AAInfographics (7.3.0)
   - Alamofire (5.4.3)
   - AlipaySDK-iOS (15.8.11)
+  - AliPlayerSDK_iOS (5.5.2.0):
+    - AliPlayerSDK_iOS/AliPlayerSDK (= 5.5.2.0)
+  - AliPlayerSDK_iOS/AliPlayerSDK (5.5.2.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -65,6 +68,7 @@ DEPENDENCIES:
   - AAInfographics (from `https://github.com/AAChartModel/AAChartKit-Swift.git`)
   - Alamofire
   - AlipaySDK-iOS
+  - AliPlayerSDK_iOS
   - FMDB
   - IQKeyboardManagerSwift
   - JXPagingView/Paging
@@ -89,6 +93,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlipaySDK-iOS
+    - AliPlayerSDK_iOS
     - FMDB
     - IQKeyboardManagerSwift
     - JXPagingView
@@ -125,6 +130,7 @@ SPEC CHECKSUMS:
   AAInfographics: ee2a7959acdd0a00243b7f5a3f03a1fa2bdf0781
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   AlipaySDK-iOS: a07b6eafa847a5b29acb6c150ea16d9792d5d167
+  AliPlayerSDK_iOS: 3770f4bd2b02451aa595c814102f6da8ed5a3333
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
@@ -136,7 +142,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
   Popover: 10e1d9528f81d9504df984b7b3f491292bc1822d
-  PromiseKit: 3402dd72417fcd35b334f730df3629970921bd5c
+  PromiseKit: 42caf791f87f006c0f3275dbedeba40f8d93e69b
   RongCloudIM: b6014f6348ba782f484115c9bfb2176a6075cae8
   RongCloudOpenSource: 3bd0bcc7c99d5c35a56af0701df1068df60ed093
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
@@ -147,6 +153,6 @@ SPEC CHECKSUMS:
   ZHXIndexView: e7bd78b850969061f33b2c3c2f878a5bc1702ad1
   ZLPhotoBrowser: a36e618898b781c225672115938ed861a11b2121
 
-PODFILE CHECKSUM: dc21b9e81110ef303935b6e8a8ecd3bb6cefc625
+PODFILE CHECKSUM: f5071a7b1d896506ede54268af8c9ac3b4702d45
 
 COCOAPODS: 1.11.3

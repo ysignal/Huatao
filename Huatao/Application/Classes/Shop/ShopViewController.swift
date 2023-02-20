@@ -11,7 +11,7 @@ class ShopViewController: SSViewController {
     
     lazy var background: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 358))
-        view.drawGradient(start: .hex("fff1e2"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
+        view.drawGradient(start: .hex("ffeedb"), end: .hex("f6f6f6"), size: view.frame.size, direction: .t2b)
         return view
     }()
     

@@ -63,7 +63,7 @@ class VipRuleViewController: BaseViewController {
         userIcon.ss_setImage(APP.userInfo.avatar, placeholder: SSImage.userDefault)
         userName.text = APP.userInfo.name
         userMobile.text = APP.userInfo.mobile
-        userId.text = "ID:\(APP.userInfo.userId)"
+        userId.text = "ID:\(APP.loginData.userId)"
         
         upgradeBtn.drawThemeGradient(CGSize(width: SS.w - 24, height: 40))
     }

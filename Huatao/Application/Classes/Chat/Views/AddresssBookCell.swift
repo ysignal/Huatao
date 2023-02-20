@@ -26,16 +26,6 @@ class AddressBookCell: UITableViewCell{
         
     }()
     
-    
-    
-   lazy var lineView: UIView = {
-        
-        let lineView = UIView(backgroundColor: .hex("EEEEEE"))
-        
-        return lineView
-    }()
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,7 +46,7 @@ class AddressBookCell: UITableViewCell{
     }
     
     func creatUI(){
-    
+        backgroundColor = .white
         contentView.addSubview(headImageView)
         
         headImageView.snp.makeConstraints { make in
@@ -80,19 +70,6 @@ class AddressBookCell: UITableViewCell{
 
         }
         
-        
-        contentView.addSubview(lineView)
-        
-        lineView.snp.makeConstraints { make in
-            
-            make.left.equalTo(58)
-            
-            make.bottom.equalTo(contentView)
-            
-            make.height.equalTo(1)
-            
-            make.right.equalTo(contentView)
-        }
     }
     
 }

@@ -61,7 +61,7 @@ public extension UITableView {
     
     /// cell复用
     func dequeueReusableCell<T: UITableViewCell>(with cellClass: T.Type) -> T {
-        return dequeueReusableCell(withIdentifier: String(describing: cellClass)) as! T
+        return dequeueReusableCell(withIdentifier: String(describing: cellClass)) as? T ?? T(style: .default, reuseIdentifier: String(describing: cellClass))
     }
     
 }

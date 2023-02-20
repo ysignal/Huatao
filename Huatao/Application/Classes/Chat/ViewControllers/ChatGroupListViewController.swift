@@ -14,41 +14,27 @@ enum ChatGroupType {
     case leader
 }
 
-
-class ChatGroupListViewController: BaseViewController{
+class ChatGroupListViewController: BaseViewController {
     
-    
-    var chatGroupType: ChatGroupType?
-    
+    var chatGroupType: ChatGroupType = .normal
     
     lazy var headBackgroundView: UIView = {
-        
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: SS.w, height: 51 + SS.statusBarHeight + SS.navBarHeight))
-        
         backgroundView.backgroundColor = .hex("F2F2F2")
-        
         backgroundView.addSubview(searchBar)
-        
         return backgroundView
-        
     }()
     
     lazy var searchBar: UISearchBar = {
         
         let searchBar = UISearchBar(frame: CGRectMake(12, SS.statusBarHeight + SS.navBarHeight, SS.w - 24, 39))
-        
         searchBar.placeholder = "搜索"
-        
         searchBar.setBackgroundImage(UIImage(color: UIColor.white), for: .any, barMetrics: .default)
-         
         searchBar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
-        
         searchBar.delegate = self
-        
         return searchBar
         
     }()
-    
     
     lazy var tableView: UITableView = {
         

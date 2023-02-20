@@ -48,6 +48,9 @@ class DynamicListItem: NSObject, SSConvertible {
     /// 点赞列表
     var likeArray: [LikeListItem] = []
     
+    /// 分享次数
+    var shareCount: Int = 0
+    
     /// 发布时间
     var createdAt: String = ""
     
@@ -81,7 +84,7 @@ struct DynamicDetailModel: SSConvertible {
     var likeCount: Int = 0
     
     /// 评论列表
-    var commentArray: [CommentListItem] = []
+    var commnetArray: [CommentListItem] = []
     
     /// 点赞列表
     var likeArray: [LikeListItem] = []
@@ -146,6 +149,9 @@ struct CommentListItem: SSConvertible {
     
     /// 评论楼内楼
     var children: [CommentChildrenItem] = []
+    
+    /// 列表折叠使用
+    var isOpen: Bool = false
 
 }
 
@@ -224,7 +230,7 @@ struct InteractMessageListItem: SSConvertible {
     var dynamicId: Int = 0
     
     /// 创建时间
-    var createAt: String = ""
+    var createdAt: String = ""
     
 }
 

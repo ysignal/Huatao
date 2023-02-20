@@ -38,8 +38,8 @@ class SSCacheManager {
     private func checkDB() {
         // 未初始化，需要初始化数据库管理对象
         // 切换用户的情况下，需要切换数据库管理对象
-        if queue == nil || currentId != APP.userInfo.userId {
-            currentId = APP.userInfo.userId
+        if queue == nil || currentId != APP.loginData.userId {
+            currentId = APP.loginData.userId
             if currentId == 0 {
                 // 默认ID，判断为用户未登录成功
                 let dbPath = cachePath

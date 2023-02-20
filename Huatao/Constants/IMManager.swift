@@ -15,6 +15,39 @@ class IMManager: NSObject {
     
 }
 
+extension IMManager: RCIMUserInfoDataSource {
+    
+    func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
+        DispatchQueue.global().async {
+            if let userInfo = RCIM.shared().getUserInfoCache(userId) {
+                DispatchQueue.main.async {
+                    completion?(userInfo)
+                }
+            } else {
+                if userId.intValue == APP.loginData.userId {
+                    let userInfo = RCUserInfo(userId: userId, name: APP.userInfo.name, portrait: APP.userInfo.avatar)
+                    RCIM.shared().refreshUserInfoCache(userInfo, withUserId: userId)
+                    DispatchQueue.main.async {
+                        completion?(userInfo)
+                    }
+                } else {
+                    HttpApi.Chat.getFriendDetail(userId: userId.intValue).done { data in
+                        let model = data.kj.model(FriendDetailModel.self)
+                        let userInfo = RCUserInfo(userId: "\(model.userId)", name: model.name, portrait: model.avatar)
+                        RCIM.shared().refreshUserInfoCache(userInfo, withUserId: userId)
+                        DispatchQueue.main.async {
+                            completion?(userInfo)
+                        }
+                    }.catch { _ in
+                        completion?(nil)
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
 extension IMManager: RCIMConnectionStatusDelegate {
     
     func onRCIMConnectionStatusChanged(_ status: RCConnectionStatus) {

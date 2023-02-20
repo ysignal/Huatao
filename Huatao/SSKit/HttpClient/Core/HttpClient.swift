@@ -15,7 +15,7 @@ public struct HttpClient {
     public init(baseURL: String? = nil, plugins: [PluginType] = []) {
         self.baseURL = baseURL
         self.plugins = plugins
-        URLSessionConfiguration.af.default.timeoutIntervalForRequest = 60
+        URLSessionConfiguration.af.default.timeoutIntervalForRequest = 10
     }
 
     public func request(_ req: HttpRequest, success: @escaping (_ response: HttpResponse) -> Void, failure: @escaping (_ error: Error) -> Void) {

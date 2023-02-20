@@ -12,22 +12,30 @@ class DynamicListItemCell: UITableViewCell {
     
     @IBOutlet weak var userIcon: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+
     @IBOutlet weak var contentLabel: LineHeightLabel!
     @IBOutlet weak var imageCV: UICollectionView!
+    @IBOutlet weak var imageCVWidth: NSLayoutConstraint!
     @IBOutlet weak var imageCVHeight: NSLayoutConstraint!
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var videoImage: UIImageView!
     @IBOutlet weak var moreBtn: UIButton!
-    @IBOutlet weak var actionBtn: SSButton!
     
-    @IBOutlet weak var likeCV: UICollectionView!
-    @IBOutlet weak var likeCVHeight: NSLayoutConstraint!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var likeView: UIView!
+    @IBOutlet weak var likeImage: UIImageView!
+    @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var commentView: UIView!
+    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var shareView: UIView!
+    @IBOutlet weak var shareLabel: UILabel!
     
-    @IBOutlet weak var commentLine: UIView!
-    @IBOutlet weak var commentTV: UITableView!
-    
-    var model = DynamicListItem()
+    var model = DynamicListItem() {
+        didSet {
+            likeImage.image = model.isLike == 1 ? UIImage(named: "ic_like_on") : UIImage(named: "ic_like_off")
+            likeLabel.text = "\(model.likeCount)"
+        }
+    }
     
     // 更新类型，0-删除、1-点赞、2-评论
     var updateBlock: IntBlock?
@@ -38,7 +46,6 @@ class DynamicListItemCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         backgroundColor = .clear
-        likeCV.register(nibCell: LikeListItemCell.self)
         imageCV.register(nibCell: BaseImageItemCell.self)
         contentLabel.font = .ss_regular(size: 14)
         
@@ -50,6 +57,30 @@ class DynamicListItemCell: UITableViewCell {
                 self.target?.present(vc, animated: true)
             }
         }
+        
+        likeView.addGesture(.tap) { tap in
+            if tap.state == .ended {
+                self.toLike()
+            }
+        }
+        
+        userIcon.addGesture(.tap) { tap in
+            if tap.state == .ended {
+                self.toDetail()
+            }
+        }
+        userName.addGesture(.tap) { tap in
+            if tap.state == .ended {
+                self.toDetail()
+            }
+        }
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if super.hitTest(point, with: event) == imageCV {
+            return self
+        }
+        return super.hitTest(point, with: event)
     }
     
     func config(item: DynamicListItem, target: UIViewController? = nil) {
@@ -58,7 +89,9 @@ class DynamicListItemCell: UITableViewCell {
         userIcon.ss_setImage(item.avatar, placeholder: SSImage.userDefault)
         userName.text = item.name
         contentLabel.text = item.content
-                
+        commentLabel.text = "\(item.commentCount)"
+        timeLabel.text = item.createdAt
+
         if item.type == 0 {
             // 图片
             if item.images.isEmpty {
@@ -75,32 +108,11 @@ class DynamicListItemCell: UITableViewCell {
             videoView.isHidden = item.video.isEmpty
             imageCVHeight.constant = item.video.isEmpty ? 0 : 150
 
-            if DataManager.cacheVideoImage.has(key: item.video), let image = DataManager.cacheVideoImage[item.video] {
-                videoImage.image = image
-            } else {
-                DispatchQueue.global().async { [weak self] in
-                    guard let weakSelf = self else { return }
-                    let image = SSPhotoManager.getVideoFirstImage(forUrl: item.video)
-                    DispatchQueue.main.async {
-                        if weakSelf.model.dynamicId == item.dynamicId {
-                            DataManager.cacheVideoImage[item.video] = image
-                            self?.videoImage.image = image
-                        }
-                    }
-                }
-            }
+            videoImage.ss_setVideo(item.video)
         }
         imageCV.reloadData()
-        likeCV.reloadData()
-        commentTV.reloadData()
-        timeLabel.text = item.createdAt
         
         moreBtn.isHidden = item.userId != APP.loginData.userId
-
-        likeCVHeight.constant = APP.likeHeight(for: item)
-        likeCV.isHidden = item.likeArray.isEmpty
-        commentLine.isHidden = item.commentArray.isEmpty
-        commentTV.isHidden = item.commentArray.isEmpty
     }
 
     @IBAction func toMore(_ sender: Any) {
@@ -128,27 +140,10 @@ class DynamicListItemCell: UITableViewCell {
 
     }
     
-    @IBAction func toAction(_ sender: Any) {
-        let popover = Popover(options: [.color(.black.withAlphaComponent(0.7)),
-                                        .blackOverlayColor(.clear),
-                                        .cornerRadius(4),
-                                        .arrowSize(.zero),
-                                        .sideEdge(12)])
-        popover.popoverType = .left
-        let menuView = CircleActionView(size: CGSize(width: 140, height: 32))
-        menuView.selectedBlock = { [weak self] index in
-            popover.dismiss()
-            switch index {
-            case 1:
-                // 点赞
-                self?.toLike()
-            case 2:
-                break
-            default:
-                break
-            }
-        }
-        popover.show(menuView, fromView: actionBtn)
+    func toDetail() {
+        let vc = AddFriendViewController.from(sb: .chat)
+        vc.userId = model.userId
+        target?.go(vc)
     }
     
     func toDelete() {
@@ -175,6 +170,11 @@ class DynamicListItemCell: UITableViewCell {
             SSMainAsync {
                 weakSelf.model.isLike = isLike ? 0 : 1
                 if isLike {
+                    weakSelf.model.likeCount -= 1
+                } else {
+                    weakSelf.model.likeCount += 1
+                }
+                if isLike {
                     weakSelf.model.likeArray.removeAll(where: { $0.userName == APP.userInfo.name && $0.userAvatar == APP.userInfo.avatar })
                     SS.keyWindow?.toast(message: "取消点赞成功！")
                 } else {
@@ -195,11 +195,6 @@ class DynamicListItemCell: UITableViewCell {
 extension DynamicListItemCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == likeCV {
-            let item = model.likeArray[indexPath.row]
-            let textWidth = item.userName.width(from: .ss_regular(size: 12), height: 21)
-            return CGSize(width: textWidth + 20, height: 21)
-        }
         return CGSize(width: 86, height: 86)
     }
     
@@ -214,44 +209,61 @@ extension DynamicListItemCell: UICollectionViewDelegateFlowLayout {
 extension DynamicListItemCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == likeCV {
-            return model.likeArray.count
-        }
         return model.images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == likeCV {
-            let cell = collectionView.dequeueReusableCell(with: LikeListItemCell.self, for: indexPath)
-            let item = model.likeArray[indexPath.row]
-            cell.nameLabel.text = item.userName
-            return cell
-        }
         let cell = collectionView.dequeueReusableCell(with: BaseImageItemCell.self, for: indexPath)
         let item = model.images[indexPath.row]
         cell.config(url: item, placeholder: SSImage.photoDefault)
-        return cell
-    }
-    
-}
-
-extension DynamicListItemCell: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 22
-    }
-    
-}
-
-extension DynamicListItemCell: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(with: CommentListItemCell.self)
-        cell.config(item: CommentListItem())
+        switch model.images.count {
+        case 1:
+            cell.baseImage.loadOption([.cornerCut(8, .allCorners, CGSize(width: 86, height: 86))])
+        case 2:
+            switch indexPath.row {
+            case 0:
+                cell.baseImage.loadOption([.cornerCut(8, [.topLeft, .bottomLeft], CGSize(width: 86, height: 86))])
+            default:
+                cell.baseImage.loadOption([.cornerCut(8, [.topRight, .bottomRight], CGSize(width: 86, height: 86))])
+            }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                cell.baseImage.loadOption([.cornerCut(8, [.topLeft, .bottomLeft], CGSize(width: 86, height: 86))])
+            case 2:
+                cell.baseImage.loadOption([.cornerCut(8, [.topRight, .bottomRight], CGSize(width: 86, height: 86))])
+            default:
+                cell.baseImage.loadOption([.cornerCut(0, .allCorners, CGSize(width: 86, height: 86))])
+            }
+        case 4,5,6:
+            switch indexPath.row {
+            case 0:
+                cell.baseImage.loadOption([.cornerCut(8, [.topLeft], CGSize(width: 86, height: 86))])
+            case 2:
+                cell.baseImage.loadOption([.cornerCut(8, [.topRight], CGSize(width: 86, height: 86))])
+            case 3:
+                cell.baseImage.loadOption([.cornerCut(8, [.bottomLeft], CGSize(width: 86, height: 86))])
+            case 5:
+                cell.baseImage.loadOption([.cornerCut(8, [.bottomRight], CGSize(width: 86, height: 86))])
+            default:
+                cell.baseImage.loadOption([.cornerCut(0, .allCorners, CGSize(width: 86, height: 86))])
+            }
+        case 7,8,9:
+            switch indexPath.row {
+            case 0:
+                cell.baseImage.loadOption([.cornerCut(8, [.topLeft], CGSize(width: 86, height: 86))])
+            case 2:
+                cell.baseImage.loadOption([.cornerCut(8, [.topRight], CGSize(width: 86, height: 86))])
+            case 6:
+                cell.baseImage.loadOption([.cornerCut(8, [.bottomLeft], CGSize(width: 86, height: 86))])
+            case 8:
+                cell.baseImage.loadOption([.cornerCut(8, [.bottomRight], CGSize(width: 86, height: 86))])
+            default:
+                cell.baseImage.loadOption([.cornerCut(0, .allCorners, CGSize(width: 86, height: 86))])
+            }
+        default:
+            break
+        }
         return cell
     }
     
