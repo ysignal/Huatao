@@ -99,9 +99,7 @@ class ChatViewController: SSViewController {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
-        
-        RCIM.shared().userInfoDataSource
-        
+                
         updateContainerView()
     }
     

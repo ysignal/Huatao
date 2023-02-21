@@ -17,6 +17,7 @@ class GroupImageView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.masksToBounds = true
+        backgroundColor = .hex("dddddd")
     }
     
     func config(images: [String], cornerRadius: CGFloat = 0) {

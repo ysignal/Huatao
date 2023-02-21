@@ -25,6 +25,7 @@ class EditDetailViewController: BaseViewController {
     var type: EditType = .name
     
     var sign: String = ""
+    
     var content: String = ""
     
     var updateBlock: NoneBlock?
@@ -77,6 +78,7 @@ class EditDetailViewController: BaseViewController {
             tfView.isHidden = true
             tvView.isHidden = false
             fakeNav.title = "个性签名"
+            countLabel.text = "\(min(sign.count, 50))/50"
         }
         
     }
@@ -157,6 +159,7 @@ extension EditDetailViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if textView.markedTextRange == nil, let text = textView.text {
             sign = text
+            countLabel.text = "\(min(text.count, 50))/50"
         }
     }
     

@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orX-mI-UDl">
-                    <rect key="frame" x="2" y="61" width="193.66666666666666" height="376.66666666666669"/>
+                    <rect key="frame" x="3" y="62" width="192.66666666666666" height="375.66666666666669"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="2"/>
@@ -23,7 +23,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NF4-kl-e2D">
-                    <rect key="frame" x="2" y="439.66666666666674" width="193.66666666666666" height="376.33333333333326"/>
+                    <rect key="frame" x="3" y="439.66666666666674" width="192.66666666666666" height="375.33333333333326"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="1"/>
@@ -31,7 +31,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bOj-4e-FMA">
-                    <rect key="frame" x="197.66666666666663" y="61" width="193.33333333333337" height="376.66666666666669"/>
+                    <rect key="frame" x="197.66666666666663" y="62" width="192.33333333333337" height="375.66666666666669"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="1"/>
@@ -39,7 +39,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rwU-Ce-KSb">
-                    <rect key="frame" x="197.66666666666663" y="439.66666666666674" width="193.33333333333337" height="376.33333333333326"/>
+                    <rect key="frame" x="197.66666666666663" y="439.66666666666674" width="192.33333333333337" height="375.33333333333326"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="1"/>
@@ -56,15 +56,15 @@
                 <constraint firstItem="NF4-kl-e2D" firstAttribute="height" secondItem="orX-mI-UDl" secondAttribute="height" id="5nQ-af-p2n"/>
                 <constraint firstItem="bOj-4e-FMA" firstAttribute="leading" secondItem="orX-mI-UDl" secondAttribute="trailing" constant="2" id="EjH-GG-sd2"/>
                 <constraint firstItem="rwU-Ce-KSb" firstAttribute="top" secondItem="bOj-4e-FMA" secondAttribute="bottom" constant="2" id="J6O-vo-b9j"/>
-                <constraint firstItem="HId-af-gmf" firstAttribute="trailing" secondItem="bOj-4e-FMA" secondAttribute="trailing" constant="2" id="TYO-mB-1b8"/>
-                <constraint firstItem="NF4-kl-e2D" firstAttribute="leading" secondItem="HId-af-gmf" secondAttribute="leading" constant="2" id="XFq-Jb-yRw"/>
-                <constraint firstItem="bOj-4e-FMA" firstAttribute="top" secondItem="HId-af-gmf" secondAttribute="top" constant="2" id="brU-af-Lrb"/>
-                <constraint firstItem="orX-mI-UDl" firstAttribute="top" secondItem="HId-af-gmf" secondAttribute="top" constant="2" id="ebW-Vi-0ZP"/>
-                <constraint firstItem="HId-af-gmf" firstAttribute="bottom" secondItem="rwU-Ce-KSb" secondAttribute="bottom" constant="2" id="hir-lU-zm2"/>
-                <constraint firstItem="HId-af-gmf" firstAttribute="bottom" secondItem="NF4-kl-e2D" secondAttribute="bottom" constant="2" id="jJC-ae-M05"/>
+                <constraint firstItem="HId-af-gmf" firstAttribute="trailing" secondItem="bOj-4e-FMA" secondAttribute="trailing" constant="3" id="TYO-mB-1b8"/>
+                <constraint firstItem="NF4-kl-e2D" firstAttribute="leading" secondItem="HId-af-gmf" secondAttribute="leading" constant="3" id="XFq-Jb-yRw"/>
+                <constraint firstItem="bOj-4e-FMA" firstAttribute="top" secondItem="HId-af-gmf" secondAttribute="top" constant="3" id="brU-af-Lrb"/>
+                <constraint firstItem="orX-mI-UDl" firstAttribute="top" secondItem="HId-af-gmf" secondAttribute="top" constant="3" id="ebW-Vi-0ZP"/>
+                <constraint firstItem="HId-af-gmf" firstAttribute="bottom" secondItem="rwU-Ce-KSb" secondAttribute="bottom" constant="3" id="hir-lU-zm2"/>
+                <constraint firstItem="HId-af-gmf" firstAttribute="bottom" secondItem="NF4-kl-e2D" secondAttribute="bottom" constant="3" id="jJC-ae-M05"/>
                 <constraint firstItem="rwU-Ce-KSb" firstAttribute="leading" secondItem="NF4-kl-e2D" secondAttribute="trailing" constant="2" id="lnM-yD-3m2"/>
-                <constraint firstItem="HId-af-gmf" firstAttribute="trailing" secondItem="rwU-Ce-KSb" secondAttribute="trailing" constant="2" id="vVr-Tg-eEz"/>
-                <constraint firstItem="orX-mI-UDl" firstAttribute="leading" secondItem="HId-af-gmf" secondAttribute="leading" constant="2" id="xZQ-M5-8TI"/>
+                <constraint firstItem="HId-af-gmf" firstAttribute="trailing" secondItem="rwU-Ce-KSb" secondAttribute="trailing" constant="3" id="vVr-Tg-eEz"/>
+                <constraint firstItem="orX-mI-UDl" firstAttribute="leading" secondItem="HId-af-gmf" secondAttribute="leading" constant="3" id="xZQ-M5-8TI"/>
                 <constraint firstItem="rwU-Ce-KSb" firstAttribute="width" secondItem="NF4-kl-e2D" secondAttribute="width" id="zqq-3b-1qi"/>
             </constraints>
             <connections>

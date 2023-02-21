@@ -125,11 +125,23 @@ class ChatConversationCell: RCConversationBaseCell {
                     }
                 }
             }
-        case .ConversationType_GROUP, .ConversationType_CHATROOM, .ConversationType_DISCUSSION:
+        case .ConversationType_GROUP, .ConversationType_ULTRAGROUP, .ConversationType_DISCUSSION:
             // 群组、聊天室、讨论组
             userIcon.isHidden = true
             groupImageView.isHidden = false
-
+            IMManager.shared.getGroupInfo(withGroupId: model.targetId) { [weak self] data in
+                SSMainAsync {
+                    if let groupInfo = data {
+                        self?.nameLabel.text = groupInfo.groupName
+                        if let imageStr = groupInfo.portraitUri {
+                            self?.groupImageView.config(images: imageStr.components(separatedBy: ","))
+                        }
+                    } else {
+                        self?.nameLabel.text = "Group<\(model.targetId ?? "")>"
+                    }
+                }
+            }
+            
         default:
             break
         }

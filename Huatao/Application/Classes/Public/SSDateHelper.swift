@@ -70,7 +70,6 @@ struct SSDateHelper {
 
     static func formattedTime(date: Date, formatter: DateFormatter) -> String {
         let dateNow = Date()
-        let dateStr = formatter.string(from: dateNow)
         var components = DateComponents()
         components.day = dateNow.day
         components.month = dateNow.month

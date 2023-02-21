@@ -44,7 +44,7 @@ class MyCodeViewController: BaseViewController {
             }
         }
     }
-
+    
     @IBAction func toScan(_ sender: Any) {
         let vc = LBXScanViewController()
         vc.scanResultDelegate = self

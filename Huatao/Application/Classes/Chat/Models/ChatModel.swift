@@ -40,6 +40,20 @@ struct FriendDetailModel: SSConvertible {
     /// 是否是好友，0-不是，1-是
     var isFriend: Int = 0
     
+    /// 备注名
+    var remarkName: String = ""
+    
+    /// 个性签名
+    var personSign: String = ""
+    
+    /// 聊天背景
+    var backgroundImg: String = ""
+    
+    /// 是否星标好友，0-不是，1-是
+    var isStar: Int = 0
+    
+    /// 是否开启免打扰，0-不是，1-是
+    var isOpenDisturb: Int = 0
 }
 
 struct NoticeFriendListModel: SSConvertible {
@@ -125,6 +139,9 @@ struct TeamSettingModel: SSConvertible {
     
     /// 群主昵称
     var name: String = ""
+    
+    /// 群昵称
+    var rename: String = ""
     
     /// 是否开启免打扰，0-未开启、1-已开启
     var isOpenDisturb: Int = 0

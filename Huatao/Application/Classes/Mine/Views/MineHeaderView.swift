@@ -82,6 +82,10 @@ class MineHeaderView: UICollectionReusableView {
         }
     }
     
+    deinit {
+        delegate = nil
+    }
+    
     func config() {
         userIcon.ss_setImage(APP.userInfo.avatar, placeholder: SSImage.userDefault)
         userName.text = APP.userInfo.name

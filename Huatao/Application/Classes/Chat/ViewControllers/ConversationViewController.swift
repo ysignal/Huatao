@@ -12,7 +12,11 @@ class ConversationViewController: RCConversationViewController {
     
     var fakeNav: SSNavigationBar = SSNavigationBar()
     
-    
+    lazy var moreBtn: SSButton = {
+        let btn = SSButton(type: .custom)
+        btn.image = UIImage(named: "ic_find_more")?.color(.hex("666666"))
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +35,20 @@ class ConversationViewController: RCConversationViewController {
         }
         fakeNav.leftImage = SSImage.back
         
+        fakeNav.addSubview(moreBtn)
+        moreBtn.snp.makeConstraints { make in
+            make.width.equalTo(30)
+            make.height.equalTo(24)
+            make.right.equalToSuperview().offset(-12)
+            make.bottom.equalToSuperview().offset(-10)
+        }
+        moreBtn.addTarget(self, action: #selector(toMore), for: .touchUpInside)
+        
         enableNewComingMessageIcon = true
         RCKitConfig.default().ui.globalMessagePortraitSize = CGSize(width: 36, height: 36)
         
+        
+        navigationController?.navRemove([SelectUserViewController.self])
     }
     
     override func registerCustomCellsAndMessages() {
@@ -47,6 +62,21 @@ class ConversationViewController: RCConversationViewController {
             if cell.model.senderUserId == "\(APP.loginData.userId)" {
                 msgCell.portraitImageView.ss_setImage(APP.userInfo.avatar, placeholder: SSImage.userDefault)
             }
+        }
+    }
+    
+    @objc func toMore() {
+        switch conversationType {
+        case .ConversationType_PRIVATE:
+            let vc = UserDetailViewController.from(sb: .chat)
+            vc.userId = targetId.intValue
+            go(vc)
+        case .ConversationType_DISCUSSION, .ConversationType_GROUP, .ConversationType_ULTRAGROUP:
+            let vc = GroupSettingViewController.from(sb: .chat)
+            vc.teamId = targetId.intValue
+            go(vc)
+        default:
+            break
         }
     }
 

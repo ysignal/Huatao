@@ -15,6 +15,30 @@ class IMManager: NSObject {
     
 }
 
+extension IMManager: RCIMGroupInfoDataSource {
+    func getGroupInfo(withGroupId groupId: String!, completion: ((RCGroup?) -> Void)!) {
+        DispatchQueue.global().async {
+            if let groupInfo = RCIM.shared().getGroupInfoCache(groupId) {
+                completion?(groupInfo)
+            } else {
+                HttpApi.Chat.getTeamMaster(teamId: groupId.intValue).done { data in
+                    let model = data.kj.model(TeamSettingModel.self)
+                    let images = model.listAvatar.compactMap({ $0.avatar }).joined(separator: ",")
+                    let groupInfo = RCGroup(groupId: groupId, groupName: model.title, portraitUri: images)
+                    RCIM.shared().refreshGroupInfoCache(groupInfo, withGroupId: groupId)
+                    DispatchQueue.main.async {
+                        completion?(groupInfo)
+                    }
+                }.catch { error in
+                    DispatchQueue.main.async {
+                        completion?(nil)
+                    }
+                }
+            }
+        }
+    }
+}
+
 extension IMManager: RCIMUserInfoDataSource {
     
     func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
@@ -39,7 +63,9 @@ extension IMManager: RCIMUserInfoDataSource {
                             completion?(userInfo)
                         }
                     }.catch { _ in
-                        completion?(nil)
+                        DispatchQueue.main.async {
+                            completion?(nil)
+                        }
                     }
                 }
             }

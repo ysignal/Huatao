@@ -434,15 +434,17 @@ extension HttpApi {
         /// - Parameter teamId: 群组ID
         /// - Returns: 返回结果
         static func getTeamMaster(teamId: Int) -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/team_master", method: .get)
-            
+            var req = HttpRequest(path: "/api/team_master", method: .get)
+            req.params = ["team_id": teamId]
+
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
-        /// 获取群主列表
+        /// 获取群组列表
         /// - Returns: 返回结果
-        static func getTeamList() -> Promise<[String: Any]> {
-            let req = HttpRequest(path: "/api/team_list", method: .get)
+        static func getTeamList(page: Int, keyword: String, pageSize: Int = 100) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/team_list", method: .get)
+            req.params = ["page": page, "keyword": keyword, "page_size": pageSize]
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
@@ -576,6 +578,61 @@ extension HttpApi {
 
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
+        
+        /// 创建群聊
+        /// - Parameter userIds: 用户ID数组
+        /// - Returns: 返回群组ID
+        static func postHandAddTeam(userIds: [Int]) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/hand_add_team", method: .post)
+            req.paramsType = .json
+            req.params = ["user_ids": userIds]
+        
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 拉人进群
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - userIds: 用户ID数组
+        /// - Returns: 无返回值
+        static func putHandJoinTeam(teamId: Int, userIds: [Int]) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/hand_join_team", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["team_id": teamId, "user_ids": userIds]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 踢出群组
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - userIds: 用户ID数组
+        /// - Returns: 无返回值
+        static func putTeamOut(teamId: Int, userIds: [Int]) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_out", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["team_id": teamId, "user_ids": userIds]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 解散群组
+        /// - Parameter teamId: 群组ID
+        /// - Returns: 无返回值
+        static func deleteTeam(teamId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_dismiss", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["team_id": teamId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
     }
 }
 

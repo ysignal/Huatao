@@ -52,6 +52,10 @@ class CircleDetailHeaderView: UIView {
         }
     }
     
+    deinit {
+        delegate = nil
+    }
+    
     func config(item: DynamicDetailModel, delegate: CircleDetailHeaderViewDelegate) {
         self.delegate = delegate
         model = item

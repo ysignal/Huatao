@@ -27,6 +27,10 @@ class MineMemuListCell: UITableViewCell {
         selectionStyle = .none
         mineCV.register(nibCell: MineMenuItemCell.self)
     }
+    
+    deinit {
+        delegate = nil
+    }
 
     func config(delegate: MineMemuListCellDelegate?) {
         self.delegate = delegate

@@ -12,8 +12,14 @@ class UserDetailViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var headerView: UIView!
+
     @IBOutlet weak var userIcon: UIImageView!
+    
     @IBOutlet weak var userName: UILabel!
+    
+    @IBOutlet weak var signLabel: UILabel!
+
     
     var list: [UserFriendItem] = []
     
@@ -65,6 +71,10 @@ class UserDetailViewController: BaseViewController {
     func updateViews() {
         userIcon.ss_setImage(model.avatar, placeholder: SSImage.userDefault)
         userName.text = model.name
+        signLabel.text = model.personSign
+        
+        let signHeight = model.personSign.height(from: .systemFont(ofSize: 14), width: SS.w - 40)
+        headerView.ex_height = 150 + signHeight
         
         tableView.reloadData()
     }

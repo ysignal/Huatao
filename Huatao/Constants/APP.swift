@@ -247,6 +247,7 @@ public struct APP {
         RCIM.shared().addConnectionStatusDelegate(IMManager.shared)
         RCIM.shared().addReceiveMessageDelegate(IMManager.shared)
         RCIM.shared().userInfoDataSource = IMManager.shared
+        RCIM.shared().groupInfoDataSource = IMManager.shared
         
         // 异步加载本地数据
         DispatchQueue.global().async {

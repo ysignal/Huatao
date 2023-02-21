@@ -22,6 +22,10 @@ protocol SSIndexViewDataSource: NSObjectProtocol {
     
 }
 
+extension SSIndexViewDataSource {
+    func itemNoHighlightIndexArrayForIndexView() -> [Int] { return [] }
+}
+
 class SSIndexItemView: UIButton {
     
     lazy var badge: UILabel = {

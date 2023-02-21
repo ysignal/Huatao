@@ -9,7 +9,6 @@ import UIKit
 import ZHXIndexView
 
 class AddressBookViewController: UIViewController {
-    
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,10 +20,11 @@ class AddressBookViewController: UIViewController {
     }()
     
     private var baseSections = [ChatSectionItem(icon: "ic_chat_group", title: "群聊", badge: 0),
-                                ChatSectionItem(icon: "ic_chat_friend", title: "新的朋友", badge: 1),
-                                ChatSectionItem(icon: "ic_chat_team", title: "团队长群", badge: 0)]
+                                ChatSectionItem(icon: "ic_chat_friend", title: "新的朋友", badge: 1)
+//                                ,ChatSectionItem(icon: "ic_chat_team", title: "团队长群", badge: 0)
+    ]
     
-    private var sectionIndexArray = ["#"]
+    private var sectionIndexArray = [" "]
     private var contactDict: [String: [FriendListItem]] = [:]
     
     private var page: Int = 1
@@ -40,9 +40,6 @@ class AddressBookViewController: UIViewController {
         }
         
         tableView.backgroundColor = .clear
-        tableView.sectionFooterHeight = 0
-        tableView.estimatedSectionHeaderHeight = 0
-        tableView.estimatedSectionFooterHeight = 0
         tableView.register(nibCell: ChatBaseSectionCell.self)
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
@@ -64,8 +61,7 @@ class AddressBookViewController: UIViewController {
     
     func updateListView() {
         contactDict = [:]
-        sectionIndexArray = ["#"]
-
+        sectionIndexArray = [" "]
         for item in DataManager.contactList {
             var newList: [FriendListItem] = contactDict[item.initial] ?? []
             newList.append(item)
@@ -202,9 +198,5 @@ extension AddressBookViewController: SSIndexViewDataSource {
     func titlesForIndexView() -> [String] {
         return sectionIndexArray
     }
-    
-    func itemNoHighlightIndexArrayForIndexView() -> [Int] {
-        return []
-    }
-    
+
 }

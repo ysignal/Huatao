@@ -12,9 +12,13 @@ class AddFriendViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var headerView: UIView!
+    
     @IBOutlet weak var userIcon: UIImageView!
     
     @IBOutlet weak var userName: UILabel!
+    
+    @IBOutlet weak var signLabel: UILabel!
     
     var userId: Int = 0
     
@@ -54,6 +58,10 @@ class AddFriendViewController: BaseViewController {
     func updateListView() {
         userIcon.ss_setImage(model.avatar, placeholder: SSImage.userDefault)
         userName.text = model.name
+        signLabel.text = model.personSign
+        
+        let signHeight = model.personSign.height(from: .systemFont(ofSize: 14), width: SS.w - 40)
+        headerView.ex_height = 150 + signHeight
         
         tableView.reloadData()
     }
@@ -117,7 +125,8 @@ extension AddFriendViewController: UITableViewDelegate {
 extension AddFriendViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        // 查看自己，无法交互
+        return APP.loginData.userId == userId ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -55,6 +55,10 @@ class CommentListCell: UITableViewCell {
             }
         }
     }
+    
+    deinit {
+        delegate = nil
+    }
 
     func config(item: CommentListItem, isOpen: Bool, delegate: CommentListCellDelegate?) {
         self.delegate = delegate

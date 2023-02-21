@@ -48,6 +48,14 @@
 		552D6DF529A3578900221D75 /* MultipleIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D6DF429A3578900221D75 /* MultipleIconView.swift */; };
 		552D6DF729A369CC00221D75 /* SSDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D6DF629A369CC00221D75 /* SSDateHelper.swift */; };
 		552D6DF929A38E4600221D75 /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D6DF829A38E4600221D75 /* BankCardViewController.swift */; };
+		552D6DFB29A4529900221D75 /* MoneyHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D6DFA29A4529900221D75 /* MoneyHistoryViewController.swift */; };
+		559DB10629A454E600A5FE16 /* dinaltbold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 559DB10529A454E600A5FE16 /* dinaltbold.ttf */; };
+		559DB10829A455F000A5FE16 /* MoneyHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB10729A455F000A5FE16 /* MoneyHistoryCell.swift */; };
+		559DB10A29A4640D00A5FE16 /* SelectUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB10929A4640D00A5FE16 /* SelectUserCell.swift */; };
+		559DB10C29A4AAC500A5FE16 /* TeamMemberListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB10B29A4AAC500A5FE16 /* TeamMemberListCell.swift */; };
+		559DB10E29A4AADA00A5FE16 /* TeamListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB10D29A4AADA00A5FE16 /* TeamListItemCell.swift */; };
+		559DB11029A4AB9900A5FE16 /* TeamMemberItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB10F29A4AB9900A5FE16 /* TeamMemberItemCell.swift */; };
+		559DB11229A4D27F00A5FE16 /* GroupRenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB11129A4D27F00A5FE16 /* GroupRenameViewController.swift */; };
 		55CEAFFA2996105F00CF8313 /* DataEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEAFF92996105F00CF8313 /* DataEmptyView.swift */; };
 		55CEB002299730F800CF8313 /* SSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB001299730F800CF8313 /* SSDate.swift */; };
 		55CEB00429973AA700CF8313 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEB00329973AA700CF8313 /* PreviewViewController.swift */; };
@@ -347,6 +355,14 @@
 		552D6DF429A3578900221D75 /* MultipleIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleIconView.swift; sourceTree = "<group>"; };
 		552D6DF629A369CC00221D75 /* SSDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDateHelper.swift; sourceTree = "<group>"; };
 		552D6DF829A38E4600221D75 /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
+		552D6DFA29A4529900221D75 /* MoneyHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyHistoryViewController.swift; sourceTree = "<group>"; };
+		559DB10529A454E600A5FE16 /* dinaltbold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dinaltbold.ttf; sourceTree = "<group>"; };
+		559DB10729A455F000A5FE16 /* MoneyHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyHistoryCell.swift; sourceTree = "<group>"; };
+		559DB10929A4640D00A5FE16 /* SelectUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCell.swift; sourceTree = "<group>"; };
+		559DB10B29A4AAC500A5FE16 /* TeamMemberListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberListCell.swift; sourceTree = "<group>"; };
+		559DB10D29A4AADA00A5FE16 /* TeamListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamListItemCell.swift; sourceTree = "<group>"; };
+		559DB10F29A4AB9900A5FE16 /* TeamMemberItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberItemCell.swift; sourceTree = "<group>"; };
+		559DB11129A4D27F00A5FE16 /* GroupRenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRenameViewController.swift; sourceTree = "<group>"; };
 		55CEAFF92996105F00CF8313 /* DataEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEmptyView.swift; sourceTree = "<group>"; };
 		55CEB001299730F800CF8313 /* SSDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDate.swift; sourceTree = "<group>"; };
 		55CEB00329973AA700CF8313 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -705,6 +721,7 @@
 				55CEB01D299A0DC100CF8313 /* CardRecordItemCell.swift */,
 				55CEB01F299A299100CF8313 /* TaskTipItemCell.swift */,
 				55CEB028299A4AA900CF8313 /* AgentUserItemCell.swift */,
+				559DB10729A455F000A5FE16 /* MoneyHistoryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -848,6 +865,10 @@
 				552D6DD8299F7B0100221D75 /* ChatMoreView.swift */,
 				552D6DE829A0B90000221D75 /* NewFriendCell.swift */,
 				552D6DF429A3578900221D75 /* MultipleIconView.swift */,
+				559DB10929A4640D00A5FE16 /* SelectUserCell.swift */,
+				559DB10B29A4AAC500A5FE16 /* TeamMemberListCell.swift */,
+				559DB10F29A4AB9900A5FE16 /* TeamMemberItemCell.swift */,
+				559DB10D29A4AADA00A5FE16 /* TeamListItemCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1209,6 +1230,7 @@
 		6BCB6027296D5F7A00E3E7EC /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				559DB10529A454E600A5FE16 /* dinaltbold.ttf */,
 				55CEB033299C7A6B00CF8313 /* china_address.json */,
 				6BCB6028296D5FAD00E3E7EC /* huatao-briding-header.h */,
 				6BCB6029296D5FD100E3E7EC /* headerTest.m */,
@@ -1358,6 +1380,7 @@
 				552D6DCC299F54FD00221D75 /* MyMoneyViewController.swift */,
 				552D6DCE299F574600221D75 /* MyTicketViewController.swift */,
 				552D6DF829A38E4600221D75 /* BankCardViewController.swift */,
+				552D6DFA29A4529900221D75 /* MoneyHistoryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1369,12 +1392,13 @@
 				552D6DDE299F895300221D75 /* ConversationListViewController.swift */,
 				552D6DEC29A308DB00221D75 /* ConversationViewController.swift */,
 				9B42FF6A2997A039002129A5 /* ChatGroupListViewController.swift */,
+				552D6DC6299F26B900221D75 /* GroupSettingViewController.swift */,
+				559DB11129A4D27F00A5FE16 /* GroupRenameViewController.swift */,
 				9B42FF6E299B5699002129A5 /* ChatNoticeViewController.swift */,
 				551BA69D299F18F80048A46F /* UserDetailViewController.swift */,
 				552D6DE629A0B51A00221D75 /* NewFriendViewController.swift */,
 				552D6DD0299F6C3400221D75 /* AddFriendViewController.swift */,
 				552D6DF229A34E1000221D75 /* ApplyFriendViewController.swift */,
-				552D6DC6299F26B900221D75 /* GroupSettingViewController.swift */,
 				552D6DDA299F7C2900221D75 /* SelectUserViewController.swift */,
 				552D6DDC299F7D4100221D75 /* SearchFriendViewController.swift */,
 				552D6DEA29A0D84800221D75 /* MyCodeViewController.swift */,
@@ -1534,6 +1558,7 @@
 				552D6DD7299F6CB300221D75 /* UserCircleCell.xib in Resources */,
 				6B650E412971674D0093FEEB /* BaseImageItemCell.xib in Resources */,
 				6BD2A809297D0A2500EA7EDC /* TradeSaleBuyCell.xib in Resources */,
+				559DB10629A454E600A5FE16 /* dinaltbold.ttf in Resources */,
 				6BCB60782971042200E3E7EC /* ShopVipSetCell.xib in Resources */,
 				6BB4DA7829866470004FFB11 /* LikeListItemCell.xib in Resources */,
 				6BCB5F6A296D397C00E3E7EC /* Assets.xcassets in Resources */,
@@ -1687,6 +1712,7 @@
 				6B650EA92974F3FF0093FEEB /* SSTapDetectingImageView.swift in Sources */,
 				6BCB608B2971176400E3E7EC /* ShopModel.swift in Sources */,
 				6BCB5F61296D397A00E3E7EC /* AppDelegate.swift in Sources */,
+				559DB10829A455F000A5FE16 /* MoneyHistoryCell.swift in Sources */,
 				6BCB5FE9296D406B00E3E7EC /* LoggerPlugin.swift in Sources */,
 				6BCB5FE8296D406B00E3E7EC /* PluginType.swift in Sources */,
 				6BCB605A2970209E00E3E7EC /* DisabledButton.swift in Sources */,
@@ -1753,7 +1779,10 @@
 				6BCB5FF5296D406B00E3E7EC /* UIFont+SS.swift in Sources */,
 				6B650E902974F3FF0093FEEB /* SSPubSubName.swift in Sources */,
 				6BD10CF229800C66002CDCB7 /* MyWalletViewController.swift in Sources */,
+				559DB11229A4D27F00A5FE16 /* GroupRenameViewController.swift in Sources */,
+				559DB10C29A4AAC500A5FE16 /* TeamMemberListCell.swift in Sources */,
 				6BCB605829701E0F00E3E7EC /* UITextField+SS.swift in Sources */,
+				552D6DFB29A4529900221D75 /* MoneyHistoryViewController.swift in Sources */,
 				6B650E9C2974F3FF0093FEEB /* PHAsset+SSPhotoManager.swift in Sources */,
 				55CEB036299CD8D200CF8313 /* AgentResultViewController.swift in Sources */,
 				55CEB029299A4AA900CF8313 /* AgentUserItemCell.swift in Sources */,
@@ -1788,6 +1817,7 @@
 				6B650EC0297533600093FEEB /* ChatBaseSectionCell.swift in Sources */,
 				6BCB6039296D656700E3E7EC /* SSColor.swift in Sources */,
 				6BCB5FFD296D406B00E3E7EC /* CGFloat+SS.swift in Sources */,
+				559DB11029A4AB9900A5FE16 /* TeamMemberItemCell.swift in Sources */,
 				6B650EAE2974F3FF0093FEEB /* SSPhotoBrowser.swift in Sources */,
 				6BFCC2F8297932D900758510 /* TeamMemberCell.swift in Sources */,
 				6BCB5FEC296D406B00E3E7EC /* SSNetCheck.swift in Sources */,
@@ -1870,6 +1900,7 @@
 				55CEB01A2999EBD900CF8313 /* CardBagViewController.swift in Sources */,
 				6BD10CF0297FF4BE002CDCB7 /* ForgetPasswordViewController.swift in Sources */,
 				6BCB5FE6296D406B00E3E7EC /* HttpClient.swift in Sources */,
+				559DB10A29A4640D00A5FE16 /* SelectUserCell.swift in Sources */,
 				9B42FF71299B5E66002129A5 /* ChatNoticeUnreadCell.swift in Sources */,
 				6B650EB12974F3FF0093FEEB /* SSImageBrowser.swift in Sources */,
 				6BB4DA6B29861FC0004FFB11 /* ConvertRateTipView.swift in Sources */,
@@ -1881,6 +1912,7 @@
 				6B650E502973E7DE0093FEEB /* MineHeaderView.swift in Sources */,
 				6BCB604B296FA41100E3E7EC /* ShopVipSetCell.swift in Sources */,
 				6B650EC2297533980093FEEB /* ChatConversationCell.swift in Sources */,
+				559DB10E29A4AADA00A5FE16 /* TeamListItemCell.swift in Sources */,
 				6BCB6007296D406B00E3E7EC /* Toast.swift in Sources */,
 				6B650EA52974F3FF0093FEEB /* CityDataBaseManager.swift in Sources */,
 				6BCB60512970155500E3E7EC /* SSImage.swift in Sources */,

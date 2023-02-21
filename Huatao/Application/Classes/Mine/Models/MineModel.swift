@@ -434,3 +434,15 @@ struct AgentChildrenItem: SSConvertible {
     var mobile: String = ""
     
 }
+
+struct MoneyHistoryItem: SSConvertible {
+    
+    var reason: String = ""
+    
+    var createdAt: String = ""
+    
+    var money: String = ""
+    
+    var type: Int = 0
+    
+}
