@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ChatConversationCellDelegate: NSObjectProtocol {
+    func onLongPressCell(_ cell: ChatConversationCell, with model: RCConversationModel?)
+}
+
 class ChatConversationCell: RCConversationBaseCell {
     
     lazy var iconView: UIView = {
@@ -25,6 +29,17 @@ class ChatConversationCell: RCConversationBaseCell {
         return UILabel(text: nil, textColor: .ss_33, textFont: .ss_regular(size: 16))
     }()
     
+    lazy var messageStack: UIStackView = {
+        let sk = UIStackView(arrangedSubviews: [unsendLabel, messageLabel])
+        sk.axis = .horizontal
+        sk.spacing = 3
+        return sk
+    }()
+    
+    lazy var unsendLabel: UILabel = {
+        return UILabel(text: "[草稿]", textColor: .hex("eb2020"), textFont: .ss_regular(size: 14))
+    }()
+    
     lazy var messageLabel: UILabel = {
         return UILabel(text: nil, textColor: .ss_99, textFont: .ss_regular(size: 14))
     }()
@@ -40,9 +55,20 @@ class ChatConversationCell: RCConversationBaseCell {
         return lb
     }()
     
+    lazy var disturbIcon: UIImageView = {
+        return UIImageView(image: UIImage(named: "ic_chat_disturb"))
+    }()
+    
+    lazy var dotView: UIView = {
+        let view = UIView(backgroundColor: .hex("eb2020"), cornerRadius: 5)
+        return view
+    }()
+    
     lazy var groupImageView: GroupImageView = {
         return GroupImageView.fromNib()
     }()
+    
+    weak var delegate: ChatConversationCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -86,14 +112,14 @@ class ChatConversationCell: RCConversationBaseCell {
             make.height.equalTo(22)
         }
         
-        contentView.addSubview(messageLabel)
-        messageLabel.snp.makeConstraints { make in
+        contentView.addSubview(messageStack)
+        messageStack.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(6)
             make.left.equalTo(userIcon.snp.right).offset(8)
-            make.height.equalTo(17)
-            make.right.equalToSuperview().offset(50)
+            make.height.equalTo(20)
+            make.right.lessThanOrEqualTo(contentView).offset(-50)
         }
-        
+
         contentView.addSubview(timeLabel)
         timeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(nameLabel)
@@ -102,13 +128,37 @@ class ChatConversationCell: RCConversationBaseCell {
         
         contentView.addSubview(countLabel)
         countLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(messageLabel)
+            make.centerY.equalTo(messageStack)
             make.right.equalToSuperview().offset(-12)
             make.width.height.equalTo(19)
         }
+        
+        contentView.addSubview(disturbIcon)
+        disturbIcon.snp.makeConstraints { make in
+            make.centerY.equalTo(messageStack)
+            make.right.equalToSuperview().offset(-12)
+        }
+        
+        contentView.addSubview(dotView)
+        dotView.snp.makeConstraints { make in
+            make.right.equalTo(userIcon)
+            make.top.equalTo(userIcon)
+            make.width.height.equalTo(10)
+        }
+        
+        addGesture(.long) { long in
+            if long.state == .began {
+                self.delegate?.onLongPressCell(self, with: self.model)
+            }
+        }
+
     }
     
     override func setDataModel(_ model: RCConversationModel!) {
+        super.setDataModel(model)
+        
+        backgroundColor = model.isTop ? model.topCellBackgroundColor : model.cellBackgroundColor
+        
         nameLabel.text = model.conversationTitle
         switch model.conversationType {
         case .ConversationType_PRIVATE:
@@ -146,9 +196,34 @@ class ChatConversationCell: RCConversationBaseCell {
             break
         }
         
-        messageLabel.text = model.lastestMessage.conversationDigest()
+        dotView.isHidden = true
+        if model.notificationLevel == .blocked {
+            countLabel.isHidden = true
+            disturbIcon.isHidden = false
+            if model.unreadMessageCount > 0 {
+                dotView.isHidden = false
+            }
+            countLabel.isHidden = true
+        } else {
+            countLabel.isHidden = false
+            disturbIcon.isHidden = true
+            countLabel.isHidden = model.unreadMessageCount <= 0
+        }
+
+        if model.draft == nil || model.draft.isEmpty {
+            unsendLabel.isHidden = true
+            if let digest = model.lastestMessage?.conversationDigest(),
+               model.notificationLevel == .blocked,
+               model.unreadMessageCount > 1 {
+                messageLabel.text = "[\(model.unreadMessageCount)条] " + digest
+            } else {
+                messageLabel.text = model.lastestMessage?.conversationDigest()
+            }
+        } else {
+            unsendLabel.isHidden = false
+            messageLabel.text = model.draft
+        }
         timeLabel.text = SSDateHelper.formattedTime(from: model.sentTime)
         countLabel.text = "\(model.unreadMessageCount)"
-        countLabel.isHidden = model.unreadMessageCount <= 0
     }
 }

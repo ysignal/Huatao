@@ -13,6 +13,7 @@ class SelectUserCell: UITableViewCell {
     @IBOutlet weak var radioIcon: UIImageView!
     @IBOutlet weak var userIcon: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var joinedLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,8 @@ class SelectUserCell: UITableViewCell {
         radioIcon.image = selected ? SSImage.radioOn : SSImage.radioOff
         userIcon.ss_setImage(item.avatar, placeholder: SSImage.userDefault)
         userName.text = item.name
+        radioIcon.isHidden = item.isJoined
+        joinedLabel.isHidden = !item.isJoined
     }
 
 }

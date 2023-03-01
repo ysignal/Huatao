@@ -115,6 +115,14 @@ struct FriendListItem: SSConvertible {
     /// 用户头像
     var avatar: String = ""
     
+    //MARK: 本地字段
+    
+    /// 是否已经加入
+    var isJoined: Bool = false
+    
+    static func from(_ user: TeamUser) -> FriendListItem {
+        return FriendListItem(userId: user.userId, initial: user.name.firstLetter(), name: user.name, avatar: user.avatar)
+    }
 }
 
 struct TeamSettingModel: SSConvertible {
@@ -123,7 +131,7 @@ struct TeamSettingModel: SSConvertible {
     var teamId: Int = 0
     
     /// IM群组ID
-    var groupId: Int = 0
+    var groupId: String = ""
     
     /// 群名称
     var title: String = ""
@@ -136,15 +144,15 @@ struct TeamSettingModel: SSConvertible {
     
     /// 成员数量
     var joinTotal: Int = 0
-    
-    /// 群主昵称
-    var name: String = ""
-    
+
     /// 群昵称
-    var rename: String = ""
+    var name: String = ""
     
     /// 是否开启免打扰，0-未开启、1-已开启
     var isOpenDisturb: Int = 0
+    
+    /// 管理员ID
+    var managerId: Int = 0
     
     /// 群组用户列表
     var listAvatar: [TeamUser] = []
@@ -161,6 +169,13 @@ struct TeamUser: SSConvertible {
     
     /// 用户头像
     var avatar: String = ""
+    
+    /// 备注
+    var remark: String = ""
+    
+    static func from(_ user: FriendListItem) -> TeamUser {
+        return TeamUser(userId: user.userId, name: user.name, avatar: user.avatar)
+    }
     
 }
 
@@ -190,16 +205,19 @@ struct ChildrenListItem: SSConvertible {
     var userId: Int = 0
     
     /// 用户昵称
-    var name: String = ""
+    var name: String = "小倪"
     
     /// 用户头像
-    var avatar: String = ""
+    var avatar: String = "http://qiniu.kp.upin168.cn/images/20230218/d435cebdac4f9cb9c0d2357a05e8695d.jpg"
     
     /// 下级列表
-    var children: [ChildrenChildItem] = []
+    var children: [ChildrenChildItem] = [ChildrenChildItem(), ChildrenChildItem(), ChildrenChildItem()]
     
     /// 下级数量
-    var count: Int = 0
+    var count: Int = 3
+    
+    /// 是否展开
+    var isOpen: Bool = false
     
 }
 
@@ -209,9 +227,9 @@ struct ChildrenChildItem: SSConvertible {
     var userId: Int = 0
     
     /// 用户昵称
-    var name: String = ""
+    var name: String = "用户0004"
     
     /// 用户头像
-    var avatar: String = ""
+    var avatar: String = "http://qiniu.kp.upin168.cn/images/20230218/d435cebdac4f9cb9c0d2357a05e8695d.jpg"
     
 }

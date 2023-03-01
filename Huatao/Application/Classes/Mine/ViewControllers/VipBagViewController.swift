@@ -45,6 +45,34 @@ class VipBagViewController: BaseViewController {
         }
     }
 
+    func buyitem(_ item: ShopGiftItem) {
+        PayWaySelectView.show(item) { [weak self] payType in
+            guard let weakSelf = self else { return }
+            if !PayManager.checkIsCanPay(payType) {
+                return
+            }
+            SS.keyWindow?.ss.showHUDLoading()
+            HttpApi.Shop.postGiftPay(giftId: item.giftId, payType: payType).done { data in
+                SSMainAsync {
+                    SS.keyWindow?.ss.hideHUD()
+                }
+                let model = data.kj.model(PayResultModel.self)
+                switch payType {
+                case "alipay":
+                    PayManager.alipayPay(model.alipay) {
+                        weakSelf.toast(message: "购买成功")
+                    }
+                default:
+                    break
+                }
+            }.catch { error in
+                SSMainAsync {
+                    SS.keyWindow?.ss.hideHUD()
+                    SS.keyWindow?.toast(message: error.localizedDescription)
+                }
+            }
+        }
+    }
 }
 
 extension VipBagViewController: UITableViewDelegate {
@@ -53,6 +81,10 @@ extension VipBagViewController: UITableViewDelegate {
         return 120.scale + 12
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = list[indexPath.row]
+        buyitem(item)
+    }
 }
 
 extension VipBagViewController: UITableViewDataSource {

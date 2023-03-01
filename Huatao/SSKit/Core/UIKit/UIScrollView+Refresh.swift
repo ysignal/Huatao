@@ -33,6 +33,11 @@ protocol UIScrollViewRefreshDelegate: AnyObject {
     func scrollViewFooterRefreshData(_ scrollView: UIScrollView)
 }
 
+extension UIScrollViewRefreshDelegate {
+    func scrollViewHeaderRefreshData(_ scrollView: UIScrollView) {}
+    func scrollViewFooterRefreshData(_ scrollView: UIScrollView) {}
+}
+
 enum UIScrollViewRefreshType {
     case none, header, footer, headerAndFooter
 }

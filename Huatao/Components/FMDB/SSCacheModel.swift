@@ -8,12 +8,18 @@
 import FMDB
 
 enum SSTable: String {
-    case user = "user"
+    case user = "im_user"
+    case group = "im_group"
+    case groupUser = "im_group_user"
     
     var key: String {
         switch self {
         case .user:
             return "user_id"
+        case .group:
+            return "team_id"
+        case .groupUser:
+            return "table_id"
         }
     }
 }
@@ -55,8 +61,8 @@ extension CacheModel {
 
     /// 读取当前模型中缓存key对应储存的数值
     /// - Returns: 缓存key对应的值
-    func keyValue() -> String {
+    func keyValue() -> Any {
         let property = jsonObject()
-        return property[dbTable().key] as? String ?? ""
+        return property[dbTable().key] ?? ""
     }
 }

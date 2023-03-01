@@ -19,6 +19,9 @@ struct GroupSettingSectionItem {
     
     var value: Bool = false
     
+    /// 事件标识
+    var action: String = ""
+    
 }
 
 class GroupSettingViewController: BaseViewController {
@@ -39,21 +42,27 @@ class GroupSettingViewController: BaseViewController {
     var isDataLoaded: Bool = false
     
     var sections: [[GroupSettingSectionItem]] = []
+    
+    var updateBlock: StringBlock?
+    var clearBlock: NoneBlock?
+    var levelBlock: ((RCPushNotificationLevel) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        view.ss.showHUDLoading()
         requestData()
     }
     
     override func buildUI() {
         fakeNav.title = "群聊设置"
-        
-        RCIMClient.shared().getConversationNotificationStatus(.ConversationType_GROUP, targetId: "\(teamId)") { [weak self] status in
-            self?.isBlocked = status == .DO_NOT_DISTURB
-            if self?.isDataLoaded == true {
-                self?.updateListView()
+
+        RCChannelClient.sharedChannelManager().getConversationNotificationLevel(.ConversationType_GROUP, targetId: "\(teamId)") { [weak self] level in
+            self?.isBlocked = level == .blocked
+            SSMainAsync {
+                if self?.isDataLoaded == true {
+                    self?.updateListView()
+                }
             }
         }
         
@@ -65,32 +74,36 @@ class GroupSettingViewController: BaseViewController {
     }
     
     func requestData() {
-        view.ss.showHUDLoading()
         HttpApi.Chat.getTeamMaster(teamId: teamId).done { [weak self] data in
-            self?.model = data.kj.model(TeamSettingModel.self)
-            self?.isDataLoaded = true
+            guard let weakSelf = self else { return }
+            weakSelf.model = data.kj.model(TeamSettingModel.self)
+            weakSelf.isDataLoaded = true
+            IMManager.shared.updateGroup(weakSelf.model)
             SSMainAsync {
-                self?.view.ss.hideHUD()
-                self?.updateListView()
+                weakSelf.view.ss.hideHUD()
+                weakSelf.updateListView()
             }
         }
     }
     
     func updateListView() {
         isMaster = model.userId == APP.loginData.userId
-    
+        
+        if let index = model.listAvatar.firstIndex(where: { $0.userId == APP.loginData.userId }) {
+            model.listAvatar[index].name = model.name
+        }
+        
         if isMaster {
-            sections = [[GroupSettingSectionItem(title: "群聊名称", type: 2, content: model.title),
-                         GroupSettingSectionItem(title: "群管理", type: 1),
-                         GroupSettingSectionItem(title: "设置管理员", type: 1),
-                         GroupSettingSectionItem(title: "我在本群的昵称", type: 2, content: "")],
-                        [GroupSettingSectionItem(title: "清空聊天记录", type: 0)],
-                        [GroupSettingSectionItem(title: "消息免打扰", type: 3, value: model.isOpenDisturb == 1)]]
+            sections = [[GroupSettingSectionItem(title: "群聊名称", type: 2, content: model.title, action: "name"),
+                         GroupSettingSectionItem(title: "设置管理员", type: 1, action: "manager"),
+                         GroupSettingSectionItem(title: "我在本群的昵称", type: 2, content: model.name, action: "rename")],
+                        [GroupSettingSectionItem(title: "清空聊天记录", type: 0, action: "clear")],
+                        [GroupSettingSectionItem(title: "消息免打扰", type: 3, value: isBlocked, action: "disturb")]]
         } else {
-            sections = [[GroupSettingSectionItem(title: "群聊名称", type: 4, content: model.title),
-                         GroupSettingSectionItem(title: "我在本群的昵称", type: 2, content: "")],
-                        [GroupSettingSectionItem(title: "清空聊天记录", type: 0)],
-                        [GroupSettingSectionItem(title: "消息免打扰", type: 3, value: isBlocked)]]
+            sections = [[GroupSettingSectionItem(title: "群聊名称", type: 4, content: model.title, action: "name"),
+                         GroupSettingSectionItem(title: "我在本群的昵称", type: 2, content: model.name, action: "rename")],
+                        [GroupSettingSectionItem(title: "清空聊天记录", type: 0, action: "clear")],
+                        [GroupSettingSectionItem(title: "消息免打扰", type: 3, value: isBlocked, action: "disturb")]]
         }
         
         tableView.reloadData()
@@ -151,21 +164,42 @@ extension GroupSettingViewController: UITableViewDataSource {
         let list = sections[indexPath.section - 1]
         let item = list[indexPath.row]
         cell.config(item: item)
+        cell.delegate = self
         return cell
     }
-    
-    
-    
+        
 }
 
 extension GroupSettingViewController: TeamMemberListCellDelegate {
     
     func cellDidTapAdd() {
-        
+        let vc = SelectUserViewController.from(sb: .chat)
+        vc.teamList = model.listAvatar
+        vc.teamId = teamId
+        vc.selectType = .add
+        vc.completeBlock = { [weak self] users in
+            guard let weakSelf = self else { return }
+            weakSelf.model.listAvatar.append(contentsOf: users.compactMap({ TeamUser.from($0) }))
+            weakSelf.updateListView()
+            IMManager.shared.updateGroup(weakSelf.model)
+        }
+        go(vc)
     }
     
     func cellDidTapDelete() {
-        
+        let vc = SelectUserViewController.from(sb: .chat)
+        vc.teamList = model.listAvatar
+        vc.teamId = teamId
+        vc.selectType = .delete
+        vc.completeBlock = { [weak self] users in
+            guard let weakSelf = self else { return }
+            weakSelf.model.listAvatar.removeAll(where: { item in
+                users.contains(where: { $0.userId == item.userId })
+            })
+            weakSelf.updateListView()
+            IMManager.shared.updateGroup(weakSelf.model)
+        }
+        go(vc)
     }
     
     func cellDidTapUser(_ item: TeamUser) {
@@ -178,17 +212,71 @@ extension GroupSettingViewController: TeamMemberListCellDelegate {
 
 extension GroupSettingViewController: TeamListItemCellDelegate {
     
-    func cellDidTap(_ model: GroupSettingSectionItem) {
-        
+    func cellDidTap(_ item: GroupSettingSectionItem) {
+        switch item.action {
+        case "name":
+            let vc = GroupRenameViewController.from(sb: .chat)
+            vc.name = model.title
+            vc.targetId = teamId
+            vc.completeBlock = { [weak self] str in
+                guard let weakSelf = self else { return }
+                weakSelf.model.title = str
+                weakSelf.updateListView()
+                weakSelf.updateBlock?(str)
+                IMManager.shared.updateGroup(weakSelf.model)
+            }
+            go(vc)
+        case "manager":
+            let vc = SelectUserViewController.from(sb: .chat)
+            vc.teamList = model.listAvatar
+            vc.teamId = teamId
+            vc.selectType = .manager
+            go(vc)
+        case "rename":
+            let vc = GroupRenameViewController.from(sb: .chat)
+            vc.type = .user
+            vc.targetId = teamId
+            vc.name = model.name
+            vc.completeBlock = { [weak self] str in
+                self?.model.name = str
+                self?.updateListView()
+            }
+            go(vc)
+        case "clear":
+            showAlert(title: "提示", message: "确定清空\(model.title)的聊天记录？", buttonTitles: ["取消", "清空"], highlightedButtonIndex: 1) { index in
+                if index == 1 {
+                    RCIMClient.shared().clearHistoryMessages(.ConversationType_GROUP, targetId: "\(self.teamId)", recordTime: 0, clearRemote: false) { [weak self] in
+                        SSMainAsync {
+                            self?.toast(message: "已清空聊天记录")
+                            self?.clearBlock?()
+                        }
+                    }
+                }
+            }
+        default:
+            break
+        }
     }
     
-    func cellDidChangeValue(_ model: GroupSettingSectionItem) {
-        switch model.title {
-        case "消息免打扰":
-            if model.value {
-                RCChannelClient.sharedChannelManager().setConversationTypeNotificationLevel(.ConversationType_GROUP, level: .blocked, success: nil)
+    func cellDidChangeValue(_ item: GroupSettingSectionItem) {
+        switch item.action {
+        case "disturb":
+            if item.value {
+                RCChannelClient.sharedChannelManager().setConversationNotificationLevel(.ConversationType_GROUP, targetId: "\(teamId)", level: .blocked) { [weak self] in
+                    guard let weakSelf = self else { return }
+                    SSMainAsync {
+                        weakSelf.levelBlock?(.blocked)
+                    }
+                    _ = HttpApi.Chat.putTeamDisturb(teamId: weakSelf.teamId, isOpenDisturb: 1)
+                }
             } else {
-                RCChannelClient.sharedChannelManager().setConversationTypeNotificationLevel(.ConversationType_GROUP, level: .allMessage, success: nil)
+                RCChannelClient.sharedChannelManager().setConversationNotificationLevel(.ConversationType_GROUP, targetId: "\(teamId)", level: .allMessage) { [weak self] in
+                    guard let weakSelf = self else { return }
+                    SSMainAsync {
+                        weakSelf.levelBlock?(.allMessage)
+                    }
+                    _ = HttpApi.Chat.putTeamDisturb(teamId: weakSelf.teamId, isOpenDisturb: 0)
+                }
             }
         default:
             break

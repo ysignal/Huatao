@@ -55,6 +55,7 @@ class TaskViewController: SSViewController {
         super.viewDidLoad()
 
         buildUI()
+        view.ss.showHUDLoading()
         requestData()
     }
     
@@ -67,7 +68,6 @@ class TaskViewController: SSViewController {
         super.viewWillDisappear(animated)
         timer?.stop()
     }
-
     
     override func buildUI() {
         view.backgroundColor = .hex("f6f6f6")
@@ -88,6 +88,7 @@ class TaskViewController: SSViewController {
         let footer = UIView().loadOption([.backgroundColor(.clear)])
         footer.ex_height = 6
         taskTV.tableFooterView = footer
+        taskTV.addRefresh(type: .header, delegate: self)
         
         segmentedDataSource.titles = titles
         segmentedDataSource.titleNormalFont = .ss_regular(size: 16)
@@ -108,31 +109,40 @@ class TaskViewController: SSViewController {
     }
     
     func requestData() {
-        view.ss.showHUDLoading()
-        
+        reqeustBannerList()
+        requestTaskList()
+    }
+    
+    func requestTaskList() {
+        HttpApi.Task.getTaskList().done { [weak self] data in
+            guard let weakSelf = self else { return }
+            weakSelf.taskModel = data.kj.model(TaskListModel.self)
+            SSMainAsync {
+                weakSelf.view.ss.hideHUD()
+                weakSelf.taskTV.endRefresh()
+                weakSelf.taskTV.reloadData()
+            }
+        }.catch { [weak self] error in
+            SSMainAsync {
+                self?.view.ss.hideHUD()
+                self?.taskTV.endRefresh()
+                self?.toast(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func reqeustBannerList() {
         HttpApi.Task.getBannerList(sign: "task").done { [weak self] data in
             guard let weakSelf = self else { return }
             self?.banners = data.kj.modelArray(BannerImageItem.self)
             SSMainAsync {
                 weakSelf.bannerCV.reloadData()
                 weakSelf.addTimer()
+                weakSelf.taskTV.endRefresh()
             }
         }.catch { [weak self] error in
             SSMainAsync {
-                self?.toast(message: error.localizedDescription)
-            }
-        }
-
-        HttpApi.Task.getTaskList().done { [weak self] data in
-            guard let weakSelf = self else { return }
-            weakSelf.taskModel = data.kj.model(TaskListModel.self)
-            SSMainAsync {
-                weakSelf.view.ss.hideHUD()
-                weakSelf.taskTV.reloadData()
-            }
-        }.catch { [weak self] error in
-            SSMainAsync {
-                self?.view.ss.hideHUD()
+                self?.taskTV.endRefresh()
                 self?.toast(message: error.localizedDescription)
             }
         }
@@ -166,7 +176,38 @@ class TaskViewController: SSViewController {
     }
 
     func itemClicked(_ item: TaskListItem) {
-        
+        if item.isComplete == 1 {
+            return
+        }
+        switch item.name {
+        case "turn_promote":
+            let vc = TurnPromoteViewController.from(sb: .task)
+            vc.completeBlock = { [weak self] in
+                self?.requestTaskList()
+            }
+            go(vc)
+        case "card_auth":
+            let vc = NameCertViewController.from(sb: .task)
+            vc.completeBlock = { [weak self] in
+                self?.requestTaskList()
+            }
+            go(vc)
+        case "trade_password":
+            let vc = SetPasswordViewController.from(sb: .task)
+            vc.completeBlock = { [weak self] in
+                self?.requestTaskList()
+            }
+            go(vc)
+        case "set_place":
+            let vc = HomePlaceViewController.from(sb: .task)
+            vc.completeBlock = { [weak self] in
+                self?.requestTaskList()
+            }
+            go(vc)
+            
+        default:
+            break
+        }
     }
 
 }
@@ -182,6 +223,17 @@ extension TaskViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView == bannerCV {
             timer?.start()
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == bannerCV {
+            var page = Int(floor(scrollView.contentOffset.x / scrollView.frame.width))
+            if (scrollView.contentOffset.x - (scrollView.frame.width * CGFloat(page))) > scrollView.frame.width * 0.5 {
+                page += 1
+            }
+            currentIndex = page
+            pageControl.currentPage = page
         }
     }
 }
@@ -321,4 +373,12 @@ extension TaskViewController: JXSegmentedViewDelegate {
             self.taskTV.reloadSections(IndexSet(integer: 1), with: .none)
         }
     }
+}
+
+extension TaskViewController: UIScrollViewRefreshDelegate {
+    
+    func scrollViewHeaderRefreshData(_ scrollView: UIScrollView) {
+        requestTaskList()
+    }
+    
 }

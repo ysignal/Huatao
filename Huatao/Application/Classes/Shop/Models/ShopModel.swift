@@ -35,3 +35,27 @@ struct ShopGiftItem: SSConvertible {
     var levelName: String = ""
     
 }
+
+struct PayResultModel: SSConvertible {
+    
+    /// 订单ID
+    var partnerId: String = ""
+    
+    /// 支付ID
+    var prepayId: String = ""
+    
+    /// 固定值
+    var package: String = ""
+    
+    /// 加密字符串
+    var nonceStr: String = ""
+    
+    /// 时间戳
+    var timeStamp: String = ""
+    
+    /// 签名
+    var sign: String = ""
+    
+    /// 支付宝订单
+    var alipay: String = ""
+}

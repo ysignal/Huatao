@@ -58,6 +58,17 @@ class MainTabbarController: SSTabBarController {
         tabBar.shadowImage = UIImage()
         tabBar.tintColor = .black
         
+        if #available(iOS 13.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.ss_99]
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.ss_theme]
+            appearance.backgroundImage = UIImage()
+            tabBar.standardAppearance = appearance
+        } else {
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.ss_99], for: .normal)
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.ss_theme], for: .selected)
+        }
+        
         addChilds()
         
         findView.isHidden = true
@@ -69,8 +80,7 @@ class MainTabbarController: SSTabBarController {
             make.width.equalTo(50)
         }
         
-        
-        selectedIndex = 3
+        selectedIndex = 4
         
         APP.updateUserInfo()
         
@@ -92,6 +102,8 @@ class MainTabbarController: SSTabBarController {
                 SS.log("融云连接失败：错误码-\(status.rawValue)")
             }
         }
+        // 初始化本地数据库
+        _ = SSCacheManager.shared
         
         sendBtn.addTarget(find, action: #selector(find.toSend), for: .touchUpInside)
         updateFindView(with: selectedIndex)
@@ -103,11 +115,11 @@ class MainTabbarController: SSTabBarController {
     }
     
     func addChilds() {
-        addChildViewController(home, title: "商城", imageName: "ic_tab_shop", selectedImageName: "ic_tab_shop_sel", index: 0, normal: .ss_99, selected: .ss_theme)
-        addChildViewController(task, title: "任务大厅", imageName: "ic_tab_task", selectedImageName: "ic_tab_task_sel", index: 1, normal: .ss_99, selected: .ss_theme)
-        addChildViewController(find, title: "发现", imageName: "ic_tab_find", selectedImageName: "ic_tab_find_sel", index: 2, normal: .ss_99, selected: .ss_theme)
-        addChildViewController(chat, title: "聊天", imageName: "ic_tab_chat", selectedImageName: "ic_tab_chat_sel", index: 3, normal: .ss_99, selected: .ss_theme)
-        addChildViewController(mine, title: "个人中心", imageName: "ic_tab_mine", selectedImageName: "ic_tab_mine_sel", index: 4, normal: .ss_99, selected: .ss_theme)
+        addChildViewController(home, title: "商城", imageName: "ic_tab_shop", selectedImageName: "ic_tab_shop_sel", index: 0, normal: .ss_66, selected: .ss_theme)
+        addChildViewController(task, title: "任务大厅", imageName: "ic_tab_task", selectedImageName: "ic_tab_task_sel", index: 1, normal: .ss_66, selected: .ss_theme)
+        addChildViewController(find, title: "发现", imageName: "ic_tab_find", selectedImageName: "ic_tab_find_sel", index: 2, normal: .ss_66, selected: .ss_theme)
+        addChildViewController(chat, title: "聊天", imageName: "ic_tab_chat", selectedImageName: "ic_tab_chat_sel", index: 3, normal: .ss_66, selected: .ss_theme)
+        addChildViewController(mine, title: "个人中心", imageName: "ic_tab_mine", selectedImageName: "ic_tab_mine_sel", index: 4, normal: .ss_66, selected: .ss_theme)
     }
     
     override func selectedTab(at index: Int, isDouble: Bool) {

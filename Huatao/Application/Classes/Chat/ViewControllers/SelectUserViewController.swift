@@ -14,6 +14,13 @@ struct HandAddTeamResult: SSConvertible {
     
 }
 
+enum SelectUserType {
+    case new // 创建群聊
+    case add // 拉人进群
+    case delete // 踢人出群
+    case manager // 设置管理员
+}
+
 class SelectUserViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -34,20 +41,37 @@ class SelectUserViewController: BaseViewController {
     }()
     
     private var sectionIndexArray: [String] = []
+    
     private var contactDict: [String: [FriendListItem]] = [:]
     
     private var keyword: String = ""
     
     private var selectedItems: [FriendListItem] = []
+    
+    var teamId: Int = 0
+    
+    var teamList: [TeamUser] = []
+    
+    var selectType: SelectUserType = .new
+    
+    var completeBlock: (([FriendListItem]) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
     }
     
     override func buildUI() {
-        fakeNav.title = "选择联系人"
+        switch selectType {
+        case .new:
+            fakeNav.title = "选择联系人"
+        case .add:
+            fakeNav.title = "选择联系人"
+        case .delete:
+            fakeNav.title = "删除成员"
+        case .manager:
+            fakeNav.title = "设置管理员"
+        }
         fakeNav.backgroundColor = .ss_f6
         view.backgroundColor = .ss_f6
         
@@ -86,11 +110,26 @@ class SelectUserViewController: BaseViewController {
     func updateListView() {
         contactDict = [:]
         sectionIndexArray = []
-        for item in DataManager.contactList {
-            if keyword.isEmpty || (item.name.contains(keyword) || keyword.contains(item.name)) {
-                var newList: [FriendListItem] = contactDict[item.initial] ?? []
-                newList.append(item)
-                contactDict[item.initial] = newList
+        
+        if selectType == .delete || selectType == .manager {
+            let list = teamList.compactMap({ FriendListItem.from($0) }).filter({ $0.userId != APP.loginData.userId })
+            for item in list {
+                if keyword.isEmpty || (item.name.contains(keyword) || keyword.contains(item.name)) {
+                    var newList: [FriendListItem] = contactDict[item.initial] ?? []
+                    newList.append(item)
+                    contactDict[item.initial] = newList
+                }
+            }
+        } else {
+            for var item in DataManager.contactList {
+                if keyword.isEmpty || (item.name.contains(keyword) || keyword.contains(item.name)) {
+                    if teamList.contains(where: { $0.userId == item.userId }) {
+                        item.isJoined = teamList.contains(where: { $0.userId == item.userId })
+                    }
+                    var newList: [FriendListItem] = contactDict[item.initial] ?? []
+                    newList.append(item)
+                    contactDict[item.initial] = newList
+                }
             }
         }
         
@@ -107,10 +146,90 @@ class SelectUserViewController: BaseViewController {
     }
     
     @objc func toCompleteSelect() {
+        let message: String = {
+            switch selectType {
+            case .new, .add:
+                return "请至少选择一位联系人"
+            case .manager, .delete:
+                return "请选择群成员"
+            }
+        }()
         guard !selectedItems.isEmpty else {
-            toast(message: "请至少选择一位联系人")
+            toast(message: message)
             return
         }
+        switch selectType {
+        case .new:
+            toCreateGroup()
+        case .add:
+            toAddMember()
+        case .delete:
+            showAlert(title: "提示", message: "是否删除已选择的群组成员？", buttonTitles: ["取消", "确认"], highlightedButtonIndex: 1) { index in
+                if index == 1 {
+                    self.toDeleteMember()
+                }
+            }
+        case .manager:
+            toUpdateManager()
+        }
+    }
+    
+    func toUpdateManager() {
+        let userId = selectedItems.first?.userId ?? 0
+        view.ss.showHUDLoading()
+        HttpApi.Chat.putTeamSet(teamId: teamId, userId: userId).done { [weak self] _ in
+            guard let weakSelf = self else { return }
+            SSMainAsync {
+                weakSelf.view.ss.hideHUD()
+                weakSelf.completeBlock?(weakSelf.selectedItems)
+                weakSelf.back()
+                SS.keyWindow?.toast(message: "设置成功")
+            }
+        }.catch { [weak self] error in
+            SSMainAsync {
+                self?.view.ss.hideHUD()
+                self?.toast(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func toDeleteMember() {
+        let userIds = selectedItems.compactMap({ $0.userId })
+        view.ss.showHUDLoading()
+        HttpApi.Chat.putTeamOut(teamId: teamId, userIds: userIds).done { [weak self] _ in
+            guard let weakSelf = self else { return }
+            SSMainAsync {
+                weakSelf.view.ss.hideHUD()
+                weakSelf.completeBlock?(weakSelf.selectedItems)
+                weakSelf.back()
+            }
+        }.catch { [weak self] error in
+            SSMainAsync {
+                self?.view.ss.hideHUD()
+                self?.toast(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func toAddMember() {
+        let userIds = selectedItems.compactMap({ $0.userId })
+        view.ss.showHUDLoading()
+        HttpApi.Chat.putHandJoinTeam(teamId: teamId, userIds: userIds).done { [weak self] _ in
+            guard let weakSelf = self else { return }
+            SSMainAsync {
+                weakSelf.view.ss.hideHUD()
+                weakSelf.completeBlock?(weakSelf.selectedItems)
+                weakSelf.back()
+            }
+        }.catch { [weak self] error in
+            SSMainAsync {
+                self?.view.ss.hideHUD()
+                self?.toast(message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func toCreateGroup() {
         if selectedItems.count == 1, let item = selectedItems.first {
             // 单聊
             let vc = ConversationViewController()
@@ -164,7 +283,7 @@ extension SelectUserViewController: UITableViewDelegate {
         sectionHeaderView.addSubview(indexNum)
         return sectionHeaderView
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 32
     }
@@ -177,22 +296,25 @@ extension SelectUserViewController: UITableViewDelegate {
         let key = sectionIndexArray[indexPath.section]
         let list = contactDict[key] ?? []
         let item = list[indexPath.row]
+        if item.isJoined {
+            // 已加入用户无法选择
+            return
+        }
         if !selectedItems.contains(where: { $0.userId == item.userId }) {
-            selectedItems.append(item)
+            if selectType == .manager {
+                // 单选
+                selectedItems = [item]
+            } else {
+                selectedItems.append(item)
+            }
         } else {
+            if selectType == .manager {
+                return
+            }
             selectedItems.removeAll(where: { $0.userId == item.userId })
         }
         tableView.reloadData()
     }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let key = sectionIndexArray[indexPath.section]
-        let list = contactDict[key] ?? []
-        let item = list[indexPath.row]
-        selectedItems.removeAll(where: { $0.userId == item.userId })
-        tableView.reloadData()
-    }
-
 }
 
 extension SelectUserViewController: UITableViewDataSource {

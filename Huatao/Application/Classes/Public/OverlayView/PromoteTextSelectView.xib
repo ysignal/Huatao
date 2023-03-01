@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PromoteTextSelectView" customModule="Huatao" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择分享文案" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fru-Hc-uya">
+                    <rect key="frame" x="147.66666666666666" y="73" width="98" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="woR-ye-DPV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNQ-MO-xXG" customClass="SSButton" customModule="Huatao" customModuleProvider="target">
+                    <rect key="frame" x="369" y="73" width="12" height="22"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="ic_close_gray_2"/>
+                    <connections>
+                        <action selector="toClose:" destination="iN0-l3-epB" eventType="touchUpInside" id="jc1-x5-Yzx"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGJ-As-clA">
+                    <rect key="frame" x="12" y="772" width="369" height="40"/>
+                    <color key="backgroundColor" red="1" green="0.50588235290000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="cJj-LM-npd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="一键复制">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="toCopy:" destination="iN0-l3-epB" eventType="touchUpInside" id="mvW-0H-cdu"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4eU-BJ-ovL">
+                    <rect key="frame" x="0.0" y="109" width="393" height="657"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="8a7-QT-URQ"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="2Zn-Uk-iH8"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xGJ-As-clA" secondAttribute="trailing" constant="12" id="1Cj-ps-uA3"/>
+                <constraint firstItem="fru-Hc-uya" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="14" id="3cC-Y7-eGJ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="xGJ-As-clA" secondAttribute="bottom" constant="6" id="4II-wu-JFJ"/>
+                <constraint firstItem="xGJ-As-clA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="8XM-SP-K5i"/>
+                <constraint firstItem="xGJ-As-clA" firstAttribute="top" secondItem="4eU-BJ-ovL" secondAttribute="bottom" constant="6" id="QzQ-zB-s6Y"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4eU-BJ-ovL" secondAttribute="trailing" id="cad-WG-uDm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VNQ-MO-xXG" secondAttribute="trailing" constant="12" id="d4T-8w-iQY"/>
+                <constraint firstItem="VNQ-MO-xXG" firstAttribute="centerY" secondItem="fru-Hc-uya" secondAttribute="centerY" id="h8w-wu-Vqd"/>
+                <constraint firstItem="fru-Hc-uya" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="i2K-GV-ifF"/>
+                <constraint firstItem="4eU-BJ-ovL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kO0-aP-PeN"/>
+                <constraint firstItem="4eU-BJ-ovL" firstAttribute="top" secondItem="fru-Hc-uya" secondAttribute="bottom" constant="14" id="mi2-V9-THl"/>
+            </constraints>
+            <connections>
+                <outlet property="closeBtn" destination="VNQ-MO-xXG" id="hhs-lw-cTH"/>
+                <outlet property="copyBtn" destination="xGJ-As-clA" id="d5r-Jg-IKT"/>
+                <outlet property="tableView" destination="4eU-BJ-ovL" id="YRF-H2-VEc"/>
+                <outlet property="titleLabel" destination="fru-Hc-uya" id="c9L-Bs-oCg"/>
+            </connections>
+            <point key="canvasLocation" x="15" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_close_gray_2" width="11.666666984558105" height="11.666666984558105"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -21,6 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         PayManager.register(with: window)
         APP.setupAPP()
     }
+    
+    @available(iOS 13.0, *)
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        WXApi.handleOpenUniversalLink(userActivity, delegate: ThirdLoginManager.shared)
+    }
 
     @available(iOS 13.0, *)
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -7,73 +7,82 @@
 
 import UIKit
 
-private let EmptyViewTag = 12345
-
-protocol DataEmptyViewProtocol: NSObjectProtocol {
-    
-    ///用以判断是会否显示空视图
-    var showEmpty: Bool { get }
-    
-    ///配置空数据提示图用于展示
-    func configEmptyView() -> UIView?
-    
-}
-
-extension DataEmptyViewProtocol {
-    
-    func configEmptyView() -> UIView? { return nil }
-    
-}
-
 extension UITableView {
     
     private struct AssociatedKeys {
-        static var emptyViewDelegate = "tableView_emptyViewDelegate"
+        static var emptyView = "scrollview_emptyView"
     }
-    
-    private static let takeOnceTime: (Selector) -> Void = { newSelector in
-        let originSelecter: Selector = #selector(UITableView.layoutSubviews)
-        if let originMethod = class_getClassMethod(UITableView.self, originSelecter) {
-            class_replaceMethod(UITableView.self, newSelector, method_getImplementation(originMethod), method_getTypeEncoding(originMethod))
-        }
-    }
-    
-    private var emptyDelegate: DataEmptyViewProtocol? {
+
+    private var emptyView: DataEmptyView {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.emptyViewDelegate) as? DataEmptyViewProtocol
+            if let view = objc_getAssociatedObject(self, &AssociatedKeys.emptyView) as? DataEmptyView {
+                return view
+            }
+            let view = DataEmptyView(content: "")
+            self.emptyView = view
+            return view
         }
         set (newValue){
-            objc_setAssociatedObject(self, &AssociatedKeys.emptyViewDelegate, newValue!, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &AssociatedKeys.emptyView, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
     }
     
-    func setEmtpyViewDelegate(_ target: DataEmptyViewProtocol) {
-        emptyDelegate = target
-        UITableView.takeOnceTime(#selector(self.re_layoutSubviews))
-    }
-    
-    @objc func re_layoutSubviews() {
-        SS.log("页面重载")
-        if emptyDelegate?.showEmpty == true {
-            guard let view = emptyDelegate?.configEmptyView() else { return }
-            viewWithTag(EmptyViewTag)?.removeFromSuperview()
-            view.tag = EmptyViewTag
-            addSubview(view)
+    func showEmpty(_ isEmpty: Bool, content: String = "", offset: CGFloat = 0) {
+        if isEmpty {
+            emptyView.frame = bounds
+            emptyView.contentLabel.text = content
+            emptyView.viewOffset = offset
+            addSubview(emptyView)
         } else {
-            viewWithTag(EmptyViewTag)?.removeFromSuperview()
+            emptyView.removeFromSuperview()
         }
     }
     
 }
 
 class DataEmptyView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    lazy var emptyIV: UIImageView = {
+        return UIImageView(image: UIImage(named: "img_no_data"))
+    }()
+    
+    lazy var contentLabel: UILabel = {
+        return UILabel(text: nil, textColor: .hex("797979"), textFont: .ss_regular(size: 14), textAlignment: .center, numberLines: 0)
+    }()
+    
+    var viewOffset: CGFloat = 0 {
+        didSet {
+            emptyIV.snp.updateConstraints { make in
+                make.centerY.equalToSuperview().offset(-108 + viewOffset)
+            }
+        }
     }
-    */
+
+    init(content: String) {
+        super.init(frame: .zero)
+        buildUI()
+        contentLabel.text = content
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        buildUI()
+    }
+    
+    func buildUI() {
+        addSubview(emptyIV)
+        emptyIV.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-108)
+            make.width.height.equalTo(300)
+        }
+        
+        addSubview(contentLabel)
+        contentLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(emptyIV.snp.bottom).offset(8)
+            make.height.equalTo(20)
+        }
+    }
 
 }

@@ -26,6 +26,7 @@ open class SSTabBarController: UITabBarController {
         backgroundImgView.image = UIImage.init(color: UIColor.hex(color))
         self.tabBar.addSubview(backgroundImgView)
         self.tabBar.tintColor = UIColor.hex(color)
+        self.tabBar.unselectedItemTintColor = UIColor.red
     }
 
     //去掉顶部黑线
@@ -48,10 +49,11 @@ open class SSTabBarController: UITabBarController {
         if imageName.count > 0 {
             childController.tabBarItem.image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
             childController.tabBarItem.selectedImage = UIImage(named: selectedImageName)?.withRenderingMode(.alwaysOriginal)
+//            childController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:normal], for: .normal)
+//            childController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:normal], for: .disabled)
+            childController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:selected], for: .selected)
             childController.tabBarItem.title = title
             childController.tabBarItem.tag = index
-            childController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:normal], for: .normal)
-            childController.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:selected], for: .selected)
         }
         let nav = SSNavigationController(rootViewController: childController)
         addChild(nav)

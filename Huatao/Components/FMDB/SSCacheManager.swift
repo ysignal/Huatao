@@ -15,7 +15,7 @@ class SSCacheManager {
     private var queue: FMDatabaseQueue!
     
     /// 注册的表格数组
-    private var tables: [CacheModel] = []
+    private var tables: [CacheModel] = [IMUserInfo(), IMGroupInfo(), IMGroupUserInfo()]
     
     /// 当前缓存用户
     private var currentId: Int = 0
@@ -47,7 +47,7 @@ class SSCacheManager {
                 createTable()
                 return
             }
-            // 用户ID和环信IM的ID都是唯一标识，用用户ID创建数据库
+            // 用户ID和IM的ID都是唯一标识，用用户ID创建数据库
             let dbPath = cachePath + "\(currentId)"
             queue = FMDatabaseQueue(path: dbPath)
             SS.log("DBPath: ----------\(dbPath)")
@@ -60,13 +60,19 @@ class SSCacheManager {
             if db.open() {
                 tables.forEach { model in
                     let propertys = model.jsonObject()
-                    var sql = "create table if not exists '\(model.dbTable().rawValue)' ('id' integer not null primary key autoincrement"
-                    for item in propertys {
-                        sql += ",'\(item.key)' text"
+                    var sql = "create table if not exists \(model.dbTable().rawValue) ('id' integer not null primary key autoincrement"
+                    for item in propertys.sorted(by: { $0.key < $1.key }) {
+                        let type: String = {
+                            if item.value is Int {
+                                return "integer"
+                            }
+                            return "text"
+                        }()
+                        sql += ",'\(item.key)' \(type)"
                     }
                     sql += ")"
                     if db.executeUpdate(sql, withArgumentsIn: []) {
-                        SS.log("[Cache] 表格'\(model.dbTable().rawValue)'创建成功!")
+                        SS.log("[Cache] 表格\(model.dbTable().rawValue)创建成功!")
                     }
                 }
                 db.close()
@@ -74,13 +80,13 @@ class SSCacheManager {
         }
     }
     
-    func model(from table: SSTable, key: String, complete: @escaping (CacheModel?) -> Void) {
+    func model(from table: SSTable, key: Any, complete: @escaping (CacheModel?) -> Void) {
         guard let model = tables.first(where: { $0.dbTable() == table }) else {
-            SS.log("[Cache] 读取表格'\(table)'数据失败")
+            SS.log("[Cache] 读取表格\(table)数据失败")
             return
         }
-        let sql = "select * from \(table.rawValue) where \(table.key) = '\(key)'"
-        SS.log("[Cache] 从表格 '\(table.rawValue)' 中来获取 \(table.key) = '\(key)' 的数据")
+        let sql = "select * from \(table.rawValue) where \(table.key) = \(key)"
+        SS.log("[Cache] 从表格 \(table.rawValue) 中来获取 \(table.key) = \(key) 的数据")
         checkDB()
         var item: CacheModel?
         queue.inDatabase { db in
@@ -108,11 +114,11 @@ class SSCacheManager {
     
     func list(from table: SSTable, complete: @escaping ([CacheModel]) -> Void) {
         guard let model = tables.first(where: { $0.dbTable() == table }) else {
-            SS.log("[Cache] 读取表格'\(table)'数据失败")
+            SS.log("[Cache] 读取表格\(table)数据失败")
             return
         }
         let sql = "select * from \(table.rawValue)"
-        SS.log("[Cache] 从表格 '\(table.rawValue)' 中获取所有数据")
+        SS.log("[Cache] 从表格 \(table.rawValue) 中获取所有数据")
         checkDB()
         var newList = [CacheModel]()
         queue.inDatabase { db in
@@ -129,7 +135,7 @@ class SSCacheManager {
             }
         }
         
-        SS.log("[Cache] 获取表格 '\(table.rawValue)' 数据个数为\(newList.count)")
+        SS.log("[Cache] 获取表格 \(table.rawValue) 数据个数为\(newList.count)")
         complete(newList)
     }
     
@@ -138,7 +144,7 @@ class SSCacheManager {
     ///   - table: 数据表
     ///   - key: 数据模型的唯一标识
     ///   - json: json数据
-    func update(_ table: SSTable, key: String, json: [String: Any]) {
+    func update(_ table: SSTable, key: Any, json: [String: Any]) {
         // 判断数据表中是否有该条数据记录
         model(from: table, key: key) { [weak self] data in
             if var model = data {
@@ -165,9 +171,15 @@ class SSCacheManager {
         var keyString = ""
         var valueString = ""
         let propertys = model.jsonObject()
-        for (i, item) in propertys.enumerated() {
+        for (i, item) in propertys.sorted(by: { $0.key < $1.key }).enumerated() {
             keyString += "\(i == 0 ? "" : ", ")\(item.key)"
-            valueString += "\(i == 0 ? "" : ", ")'\(String(describing: item.value))'"
+            let valueStr: String = {
+                if item.value is String {
+                    return "'\(item.value)'"
+                }
+                return "\(item.value)"
+            }()
+            valueString += "\(i == 0 ? "" : ", ")\(valueStr)"
         }
         
         let sql = "insert into \(model.dbTable().rawValue) (\(keyString)) values (\(valueString))"
@@ -176,7 +188,7 @@ class SSCacheManager {
         queue.inDatabase { db in
             if db.open() {
                 if db.executeUpdate(sql, withArgumentsIn: []) {
-                    SS.log("[Cache] 表格'\(model.dbTable().rawValue)'数据新增成功")
+                    SS.log("[Cache] 表格\(model.dbTable().rawValue)数据新增成功")
                 }
                 db.close()
             }
@@ -186,16 +198,22 @@ class SSCacheManager {
     private func updateModel(_ model: CacheModel) {
         var updateString = ""
         let propertys = model.jsonObject()
-        for (i, item) in propertys.enumerated() {
-            updateString += "\(i == 0 ? "" : ", ")\(item.key) = '\(item.value)'"
+        for (i, item) in propertys.sorted(by: { $0.key < $1.key }).enumerated() {
+            let valueStr: String = {
+                if item.value is String {
+                    return "'\(item.value)'"
+                }
+                return "\(item.value)"
+            }()
+            updateString += "\(i == 0 ? "" : ", ")\(item.key) = \(valueStr)"
         }
-        let sql = "update \(model.dbTable().rawValue) set \(updateString) where \(model.dbTable().key) = '\(model.keyValue())'"
+        let sql = "update \(model.dbTable().rawValue) set \(updateString) where \(model.dbTable().key) = \(model.keyValue())"
         SS.log("[Cache] FMDB execute sql: \(sql)")
         checkDB()
         queue.inDatabase { db in
             if db.open() {
                 if db.executeUpdate(sql, withArgumentsIn: []) {
-                    SS.log("[Cache] 表格'\(model.dbTable().rawValue)'中 \(model.dbTable().key) = '\(model.keyValue())' 的数据更新成功")
+                    SS.log("[Cache] 表格\(model.dbTable().rawValue)中 \(model.dbTable().key) = \(model.keyValue()) 的数据更新成功")
                 }
                 db.close()
             }
@@ -203,13 +221,13 @@ class SSCacheManager {
     }
     
     func deleteModel(_ table: SSTable, key: String) {
-        let sql = "delete from \(table.rawValue) where \(table.key) = '\(key)'"
+        let sql = "delete from \(table.rawValue) where \(table.key) = \(key)"
         SS.log("[Cache] FMDB execute sql: \(sql)")
         checkDB()
         queue.inDatabase { db in
             if db.open() {
                 if db.executeUpdate(sql, withArgumentsIn: []) {
-                    SS.log("[Cache] 表格'\(table.rawValue)'中 \(table.key) = '\(key)' 的数据删除成功")
+                    SS.log("[Cache] 表格\(table.rawValue)中 \(table.key) = \(key) 的数据删除成功")
                 }
                 db.close()
             }

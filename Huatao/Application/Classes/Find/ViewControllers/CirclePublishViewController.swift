@@ -36,6 +36,7 @@ class CirclePublishViewController: BaseViewController {
     
     func toPickerImage() {
         let zl = ZLPhotoPreviewSheet()
+        ZLPhotoConfiguration.resetConfiguration()
         ZLPhotoConfiguration.default().allowSelectVideo(false).allowRecordVideo(false).maxSelectCount(9 - list.count)
         
         zl.selectImageBlock = { images, isFull in

@@ -86,7 +86,15 @@ extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            break
+            let vc = NameCertViewController.from(sb: .task)
+            vc.completeBlock = {
+                
+            }
+            go(vc)
+        case 1:
+            ThirdLoginManager.shared.wxLogin(in: self) { openid in
+                SS.log(openid)
+            }
         case 3:
             // 关于
             let vc = AboutViewController.from(sb: .mine)

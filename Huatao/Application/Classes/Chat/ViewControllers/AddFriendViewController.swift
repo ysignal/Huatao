@@ -12,13 +12,9 @@ class AddFriendViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var headerView: UIView!
-    
-    @IBOutlet weak var userIcon: UIImageView!
-    
-    @IBOutlet weak var userName: UILabel!
-    
-    @IBOutlet weak var signLabel: UILabel!
+    lazy var headerView: UserDetailHeaderView = {
+        return UserDetailHeaderView.fromNib()
+    }()
     
     var userId: Int = 0
     
@@ -32,6 +28,7 @@ class AddFriendViewController: BaseViewController {
     
     override func buildUI() {
         tableView.backgroundColor = .hex("f6f6f6")
+        tableView.tableHeaderView = headerView
         tableView.tableFooterView = UIView()
         tableView.register(nibCell: UserCircleCell.self)
         tableView.register(nibCell: UserAddFriendCell.self)
@@ -42,10 +39,12 @@ class AddFriendViewController: BaseViewController {
     func requestData() {
         view.ss.showHUDLoading()
         HttpApi.Chat.getFriendDetail(userId: userId).done { [weak self] data in
-            self?.model = data.kj.model(FriendDetailModel.self)
+            guard let weakSelf = self else { return }
+            weakSelf.model = data.kj.model(FriendDetailModel.self)
+            IMManager.shared.updateUser(weakSelf.model)
             SSMainAsync {
-                self?.view.ss.hideHUD()
-                self?.updateListView()
+                weakSelf.view.ss.hideHUD()
+                weakSelf.updateListView()
             }
         }.catch { [weak self] error in
             SSMainAsync {
@@ -56,12 +55,7 @@ class AddFriendViewController: BaseViewController {
     }
     
     func updateListView() {
-        userIcon.ss_setImage(model.avatar, placeholder: SSImage.userDefault)
-        userName.text = model.name
-        signLabel.text = model.personSign
-        
-        let signHeight = model.personSign.height(from: .systemFont(ofSize: 14), width: SS.w - 40)
-        headerView.ex_height = 150 + signHeight
+        headerView.config(model: model)
         
         tableView.reloadData()
     }
@@ -100,14 +94,21 @@ extension AddFriendViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            SS.log("点击了朋友圈")
+            if userId == APP.loginData.userId {
+                let vc = MyCircleViewController.from(sb: .mine)
+                go(vc)
+            } else {
+                let vc = FriendCircleViewController.from(sb: .find)
+                vc.userId = userId
+                go(vc)
+            }
         case 1:
             if model.isFriend == 1 {
                 // 发送消息
                 let vc = ConversationViewController()
                 vc.conversationType = .ConversationType_PRIVATE
                 vc.targetId = "\(model.userId)"
-                vc.fakeNav.title = model.name
+                vc.fakeNav.title = model.remarkName.isEmpty ? model.name : model.remarkName
                 go(vc)
             } else {
                 let vc = ApplyFriendViewController.from(sb: .chat)

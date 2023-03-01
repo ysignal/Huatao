@@ -49,6 +49,7 @@ class VipRuleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.ss.showHUDLoading()
         requestData()
     }
     
@@ -66,6 +67,7 @@ class VipRuleViewController: BaseViewController {
         userId.text = "ID:\(APP.loginData.userId)"
         
         upgradeBtn.drawThemeGradient(CGSize(width: SS.w - 24, height: 40))
+        vipBtn.isHidden = true
     }
     
     func requestData() {
@@ -86,6 +88,7 @@ class VipRuleViewController: BaseViewController {
     func updateViews() {
         let level = DataManager.vipList.firstIndex(of: model.currentLevel) ?? 0
         vipBtn.image = UIImage(named: "ic_mine_vip_\(level + 1)")
+        vipBtn.isHidden = false
         
         curLevel.text = model.currentLevel
         curLabel.text = model.currentLevel

@@ -39,6 +39,8 @@ public struct APP {
         static let AlipayScheme = "alipay2021003174648764"
         // 融云IM AppKey
         static let RCIMAPPKey = "25wehl3u2v5tw"
+        
+        static var AliFaceCertifyId: String = ""
     }
     
     struct SettingKey {
@@ -46,6 +48,8 @@ public struct APP {
         static let loginData = "kLoginData"
         
         static let isAgree = "kIsAgree"
+        
+        static let isLogout = "kIsLogout"
         
         static let isUpdate = "kIsUpdate"
         
@@ -78,12 +82,20 @@ public struct APP {
     
     /// 登录返回的用户数据模型
     static var loginData: LoginData {
-        return loginDataString.kj.model(LoginData.self) ?? LoginData()
+        let dataStr = loginDataString
+        if dataStr.isEmpty {
+            return LoginData()
+        }
+        return dataStr.kj.model(LoginData.self) ?? LoginData()
     }
 
     /// 最后一个登录的手机号
     @SSDefault(SettingKey.lastLogin, defaultValue: "")
     static var lastLogin: String
+    
+    /// 是否退出登录返回的登录页面
+    @SSDefault(SettingKey.isLogout, defaultValue: false)
+    static var isLogout: Bool
     
     /// 是否退出登录返回的登录页面
     @SSDefault(SettingKey.isAgree, defaultValue: false)
@@ -102,10 +114,20 @@ public struct APP {
     
     /// 用户的钱包数据
     static var walletInfo = ""
+    
+    /// QQ、微信授权登录使用的openid
+    static var openId: String = ""
+    
+    /// 微信获取的用户信息
+    static var wxModel = WXModel()
 
     /// 请求用的token
     static var token: String {
         return loginData.tokenType + loginData.accessToken
+    }
+    
+    static var shareUrl: String {
+        return "http://huataoh5.gou39.cn?pid=\(loginData.userId)"
     }
     
     static weak var delegate: AppDelegate?
@@ -121,6 +143,8 @@ public struct APP {
         }
         return HttpClient(baseURL: host, plugins: [ParamsPlugin(), LoggerPlugin()])
     }
+    
+    static var normalClient = HttpClient(baseURL: "", plugins: [NormalPlugin()])
         
     static let dateFormat: String = "yyyy-MM-dd"
     static let dateFullFormat: String = "yyyy-MM-dd hh:mm:ss"
@@ -150,7 +174,7 @@ public struct APP {
     
     /// 退出登录，注销用户
     static func logout() {
-        APP.loginDataString = ""
+        APP.loginDataString = "{}"
         // 退出IM
         RCIM.shared().logout()
         APP.switchLoginViewController()
@@ -231,13 +255,15 @@ public struct APP {
     }
     
     static func asyncIMUserInfo() {
-        
+        RCIM.shared().currentUserInfo = RCUserInfo(userId: "\(APP.loginData.userId)", name: APP.userInfo.name, portrait: APP.userInfo.avatar)
     }
     
     static func setupAPP() {
         UITextView.appearance().tintColor = .ss_theme
         UITextField.appearance().tintColor = .ss_theme
         
+        _ = AliyunFaceAuthFacade.init()
+                
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -248,7 +274,7 @@ public struct APP {
         RCIM.shared().addReceiveMessageDelegate(IMManager.shared)
         RCIM.shared().userInfoDataSource = IMManager.shared
         RCIM.shared().groupInfoDataSource = IMManager.shared
-        
+        RCIM.shared().enablePersistentUserInfoCache = true
         // 异步加载本地数据
         DispatchQueue.global().async {
             if let url = Bundle.main.url(forResource: "china_address", withExtension: "json"),

@@ -10,8 +10,8 @@ import UIKit
 
 protocol TeamListItemCellDelegate: NSObjectProtocol {
     
-    func cellDidTap(_ model: GroupSettingSectionItem)
-    func cellDidChangeValue(_ model: GroupSettingSectionItem)
+    func cellDidTap(_ item: GroupSettingSectionItem)
+    func cellDidChangeValue(_ item: GroupSettingSectionItem)
     
 }
 

@@ -22,6 +22,34 @@ extension HttpApi {
             return APP.httpClient.upload(req, uploadProgress: uploadProgress).map({ ($0.json as? [String: Any] ?? [:]) })
         }
     }
+    
+    /// 根据微信授权的code请求微信openid等信息
+    /// - Parameter code: 微信授权返回的code
+    /// - Returns: 返回结果
+    static func loginAuth(code: String) -> Promise<[String: Any]> {
+        let url = "https://api.weixin.qq.com/sns/oauth2/access_token"
+        var req = HttpRequest(path: url, method: .get, isEncode: false)
+        req.params = ["appid": APP.SDKKey.WXAppID,
+                      "secret": APP.SDKKey.WXSecret,
+                      "code": code,
+                      "grant_type": "authorization_code"]
+
+        return APP.normalClient.request(req).map({ ($0.json as? [String: Any] ?? [:]) })
+    }
+    
+    /// 获取微信用户信息
+    /// - Parameters:
+    ///   - accessToken: 授权token，仅当作用域scope为`snsapi_userinfo`时可以调用
+    ///   - openid: 微信用户唯一认证标识
+    /// - Returns: 返回结果
+    static func getWXUserInfo(accessToken: String, openid: String) -> Promise<[String: Any]> {
+        let url = "https://api.weixin.qq.com/sns/userinfo"
+        var req = HttpRequest(path: url, method: .get, isEncode: false)
+        req.params = ["access_token": accessToken,
+                      "openid": openid]
+
+        return APP.normalClient.request(req).map({ ($0.json as? [String: Any] ?? [:]) })
+    }
 }
 
 // MARK: - 登录相关接口
@@ -126,14 +154,15 @@ extension HttpApi {
         /// 购买礼包
         /// - Parameters:
         ///   - giftId: 礼包ID
-        ///   - payType: 支付方式
+        ///   - payType: 支付类型，wechat-微信，alipay-支付宝
+        ///   - payWay: 支付方法，miniapp-小程序，app-APP内支付，scan-扫码支付
         /// - Returns: 返回结果
-        static func postGiftPay(giftId: Int, payType: String) -> Promise<Void> {
+        static func postGiftPay(giftId: Int, payType: String, payWay: String = "app") -> Promise<[String: Any]> {
             var req = HttpRequest(path: "/api/gift_pay", method: .post)
             req.paramsType = .json
             req.params = ["gift_id": giftId, "pay_type": payType, "pay_way": "app"]
             
-            return APP.httpClient.request(req).asVoid()
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
         
@@ -149,7 +178,7 @@ extension HttpApi {
         /// - Returns: 返回结果
         static func getSendMaterialList(page: Int) -> Promise<[String: Any]> {
             var req = HttpRequest(path: "/api/send_material_list", method: .get)
-            req.params = ["page": page]
+            req.params = ["page": page, "pageSize": 100]
 
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
@@ -173,6 +202,20 @@ extension HttpApi {
             return APP.httpClient.request(req).asVoid()
         }
         
+        /// 获取人脸认证ID
+        /// - Parameters:
+        ///   - certName: 认证姓名
+        ///   - certNo: 认证身份证号码
+        ///   - metaInfo: metaInfo
+        /// - Returns: 返回结果
+        static func postFaceAuth(certName: String, certNo: String, metaInfo: String) -> Promise<String> {
+            var req = HttpRequest(path: "/api/face_auth", method: .post)
+            req.paramsType = .json
+            req.params = ["certName": certName, "certNo": certNo, "metaInfo": metaInfo]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? String ?? "")})
+        }
+        
         /// 提交实名认证
         /// - Parameters:
         ///   - realName: 姓名
@@ -187,6 +230,8 @@ extension HttpApi {
 
             return APP.httpClient.request(req).asVoid()
         }
+        
+        
         
         /// 设置交易密码
         /// - Parameters:
@@ -209,7 +254,7 @@ extension HttpApi {
         ///   - cityCode: 省份code码
         /// - Returns: 无返回值
         static func putSetLocation(provinceCode: String, cityCode: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/card_auth", method: .put)
+            var req = HttpRequest(path: "/api/set_location", method: .put)
             req.headers["Content-Type"] = "application/x-www-form-urlencoded"
             req.paramsType = .url
             req.encoding = URLEncoding.httpBody
@@ -234,6 +279,26 @@ extension HttpApi {
             req.params = ["sign": sign]
             
             return APP.httpClient.request(req).map({ ($0.json as? [[String: Any]] ?? [])})
+        }
+        
+        /// 海报分享记录
+        /// - Parameter page: 页数
+        /// - Returns: 返回数据
+        static func getTurnRecordList(page: Int, pageSize: Int = 100) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/turn_record_list", method: .get)
+            req.params = ["page": page, "page_size": pageSize]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 获取分享文案
+        /// - Parameter page: 文案页数
+        /// - Returns: 无返回值
+        static func getSendTextList(page: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/send_text_list", method: .get)
+            req.params = ["page": page]
+            
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
     }
 }
@@ -279,9 +344,13 @@ extension HttpApi {
         ///   - isMy: 动态类型，0-所有，1-我的
         ///   - page: 数据页数
         /// - Returns: 返回结果
-        static func getDynamicList(isMy: Int, page: Int = 0) -> Promise<[String: Any]> {
+        static func getDynamicList(isMy: Int, page: Int = 1, userId: Int = 0) -> Promise<[String: Any]> {
             var req = HttpRequest(path: "/api/dynamic_list", method: .get)
-            req.params = ["is_my": isMy]
+            var params: [String: Any] = ["is_my": isMy, "page": page]
+            if isMy == 0 && userId > 0 {
+                params["user_id"] = userId
+            }
+            req.params = params
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
@@ -469,7 +538,7 @@ extension HttpApi {
         ///   - teamId: 群组ID
         ///   - keyword: 关键词
         /// - Returns: 返回结果
-        static func getTeamSet(teamId: Int, keyword: String) -> Promise<[String: Any]> {
+        static func getTeamSet(teamId: Int, keyword: String = "") -> Promise<[String: Any]> {
             var req = HttpRequest(path: "/api/team_set", method: .get)
             req.params = ["keyword": keyword, "team_id": teamId]
 
@@ -569,6 +638,37 @@ extension HttpApi {
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
+        /// 修改好友资料
+        /// - Parameters:
+        ///   - userId: 用户ID
+        ///   - name: 备注名
+        ///   - isOpenDisturb: 是否开启免打扰，0-未开启，1-开启`
+        ///   - isStar: 是否星标用户，0-不是，1-是
+        ///   - backgroundImg: 聊天背景
+        /// - Returns: 无返回值
+        static func putFriendDetail(userId: Int, name: String = "", isOpenDisturb: Int = -1, isStar: Int = -1, backgroundImg: String = "") -> Promise<Void> {
+            var req = HttpRequest(path: "/api/friend_detail", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            var params: [String: Any] = ["user_id": userId]
+            if !name.isEmpty {
+                params["name"] = name
+            }
+            if !backgroundImg.isEmpty {
+                params["background_img"] = backgroundImg
+            }
+            if isOpenDisturb > -1 {
+                params["is_open_disturb"] = isOpenDisturb
+            }
+            if isStar > -1 {
+                params["is_star"] = isStar
+            }
+            req.params = params
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
         /// 获取下级关系
         /// - Parameter userId: 用户ID
         /// - Returns: 返回结果
@@ -633,6 +733,35 @@ extension HttpApi {
             return APP.httpClient.request(req).asVoid()
         }
         
+        /// 修改群组免打扰设置
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - isOpenDisturb: 免打扰设置，0-关闭，1-开启
+        /// - Returns: 无返回值
+        static func putTeamDisturb(teamId: Int, isOpenDisturb: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_my_edit", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["team_id": teamId, "is_open_disturb": isOpenDisturb]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 修改群组内昵称
+        /// - Parameters:
+        ///   - teamId: 群组ID
+        ///   - rename: 群组昵称
+        /// - Returns: 无返回值
+        static func putTeamRename(teamId: Int, rename: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/team_my_edit", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["team_id": teamId, "name": rename]
+
+            return APP.httpClient.request(req).asVoid()
+        }
     }
 }
 
@@ -996,6 +1125,26 @@ extension HttpApi {
             req.params = ["job_name": jobName]
 
             return APP.httpClient.request(req).asVoid()
+        }
+        
+        
+        /// 余额提现
+        /// - Parameter cardNo: 卡号
+        /// - Returns: 无返回值
+        static func postMoneyWithdraw(cardNo: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/money_withdraw_post", method: .post)
+            req.paramsType = .json
+            req.params = ["card_no": cardNo]
+        
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取我的银行卡
+        /// - Returns: 返回数据
+        static func getUserBankList() -> Promise<[String: Any]> {
+            let req = HttpRequest(path: "/api/user_bank_list", method: .get)
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
     }
 

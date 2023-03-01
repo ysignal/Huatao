@@ -6,13 +6,11 @@
 //
 
 import Foundation
+import Kingfisher
 
 struct DataManager {
         
     static var cacheVideoImage: [String: UIImage] = [:]
-    
-    static var randomTotal: Int = Int.random(in: 10000...9999999)
-    static var randomRelease: Int = Int.random(in: 1000...randomTotal)
     
     static var vipList: [String] = ["普通会员","铜牌会员","银牌会员","金牌会员","一星会员","二星会员"]
     
@@ -24,6 +22,12 @@ struct DataManager {
     
     /// 通讯录数据页数
     private static var contactPage: Int = 1
+    
+    static func cacheImage(_ url: String) {
+        if url.isEmpty { return }
+        if KingfisherManager.shared.cache.isCached(forKey: url) { return }
+        KingfisherManager.shared.cache.retrieveImageInDiskCache(forKey: url, completionHandler: { result in })
+    }
     
 }
 

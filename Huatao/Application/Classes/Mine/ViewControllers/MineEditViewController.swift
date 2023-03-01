@@ -62,6 +62,7 @@ class MineEditViewController: BaseViewController {
     
     func toPickerImage() {
         let zl = ZLPhotoPreviewSheet()
+        ZLPhotoConfiguration.resetConfiguration()
         ZLPhotoConfiguration.default().allowSelectVideo(false).allowRecordVideo(false).maxSelectCount(1)
         
         zl.selectImageBlock = { images, isFull in

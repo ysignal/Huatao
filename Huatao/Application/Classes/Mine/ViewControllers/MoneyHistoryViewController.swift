@@ -13,7 +13,6 @@ class MoneyHistoryViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var noDataImage: UIImageView!
     
     lazy var segmentedView: JXSegmentedView = {
         let segment = JXSegmentedView(frame: CGRect(x: 0, y: 0, width: 120, height: 40))
@@ -61,6 +60,8 @@ class MoneyHistoryViewController: BaseViewController {
         indicator.indicatorHeight = 2
         indicator.indicatorColor = UIColor.ss_theme
         segmentedView.indicators = [indicator]
+        
+        tableView.showEmpty(true)
     }
     
     func requestData() {

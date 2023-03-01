@@ -25,7 +25,7 @@ class LoginViewController: SSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         readCacheLogin()
     }
     

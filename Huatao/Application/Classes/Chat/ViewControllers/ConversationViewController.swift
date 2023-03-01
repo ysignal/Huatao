@@ -7,8 +7,11 @@
 	
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class ConversationViewController: RCConversationViewController {
+    
+    private let RED_PACKET_TAG: Int = 1104
     
     var fakeNav: SSNavigationBar = SSNavigationBar()
     
@@ -17,14 +20,51 @@ class ConversationViewController: RCConversationViewController {
         btn.image = UIImage(named: "ic_find_more")?.color(.hex("666666"))
         return btn
     }()
-
+    
+    lazy var disturbView: UIView = {
+        let view = UIView(backgroundColor: .clear)
+        
+        let iv = UIImageView(image: UIImage(named: "ic_chat_disturb"))
+        iv.contentMode = .scaleAspectFit
+        view.addSubview(iv)
+        iv.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(12)
+            make.height.equalToSuperview()
+        }
+        
+        return view
+    }()
+    
+    lazy var background: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
+    var notificationLevel: RCPushNotificationLevel = .allMessage
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         buildUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateBackground()
+        IQKeyboardManager.shared.enable = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enable = true
+    }
+    
     func buildUI() {
+        // 配置自定义页面
+        view.backgroundColor = .ss_f6
         view.addSubview(fakeNav)
         fakeNav.snp.makeConstraints({
             $0.left.right.top.equalToSuperview()
@@ -35,6 +75,11 @@ class ConversationViewController: RCConversationViewController {
         }
         fakeNav.leftImage = SSImage.back
         
+        fakeNav.titleStack.addArrangedSubview(disturbView)
+        disturbView.snp.makeConstraints { make in
+            make.width.equalTo(18)
+        }
+        
         fakeNav.addSubview(moreBtn)
         moreBtn.snp.makeConstraints { make in
             make.width.equalTo(30)
@@ -44,13 +89,73 @@ class ConversationViewController: RCConversationViewController {
         }
         moreBtn.addTarget(self, action: #selector(toMore), for: .touchUpInside)
         
-        enableNewComingMessageIcon = true
-        RCKitConfig.default().ui.globalMessagePortraitSize = CGSize(width: 36, height: 36)
-        
-        
+        view.insertSubview(background, at: 0)
+        background.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(SS.statusWithNavBarHeight)
+        }
+        // 移除中间页面
         navigationController?.navRemove([SelectUserViewController.self])
+        // 更新免打扰设置
+        updateLevelView()
+        // 设置聊天列表背景透明
+        conversationMessageCollectionView.backgroundColor = .clear
+        // 允许提示新消息
+        enableNewComingMessageIcon = true
+        // 修改头像大小
+        RCKitConfig.default().ui.globalMessagePortraitSize = CGSize(width: 36, height: 36)
+        // 私聊需要请求个人详情获取背景
+        if conversationType == .ConversationType_PRIVATE {
+            requestUserDetail()
+        }
+        // 添加添加红包控件
+        chatSessionInputBarControl.pluginBoardView.insertItem(UIImage(named: "plugin_item_red"), highlightedImage: UIImage(named: "plugin_item_red_highlight"), title: "红包", at: 2, tag: RED_PACKET_TAG)
     }
     
+    func requestUserDetail() {
+        let userId = targetId.intValue
+        HttpApi.Chat.getFriendDetail(userId: userId).done { [weak self] data in
+            let model = data.kj.model(FriendDetailModel.self)
+            IMManager.shared.updateUser(model)
+            SSMainAsync {
+                self?.background.ss_setImage(model.backgroundImg, placeholder: nil)
+            }
+        }
+    }
+    
+    func updateBackground() {
+        if conversationType == .ConversationType_PRIVATE {
+            SSCacheLoader.loadIMUser(from: targetId.intValue) { [weak self] data in
+                if let user = data {
+                    self?.background.ss_setImage(user.backgroundImage, placeholder: nil)
+                }
+            }
+        }
+    }
+    
+    func updateLevelView() {
+        if notificationLevel == .blocked {
+            disturbView.isHidden = false
+        } else {
+            disturbView.isHidden = true
+        }
+    }
+    
+    override func pluginBoardView(_ pluginBoardView: RCPluginBoardView!, clickedItemWithTag tag: Int) {
+        super.pluginBoardView(pluginBoardView, clickedItemWithTag: tag)
+        // 工具面板点击事件
+        switch tag {
+        case RED_PACKET_TAG:
+            // 点击了红包
+            let vc = RedPacketViewController.from(sb: .chat)
+            vc.targetId = targetId
+            vc.conversationType = conversationType
+            go(vc)
+        default:
+            break
+        }
+    }
+
     override func registerCustomCellsAndMessages() {
         super.registerCustomCellsAndMessages()
     }
@@ -59,9 +164,6 @@ class ConversationViewController: RCConversationViewController {
         if let msgCell = cell as? RCMessageCell {
             msgCell.portraitImageView.layer.cornerRadius = 14
             msgCell.portraitImageView.contentMode = .scaleAspectFill
-            if cell.model.senderUserId == "\(APP.loginData.userId)" {
-                msgCell.portraitImageView.ss_setImage(APP.userInfo.avatar, placeholder: SSImage.userDefault)
-            }
         }
     }
     
@@ -70,10 +172,33 @@ class ConversationViewController: RCConversationViewController {
         case .ConversationType_PRIVATE:
             let vc = UserDetailViewController.from(sb: .chat)
             vc.userId = targetId.intValue
+            vc.updateBlock = { [weak self] str in
+                self?.fakeNav.title = str
+                self?.conversationMessageCollectionView.reloadData()
+            }
+            vc.clearBlock = { [weak self] in
+                self?.conversationDataRepository = []
+                self?.conversationMessageCollectionView.reloadData()
+            }
+            vc.levelBlock = { [weak self] level in
+                self?.notificationLevel = level
+                self?.updateLevelView()
+            }
             go(vc)
         case .ConversationType_DISCUSSION, .ConversationType_GROUP, .ConversationType_ULTRAGROUP:
             let vc = GroupSettingViewController.from(sb: .chat)
             vc.teamId = targetId.intValue
+            vc.updateBlock = { [weak self] str in
+                self?.fakeNav.title = str
+            }
+            vc.clearBlock = { [weak self] in
+                self?.conversationDataRepository = []
+                self?.conversationMessageCollectionView.reloadData()
+            }
+            vc.levelBlock = { [weak self] level in
+                self?.notificationLevel = level
+                self?.updateLevelView()
+            }
             go(vc)
         default:
             break

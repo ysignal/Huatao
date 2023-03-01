@@ -13,3 +13,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 // 融云
 #import <RongCloudOpenSource/RongIMKit.h>
+// 阿里云人脸
+#import <AliyunFaceAuthFacade/AliyunFaceAuthFacade.h>
+#import <DTFIdentityManager/DTFIdentityManager.h>
+#import <AliyunMobileRPC/ZimGatewayForPop.h>

@@ -12,12 +12,9 @@ import AAInfographics
 class TradeHeaderView: UIView {
     
     @IBOutlet weak var tradePrice: UILabel!
-    @IBOutlet weak var tradeTotal: UILabel!
-    @IBOutlet weak var waitTotal: UILabel!
     @IBOutlet weak var saleTotal: UILabel!
     @IBOutlet weak var buyTotal: UILabel!
-    @IBOutlet weak var scrapTotal: UILabel!
-    
+    @IBOutlet weak var destroyLabel: UILabel!
     @IBOutlet weak var sectionView: UIView!
     @IBOutlet weak var chartBackground: UIView!
     
@@ -82,10 +79,7 @@ class TradeHeaderView: UIView {
         tradePrice.text = "\(model.startPrice)"
         saleTotal.text = "\(model.canSaleTotal)"
         buyTotal.text = "\(model.canBuyTotal)"
-        scrapTotal.text = "\(model.destructeTotal)"
-        //TODO: 测试数据
-        tradeTotal.text = "\(model.canSaleTotal + DataManager.randomTotal)"
-        waitTotal.text = "\(DataManager.randomRelease)"
+        destroyLabel.text = "\(model.destructeTotal)"
     }
     
     func configChart(list: [TradeHallLineItem]) {

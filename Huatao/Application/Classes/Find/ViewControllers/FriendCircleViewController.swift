@@ -10,16 +10,12 @@ import UIKit
 class FriendCircleViewController: BaseViewController {
     
     @IBOutlet weak var circleTV: UITableView!
-    
-    lazy var sendBtn: SSButton = {
-        let btn = SSButton().loadOption([.cornerRadius(4), .border(1, .hex("ffb300")), .font(.ss_regular(size: 14)), .title("发布"), .titleColor(.white)])
-        btn.drawGradient(start: .hex("ffa300"), end: .hex("ff8100"), size: CGSize(width: 50, height: 26))
-        return btn
-    }()
-    
+
     var list: [DynamicListItem] = []
     
     var page: Int = 1
+    
+    var userId: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,23 +26,14 @@ class FriendCircleViewController: BaseViewController {
     
     override func buildUI() {
         fakeNav.title = "朋友圈"
-        
-        fakeNav.addSubview(sendBtn)
-        sendBtn.snp.makeConstraints { make in
-            make.width.equalTo(50)
-            make.height.equalTo(26)
-            make.right.equalToSuperview().offset(-12)
-            make.bottom.equalToSuperview().offset(-9)
-        }
-        sendBtn.addTarget(self, action: #selector(toSend), for: .touchUpInside)
-        
+
         circleTV.addRefresh(type: .headerAndFooter, delegate: self)
         circleTV.register(nibCell: DynamicListItemCell.self)
         circleTV.tableFooterView = UIView()
     }
     
     func requestData() {
-        HttpApi.Find.getDynamicList(isMy: 0, page: page).done { [weak self] data in
+        HttpApi.Find.getDynamicList(isMy: 0, page: page, userId: userId).done { [weak self] data in
             guard let weakSelf = self else { return }
             let listModel = data.kj.model(ListModel<DynamicListItem>.self)
             if weakSelf.page == 1 {

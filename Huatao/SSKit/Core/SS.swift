@@ -236,3 +236,9 @@ public func SSMainAsync(after: TimeInterval = 0, handler: @escaping (() -> Void)
         handler()
     }
 }
+
+public func SSGlobelAsync(after: TimeInterval = 0, handler: @escaping (() -> Void)) {
+    DispatchQueue.global().asyncAfter(deadline: .now() + after) {
+        handler()
+    }
+}

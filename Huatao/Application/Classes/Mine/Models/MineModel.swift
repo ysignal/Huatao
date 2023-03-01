@@ -99,6 +99,12 @@ struct MineUserInfo: SSConvertible {
     /// 个性签名
     var personSign: String = ""
     
+    /// 卡包数量
+    var cardCount: Int = 0
+    
+    /// 银豆数量
+    var silverBean: String = ""
+    
 }
 
 struct MineTeamListItem: SSConvertible {
@@ -437,12 +443,35 @@ struct AgentChildrenItem: SSConvertible {
 
 struct MoneyHistoryItem: SSConvertible {
     
+    /// 变动原因
     var reason: String = ""
     
+    /// 变动时间
     var createdAt: String = ""
     
+    /// 变动金额
     var money: String = ""
     
+    /// 变动类型，0-支出，1-收入
     var type: Int = 0
+    
+}
+
+struct BankCardItem: SSConvertible {
+    
+    /// 银行卡ID
+    var bankId: Int = 0
+    
+    /// 银行卡绑定姓名
+    var name: String = ""
+    
+    /// 银行卡号码
+    var cardNo: String = ""
+    
+    /// 银行卡绑定身份证号
+    var cardId: String = ""
+    
+    /// 创建时间
+    var createdAt: String = ""
     
 }

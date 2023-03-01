@@ -11,27 +11,70 @@ class IMManager: NSObject {
     
     static let shared = IMManager()
     
+    func updateUser(_ model: FriendDetailModel, completion: ((RCUserInfo?) -> Void)? = nil) {
+        // 预加载背景图
+        DataManager.cacheImage(model.backgroundImg)
+        // 保存数据到临时缓存
+        let name = model.remarkName.isEmpty ? model.name : model.remarkName
+        let userInfo = RCUserInfo(userId: "\(model.userId)", name: name, portrait: model.avatar)
+        RCIM.shared().refreshUserInfoCache(userInfo, withUserId: "\(model.userId)")
+        // 保存数据到本地数据库
+        let imUser = IMUserInfo.from(model)
+        SSCacheSaver.saveIMUser(imUser)
+        // 闭包回调
+        DispatchQueue.main.async {
+            completion?(userInfo)
+        }
+    }
     
-    
+    func updateGroup(_ model: TeamSettingModel, completion: ((RCGroup?) -> Void)? = nil) {
+        // 保存数据到本地数据库
+        let imGroup = IMGroupInfo.from(model)
+        SSCacheSaver.saveIMGroup(imGroup)
+        // 保存数据到临时缓存
+        let groupInfo = RCGroup(groupId: "\(model.teamId)", groupName: model.title, portraitUri: imGroup.images)
+        RCIM.shared().refreshGroupInfoCache(groupInfo, withGroupId: "\(model.teamId)")
+        // 闭包回调
+        DispatchQueue.main.async {
+            completion?(groupInfo)
+        }
+    }
 }
 
 extension IMManager: RCIMGroupInfoDataSource {
     func getGroupInfo(withGroupId groupId: String!, completion: ((RCGroup?) -> Void)!) {
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
             if let groupInfo = RCIM.shared().getGroupInfoCache(groupId) {
                 completion?(groupInfo)
             } else {
-                HttpApi.Chat.getTeamMaster(teamId: groupId.intValue).done { data in
-                    let model = data.kj.model(TeamSettingModel.self)
-                    let images = model.listAvatar.compactMap({ $0.avatar }).joined(separator: ",")
-                    let groupInfo = RCGroup(groupId: groupId, groupName: model.title, portraitUri: images)
-                    RCIM.shared().refreshGroupInfoCache(groupInfo, withGroupId: groupId)
-                    DispatchQueue.main.async {
-                        completion?(groupInfo)
-                    }
-                }.catch { error in
-                    DispatchQueue.main.async {
-                        completion?(nil)
+                SSCacheLoader.loadIMGroup(from: groupId.intValue) { data in
+                    if let group = data {
+                        // 先返回本地数据库数据
+                        let groupInfo = RCGroup(groupId: groupId, groupName: group.title, portraitUri: group.images)
+                        RCIM.shared().refreshGroupInfoCache(groupInfo, withGroupId: groupId)
+                        // 闭包回调
+                        DispatchQueue.main.async {
+                            completion?(groupInfo)
+                        }
+                        // 判断是否需要更新本地数据库数据
+                        let now = Date().toString(.custom(APP.dateFormat))
+                        if group.updated != now {
+                            // 请求网络数据
+                            HttpApi.Chat.getTeamMaster(teamId: groupId.intValue).done { data in
+                                let model = data.kj.model(TeamSettingModel.self)
+                                self?.updateGroup(model, completion: completion)
+                            }
+                        }
+                    } else {
+                        HttpApi.Chat.getTeamMaster(teamId: groupId.intValue).done { data in
+                            let model = data.kj.model(TeamSettingModel.self)
+                            self?.updateGroup(model, completion: completion)
+                        }.catch { error in
+                            // 闭包回调
+                            DispatchQueue.main.async {
+                                completion?(nil)
+                            }
+                        }
                     }
                 }
             }
@@ -42,7 +85,7 @@ extension IMManager: RCIMGroupInfoDataSource {
 extension IMManager: RCIMUserInfoDataSource {
     
     func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
             if let userInfo = RCIM.shared().getUserInfoCache(userId) {
                 DispatchQueue.main.async {
                     completion?(userInfo)
@@ -55,23 +98,41 @@ extension IMManager: RCIMUserInfoDataSource {
                         completion?(userInfo)
                     }
                 } else {
-                    HttpApi.Chat.getFriendDetail(userId: userId.intValue).done { data in
-                        let model = data.kj.model(FriendDetailModel.self)
-                        let userInfo = RCUserInfo(userId: "\(model.userId)", name: model.name, portrait: model.avatar)
-                        RCIM.shared().refreshUserInfoCache(userInfo, withUserId: userId)
-                        DispatchQueue.main.async {
-                            completion?(userInfo)
-                        }
-                    }.catch { _ in
-                        DispatchQueue.main.async {
-                            completion?(nil)
+                    SSCacheLoader.loadIMUser(from: userId.intValue) { data in
+                        if let user = data {
+                            // 先返回本地数据库的数据
+                            let name = user.remark.isEmpty ? user.name : user.remark
+                            let userInfo = RCUserInfo(userId: "\(user.userId)", name: name, portrait: user.avatar)
+                            RCIM.shared().refreshUserInfoCache(userInfo, withUserId: userId)
+                            // 闭包回调
+                            DispatchQueue.main.async {
+                                completion?(userInfo)
+                            }
+                            // 判断是否需要更新本地数据库
+                            let now = Date().toString(.custom(APP.dateFormat))
+                            if user.updated != now {
+                                // 请求网络数据
+                                HttpApi.Chat.getFriendDetail(userId: userId.intValue).done { data in
+                                    let model = data.kj.model(FriendDetailModel.self)
+                                    self?.updateUser(model, completion: completion)
+                                }
+                            }
+                        } else {
+                            HttpApi.Chat.getFriendDetail(userId: userId.intValue).done { data in
+                                let model = data.kj.model(FriendDetailModel.self)
+                                self?.updateUser(model, completion: completion)
+                            }.catch { _ in
+                                // 闭包回调
+                                DispatchQueue.main.async {
+                                    completion?(nil)
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
-    
 }
 
 extension IMManager: RCIMConnectionStatusDelegate {

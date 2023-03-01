@@ -11,6 +11,13 @@ import SnapKit
 open class SSNavigationBar: UIView {
     open var statusBackground = UIView()
     open var leftButton = SSButton(type: .custom)
+    
+    lazy var titleStack: UIStackView = {
+        let sk = UIStackView(arrangedSubviews: [titleLabel])
+        sk.spacing = 3
+        return sk
+    }()
+    
     open var titleLabel = UILabel(text: "", textColor: .hex("#222222"), textFont: .ss_medium(size: 16), textAlignment: .center)
     open var rightButton = SSButton(type: .custom)
     
@@ -88,11 +95,11 @@ open class SSNavigationBar: UIView {
     }
     
     private func buildTitleLabel(){
-        addSubview(titleLabel)
+        addSubview(titleStack)
         
-        titleLabel.snp.makeConstraints({ (make) in
-            make.left.equalTo(44)
-            make.right.equalTo(-44)
+        titleStack.snp.makeConstraints({ (make) in
+            make.centerX.equalToSuperview()
+            make.width.lessThanOrEqualTo(SS.w - 88)
             make.height.equalTo(22.0)
             make.bottom.equalTo(-11.0)
         })

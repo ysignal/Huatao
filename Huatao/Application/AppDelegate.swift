@@ -16,13 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         APP.delegate = self
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = SSNavigationController(rootViewController: LoginViewController.from(sb: .login))
-        window?.makeKeyAndVisible()
-        APP.window = window
-        PayManager.register(with: window)
-        APP.setupAPP()
+        if #unavailable(iOS 13.0) {
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = SSNavigationController(rootViewController: LoginViewController.from(sb: .login))
+            window?.makeKeyAndVisible()
+            APP.window = window
+            PayManager.register(with: window)
+            APP.setupAPP()
+        }
         return true
     }
     
@@ -42,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return WXApi.handleOpen(url, delegate: self)
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        return WXApi.handleOpenUniversalLink(userActivity, delegate: ThirdLoginManager.shared)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {

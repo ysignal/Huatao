@@ -70,7 +70,7 @@ class MineViewController: SSViewController {
             make.bottom.equalToSuperview().offset(-10)
         }
         messageBtn.addTarget(self, action: #selector(toMessage), for: .touchUpInside)
-
+        messageBtn.isHidden = true
         
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = UIView()

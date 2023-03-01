@@ -48,7 +48,7 @@ struct TaskListItem: SSConvertible {
     var title: String = ""
     
     /// 需要完成数量
-    var nubmer: Int = 0
+    var number: Int = 0
     
     /// 已完成数量
     var completeNumber: Int = 0
@@ -107,5 +107,35 @@ struct TaskDetail: SSConvertible {
 struct BannerImageItem: SSConvertible {
     
     var image: String = ""
+    
+}
+
+struct TurnRecordListItem: SSConvertible {
+    
+    /// 转发记录ID
+    var turnId: Int = 0
+    
+    /// 转发用户头像
+    var avatar: String = ""
+    
+    /// 转发用户昵称
+    var name: String = ""
+    
+    /// 转发时间
+    var createdAt: String = ""
+    
+    /// 是否正在显示
+    var isShow: Bool = false
+    
+}
+
+struct SendTextListItem: SSConvertible {
+    
+    /// 文案ID
+    var textId: Int = 0
+    
+    /// 分享文案
+    var content: String = ""
+    
     
 }

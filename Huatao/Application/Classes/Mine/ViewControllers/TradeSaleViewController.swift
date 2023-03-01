@@ -59,6 +59,7 @@ class TradeSaleViewController: BaseViewController {
     
     @IBAction func toPickImage(_ sender: Any) {
         let zl = ZLPhotoPreviewSheet()
+        ZLPhotoConfiguration.resetConfiguration()
         ZLPhotoConfiguration.default().allowRecordVideo(false).maxSelectCount(1)
         
         zl.selectImageBlock = { images, isFull in

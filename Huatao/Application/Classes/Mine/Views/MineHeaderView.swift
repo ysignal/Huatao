@@ -96,7 +96,8 @@ class MineHeaderView: UICollectionReusableView {
         
         moneyLabel.text = "\(APP.userInfo.money)"
         rateLabel.text = APP.userInfo.rate.fixedZero()
-        
+        cardLabel.text = "\(APP.userInfo.cardCount)"
+        beanLabel.text = APP.userInfo.silverBean.fixedZero()
     }
     
     @IBAction func toCopy(_ sender: Any) {
