@@ -111,7 +111,7 @@ class ConversationViewController: RCConversationViewController {
         // 添加添加红包控件
         chatSessionInputBarControl.pluginBoardView.insertItem(UIImage(named: "plugin_item_red"), highlightedImage: UIImage(named: "plugin_item_red_highlight"), title: "红包", at: 2, tag: RED_PACKET_TAG)
     }
-    
+
     func requestUserDetail() {
         let userId = targetId.intValue
         HttpApi.Chat.getFriendDetail(userId: userId).done { [weak self] data in
@@ -158,12 +158,47 @@ class ConversationViewController: RCConversationViewController {
 
     override func registerCustomCellsAndMessages() {
         super.registerCustomCellsAndMessages()
+        
+        // 注册自定义消息
+        register(HTRedMessageCell.self, forMessageClass: HTRedMessage.self)
     }
     
     override func willDisplayMessageCell(_ cell: RCMessageBaseCell!, at indexPath: IndexPath!) {
         if let msgCell = cell as? RCMessageCell {
             msgCell.portraitImageView.layer.cornerRadius = 14
             msgCell.portraitImageView.contentMode = .scaleAspectFill
+        }
+    }
+    
+    override func didTapMessageCell(_ model: RCMessageModel!) {
+        super.didTapMessageCell(model)
+        
+        if let redContent = model.content as? HTRedMessage, let m = redContent.model {
+            if model.senderUserId.intValue == APP.loginData.userId {
+                let vc = RedDetailViewController.from(sb: .chat)
+                vc.redId = m.redid
+                vc.targetId = self.targetId
+                vc.conversationType = self.conversationType
+                vc.messageId = model.messageId
+                vc.model = m
+                vc.isSender = true
+                vc.isopen = model.expansionDic?["isopen"] ?? ""
+                self.go(vc)
+            } else {
+                // 点击了红包
+                RedOpenView.show(model: m) {
+                    let vc = RedDetailViewController.from(sb: .chat)
+                    vc.redId = m.redid
+                    vc.targetId = self.targetId
+                    vc.conversationType = self.conversationType
+                    vc.messageId = model.messageId
+                    vc.model = m
+                    vc.isSender = false
+                    vc.isopen = model.expansionDic?["isopen"] ?? ""
+                    self.go(vc)
+                }
+            }
+
         }
     }
     

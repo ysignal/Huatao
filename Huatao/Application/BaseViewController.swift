@@ -10,8 +10,6 @@ import UIKit
 class BaseViewController: SSViewController {
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
         showFakeNavBar()
         
         fakeNav.leftButtonHandler = {
@@ -19,8 +17,7 @@ class BaseViewController: SSViewController {
         }
         fakeNav.leftImage = SSImage.back
         
-        buildUI()
-        view.bringSubviewToFront(fakeNav)
+        super.viewDidLoad()
     }
 
 }

@@ -10,6 +10,10 @@ import UIKit
 
 class SetPasswordViewController: BaseViewController {
     
+    enum SetPasswordType {
+    case create, edit
+    }
+    
     @IBOutlet weak var titleOne: UILabel!
     @IBOutlet weak var titleTwo: UILabel!
     
@@ -21,6 +25,9 @@ class SetPasswordViewController: BaseViewController {
     @IBOutlet weak var tf6: SSTextField!
     
     @IBOutlet weak var completeBtn: UIButton!
+    
+    /// 设置类型，1-创建密码，2-修改密码
+    var type: SetPasswordType = .create
     
     /// 设置步骤，1-设置初始密码，2-设置确认密码
     var step: Int = 1
@@ -48,6 +55,8 @@ class SetPasswordViewController: BaseViewController {
         tf6.ssDelegate = self
         
         tf1.becomeFirstResponder()
+        
+        navRemove(ForgetPasswordViewController.self)
     }
     
     func clearInput() {
@@ -114,13 +123,9 @@ class SetPasswordViewController: BaseViewController {
             toast(message: "请输入6位数字密码")
             return
         }
-        let allNum = "0123456789"
-        guard allNum.contains(text1),
-              allNum.contains(text2),
-              allNum.contains(text3),
-              allNum.contains(text4),
-              allNum.contains(text5),
-              allNum.contains(text6) else {
+        
+        let pwd = text1 + text2 + text3 + text4 + text5 + text6
+        guard pwd.isNumberStr() else {
             clearInput()
             toast(message: "交易密码仅支持数字")
             return
@@ -131,14 +136,14 @@ class SetPasswordViewController: BaseViewController {
             step = 2
             titleTwo.text = "再次填写以确认"
             titleTwo.textColor = .black
-            pwdOne = text1 + text2 + text3 + text4 + text5 + text6
+            pwdOne = pwd
             completeBtn.isHidden = false
             completeBtn.drawGradient(start: .ss_dd, end: .ss_dd, size: CGSize(width: 160, height: 44), direction: .l2r)
             completeBtn.isUserInteractionEnabled = false
             clearInput()
         } else {
             // 进行密码验证
-            pwdTwo = text1 + text2 + text3 + text4 + text5 + text6
+            pwdTwo = pwd
             completeBtn.drawThemeGradient(CGSize(width: 160, height: 44))
             completeBtn.isUserInteractionEnabled = true
             view.endEditing(true)
@@ -156,19 +161,36 @@ class SetPasswordViewController: BaseViewController {
             completeBtn.isUserInteractionEnabled = false
             return
         }
-        
-        view.ss.showHUDLoading()
-        HttpApi.Task.putTradePassword(tradePassword: pwdOne, confirmPassword: pwdTwo).done { [weak self] _ in
-            SSMainAsync {
-                self?.view.ss.hideHUD()
-                self?.globalToast(message: "设置成功")
-                self?.completeBlock?()
-                self?.back()
+        switch type {
+        case .create:
+            view.ss.showHUDLoading()
+            HttpApi.Task.putTradePassword(tradePassword: pwdOne, confirmPassword: pwdTwo).done { [weak self] _ in
+                SSMainAsync {
+                    self?.view.ss.hideHUD()
+                    self?.globalToast(message: "设置成功")
+                    self?.completeBlock?()
+                    self?.back()
+                }
+            }.catch { [weak self] error in
+                SSMainAsync {
+                    self?.view.ss.hideHUD()
+                    self?.toast(message: error.localizedDescription)
+                }
             }
-        }.catch { [weak self] error in
-            SSMainAsync {
-                self?.view.ss.hideHUD()
-                self?.toast(message: error.localizedDescription)
+        case .edit:
+            view.ss.showHUDLoading()
+            HttpApi.Mine.putEditPasswordAuth(tradePassword: pwdOne).done { [weak self] _ in
+                SSMainAsync {
+                    self?.view.ss.hideHUD()
+                    self?.globalToast(message: "修改成功")
+                    self?.completeBlock?()
+                    self?.back()
+                }
+            }.catch { [weak self] error in
+                SSMainAsync {
+                    self?.view.ss.hideHUD()
+                    self?.toast(message: error.localizedDescription)
+                }
             }
         }
     }

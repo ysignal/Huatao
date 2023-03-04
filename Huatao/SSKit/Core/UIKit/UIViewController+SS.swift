@@ -289,4 +289,22 @@ extension UIViewController{
         present(alertController, animated: true, completion: nil)
         return alertController
     }
+    
+    @discardableResult
+    func showConfirm(title: String?,
+                     message: String?,
+                     buttonTitle: String = "确定",
+                     style: UIAlertAction.Style = .default,
+                     completion: (() -> Void)? = nil) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let action = UIAlertAction(title: buttonTitle, style: style, handler: { _ in
+            completion?()
+        })
+        alertController.addAction(cancel)
+        alertController.addAction(action)
+        alertController.preferredAction = action
+        present(alertController, animated: true, completion: nil)
+        return alertController
+    }
 }

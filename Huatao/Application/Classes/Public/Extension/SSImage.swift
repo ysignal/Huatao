@@ -31,6 +31,9 @@ struct SSImage {
     static var radioOn: UIImage? { return UIImage(named: "ic_radio_on") }
     static var radioOff: UIImage? { return UIImage(named: "ic_radio_off") }
     
+    static var checkboxOn: UIImage? { return UIImage(named: "ic_checkbox_on") }
+    static var checkboxOff: UIImage? { return UIImage(named: "ic_checkbox_off") }
+    
     static var taskPromote: UIImage? { return UIImage(named: "ic_task_share") }
     static var taskAuth: UIImage? { return UIImage(named: "ic_task_cert") }
     static var taskTrade: UIImage? { return UIImage(named: "ic_task_password") }

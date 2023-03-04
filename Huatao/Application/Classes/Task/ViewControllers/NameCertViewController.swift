@@ -48,7 +48,7 @@ class NameCertViewController: BaseViewController {
         self.name = name
         self.card = card
         view.ss.showHUDLoading()
-        let metaInfo = fixedDict(AliyunFaceAuthFacade.getMetaInfo())
+        let metaInfo = fixedDict(AliyunFaceManager.getMetaInfo())
         HttpApi.Task.postFaceAuth(certName: name, certNo: card, metaInfo: metaInfo).done { [weak self] certifyId in
             SS.log(certifyId)
             self?.certifyId = certifyId
@@ -66,26 +66,12 @@ class NameCertViewController: BaseViewController {
     
     func toVerify() {
         let params: [String: Any] = ["currentCtr": self]
-        AliyunFaceAuthFacade.verify(with: certifyId, extParams: params) { [weak self] response in
-            SS.log(response.reason)
-            SS.log(response.retMessageSub)
+        AliyunFaceManager.verify(with: certifyId, extParams: params) { [weak self] success, errorMsg in
             SSMainAsync {
-                switch response.code {
-                case .ZIMResponseSuccess:
-                    //刷脸成功
+                if success {
                     self?.uploadCertData()
-                case .ZIMInternalError:
-                    self?.globalToast(message: "系统错误")
-                case .ZIMInterrupt:
-                    self?.globalToast(message: "验证中断")
-                case .ZIMNetworkfail:
-                    self?.globalToast(message: "网络错误")
-                case .ZIMResponseFail:
-                    self?.globalToast(message: "验证失败")
-                case .ZIMTIMEError:
-                    self?.globalToast(message: "设备时间错误")
-                default:
-                    break
+                } else {
+                    SS.log(errorMsg)
                 }
             }
         }

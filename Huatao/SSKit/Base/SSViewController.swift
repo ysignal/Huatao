@@ -42,6 +42,7 @@ open class SSViewController: UIViewController {
             automaticallyAdjustsScrollViewInsets = false
         }
         buildUI()
+        view.bringSubviewToFront(fakeNav)
     }
     
     func buildUI() {

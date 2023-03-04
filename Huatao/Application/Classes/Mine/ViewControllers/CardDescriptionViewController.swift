@@ -93,7 +93,7 @@ class CardDescriptionViewController: BaseViewController {
     }
 
     @IBAction func toBind(_ sender: Any) {
-        let vc = BankCardViewController.from(sb: .mine)
+        let vc = CreateCardViewController.from(sb: .mine)
         self.go(vc)
     }
     

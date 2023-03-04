@@ -34,7 +34,7 @@ public extension Dictionary {
     }
     
     /// 字典转json
-    func toJson(prettify: Bool = false) -> String? {
+    func toJson(prettify: Bool = true) -> String? {
         guard JSONSerialization.isValidJSONObject(self) else { return nil }
         let options = (prettify == true) ? JSONSerialization.WritingOptions.prettyPrinted : JSONSerialization.WritingOptions()
         guard let jsonData = try? JSONSerialization.data(withJSONObject: self, options: options) else { return nil }

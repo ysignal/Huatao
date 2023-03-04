@@ -402,7 +402,7 @@
                                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_like_off" translatesAutoresizingMaskIntoConstraints="NO" id="wKr-3r-6py">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_find_share_gray" translatesAutoresizingMaskIntoConstraints="NO" id="wKr-3r-6py">
                                                         <rect key="frame" x="9" y="14.666666666666629" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="JqT-Yn-MZH"/>
@@ -622,6 +622,7 @@
     </scenes>
     <resources>
         <image name="ic_find_comment_gray" width="19" height="19.666666030883789"/>
+        <image name="ic_find_share_gray" width="17.666666030883789" height="17.666666030883789"/>
         <image name="ic_find_tab_circle" width="48" height="48"/>
         <image name="ic_find_tab_health" width="48" height="48"/>
         <image name="ic_find_tab_shop" width="48" height="48"/>

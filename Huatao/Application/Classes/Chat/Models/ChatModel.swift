@@ -205,16 +205,16 @@ struct ChildrenListItem: SSConvertible {
     var userId: Int = 0
     
     /// 用户昵称
-    var name: String = "小倪"
+    var name: String = ""
     
     /// 用户头像
-    var avatar: String = "http://qiniu.kp.upin168.cn/images/20230218/d435cebdac4f9cb9c0d2357a05e8695d.jpg"
+    var avatar: String = ""
     
     /// 下级列表
-    var children: [ChildrenChildItem] = [ChildrenChildItem(), ChildrenChildItem(), ChildrenChildItem()]
+    var children: [ChildrenChildItem] = []
     
     /// 下级数量
-    var count: Int = 3
+    var count: Int = 0
     
     /// 是否展开
     var isOpen: Bool = false
@@ -227,9 +227,64 @@ struct ChildrenChildItem: SSConvertible {
     var userId: Int = 0
     
     /// 用户昵称
-    var name: String = "用户0004"
+    var name: String = ""
     
     /// 用户头像
-    var avatar: String = "http://qiniu.kp.upin168.cn/images/20230218/d435cebdac4f9cb9c0d2357a05e8695d.jpg"
+    var avatar: String = ""
+    
+}
+
+
+struct RedDetailModel: SSConvertible {
+    
+    /// 领取到的红包金额
+    var money: CGFloat = 0
+    
+    /// 是否领取到
+    var isHaveGet: Int = 0
+    
+    /// 是否可以领
+    var isCanGet: Int = 0
+    
+    /// 红包ID
+    var redId: Int = 0
+    
+    /// 红包对象
+    var redDetail = RedDetailItem()
+    
+}
+
+struct RedDetailItem: SSConvertible {
+    
+    /// 描述
+    var description: String = ""
+    
+    /// 红包个数
+    var total: Int = 0
+    
+    /// 红包已领取个数
+    var getTotal: Int = 0
+    
+    /// 红包总金额
+    var totalMoney: String = ""
+    
+    /// 领取用户列表
+    var list: [RedUserItem] = []
+    
+}
+
+struct RedUserItem: SSConvertible {
+
+    /// 用户昵称
+    var name: String = ""
+    
+    /// 用户头像
+    var avatar: String = ""
+    
+    /// 领取金额
+    var money: String = ""
+    
+    /// 领取时间
+    var createdAt: String = ""
     
 }

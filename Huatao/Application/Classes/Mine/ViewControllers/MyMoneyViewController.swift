@@ -19,7 +19,11 @@ class MyMoneyViewController: BaseViewController {
     /// 提现用的卡号
     private var cardNo: String = "" {
         didSet {
-            cardLabel.text = cardNo
+            if cardNo.count > 4 {
+                cardLabel.text = "*".repeatCount(cardNo.count - 4) + cardNo.suffix(4)
+            } else {
+                cardLabel.text = cardNo
+            }
         }
     }
         
@@ -45,6 +49,9 @@ class MyMoneyViewController: BaseViewController {
                     self.go(vc)
                 } else {
                     let vc = BankCardViewController.from(sb: .mine)
+                    vc.completeBlock = { str in
+                        self.cardNo = str
+                    }
                     self.go(vc)
                 }
             }
@@ -84,6 +91,10 @@ class MyMoneyViewController: BaseViewController {
     @IBAction func toWithdraw(_ sender: Any) {
         if cardNo.isEmpty {
             toast(message: "请先选择提现账号")
+            return
+        }
+        if APP.userInfo.money <= 0 {
+            toast(message: "提现余额不足")
             return
         }
         view.ss.showHUDLoading()

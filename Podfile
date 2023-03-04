@@ -42,6 +42,8 @@ target 'Huatao' do
   # 支付宝SDK
   pod 'AlipaySDK-iOS'
   pod 'AliPlayerSDK_iOS'
+  # 穿山甲SDK
+  pod 'Ads-CN'
   
 #  pod 'RongCloud/IMLib'
   # 融云IM

@@ -70,9 +70,6 @@ public struct APP {
     /// 一键登录倒计时计数
     static var authCount: Int = 0
     
-    /// 手机号码倒计时计数
-    static var phoneCount: Int = 0
-    
     /// 当前聊天会话ID
     static var currentEaseId: String = ""
     
@@ -259,10 +256,11 @@ public struct APP {
     }
     
     static func setupAPP() {
+        
         UITextView.appearance().tintColor = .ss_theme
         UITextField.appearance().tintColor = .ss_theme
         
-        _ = AliyunFaceAuthFacade.init()
+        AliyunFaceManager.initFaceSDK()
                 
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
@@ -275,6 +273,7 @@ public struct APP {
         RCIM.shared().userInfoDataSource = IMManager.shared
         RCIM.shared().groupInfoDataSource = IMManager.shared
         RCIM.shared().enablePersistentUserInfoCache = true
+        RCIM.shared().registerMessageType(HTRedMessage.self)
         // 异步加载本地数据
         DispatchQueue.global().async {
             if let url = Bundle.main.url(forResource: "china_address", withExtension: "json"),

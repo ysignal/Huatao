@@ -213,6 +213,9 @@ extension GroupSettingViewController: TeamMemberListCellDelegate {
 extension GroupSettingViewController: TeamListItemCellDelegate {
     
     func cellDidTap(_ item: GroupSettingSectionItem) {
+        if item.type == 4 {
+            return
+        }
         switch item.action {
         case "name":
             let vc = GroupRenameViewController.from(sb: .chat)

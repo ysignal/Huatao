@@ -99,7 +99,14 @@ public extension String {
     
     private func crypto(algorithm: CryptoAlgorithm) -> String {
         guard let data = self.data(using: .utf8) else { return "" }
-        let digestLen = algorithm.digestLength
+        let digestLen: Int32 = {
+            if #available(iOS 13.0, *), algorithm == .md5 {
+                // iOS 13.0以后会弃用该api，不推荐使用md5
+                return CryptoAlgorithm.sha256.digestLength
+            } else {
+                return algorithm.digestLength
+            }
+        }()
         let result = data.withUnsafeBytes { (bytes) -> [UInt8] in
             var h = [UInt8](repeating: 0, count: Int(digestLen))
             switch algorithm {

@@ -230,9 +230,7 @@ extension HttpApi {
 
             return APP.httpClient.request(req).asVoid()
         }
-        
-        
-        
+                
         /// 设置交易密码
         /// - Parameters:
         ///   - tradePassword: 交易密码
@@ -300,6 +298,23 @@ extension HttpApi {
             
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
+        
+        /// 转发朋友圈上报
+        /// - Returns: 无返回值
+        static func putShareUpdate() -> Promise<Void> {
+            let req = HttpRequest(path: "/api/share_update", method: .put)
+            
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 观看广告上报
+        /// - Returns: 无返回值
+        static func putAdUpdate() -> Promise<Void> {
+            let req = HttpRequest(path: "/api/ad_update", method: .put)
+            
+            return APP.httpClient.request(req).asVoid()
+        }
+        
     }
 }
 
@@ -583,14 +598,31 @@ extension HttpApi {
         ///   - money: 数额
         ///   - orderSn: 支付订单号
         /// - Returns: 无返回值
-        static func putUserSendRed(userId: Int, type: Int, payType: Int, money: Int, orderSn: String) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/team_set", method: .put)
+        static func putUserSendRed(userId: Int, type: Int, payType: Int, money: CGFloat, orderSn: String = "") -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/send_red_user", method: .put)
             req.headers["Content-Type"] = "application/x-www-form-urlencoded"
             req.paramsType = .url
             req.encoding = URLEncoding.httpBody
-            req.params = ["user_id": userId, "type": type, "pay_type": payType, "money": money, "order_sn": orderSn]
+            var params: [String: Any] = ["user_id": userId, "type": type, "pay_type": payType, "money": Int(money)]
+            if !orderSn.isEmpty {
+                params["order_sn"] = orderSn
+            }
+            req.params = params
 
-            return APP.httpClient.request(req).asVoid()
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 领取个人红包
+        /// - Parameter sendRedId: 红包ID
+        /// - Returns: 无返回值
+        static func putGetUserRed(sendRedId: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/get_user_red", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["send_red_id": sendRedId]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
         
         /// 发放群组红包
@@ -604,12 +636,25 @@ extension HttpApi {
         ///   - redType: 红包类型，0-普通红包，1-拼手气红包
         ///   - totalMoney: 总金额
         /// - Returns: 无返回值
-        static func putTeamSendRed(teamId: Int, type: Int, payType: Int, money: Int, number: Int, orderSn: String, redType: Int, totalMoney: Int) -> Promise<Void> {
-            var req = HttpRequest(path: "/api/team_set", method: .put)
+        static func putTeamSendRed(teamId: Int, type: Int, payType: Int, money: Int, number: Int, orderSn: String, redType: Int, totalMoney: Int) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/send_red_team", method: .put)
             req.headers["Content-Type"] = "application/x-www-form-urlencoded"
             req.paramsType = .url
             req.encoding = URLEncoding.httpBody
             req.params = ["team_id": teamId, "type": type, "pay_type": payType, "money": money, "number": number, "order_sn": orderSn, "red_type": redType, "total_money": totalMoney]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 领取群组红包
+        /// - Parameter sendRedId: 红包ID
+        /// - Returns: 无返回值
+        static func putGetTeamRed(redId: Int, teamId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/get_team_red", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["red_id": redId, "team_id": teamId]
 
             return APP.httpClient.request(req).asVoid()
         }
@@ -627,6 +672,8 @@ extension HttpApi {
         
             return APP.httpClient.request(req).asVoid()
         }
+        
+        
         
         /// 获取好友详情
         /// - Parameter userId: 用户ID
@@ -1127,7 +1174,6 @@ extension HttpApi {
             return APP.httpClient.request(req).asVoid()
         }
         
-        
         /// 余额提现
         /// - Parameter cardNo: 卡号
         /// - Returns: 无返回值
@@ -1146,6 +1192,60 @@ extension HttpApi {
 
             return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
         }
+        
+        /// 添加银行卡
+        /// - Parameters:
+        ///   - name: 姓名
+        ///   - cardNo: 银行卡号
+        ///   - cardId: 身份证号
+        /// - Returns: 无返回值
+        static func postAddBank(name: String, cardNo: String, cardId: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/add_bank", method: .post)
+            req.paramsType = .json
+            req.params = ["card_no": cardNo, "name": name, "card_id": cardId]
+        
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 删除银行卡
+        /// - Parameter bankId: 银行卡ID
+        /// - Returns: 无返回值
+        static func deleteBank(bankId: Int) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/delete_bank", method: .delete)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["bank_id": bankId]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
+        /// 获取修改密码认证
+        /// - Parameters:
+        ///   - realName: 姓名
+        ///   - cardId: 身份证号
+        /// - Returns: 返回结果
+        static func getEditPasswordAuth(realName: String, cardId: String) -> Promise<[String: Any]> {
+            var req = HttpRequest(path: "/api/edit_password_auth", method: .get)
+            req.paramsType = .url
+            req.params = ["real_name": realName, "card_id": cardId]
+
+            return APP.httpClient.request(req).map({ ($0.json as? [String: Any] ?? [:])})
+        }
+        
+        /// 修改交易密码
+        /// - Parameter tradePassword: 密码
+        /// - Returns: 无返回值
+        static func putEditPasswordAuth(tradePassword: String) -> Promise<Void> {
+            var req = HttpRequest(path: "/api/edit_password_auth", method: .put)
+            req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+            req.paramsType = .url
+            req.encoding = URLEncoding.httpBody
+            req.params = ["trade_password": tradePassword]
+
+            return APP.httpClient.request(req).asVoid()
+        }
+        
     }
 
 }

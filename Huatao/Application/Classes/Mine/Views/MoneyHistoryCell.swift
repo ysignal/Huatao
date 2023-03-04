@@ -16,11 +16,19 @@ class MoneyHistoryCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        selectionStyle = .none
     }
     
-    func config(item: MoneyHistoryItem) {
+    func config(item: WalletRecordItem) {
+        reasonLabel.text = item.desc
+        timeLabel.text = item.createdAt
         
+        let mulStr = NSMutableAttributedString()
+        let typeText = item.type == 1 ? "+" : "-"
+        moneyLabel.textColor = item.type == 1 ? .hex("1bd86d") : .hex("f11f1f")
+        mulStr.append(NSAttributedString(string: "\(typeText)\(item.money.fixedZero())", attributes: [.font: UIFont.ss_dinbold(size: 16)]))
+        mulStr.append(NSAttributedString(string: "元", attributes: [.font: UIFont.ss_dinbold(size: 10)]))
+        moneyLabel.attributedText = mulStr
     }
 
 }

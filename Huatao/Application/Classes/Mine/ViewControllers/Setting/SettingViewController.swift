@@ -23,12 +23,7 @@ class SettingViewController: BaseViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var menuTV: UITableView!
     
-    var list: [SettingMenuItem] = [SettingMenuItem(icon: "ic_setting_face", title: "实名认证"),
-                                   SettingMenuItem(icon: "ic_setting_wechat", title: "微信绑定"),
-                                   SettingMenuItem(icon: "ic_setting_mobile", title: "手机绑定"),
-                                   SettingMenuItem(icon: "ic_setting_about", title: "关于华涛生活"),
-                                   SettingMenuItem(icon: "ic_setting_clear", title: "清理缓存"),
-                                   SettingMenuItem(icon: "ic_setting_logout", title: "退出登录")]
+    var list: [SettingMenuItem] = []
     
 
     override func viewDidLoad() {
@@ -64,9 +59,10 @@ class SettingViewController: BaseViewController {
             case .failure(_):
                 break
             }
-            self?.list = [SettingMenuItem(icon: "ic_setting_face", title: "实名认证"),
-                          SettingMenuItem(icon: "ic_setting_wechat", title: "微信绑定"),
+            self?.list = [SettingMenuItem(icon: "ic_setting_face", title: "实名认证", value: APP.userInfo.cardStatus == 1 ? "已实名认证" : ""),
+//                          SettingMenuItem(icon: "ic_setting_wechat", title: "微信绑定"),
                           SettingMenuItem(icon: "ic_setting_phone", title: "手机绑定", value: mobileValue),
+                          SettingMenuItem(icon: "ic_setting_pwd", title: "支付密码"),
                           SettingMenuItem(icon: "ic_setting_about", title: "关于华涛生活"),
                           SettingMenuItem(icon: "ic_setting_clear", title: "清理缓存", value: cacheValue),
                           SettingMenuItem(icon: "ic_setting_logout", title: "退出登录")]
@@ -84,30 +80,66 @@ extension SettingViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
+        let item = list[indexPath.row]
+        switch item.icon {
+        case "ic_setting_face":
+            if APP.userInfo.cardStatus == 1 {
+                // 已认证的用户不能进入认证流程
+                return
+            }
             let vc = NameCertViewController.from(sb: .task)
             vc.completeBlock = {
-                
+                APP.updateUserInfo {
+                    self.loadList()
+                }
             }
             go(vc)
-        case 1:
+        case "ic_setting_wechat":
             ThirdLoginManager.shared.wxLogin(in: self) { openid in
                 SS.log(openid)
             }
-        case 3:
+        case "ic_setting_phone":
+            let vc = MobileConfirmViewController.from(sb: .mine)
+            vc.completeBlock = {
+                APP.updateUserInfo {
+                    self.loadList()
+                }
+            }
+            go(vc)
+        case "ic_setting_pwd":
+            if APP.userInfo.cardStatus == 1 {
+                // 已认证，进入忘记密码页面
+                let vc = ForgetPasswordViewController.from(sb: .mine)
+                self.go(vc)
+            } else {
+                showConfirm(title: "提示", message: "修改支付密码需要先进行实名认证，是否去认证?", buttonTitle: "去认证") {
+                    // 未认证，进入认证页面
+                    let vc = NameCertViewController.from(sb: .task)
+                    vc.completeBlock = {
+                        APP.updateUserInfo {
+                            self.loadList()
+                        }
+                    }
+                    self.go(vc)
+                }
+            }
+        case "ic_setting_about":
             // 关于
             let vc = AboutViewController.from(sb: .mine)
             go(vc)
-        case 4:
+        case "ic_setting_clear":
             // 清理缓存
-            view.ss.showHUDLoading()
-            KingfisherManager.shared.cache.clearDiskCache { [weak self] in
-                self?.loadList()
+            showConfirm(title: "提示", message: "清除缓存后图片和文件等资源需要重新加载", buttonTitle: "清理", style: .destructive) { [weak self] in
+                self?.view.ss.showHUDLoading()
+                KingfisherManager.shared.cache.clearDiskCache {
+                    self?.loadList()
+                }
             }
-        case 5:
+        case "ic_setting_logout":
             // 退出登录
-            APP.logout()
+            showConfirm(title: "提示", message: "是否继续退出登录?", buttonTitle: "继续", style: .destructive) {
+                APP.logout()
+            }
         default:
             break
         }

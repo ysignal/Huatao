@@ -29,7 +29,11 @@ class MoneyHistoryViewController: BaseViewController {
     /// 组头
     var currentPage: Int = 0
     
-    var list: [MoneyHistoryItem] = []
+    var list: [WalletRecordItem] = []
+    
+    var type: Int = 2
+    
+    var page: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +65,35 @@ class MoneyHistoryViewController: BaseViewController {
         indicator.indicatorColor = UIColor.ss_theme
         segmentedView.indicators = [indicator]
         
-        tableView.showEmpty(true)
     }
     
     func requestData() {
-        
+        HttpApi.Mine.getRecordList(way: 0, type: type, page: page).done { [weak self] data in
+            guard let weakSelf = self else { return }
+            let listModel = data.kj.model(ListModel<WalletRecordItem>.self)
+            if weakSelf.page == 1 {
+                weakSelf.list = listModel.list
+            } else {
+                weakSelf.list.append(contentsOf: listModel.list)
+            }
+            SSMainAsync {
+                weakSelf.tableView.mj_header?.endRefreshing()
+                weakSelf.view.ss.hideHUD()
+                if weakSelf.list.count >= listModel.total {
+                    weakSelf.tableView.mj_footer?.endRefreshingWithNoMoreData()
+                } else {
+                    weakSelf.tableView.mj_footer?.resetNoMoreData()
+                }
+                weakSelf.tableView.showEmpty(weakSelf.list.isEmpty)
+                weakSelf.tableView.reloadData()
+            }
+        }.catch { [weak self] error in
+            SSMainAsync {
+                self?.view.ss.hideHUD()
+                self?.tableView.endRefresh()
+                self?.toast(message: error.localizedDescription)
+            }
+        }
     }
 
 }
@@ -73,7 +101,18 @@ class MoneyHistoryViewController: BaseViewController {
 extension MoneyHistoryViewController: JXSegmentedViewDelegate {
     func segmentedView(_ segmentedView: JXSegmentedView, didSelectedItemAt index: Int) {
         currentPage = index
-        
+        switch currentPage {
+        case 0:
+            type = 2
+        case 1:
+            type = 1
+        case 2:
+            type = 0
+        default:
+            break
+        }
+        view.ss.showHUDLoading()
+        requestData()
     }
 }
 

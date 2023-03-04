@@ -171,10 +171,28 @@ extension String {
         }
     }
 
+    func repeatCount(_ count: Int) -> String {
+        if count > 0 {
+            var list: [String] = []
+            for _ in 0..<count {
+                list.append(self)
+            }
+            return list.joined()
+        }
+        return self
+    }
     
     // 手机号码匹配
     func isPhoneStr() -> Bool {
         let pattern = "^1[0-9]{10}$"
+        if NSPredicate(format: "SELF MATCHES %@", pattern).evaluate(with: self) {
+            return true
+        }
+        return false
+    }
+    
+    func isNumberStr() -> Bool {
+        let pattern = "^[0-9]*$"
         if NSPredicate(format: "SELF MATCHES %@", pattern).evaluate(with: self) {
             return true
         }

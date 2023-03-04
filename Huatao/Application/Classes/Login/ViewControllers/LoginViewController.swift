@@ -78,23 +78,12 @@ class LoginViewController: SSViewController {
     }
     
     private func startCountDown() {
-        // 注销事件
-        timer?.invalidate()
-        // 释放Timer
-        timer = nil
-        // 开启事件
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] t in
-            if APP.phoneCount <= 1 {
-                t.invalidate()
-                SSMainAsync {
-                    self?.codeBtn.isUserInteractionEnabled = true
-                    self?.codeBtn.title = "获取验证码"
-                }
-                return
-            }
-            APP.phoneCount -= 1
-            SSMainAsync {
-                self?.codeBtn.title = "\(APP.phoneCount)秒后重新获取"
+        TimerManager.countDown { [weak self] count, isEnded in
+            if isEnded {
+                self?.codeBtn.isUserInteractionEnabled = true
+                self?.codeBtn.title = "获取验证码"
+            } else {
+                self?.codeBtn.title = "\(count)秒后重新获取"
             }
         }
     }
@@ -108,7 +97,7 @@ class LoginViewController: SSViewController {
         }
         view.ss.showHUDLoading()
         HttpApi.Login.sendSms(mobile: mobile, sign: 1).done { [weak self] () in
-            APP.phoneCount = 60
+            TimerManager.phoneCount = 60
             SSMainAsync {
                 self?.view.ss.hideHUD()
                 self?.toast(message: "发送成功")

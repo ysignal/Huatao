@@ -181,32 +181,54 @@ class TaskViewController: SSViewController {
         }
         switch item.name {
         case "turn_promote":
+            // 完成转发海报任务
             let vc = TurnPromoteViewController.from(sb: .task)
             vc.completeBlock = { [weak self] in
                 self?.requestTaskList()
             }
             go(vc)
         case "card_auth":
+            // 完成实名认证任务
             let vc = NameCertViewController.from(sb: .task)
             vc.completeBlock = { [weak self] in
                 self?.requestTaskList()
             }
             go(vc)
         case "trade_password":
+            // 完成设置交易密码任务
             let vc = SetPasswordViewController.from(sb: .task)
             vc.completeBlock = { [weak self] in
                 self?.requestTaskList()
             }
             go(vc)
         case "set_place":
+            // 完成设置归属地任务
             let vc = HomePlaceViewController.from(sb: .task)
             vc.completeBlock = { [weak self] in
                 self?.requestTaskList()
             }
             go(vc)
-            
+        case "point_like":
+            // 去完成点赞任务，切换分页到发现分页
+            tabBarController?.selectedIndex = 2
+        case "share_friend":
+            // 分享到朋友圈
+            requestShareUpdate()
+        case "invite_user":
+            // 邀请新用户
+            let vc = MyCodeViewController()
         default:
             break
+        }
+    }
+    
+    func requestShareUpdate() {
+        HttpApi.Task.putShareUpdate().done { [weak self] _ in
+            self?.requestTaskList()
+        }.catch { [weak self] error in
+            SSMainAsync {
+                self?.toast(message: error.localizedDescription)
+            }
         }
     }
 

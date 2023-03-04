@@ -17,6 +17,8 @@ class BankCardViewController: BaseViewController {
     
     private var isEditMode: Bool = false
     
+    var completeBlock: StringBlock?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +42,7 @@ class BankCardViewController: BaseViewController {
         
         bottomBtn.drawThemeGradient(CGSizeMake(SS.w - 24, 40))
         // 移除绑卡说明中间页
-        navRemove([CardDescriptionViewController.self])
+        navRemove([CardDescriptionViewController.self, CreateCardViewController.self])
     }
     
     func requestData() {
@@ -69,15 +71,39 @@ class BankCardViewController: BaseViewController {
             tableView.reloadData()
             fakeNav.title = "解除绑定"
             fakeNav.rightButton.title = "取消"
+            bottomBtn.isHidden = true
         } else {
             tableView.reloadData()
             fakeNav.title = "我的银行卡"
             fakeNav.rightButton.title = "解除绑定"
+            bottomBtn.isHidden = false
         }
     }
     
+    func toDelete(_ item: BankCardItem) {
+        showConfirm(title: "提示", message: "是否解除当前银行卡绑定?", buttonTitle: "确定", style: .destructive) { [weak self] in
+            self?.view.ss.showHUDLoading()
+            HttpApi.Mine.deleteBank(bankId: item.bankId).done { _ in
+                SSMainAsync {
+                    self?.view.ss.hideHUD()
+                    self?.toast(message: "已解除绑定")
+                    self?.requestData()
+                }
+            }.catch { error in
+                SSMainAsync {
+                    self?.view.ss.hideHUD()
+                    self?.toast(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+
     @IBAction func bottomClicked(_ sender: Any) {
-        
+        let vc = CreateCardViewController.from(sb: .mine)
+        vc.completeBlock = { [weak self] in
+            self?.requestData()
+        }
+        go(vc)
     }
     
 }
@@ -86,6 +112,17 @@ extension BankCardViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 198.scale + 12
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isEditMode {
+            return
+        }
+        let item = list[indexPath.row]
+        completeBlock?(item.cardNo)
+        if completeBlock != nil {
+            back()
+        }
     }
     
 }
@@ -99,7 +136,9 @@ extension BankCardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(with: BankCardItemCell.self)
         let item = list[indexPath.row]
-        cell.config(item: item)
+        cell.config(item: item, isEditMode: isEditMode) {
+            self.toDelete(item)
+        }
         return cell
     }
     

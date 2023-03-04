@@ -65,6 +65,7 @@ class VipRuleViewController: BaseViewController {
         userName.text = APP.userInfo.name
         userMobile.text = APP.userInfo.mobile
         userId.text = "ID:\(APP.loginData.userId)"
+        vipRate.text = "费率:\(APP.userInfo.rate.fixedZero())%"
         
         upgradeBtn.drawThemeGradient(CGSize(width: SS.w - 24, height: 40))
         vipBtn.isHidden = true

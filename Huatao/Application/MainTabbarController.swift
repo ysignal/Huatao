@@ -80,7 +80,7 @@ class MainTabbarController: SSTabBarController {
             make.width.equalTo(50)
         }
         
-        selectedIndex = 4
+        selectedIndex = 2
         
         APP.updateUserInfo()
         

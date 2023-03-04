@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		551BA688299CE2E20048A46F /* SetupPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BA687299CE2E20048A46F /* SetupPasswordViewController.swift */; };
 		551BA68A299DCB5C0048A46F /* CircleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BA689299DCB5C0048A46F /* CircleDetailViewController.swift */; };
 		551BA68C299DD5240048A46F /* CircleLikeUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BA68B299DD5240048A46F /* CircleLikeUserView.swift */; };
 		551BA68E299DD54D0048A46F /* CircleDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BA68D299DD54D0048A46F /* CircleDetailHeaderView.swift */; };
@@ -82,50 +81,50 @@
 		557B1C3329ADDD39009543F8 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C3229ADDD39009543F8 /* ReplayKit.framework */; };
 		557B1C4329ADE416009543F8 /* SSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1C4229ADE416009543F8 /* SSTextField.swift */; };
 		557B1C4529ADED42009543F8 /* NameCertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1C4429ADED42009543F8 /* NameCertViewController.swift */; };
-		557B1C9E29AE1CDA009543F8 /* DTFUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C8D29AE1CD9009543F8 /* DTFUIModule.framework */; };
-		557B1C9F29AE1CDA009543F8 /* MultiFactorFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C8E29AE1CD9009543F8 /* MultiFactorFacade.framework */; };
-		557B1CA029AE1CDA009543F8 /* deviceiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C8F29AE1CD9009543F8 /* deviceiOS.framework */; };
-		557B1CA129AE1CDA009543F8 /* APPSecuritySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9029AE1CD9009543F8 /* APPSecuritySDK.framework */; };
-		557B1CA229AE1CDA009543F8 /* DTFIdentityManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9129AE1CD9009543F8 /* DTFIdentityManager.framework */; };
-		557B1CA329AE1CDA009543F8 /* AliyunFaceAuthFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9229AE1CD9009543F8 /* AliyunFaceAuthFacade.framework */; };
-		557B1CA429AE1CDA009543F8 /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9329AE1CD9009543F8 /* AliyunOSSiOS.framework */; };
-		557B1CA529AE1CDA009543F8 /* ToygerNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9429AE1CD9009543F8 /* ToygerNative.framework */; };
-		557B1CA629AE1CDA009543F8 /* OCRDetectSDKForTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9529AE1CD9009543F8 /* OCRDetectSDKForTech.framework */; };
-		557B1CA729AE1CDA009543F8 /* AliyunMobileRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9629AE1CD9009543F8 /* AliyunMobileRPC.framework */; };
-		557B1CA829AE1CDA009543F8 /* BioAuthEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9729AE1CD9009543F8 /* BioAuthEngine.framework */; };
-		557B1CA929AE1CDA009543F8 /* DTFSensorServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9829AE1CD9009543F8 /* DTFSensorServices.framework */; };
-		557B1CAA29AE1CDA009543F8 /* BioAuthAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9929AE1CD9009543F8 /* BioAuthAPI.framework */; };
-		557B1CAB29AE1CDA009543F8 /* APBToygerFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9A29AE1CD9009543F8 /* APBToygerFacade.framework */; };
-		557B1CAC29AE1CDA009543F8 /* DTFUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9B29AE1CDA009543F8 /* DTFUtility.framework */; };
-		557B1CAD29AE1CDA009543F8 /* MPRemoteLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9C29AE1CDA009543F8 /* MPRemoteLogging.framework */; };
-		557B1CAE29AE1CDA009543F8 /* ToygerService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1C9D29AE1CDA009543F8 /* ToygerService.framework */; };
-		557B1CB029AE1D5B009543F8 /* ToygerNative.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B1CAF29AE1D5B009543F8 /* ToygerNative.bundle */; };
-		557B1CB229AE1D71009543F8 /* OCRXMedia.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B1CB129AE1D70009543F8 /* OCRXMedia.bundle */; };
-		557B1CB429AE1D86009543F8 /* BioAuthEngine.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B1CB329AE1D86009543F8 /* BioAuthEngine.bundle */; };
-		557B1CB629AE1D9C009543F8 /* APBToygerFacade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B1CB529AE1D9C009543F8 /* APBToygerFacade.bundle */; };
 		557B1CEF29AE28E3009543F8 /* ThirdLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CEE29AE28E3009543F8 /* ThirdLoginManager.swift */; };
 		557B1CF129AE2A2C009543F8 /* NormalPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CF029AE2A2C009543F8 /* NormalPlugin.swift */; };
-		557B1D0429AEE5CB009543F8 /* BioAuthEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CF329AEE5CB009543F8 /* BioAuthEngine.framework */; };
-		557B1D0529AEE5CB009543F8 /* MPRemoteLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CF429AEE5CB009543F8 /* MPRemoteLogging.framework */; };
-		557B1D0629AEE5CB009543F8 /* BioAuthAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CF529AEE5CB009543F8 /* BioAuthAPI.framework */; };
-		557B1D0729AEE5CB009543F8 /* APBToygerFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CF629AEE5CB009543F8 /* APBToygerFacade.framework */; };
-		557B1D0829AEE5CB009543F8 /* OCRDetectSDKForTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CF729AEE5CB009543F8 /* OCRDetectSDKForTech.framework */; };
-		557B1D0929AEE5CB009543F8 /* DTFUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CF829AEE5CB009543F8 /* DTFUtility.framework */; };
-		557B1D0A29AEE5CB009543F8 /* MultiFactorFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CF929AEE5CB009543F8 /* MultiFactorFacade.framework */; };
-		557B1D0B29AEE5CB009543F8 /* DTFUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CFA29AEE5CB009543F8 /* DTFUIModule.framework */; };
-		557B1D0C29AEE5CB009543F8 /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CFB29AEE5CB009543F8 /* AliyunOSSiOS.framework */; };
-		557B1D0D29AEE5CB009543F8 /* AliyunMobileRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CFC29AEE5CB009543F8 /* AliyunMobileRPC.framework */; };
-		557B1D0E29AEE5CB009543F8 /* ToygerNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CFD29AEE5CB009543F8 /* ToygerNative.framework */; };
-		557B1D0F29AEE5CB009543F8 /* DTFIdentityManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CFE29AEE5CB009543F8 /* DTFIdentityManager.framework */; };
-		557B1D1029AEE5CB009543F8 /* AliyunFaceAuthFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1CFF29AEE5CB009543F8 /* AliyunFaceAuthFacade.framework */; };
-		557B1D1129AEE5CB009543F8 /* DTFSensorServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1D0029AEE5CB009543F8 /* DTFSensorServices.framework */; };
-		557B1D1229AEE5CB009543F8 /* ToygerService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1D0129AEE5CB009543F8 /* ToygerService.framework */; };
-		557B1D1329AEE5CB009543F8 /* APPSecuritySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1D0229AEE5CB009543F8 /* APPSecuritySDK.framework */; };
-		557B1D1429AEE5CB009543F8 /* deviceiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1D0329AEE5CB009543F8 /* deviceiOS.framework */; };
-		557B1D1629AEEA52009543F8 /* MultiFactorFacade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B1D1529AEEA52009543F8 /* MultiFactorFacade.bundle */; };
 		557B1FC329AF48F4009543F8 /* BankCardItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FC229AF48F4009543F8 /* BankCardItemCell.swift */; };
 		557B1FC529AF5617009543F8 /* CardDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FC429AF5617009543F8 /* CardDescriptionViewController.swift */; };
 		557B1FC729AF630C009543F8 /* CreateCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FC629AF630C009543F8 /* CreateCardViewController.swift */; };
+		557B1FC929B08FC5009543F8 /* BaseActionSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FC829B08FC5009543F8 /* BaseActionSheetView.swift */; };
+		557B1FCB29B08FCD009543F8 /* BaseActionSheetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557B1FCA29B08FCD009543F8 /* BaseActionSheetView.xib */; };
+		557B1FCD29B0904D009543F8 /* BaseActionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FCC29B0904D009543F8 /* BaseActionItemCell.swift */; };
+		557B1FCF29B09052009543F8 /* BaseActionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557B1FCE29B09052009543F8 /* BaseActionItemCell.xib */; };
+		557B1FD229B09E9A009543F8 /* HTRedMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FD129B09E9A009543F8 /* HTRedMessage.swift */; };
+		557B1FD429B0B205009543F8 /* MobileConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FD329B0B205009543F8 /* MobileConfirmViewController.swift */; };
+		557B1FD629B0B216009543F8 /* MobileChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FD529B0B216009543F8 /* MobileChangeViewController.swift */; };
+		557B1FDA29B18CE6009543F8 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FD929B18CE6009543F8 /* TimerManager.swift */; };
+		557B1FDC29B194E5009543F8 /* HTRedMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FDB29B194E5009543F8 /* HTRedMessageCell.swift */; };
+		557B1FDE29B1C391009543F8 /* RedOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FDD29B1C391009543F8 /* RedOpenView.swift */; };
+		557B1FE029B1C3A5009543F8 /* RedOpenView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557B1FDF29B1C3A5009543F8 /* RedOpenView.xib */; };
+		557B1FE229B1C9C2009543F8 /* RedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FE129B1C9C2009543F8 /* RedDetailViewController.swift */; };
+		557B1FE429B1D3A1009543F8 /* RedDetailUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FE329B1D3A1009543F8 /* RedDetailUserCell.swift */; };
+		557B1FE629B1F7F4009543F8 /* PayTypeSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FE529B1F7F4009543F8 /* PayTypeSelectView.swift */; };
+		557B1FE829B1F7FE009543F8 /* PayTypeSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557B1FE729B1F7FE009543F8 /* PayTypeSelectView.xib */; };
+		557B1FEA29B1FEBD009543F8 /* PasswordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1FE929B1FEBD009543F8 /* PasswordInputView.swift */; };
+		557B1FFC29B31A9D009543F8 /* DTFIdentityManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FEB29B31A9C009543F8 /* DTFIdentityManager.framework */; };
+		557B1FFD29B31A9D009543F8 /* BioAuthEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FEC29B31A9C009543F8 /* BioAuthEngine.framework */; };
+		557B1FFE29B31A9D009543F8 /* BioAuthAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FED29B31A9C009543F8 /* BioAuthAPI.framework */; };
+		557B1FFF29B31A9D009543F8 /* DTFUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FEE29B31A9C009543F8 /* DTFUIModule.framework */; };
+		557B200029B31A9D009543F8 /* MPRemoteLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FEF29B31A9C009543F8 /* MPRemoteLogging.framework */; };
+		557B200129B31A9D009543F8 /* AliyunOSSiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF029B31A9C009543F8 /* AliyunOSSiOS.framework */; };
+		557B200229B31A9D009543F8 /* OCRDetectSDKForTech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF129B31A9C009543F8 /* OCRDetectSDKForTech.framework */; };
+		557B200329B31A9D009543F8 /* MultiFactorFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF229B31A9C009543F8 /* MultiFactorFacade.framework */; };
+		557B200429B31A9D009543F8 /* ToygerService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF329B31A9C009543F8 /* ToygerService.framework */; };
+		557B200529B31A9D009543F8 /* DTFSensorServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF429B31A9C009543F8 /* DTFSensorServices.framework */; };
+		557B200629B31A9D009543F8 /* AliyunFaceAuthFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF529B31A9C009543F8 /* AliyunFaceAuthFacade.framework */; };
+		557B200729B31A9D009543F8 /* DTFUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF629B31A9C009543F8 /* DTFUtility.framework */; };
+		557B200829B31A9D009543F8 /* AliyunMobileRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF729B31A9D009543F8 /* AliyunMobileRPC.framework */; };
+		557B200929B31A9D009543F8 /* APPSecuritySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF829B31A9D009543F8 /* APPSecuritySDK.framework */; };
+		557B200A29B31A9D009543F8 /* APBToygerFacade.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FF929B31A9D009543F8 /* APBToygerFacade.framework */; };
+		557B200B29B31A9D009543F8 /* deviceiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FFA29B31A9D009543F8 /* deviceiOS.framework */; };
+		557B200C29B31A9D009543F8 /* ToygerNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557B1FFB29B31A9D009543F8 /* ToygerNative.framework */; };
+		557B200E29B31F5F009543F8 /* BioAuthEngine.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B200D29B31F5F009543F8 /* BioAuthEngine.bundle */; };
+		557B201029B31F75009543F8 /* OCRXMedia.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B200F29B31F75009543F8 /* OCRXMedia.bundle */; };
+		557B201229B31F83009543F8 /* ToygerNative.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B201129B31F83009543F8 /* ToygerNative.bundle */; };
+		557B201429B31F93009543F8 /* APBToygerFacade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B201329B31F93009543F8 /* APBToygerFacade.bundle */; };
+		557B201629B31F9F009543F8 /* MultiFactorFacade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 557B201529B31F9F009543F8 /* MultiFactorFacade.bundle */; };
+		557B20B729B327E3009543F8 /* AliyunFaceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 557B20B629B327E3009543F8 /* AliyunFaceManager.m */; };
 		559DB10629A454E600A5FE16 /* dinaltbold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 559DB10529A454E600A5FE16 /* dinaltbold.ttf */; };
 		559DB10829A455F000A5FE16 /* MoneyHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB10729A455F000A5FE16 /* MoneyHistoryCell.swift */; };
 		559DB10A29A4640D00A5FE16 /* SelectUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559DB10929A4640D00A5FE16 /* SelectUserCell.swift */; };
@@ -407,7 +406,6 @@
 
 /* Begin PBXFileReference section */
 		271CF15653F35951F675CE50 /* Pods_Huatao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Huatao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		551BA687299CE2E20048A46F /* SetupPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupPasswordViewController.swift; sourceTree = "<group>"; };
 		551BA689299DCB5C0048A46F /* CircleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDetailViewController.swift; sourceTree = "<group>"; };
 		551BA68B299DD5240048A46F /* CircleLikeUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLikeUserView.swift; sourceTree = "<group>"; };
 		551BA68D299DD54D0048A46F /* CircleDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -482,50 +480,52 @@
 		557B1C3229ADDD39009543F8 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 		557B1C4229ADE416009543F8 /* SSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTextField.swift; sourceTree = "<group>"; };
 		557B1C4429ADED42009543F8 /* NameCertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCertViewController.swift; sourceTree = "<group>"; };
-		557B1C8D29AE1CD9009543F8 /* DTFUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFUIModule.framework; path = Huatao/SupportFiles/AliFace/DTFUIModule.framework; sourceTree = "<group>"; };
-		557B1C8E29AE1CD9009543F8 /* MultiFactorFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultiFactorFacade.framework; path = Huatao/SupportFiles/AliFace/MultiFactorFacade.framework; sourceTree = "<group>"; };
-		557B1C8F29AE1CD9009543F8 /* deviceiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = deviceiOS.framework; path = Huatao/SupportFiles/AliFace/deviceiOS.framework; sourceTree = "<group>"; };
-		557B1C9029AE1CD9009543F8 /* APPSecuritySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APPSecuritySDK.framework; path = Huatao/SupportFiles/AliFace/APPSecuritySDK.framework; sourceTree = "<group>"; };
-		557B1C9129AE1CD9009543F8 /* DTFIdentityManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFIdentityManager.framework; path = Huatao/SupportFiles/AliFace/DTFIdentityManager.framework; sourceTree = "<group>"; };
-		557B1C9229AE1CD9009543F8 /* AliyunFaceAuthFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunFaceAuthFacade.framework; path = Huatao/SupportFiles/AliFace/AliyunFaceAuthFacade.framework; sourceTree = "<group>"; };
-		557B1C9329AE1CD9009543F8 /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunOSSiOS.framework; path = Huatao/SupportFiles/AliFace/AliyunOSSiOS.framework; sourceTree = "<group>"; };
-		557B1C9429AE1CD9009543F8 /* ToygerNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToygerNative.framework; path = Huatao/SupportFiles/AliFace/ToygerNative.framework; sourceTree = "<group>"; };
-		557B1C9529AE1CD9009543F8 /* OCRDetectSDKForTech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCRDetectSDKForTech.framework; path = Huatao/SupportFiles/AliFace/OCRDetectSDKForTech.framework; sourceTree = "<group>"; };
-		557B1C9629AE1CD9009543F8 /* AliyunMobileRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunMobileRPC.framework; path = Huatao/SupportFiles/AliFace/AliyunMobileRPC.framework; sourceTree = "<group>"; };
-		557B1C9729AE1CD9009543F8 /* BioAuthEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BioAuthEngine.framework; path = Huatao/SupportFiles/AliFace/BioAuthEngine.framework; sourceTree = "<group>"; };
-		557B1C9829AE1CD9009543F8 /* DTFSensorServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFSensorServices.framework; path = Huatao/SupportFiles/AliFace/DTFSensorServices.framework; sourceTree = "<group>"; };
-		557B1C9929AE1CD9009543F8 /* BioAuthAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BioAuthAPI.framework; path = Huatao/SupportFiles/AliFace/BioAuthAPI.framework; sourceTree = "<group>"; };
-		557B1C9A29AE1CD9009543F8 /* APBToygerFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APBToygerFacade.framework; path = Huatao/SupportFiles/AliFace/APBToygerFacade.framework; sourceTree = "<group>"; };
-		557B1C9B29AE1CDA009543F8 /* DTFUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFUtility.framework; path = Huatao/SupportFiles/AliFace/DTFUtility.framework; sourceTree = "<group>"; };
-		557B1C9C29AE1CDA009543F8 /* MPRemoteLogging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MPRemoteLogging.framework; path = Huatao/SupportFiles/AliFace/MPRemoteLogging.framework; sourceTree = "<group>"; };
-		557B1C9D29AE1CDA009543F8 /* ToygerService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToygerService.framework; path = Huatao/SupportFiles/AliFace/ToygerService.framework; sourceTree = "<group>"; };
-		557B1CAF29AE1D5B009543F8 /* ToygerNative.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ToygerNative.bundle; path = Huatao/SupportFiles/AliFace/ToygerNative.framework/ToygerNative.bundle; sourceTree = "<group>"; };
-		557B1CB129AE1D70009543F8 /* OCRXMedia.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = OCRXMedia.bundle; path = Huatao/SupportFiles/AliFace/OCRDetectSDKForTech.framework/OCRXMedia.bundle; sourceTree = "<group>"; };
-		557B1CB329AE1D86009543F8 /* BioAuthEngine.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BioAuthEngine.bundle; path = Huatao/SupportFiles/AliFace/BioAuthEngine.framework/BioAuthEngine.bundle; sourceTree = "<group>"; };
-		557B1CB529AE1D9C009543F8 /* APBToygerFacade.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = APBToygerFacade.bundle; path = Huatao/SupportFiles/AliFace/APBToygerFacade.framework/APBToygerFacade.bundle; sourceTree = "<group>"; };
 		557B1CEE29AE28E3009543F8 /* ThirdLoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdLoginManager.swift; sourceTree = "<group>"; };
 		557B1CF029AE2A2C009543F8 /* NormalPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalPlugin.swift; sourceTree = "<group>"; };
-		557B1CF329AEE5CB009543F8 /* BioAuthEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BioAuthEngine.framework; sourceTree = "<group>"; };
-		557B1CF429AEE5CB009543F8 /* MPRemoteLogging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MPRemoteLogging.framework; sourceTree = "<group>"; };
-		557B1CF529AEE5CB009543F8 /* BioAuthAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BioAuthAPI.framework; sourceTree = "<group>"; };
-		557B1CF629AEE5CB009543F8 /* APBToygerFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = APBToygerFacade.framework; sourceTree = "<group>"; };
-		557B1CF729AEE5CB009543F8 /* OCRDetectSDKForTech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCRDetectSDKForTech.framework; sourceTree = "<group>"; };
-		557B1CF829AEE5CB009543F8 /* DTFUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DTFUtility.framework; sourceTree = "<group>"; };
-		557B1CF929AEE5CB009543F8 /* MultiFactorFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MultiFactorFacade.framework; sourceTree = "<group>"; };
-		557B1CFA29AEE5CB009543F8 /* DTFUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DTFUIModule.framework; sourceTree = "<group>"; };
-		557B1CFB29AEE5CB009543F8 /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunOSSiOS.framework; sourceTree = "<group>"; };
-		557B1CFC29AEE5CB009543F8 /* AliyunMobileRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunMobileRPC.framework; sourceTree = "<group>"; };
-		557B1CFD29AEE5CB009543F8 /* ToygerNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ToygerNative.framework; sourceTree = "<group>"; };
-		557B1CFE29AEE5CB009543F8 /* DTFIdentityManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DTFIdentityManager.framework; sourceTree = "<group>"; };
-		557B1CFF29AEE5CB009543F8 /* AliyunFaceAuthFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AliyunFaceAuthFacade.framework; sourceTree = "<group>"; };
-		557B1D0029AEE5CB009543F8 /* DTFSensorServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DTFSensorServices.framework; sourceTree = "<group>"; };
-		557B1D0129AEE5CB009543F8 /* ToygerService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ToygerService.framework; sourceTree = "<group>"; };
-		557B1D0229AEE5CB009543F8 /* APPSecuritySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = APPSecuritySDK.framework; sourceTree = "<group>"; };
-		557B1D0329AEE5CB009543F8 /* deviceiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = deviceiOS.framework; sourceTree = "<group>"; };
-		557B1D1529AEEA52009543F8 /* MultiFactorFacade.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MultiFactorFacade.bundle; path = Huatao/SupportFiles/AliFace/MultiFactorFacade.framework/MultiFactorFacade.bundle; sourceTree = "<group>"; };
 		557B1FC229AF48F4009543F8 /* BankCardItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardItemCell.swift; sourceTree = "<group>"; };
 		557B1FC429AF5617009543F8 /* CardDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDescriptionViewController.swift; sourceTree = "<group>"; };
 		557B1FC629AF630C009543F8 /* CreateCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCardViewController.swift; sourceTree = "<group>"; };
+		557B1FC829B08FC5009543F8 /* BaseActionSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActionSheetView.swift; sourceTree = "<group>"; };
+		557B1FCA29B08FCD009543F8 /* BaseActionSheetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseActionSheetView.xib; sourceTree = "<group>"; };
+		557B1FCC29B0904D009543F8 /* BaseActionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActionItemCell.swift; sourceTree = "<group>"; };
+		557B1FCE29B09052009543F8 /* BaseActionItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseActionItemCell.xib; sourceTree = "<group>"; };
+		557B1FD129B09E9A009543F8 /* HTRedMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTRedMessage.swift; sourceTree = "<group>"; };
+		557B1FD329B0B205009543F8 /* MobileConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConfirmViewController.swift; sourceTree = "<group>"; };
+		557B1FD529B0B216009543F8 /* MobileChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileChangeViewController.swift; sourceTree = "<group>"; };
+		557B1FD829B181F0009543F8 /* Huatao.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Huatao.entitlements; sourceTree = "<group>"; };
+		557B1FD929B18CE6009543F8 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		557B1FDB29B194E5009543F8 /* HTRedMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTRedMessageCell.swift; sourceTree = "<group>"; };
+		557B1FDD29B1C391009543F8 /* RedOpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedOpenView.swift; sourceTree = "<group>"; };
+		557B1FDF29B1C3A5009543F8 /* RedOpenView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedOpenView.xib; sourceTree = "<group>"; };
+		557B1FE129B1C9C2009543F8 /* RedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedDetailViewController.swift; sourceTree = "<group>"; };
+		557B1FE329B1D3A1009543F8 /* RedDetailUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedDetail\bUserCell.swift"; sourceTree = "<group>"; };
+		557B1FE529B1F7F4009543F8 /* PayTypeSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayTypeSelectView.swift; sourceTree = "<group>"; };
+		557B1FE729B1F7FE009543F8 /* PayTypeSelectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayTypeSelectView.xib; sourceTree = "<group>"; };
+		557B1FE929B1FEBD009543F8 /* PasswordInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInputView.swift; sourceTree = "<group>"; };
+		557B1FEB29B31A9C009543F8 /* DTFIdentityManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFIdentityManager.framework; path = Frameworks/DTFIdentityManager.framework; sourceTree = "<group>"; };
+		557B1FEC29B31A9C009543F8 /* BioAuthEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BioAuthEngine.framework; path = Frameworks/BioAuthEngine.framework; sourceTree = "<group>"; };
+		557B1FED29B31A9C009543F8 /* BioAuthAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BioAuthAPI.framework; path = Frameworks/BioAuthAPI.framework; sourceTree = "<group>"; };
+		557B1FEE29B31A9C009543F8 /* DTFUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFUIModule.framework; path = Frameworks/DTFUIModule.framework; sourceTree = "<group>"; };
+		557B1FEF29B31A9C009543F8 /* MPRemoteLogging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MPRemoteLogging.framework; path = Frameworks/MPRemoteLogging.framework; sourceTree = "<group>"; };
+		557B1FF029B31A9C009543F8 /* AliyunOSSiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunOSSiOS.framework; path = Frameworks/AliyunOSSiOS.framework; sourceTree = "<group>"; };
+		557B1FF129B31A9C009543F8 /* OCRDetectSDKForTech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCRDetectSDKForTech.framework; path = Frameworks/OCRDetectSDKForTech.framework; sourceTree = "<group>"; };
+		557B1FF229B31A9C009543F8 /* MultiFactorFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultiFactorFacade.framework; path = Frameworks/MultiFactorFacade.framework; sourceTree = "<group>"; };
+		557B1FF329B31A9C009543F8 /* ToygerService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToygerService.framework; path = Frameworks/ToygerService.framework; sourceTree = "<group>"; };
+		557B1FF429B31A9C009543F8 /* DTFSensorServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFSensorServices.framework; path = Frameworks/DTFSensorServices.framework; sourceTree = "<group>"; };
+		557B1FF529B31A9C009543F8 /* AliyunFaceAuthFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunFaceAuthFacade.framework; path = Frameworks/AliyunFaceAuthFacade.framework; sourceTree = "<group>"; };
+		557B1FF629B31A9C009543F8 /* DTFUtility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DTFUtility.framework; path = Frameworks/DTFUtility.framework; sourceTree = "<group>"; };
+		557B1FF729B31A9D009543F8 /* AliyunMobileRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AliyunMobileRPC.framework; path = Frameworks/AliyunMobileRPC.framework; sourceTree = "<group>"; };
+		557B1FF829B31A9D009543F8 /* APPSecuritySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APPSecuritySDK.framework; path = Frameworks/APPSecuritySDK.framework; sourceTree = "<group>"; };
+		557B1FF929B31A9D009543F8 /* APBToygerFacade.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APBToygerFacade.framework; path = Frameworks/APBToygerFacade.framework; sourceTree = "<group>"; };
+		557B1FFA29B31A9D009543F8 /* deviceiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = deviceiOS.framework; path = Frameworks/deviceiOS.framework; sourceTree = "<group>"; };
+		557B1FFB29B31A9D009543F8 /* ToygerNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToygerNative.framework; path = Frameworks/ToygerNative.framework; sourceTree = "<group>"; };
+		557B200D29B31F5F009543F8 /* BioAuthEngine.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BioAuthEngine.bundle; path = Frameworks/BioAuthEngine.framework/BioAuthEngine.bundle; sourceTree = "<group>"; };
+		557B200F29B31F75009543F8 /* OCRXMedia.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = OCRXMedia.bundle; path = Frameworks/OCRDetectSDKForTech.framework/OCRXMedia.bundle; sourceTree = "<group>"; };
+		557B201129B31F83009543F8 /* ToygerNative.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ToygerNative.bundle; path = Frameworks/ToygerNative.framework/ToygerNative.bundle; sourceTree = "<group>"; };
+		557B201329B31F93009543F8 /* APBToygerFacade.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = APBToygerFacade.bundle; path = Frameworks/APBToygerFacade.framework/APBToygerFacade.bundle; sourceTree = "<group>"; };
+		557B201529B31F9F009543F8 /* MultiFactorFacade.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MultiFactorFacade.bundle; path = Frameworks/MultiFactorFacade.framework/MultiFactorFacade.bundle; sourceTree = "<group>"; };
+		557B20B529B327E3009543F8 /* AliyunFaceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AliyunFaceManager.h; sourceTree = "<group>"; };
+		557B20B629B327E3009543F8 /* AliyunFaceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AliyunFaceManager.m; sourceTree = "<group>"; };
 		559DB10529A454E600A5FE16 /* dinaltbold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dinaltbold.ttf; sourceTree = "<group>"; };
 		559DB10729A455F000A5FE16 /* MoneyHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyHistoryCell.swift; sourceTree = "<group>"; };
 		559DB10929A4640D00A5FE16 /* SelectUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserCell.swift; sourceTree = "<group>"; };
@@ -801,35 +801,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				557B1C9E29AE1CDA009543F8 /* DTFUIModule.framework in Frameworks */,
-				557B1D0529AEE5CB009543F8 /* MPRemoteLogging.framework in Frameworks */,
-				557B1C9F29AE1CDA009543F8 /* MultiFactorFacade.framework in Frameworks */,
-				557B1D1129AEE5CB009543F8 /* DTFSensorServices.framework in Frameworks */,
-				557B1CA029AE1CDA009543F8 /* deviceiOS.framework in Frameworks */,
-				557B1D0D29AEE5CB009543F8 /* AliyunMobileRPC.framework in Frameworks */,
-				557B1D0C29AEE5CB009543F8 /* AliyunOSSiOS.framework in Frameworks */,
-				557B1CA129AE1CDA009543F8 /* APPSecuritySDK.framework in Frameworks */,
-				557B1CA229AE1CDA009543F8 /* DTFIdentityManager.framework in Frameworks */,
-				557B1CA329AE1CDA009543F8 /* AliyunFaceAuthFacade.framework in Frameworks */,
-				557B1CA429AE1CDA009543F8 /* AliyunOSSiOS.framework in Frameworks */,
-				557B1D0E29AEE5CB009543F8 /* ToygerNative.framework in Frameworks */,
-				557B1CA529AE1CDA009543F8 /* ToygerNative.framework in Frameworks */,
-				557B1CA629AE1CDA009543F8 /* OCRDetectSDKForTech.framework in Frameworks */,
-				557B1D1029AEE5CB009543F8 /* AliyunFaceAuthFacade.framework in Frameworks */,
-				557B1D0729AEE5CB009543F8 /* APBToygerFacade.framework in Frameworks */,
-				557B1CA729AE1CDA009543F8 /* AliyunMobileRPC.framework in Frameworks */,
-				557B1CA829AE1CDA009543F8 /* BioAuthEngine.framework in Frameworks */,
-				557B1CA929AE1CDA009543F8 /* DTFSensorServices.framework in Frameworks */,
-				557B1CAA29AE1CDA009543F8 /* BioAuthAPI.framework in Frameworks */,
-				557B1D0829AEE5CB009543F8 /* OCRDetectSDKForTech.framework in Frameworks */,
-				557B1CAB29AE1CDA009543F8 /* APBToygerFacade.framework in Frameworks */,
-				557B1CAC29AE1CDA009543F8 /* DTFUtility.framework in Frameworks */,
-				557B1D0929AEE5CB009543F8 /* DTFUtility.framework in Frameworks */,
-				557B1D0B29AEE5CB009543F8 /* DTFUIModule.framework in Frameworks */,
-				557B1D1329AEE5CB009543F8 /* APPSecuritySDK.framework in Frameworks */,
-				557B1CAD29AE1CDA009543F8 /* MPRemoteLogging.framework in Frameworks */,
-				557B1CAE29AE1CDA009543F8 /* ToygerService.framework in Frameworks */,
-				557B1D1429AEE5CB009543F8 /* deviceiOS.framework in Frameworks */,
+				557B1FFC29B31A9D009543F8 /* DTFIdentityManager.framework in Frameworks */,
+				557B1FFD29B31A9D009543F8 /* BioAuthEngine.framework in Frameworks */,
+				557B1FFE29B31A9D009543F8 /* BioAuthAPI.framework in Frameworks */,
+				557B1FFF29B31A9D009543F8 /* DTFUIModule.framework in Frameworks */,
+				557B200029B31A9D009543F8 /* MPRemoteLogging.framework in Frameworks */,
+				557B200129B31A9D009543F8 /* AliyunOSSiOS.framework in Frameworks */,
+				557B200229B31A9D009543F8 /* OCRDetectSDKForTech.framework in Frameworks */,
+				557B200329B31A9D009543F8 /* MultiFactorFacade.framework in Frameworks */,
+				557B200429B31A9D009543F8 /* ToygerService.framework in Frameworks */,
+				557B200529B31A9D009543F8 /* DTFSensorServices.framework in Frameworks */,
+				557B200629B31A9D009543F8 /* AliyunFaceAuthFacade.framework in Frameworks */,
+				557B200729B31A9D009543F8 /* DTFUtility.framework in Frameworks */,
+				557B200829B31A9D009543F8 /* AliyunMobileRPC.framework in Frameworks */,
+				557B200929B31A9D009543F8 /* APPSecuritySDK.framework in Frameworks */,
+				557B200A29B31A9D009543F8 /* APBToygerFacade.framework in Frameworks */,
+				557B200B29B31A9D009543F8 /* deviceiOS.framework in Frameworks */,
+				557B200C29B31A9D009543F8 /* ToygerNative.framework in Frameworks */,
 				557B1C3329ADDD39009543F8 /* ReplayKit.framework in Frameworks */,
 				557B1C3129ADDD33009543F8 /* AdSupport.framework in Frameworks */,
 				557B1C2F29ADDD2D009543F8 /* libz.1.2.8.tbd in Frameworks */,
@@ -838,16 +826,13 @@
 				557B1C2929ADDD1B009543F8 /* AudioToolbox.framework in Frameworks */,
 				557B1C2729ADDD14009543F8 /* libc++abi.tbd in Frameworks */,
 				557B1C2529ADDD0B009543F8 /* libc++.1.tbd in Frameworks */,
-				557B1D0629AEE5CB009543F8 /* BioAuthAPI.framework in Frameworks */,
 				557B1C2329ADDD06009543F8 /* libc++.tbd in Frameworks */,
 				557B1C2129ADDCFC009543F8 /* libz.tbd in Frameworks */,
 				557B1C1F29ADDCF6009543F8 /* libresolv.tbd in Frameworks */,
 				557B1C1D29ADDCED009543F8 /* WebKit.framework in Frameworks */,
 				557B1C1B29ADDCE7009543F8 /* AVFoundation.framework in Frameworks */,
 				557B1C1929ADDCDF009543F8 /* CoreMotion.framework in Frameworks */,
-				557B1D1229AEE5CB009543F8 /* ToygerService.framework in Frameworks */,
 				557B1C1729ADDCD3009543F8 /* CoreMedia.framework in Frameworks */,
-				557B1D0F29AEE5CB009543F8 /* DTFIdentityManager.framework in Frameworks */,
 				557B1C1529ADDCCD009543F8 /* ImageIO.framework in Frameworks */,
 				557B1C1329ADDCC6009543F8 /* CoreLocation.framework in Frameworks */,
 				557B1C1129ADDCBF009543F8 /* CoreFoundation.framework in Frameworks */,
@@ -856,10 +841,8 @@
 				557B1C0B29ADDCAC009543F8 /* AssetsLibrary.framework in Frameworks */,
 				557B1C0929ADDCA4009543F8 /* SystemConfiguration.framework in Frameworks */,
 				557B1C0729ADDC9E009543F8 /* Accelerate.framework in Frameworks */,
-				557B1D0429AEE5CB009543F8 /* BioAuthEngine.framework in Frameworks */,
 				557B1C0529ADDC84009543F8 /* CoreGraphics.framework in Frameworks */,
 				BE0D2C92EA479F3C060F98B1 /* Pods_Huatao.framework in Frameworks */,
-				557B1D0A29AEE5CB009543F8 /* MultiFactorFacade.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,28 +864,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		557B1CF229AEE5CB009543F8 /* AliFace */ = {
+		557B1FD029B09E6E009543F8 /* ChatMessages */ = {
 			isa = PBXGroup;
 			children = (
-				557B1CF329AEE5CB009543F8 /* BioAuthEngine.framework */,
-				557B1CF429AEE5CB009543F8 /* MPRemoteLogging.framework */,
-				557B1CF529AEE5CB009543F8 /* BioAuthAPI.framework */,
-				557B1CF629AEE5CB009543F8 /* APBToygerFacade.framework */,
-				557B1CF729AEE5CB009543F8 /* OCRDetectSDKForTech.framework */,
-				557B1CF829AEE5CB009543F8 /* DTFUtility.framework */,
-				557B1CF929AEE5CB009543F8 /* MultiFactorFacade.framework */,
-				557B1CFA29AEE5CB009543F8 /* DTFUIModule.framework */,
-				557B1CFB29AEE5CB009543F8 /* AliyunOSSiOS.framework */,
-				557B1CFC29AEE5CB009543F8 /* AliyunMobileRPC.framework */,
-				557B1CFD29AEE5CB009543F8 /* ToygerNative.framework */,
-				557B1CFE29AEE5CB009543F8 /* DTFIdentityManager.framework */,
-				557B1CFF29AEE5CB009543F8 /* AliyunFaceAuthFacade.framework */,
-				557B1D0029AEE5CB009543F8 /* DTFSensorServices.framework */,
-				557B1D0129AEE5CB009543F8 /* ToygerService.framework */,
-				557B1D0229AEE5CB009543F8 /* APPSecuritySDK.framework */,
-				557B1D0329AEE5CB009543F8 /* deviceiOS.framework */,
+				557B1FD129B09E9A009543F8 /* HTRedMessage.swift */,
+				557B1FDB29B194E5009543F8 /* HTRedMessageCell.swift */,
 			);
-			path = AliFace;
+			path = ChatMessages;
+			sourceTree = "<group>";
+		};
+		557B1FD729B0BF3B009543F8 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				6BB4DA5C2982CBDC004FFB11 /* SettingViewController.swift */,
+				6BD10CEF297FF4BE002CDCB7 /* ForgetPasswordViewController.swift */,
+				6BB4DA602982DBE4004FFB11 /* AboutViewController.swift */,
+				557B1FD329B0B205009543F8 /* MobileConfirmViewController.swift */,
+				557B1FD529B0B216009543F8 /* MobileChangeViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		559DB12F29A865E700A5FE16 /* ViewControllers */ = {
@@ -927,6 +907,14 @@
 				557B1BD729ADA4D2009543F8 /* PromoteTextSelectView.xib */,
 				557B1BD929ADAB7A009543F8 /* PromoteTextItemCell.swift */,
 				557B1BDA29ADAB7A009543F8 /* PromoteTextItemCell.xib */,
+				557B1FC829B08FC5009543F8 /* BaseActionSheetView.swift */,
+				557B1FCA29B08FCD009543F8 /* BaseActionSheetView.xib */,
+				557B1FCC29B0904D009543F8 /* BaseActionItemCell.swift */,
+				557B1FCE29B09052009543F8 /* BaseActionItemCell.xib */,
+				557B1FDD29B1C391009543F8 /* RedOpenView.swift */,
+				557B1FDF29B1C3A5009543F8 /* RedOpenView.xib */,
+				557B1FE529B1F7F4009543F8 /* PayTypeSelectView.swift */,
+				557B1FE729B1F7FE009543F8 /* PayTypeSelectView.xib */,
 			);
 			path = OverlayView;
 			sourceTree = "<group>";
@@ -1162,6 +1150,7 @@
 				559DB10D29A4AADA00A5FE16 /* TeamListItemCell.swift */,
 				559DB11F29A6FF4A00A5FE16 /* NextChildrenItemCell.swift */,
 				559DB12929A7593200A5FE16 /* MessageHistoryItemCell.swift */,
+				557B1FE329B1D3A1009543F8 /* RedDetailUserCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1188,11 +1177,11 @@
 		6BCB5F54296D397A00E3E7EC = {
 			isa = PBXGroup;
 			children = (
-				557B1D1529AEEA52009543F8 /* MultiFactorFacade.bundle */,
-				557B1CB529AE1D9C009543F8 /* APBToygerFacade.bundle */,
-				557B1CB329AE1D86009543F8 /* BioAuthEngine.bundle */,
-				557B1CB129AE1D70009543F8 /* OCRXMedia.bundle */,
-				557B1CAF29AE1D5B009543F8 /* ToygerNative.bundle */,
+				557B201529B31F9F009543F8 /* MultiFactorFacade.bundle */,
+				557B201329B31F93009543F8 /* APBToygerFacade.bundle */,
+				557B201129B31F83009543F8 /* ToygerNative.bundle */,
+				557B200F29B31F75009543F8 /* OCRXMedia.bundle */,
+				557B200D29B31F5F009543F8 /* BioAuthEngine.bundle */,
 				6BCB5F5F296D397A00E3E7EC /* Huatao */,
 				6BCB5F76296D397D00E3E7EC /* HuataoTests */,
 				6BCB5F80296D397D00E3E7EC /* HuataoUITests */,
@@ -1215,6 +1204,7 @@
 		6BCB5F5F296D397A00E3E7EC /* Huatao */ = {
 			isa = PBXGroup;
 			children = (
+				557B1FD829B181F0009543F8 /* Huatao.entitlements */,
 				6BCB5F69296D397C00E3E7EC /* Assets.xcassets */,
 				6BCB5F6E296D397C00E3E7EC /* Info.plist */,
 				6BCB5F90296D3E6B00E3E7EC /* Application */,
@@ -1277,6 +1267,7 @@
 				6BCB5F96296D406A00E3E7EC /* PlayManager.swift */,
 				6BCB5F97296D406A00E3E7EC /* DataManager.swift */,
 				6BCB5F98296D406A00E3E7EC /* PayManager.swift */,
+				557B1FD929B18CE6009543F8 /* TimerManager.swift */,
 				557B1CEE29AE28E3009543F8 /* ThirdLoginManager.swift */,
 				6BCB5F99296D406A00E3E7EC /* UIView+.swift */,
 				6BCB5F9B296D406A00E3E7EC /* UIView+Gesture.swift */,
@@ -1507,6 +1498,7 @@
 		6BCB6019296D41CF00E3E7EC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				557B1FD029B09E6E009543F8 /* ChatMessages */,
 				9B42FF63299767DB002129A5 /* ViewControllers */,
 				6B650EC3297534D70093FEEB /* Models */,
 				6B650EBE297533020093FEEB /* Views */,
@@ -1531,9 +1523,10 @@
 		6BCB6027296D5F7A00E3E7EC /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
-				557B1CF229AEE5CB009543F8 /* AliFace */,
 				559DB10529A454E600A5FE16 /* dinaltbold.ttf */,
 				55CEB033299C7A6B00CF8313 /* china_address.json */,
+				557B20B529B327E3009543F8 /* AliyunFaceManager.h */,
+				557B20B629B327E3009543F8 /* AliyunFaceManager.m */,
 				6BCB6028296D5FAD00E3E7EC /* huatao-briding-header.h */,
 				6BCB6029296D5FD100E3E7EC /* headerTest.m */,
 			);
@@ -1569,6 +1562,7 @@
 				55CEAFF92996105F00CF8313 /* DataEmptyView.swift */,
 				559DB12529A746F900A5FE16 /* PopoverMenuView.swift */,
 				559DB12D29A84D5300A5FE16 /* PayWaySelectView.swift */,
+				557B1FE929B1FEBD009543F8 /* PasswordInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1652,6 +1646,7 @@
 		6BFCC2F02977AE0600758510 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				557B1FD729B0BF3B009543F8 /* Setting */,
 				6BFCC2F12977AE1D00758510 /* MyTeamViewController.swift */,
 				6BFCC2FB297BF12400758510 /* TradeCenterViewController.swift */,
 				6BFCC301297C381600758510 /* TradeHistoryViewController.swift */,
@@ -1659,8 +1654,6 @@
 				6BD2A80A297D88DA00EA7EDC /* TradeBuyViewController.swift */,
 				6BD2A80E297E7D4700EA7EDC /* TradeSaleViewController.swift */,
 				6BD2A810297F92BB00EA7EDC /* TradePasswordViewController.swift */,
-				6BD10CEF297FF4BE002CDCB7 /* ForgetPasswordViewController.swift */,
-				551BA687299CE2E20048A46F /* SetupPasswordViewController.swift */,
 				6BD10CF129800C66002CDCB7 /* MyWalletViewController.swift */,
 				6BB4DA5A2982CB11004FFB11 /* BeanConvertViewController.swift */,
 				6BB4DA6629861691004FFB11 /* ConvertHistoryViewController.swift */,
@@ -1669,8 +1662,6 @@
 				6BD10CF529822CA4002CDCB7 /* PosterDetailViewController.swift */,
 				6BD10CED297FF499002CDCB7 /* MyCircleViewController.swift */,
 				55CEB00B2999D84B00CF8313 /* DonateViewController.swift */,
-				6BB4DA5C2982CBDC004FFB11 /* SettingViewController.swift */,
-				6BB4DA602982DBE4004FFB11 /* AboutViewController.swift */,
 				55CEB0072997A74F00CF8313 /* VipBagViewController.swift */,
 				55CEB0092997A77600CF8313 /* VipJoinViewController.swift */,
 				55CEB00F2999EAE000CF8313 /* BuyHistoryViewController.swift */,
@@ -1714,6 +1705,7 @@
 				559DB11D29A6FBE400A5FE16 /* NextListViewController.swift */,
 				559DB12729A752F400A5FE16 /* MessageHistoryViewController.swift */,
 				559DB12B29A7744E00A5FE16 /* RedPacketViewController.swift */,
+				557B1FE129B1C9C2009543F8 /* RedDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1732,23 +1724,23 @@
 		E08E577C06F884D3DBBF2C5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				557B1C9229AE1CD9009543F8 /* AliyunFaceAuthFacade.framework */,
-				557B1C9629AE1CD9009543F8 /* AliyunMobileRPC.framework */,
-				557B1C9329AE1CD9009543F8 /* AliyunOSSiOS.framework */,
-				557B1C9A29AE1CD9009543F8 /* APBToygerFacade.framework */,
-				557B1C9029AE1CD9009543F8 /* APPSecuritySDK.framework */,
-				557B1C9929AE1CD9009543F8 /* BioAuthAPI.framework */,
-				557B1C9729AE1CD9009543F8 /* BioAuthEngine.framework */,
-				557B1C8F29AE1CD9009543F8 /* deviceiOS.framework */,
-				557B1C9129AE1CD9009543F8 /* DTFIdentityManager.framework */,
-				557B1C9829AE1CD9009543F8 /* DTFSensorServices.framework */,
-				557B1C8D29AE1CD9009543F8 /* DTFUIModule.framework */,
-				557B1C9B29AE1CDA009543F8 /* DTFUtility.framework */,
-				557B1C9C29AE1CDA009543F8 /* MPRemoteLogging.framework */,
-				557B1C8E29AE1CD9009543F8 /* MultiFactorFacade.framework */,
-				557B1C9529AE1CD9009543F8 /* OCRDetectSDKForTech.framework */,
-				557B1C9429AE1CD9009543F8 /* ToygerNative.framework */,
-				557B1C9D29AE1CDA009543F8 /* ToygerService.framework */,
+				557B1FF529B31A9C009543F8 /* AliyunFaceAuthFacade.framework */,
+				557B1FF729B31A9D009543F8 /* AliyunMobileRPC.framework */,
+				557B1FF029B31A9C009543F8 /* AliyunOSSiOS.framework */,
+				557B1FF929B31A9D009543F8 /* APBToygerFacade.framework */,
+				557B1FF829B31A9D009543F8 /* APPSecuritySDK.framework */,
+				557B1FED29B31A9C009543F8 /* BioAuthAPI.framework */,
+				557B1FEC29B31A9C009543F8 /* BioAuthEngine.framework */,
+				557B1FFA29B31A9D009543F8 /* deviceiOS.framework */,
+				557B1FEB29B31A9C009543F8 /* DTFIdentityManager.framework */,
+				557B1FF429B31A9C009543F8 /* DTFSensorServices.framework */,
+				557B1FEE29B31A9C009543F8 /* DTFUIModule.framework */,
+				557B1FF629B31A9C009543F8 /* DTFUtility.framework */,
+				557B1FEF29B31A9C009543F8 /* MPRemoteLogging.framework */,
+				557B1FF229B31A9C009543F8 /* MultiFactorFacade.framework */,
+				557B1FF129B31A9C009543F8 /* OCRDetectSDKForTech.framework */,
+				557B1FFB29B31A9D009543F8 /* ToygerNative.framework */,
+				557B1FF329B31A9C009543F8 /* ToygerService.framework */,
 				557B1C0629ADDC9D009543F8 /* Accelerate.framework */,
 				557B1C3029ADDD33009543F8 /* AdSupport.framework */,
 				557B1C0A29ADDCAC009543F8 /* AssetsLibrary.framework */,
@@ -1888,11 +1880,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				557B1D1629AEEA52009543F8 /* MultiFactorFacade.bundle in Resources */,
-				557B1CB629AE1D9C009543F8 /* APBToygerFacade.bundle in Resources */,
-				557B1CB429AE1D86009543F8 /* BioAuthEngine.bundle in Resources */,
-				557B1CB229AE1D71009543F8 /* OCRXMedia.bundle in Resources */,
-				557B1CB029AE1D5B009543F8 /* ToygerNative.bundle in Resources */,
+				557B201629B31F9F009543F8 /* MultiFactorFacade.bundle in Resources */,
+				557B201429B31F93009543F8 /* APBToygerFacade.bundle in Resources */,
+				557B201229B31F83009543F8 /* ToygerNative.bundle in Resources */,
+				557B201029B31F75009543F8 /* OCRXMedia.bundle in Resources */,
+				557B200E29B31F5F009543F8 /* BioAuthEngine.bundle in Resources */,
 				6BCB6032296D645200E3E7EC /* Find.storyboard in Resources */,
 				551BA690299DD5BD0048A46F /* CircleDetailHeaderView.xib in Resources */,
 				6BB4DA6D29861FCA004FFB11 /* ConvertRateTipView.xib in Resources */,
@@ -1901,14 +1893,17 @@
 				6BCB602C296D641B00E3E7EC /* Login.storyboard in Resources */,
 				6B650EB92974FCF90093FEEB /* CommentListItemCell.xib in Resources */,
 				55CEB02E299C754400CF8313 /* CityPickerView.xib in Resources */,
+				557B1FCB29B08FCD009543F8 /* BaseActionSheetView.xib in Resources */,
 				6BFCC300297BF1E700758510 /* TradeHeaderView.xib in Resources */,
 				6BFCC2F62979317F00758510 /* TeamHeaderView.xib in Resources */,
 				6BCB60662970FF8500E3E7EC /* AgreementAlertView.xib in Resources */,
 				6B650E602974DF520093FEEB /* DynamicListItemCell.xib in Resources */,
 				551BA694299DFCB20048A46F /* CommentListCell.xib in Resources */,
 				557B1BD829ADA4D2009543F8 /* PromoteTextSelectView.xib in Resources */,
+				557B1FCF29B09052009543F8 /* BaseActionItemCell.xib in Resources */,
 				55CEB032299C762300CF8313 /* CityPickerItemCell.xib in Resources */,
 				552D6DD3299F6C7F00221D75 /* UserFriendItemCell.xib in Resources */,
+				557B1FE829B1F7FE009543F8 /* PayTypeSelectView.xib in Resources */,
 				55CEB00E2999E28900CF8313 /* ConvertListItemCell.xib in Resources */,
 				6BCB6030296D644200E3E7EC /* Task.storyboard in Resources */,
 				6BCB6036296D64D100E3E7EC /* Mine.storyboard in Resources */,
@@ -1918,6 +1913,7 @@
 				552D6DD7299F6CB300221D75 /* UserCircleCell.xib in Resources */,
 				6B650E412971674D0093FEEB /* BaseImageItemCell.xib in Resources */,
 				6BD2A809297D0A2500EA7EDC /* TradeSaleBuyCell.xib in Resources */,
+				557B1FE029B1C3A5009543F8 /* RedOpenView.xib in Resources */,
 				559DB10629A454E600A5FE16 /* dinaltbold.ttf in Resources */,
 				6BCB60782971042200E3E7EC /* ShopVipSetCell.xib in Resources */,
 				6BB4DA7829866470004FFB11 /* LikeListItemCell.xib in Resources */,
@@ -2043,6 +2039,7 @@
 				6BCB607B2971049F00E3E7EC /* SectionCollectionView.swift in Sources */,
 				552D6DCF299F574600221D75 /* MyTicketViewController.swift in Sources */,
 				6B650E56297401080093FEEB /* Timer+SS.swift in Sources */,
+				557B1FD429B0B205009543F8 /* MobileConfirmViewController.swift in Sources */,
 				55CEB031299C762300CF8313 /* CityPickerItemCell.swift in Sources */,
 				6BD2A80B297D88DA00EA7EDC /* TradeBuyViewController.swift in Sources */,
 				552D6DDB299F7C2900221D75 /* SelectUserViewController.swift in Sources */,
@@ -2067,6 +2064,7 @@
 				552D6DC7299F26B900221D75 /* GroupSettingViewController.swift in Sources */,
 				552D6DD9299F7B0100221D75 /* ChatMoreView.swift in Sources */,
 				6BCB600D296D406B00E3E7EC /* SSNavigationBar.swift in Sources */,
+				557B1FEA29B1FEBD009543F8 /* PasswordInputView.swift in Sources */,
 				552D6DF529A3578900221D75 /* MultipleIconView.swift in Sources */,
 				552D6DC5299F1CD500221D75 /* UserFriendItemCell.swift in Sources */,
 				6BCB60712971002100E3E7EC /* SSOverlayConfig.swift in Sources */,
@@ -2076,8 +2074,10 @@
 				559DB12A29A7593200A5FE16 /* MessageHistoryItemCell.swift in Sources */,
 				6B650E912974F3FF0093FEEB /* SSNotification.swift in Sources */,
 				552D6DCB299F4CB500221D75 /* MineMemuListCell.swift in Sources */,
+				557B1FDA29B18CE6009543F8 /* TimerManager.swift in Sources */,
 				552D6DC3299F1CC500221D75 /* UserAddFriendCell.swift in Sources */,
 				6B650EA92974F3FF0093FEEB /* SSTapDetectingImageView.swift in Sources */,
+				557B1FDC29B194E5009543F8 /* HTRedMessageCell.swift in Sources */,
 				6BCB608B2971176400E3E7EC /* ShopModel.swift in Sources */,
 				6BCB5F61296D397A00E3E7EC /* AppDelegate.swift in Sources */,
 				559DB10829A455F000A5FE16 /* MoneyHistoryCell.swift in Sources */,
@@ -2099,6 +2099,7 @@
 				551BA696299E354F0048A46F /* CircleNoticeViewController.swift in Sources */,
 				6B650E3C297166940093FEEB /* SSImageView.swift in Sources */,
 				6BB4DA7A29867D19004FFB11 /* SSTextView.swift in Sources */,
+				557B1FE429B1D3A1009543F8 /* RedDetailUserCell.swift in Sources */,
 				6B650EAF2974F3FF0093FEEB /* SSPhoto.swift in Sources */,
 				6BCB5FE1296D406B00E3E7EC /* UIView+Gesture.swift in Sources */,
 				6B650EAC2974F3FF0093FEEB /* SSGridViewController.swift in Sources */,
@@ -2125,6 +2126,7 @@
 				6B650E36297156370093FEEB /* TaskListItemCell.swift in Sources */,
 				6B650EA62974F3FF0093FEEB /* SSCacheSaver.swift in Sources */,
 				6B650EB22974F3FF0093FEEB /* SSCircularProgressView.swift in Sources */,
+				557B1FC929B08FC5009543F8 /* BaseActionSheetView.swift in Sources */,
 				6B650EA82974F3FF0093FEEB /* SSCacheLoader.swift in Sources */,
 				6BCB6006296D406B00E3E7EC /* SSSandbox.swift in Sources */,
 				6B650EB52974FB070093FEEB /* SSAlignFlowLayout.swift in Sources */,
@@ -2196,6 +2198,7 @@
 				6B650EB02974F3FF0093FEEB /* SSTapDetectingView.swift in Sources */,
 				6B650EAA2974F3FF0093FEEB /* SSGridCell.swift in Sources */,
 				6BD2A808297D0A2500EA7EDC /* TradeSaleBuyCell.swift in Sources */,
+				557B1FDE29B1C391009543F8 /* RedOpenView.swift in Sources */,
 				9B42FF6B2997A039002129A5 /* ChatGroupListViewController.swift in Sources */,
 				6BB4DA5F2982CF06004FFB11 /* SettingMenuItemCell.swift in Sources */,
 				6BB4DA6729861691004FFB11 /* ConvertHistoryViewController.swift in Sources */,
@@ -2211,12 +2214,13 @@
 				6BCB5FEA296D406B00E3E7EC /* HttpDecoder.swift in Sources */,
 				55CEB0162999EB4D00CF8313 /* ServiceViewController.swift in Sources */,
 				6BCB60722971002100E3E7EC /* ZoomOutAniamtion.swift in Sources */,
+				557B20B729B327E3009543F8 /* AliyunFaceManager.m in Sources */,
 				6BCB6013296D40C500E3E7EC /* MainTabbarController.swift in Sources */,
 				552D6DF729A369CC00221D75 /* SSDateHelper.swift in Sources */,
 				559DB11629A6257100A5FE16 /* ConfirmBackgroundViewController.swift in Sources */,
 				6BCB6005296D406B00E3E7EC /* SSDefault.swift in Sources */,
 				557B1BDB29ADAB7A009543F8 /* PromoteTextItemCell.swift in Sources */,
-				551BA688299CE2E20048A46F /* SetupPasswordViewController.swift in Sources */,
+				557B1FE629B1F7F4009543F8 /* PayTypeSelectView.swift in Sources */,
 				6BCB6011296D406B00E3E7EC /* SSTabBarController.swift in Sources */,
 				6BD2A811297F92BB00EA7EDC /* TradePasswordViewController.swift in Sources */,
 				6B650E952974F3FF0093FEEB /* SSCameraOptions.swift in Sources */,
@@ -2238,6 +2242,7 @@
 				559DB11829A62DFC00A5FE16 /* IMUserInfo.swift in Sources */,
 				559DB11A29A6F82800A5FE16 /* UserDetailHeaderView.swift in Sources */,
 				559DB12829A752F400A5FE16 /* MessageHistoryViewController.swift in Sources */,
+				557B1FE229B1C9C2009543F8 /* RedDetailViewController.swift in Sources */,
 				551BA693299DFCB20048A46F /* CommentListCell.swift in Sources */,
 				557B1B5429ACA24F009543F8 /* DanMuView.swift in Sources */,
 				6BCB6008296D406B00E3E7EC /* SSViewController.swift in Sources */,
@@ -2252,6 +2257,7 @@
 				6BD10CF629822CA4002CDCB7 /* PosterDetailViewController.swift in Sources */,
 				6BCB608429710B1A00E3E7EC /* SSRefreshHeader.swift in Sources */,
 				6BCB6020296D44E100E3E7EC /* FindViewController.swift in Sources */,
+				557B1FD229B09E9A009543F8 /* HTRedMessage.swift in Sources */,
 				6B650E5F2974DF520093FEEB /* DynamicListItemCell.swift in Sources */,
 				6BCB5FDA296D406B00E3E7EC /* ParamsPlugin.swift in Sources */,
 				55CEB00A2997A77600CF8313 /* VipJoinViewController.swift in Sources */,
@@ -2273,8 +2279,10 @@
 				557B1C4329ADE416009543F8 /* SSTextField.swift in Sources */,
 				6BCB601E296D44C300E3E7EC /* ChatViewController.swift in Sources */,
 				6BD2A80F297E7D4700EA7EDC /* TradeSaleViewController.swift in Sources */,
+				557B1FD629B0B216009543F8 /* MobileChangeViewController.swift in Sources */,
 				6BCB60542970191400E3E7EC /* AuthLoginViewController.swift in Sources */,
 				552D6DF129A3211A00221D75 /* EditDetailViewController.swift in Sources */,
+				557B1FCD29B0904D009543F8 /* BaseActionItemCell.swift in Sources */,
 				6BCB603D296D6A3100E3E7EC /* SSModel.swift in Sources */,
 				557B1CF129AE2A2C009543F8 /* NormalPlugin.swift in Sources */,
 				6BCB605E2970EFE700E3E7EC /* SSLanguage.swift in Sources */,
@@ -2485,6 +2493,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Huatao/Huatao.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S54L9X6U53;
@@ -2492,6 +2501,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Huatao/SupportFiles/AliFace",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Huatao/Info.plist;
@@ -2657,12 +2667,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Huatao/Huatao.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S54L9X6U53;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Huatao/SupportFiles/AliFace",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Huatao/Info.plist;
